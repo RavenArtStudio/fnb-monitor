@@ -812,7 +812,7 @@ function kpisOf(d){if(d.kpis)return d.kpis;const s=d.stats,ser=Object.values(d.m
  const pt=prev.reduce((a,v)=>a+(v||0),0);
  return [{label:d.main.tipLabel||'Previous period',value:fmt(s.previousTotal??pt)},
   {label:'Daily average',value:fmt(s.avgPerDay),note:`previous ${fmt(Math.round(pt/(prev.length||1)*10)/10)}`},
-  {label:'Best day',value:fmt(vals[best]),note:ser[best]?sd(ser[best].date):''}];}
+  vals[best]?{label:'Best day',value:fmt(vals[best]),note:ser[best]?sd(ser[best].date):''}:{label:'Best day',value:'--',note:'None yet'}];}
 function stripHTML(d){const s=d.stats,ks=kpisOf(d);
  let chip='',tone='';if(s.deltaText){chip=s.deltaText;tone=s.deltaTone||'';}else if(s.change!=null){chip=`${s.change>0?'+':s.change<0?'−':''}${Math.abs(s.change)}% on the previous ${d.period} days`;tone=s.change>0?'up':s.change<0?'down':'';}
  const unit=d.kind==='heatmap'?'of 10':esc(d.unit);
