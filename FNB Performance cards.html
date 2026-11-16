@@ -721,7 +721,7 @@ button.heat-row:hover{background:var(--surface-2);color:var(--ink)}
 <body>
 <div id="toast" role="status" aria-live="polite"></div>
 <main class="app">
- <div class="topbar"><span class="snap" id="snap"></span><span>FNB Performance, Checkpoint 12</span></div>
+ <div class="topbar"><span class="snap" id="snap"></span><span>FNB Performance, Checkpoint 13</span></div>
  <nav class="rail" id="rail" role="tablist" aria-label="Cards" aria-orientation="vertical"></nav>
  <div><section class="ws" id="ws" role="tabpanel" aria-live="polite"></section><p class="demo-note" id="note"></p></div>
 </main>
@@ -902,7 +902,7 @@ function sheetHTML(d,r){const one=(v)=>v===null||v===undefined?'--':Number(v).to
  return HEAD(`Search visibility, ${d.heat.stage} stage`,r.name)+`<div class="pp">
   <div>${PILL(ok?'good':'bad',ok?`On target at ${one(now)}`:`${one(gap)} below the ${one(r.target)} target`)}</div>
   ${BOX('Score',KV([{label:'Now',value:one(now)},{label:'Target',value:one(r.target)},{label:'Audit, Nov 13',value:one(r.cells[0])},{label:'Weight',value:r.weight+'%'},{label:'Points to gain',value:'+'+gainAll.toFixed(2),tone:gainAll>0?'up':''}]))}
-  ${BOX(`Sub-metrics<span>${live} of ${subs.length} measured live</span>`,`<div class="sml">${subs.map(s=>`<div class="smr" title="${esc(s.evidence||'')}"><span class="smn">${esc(s.name)}<em>${s.measured?'live':'audit'}</em></span><span class="sbar"><span class="tr"><span class="fl ${s.band}" style="display:block;width:${Math.max(2,s.score*10)}%"></span></span><b>${one(s.score)}</b></span><span class="smw">${s.weight}%</span><span class="sme">${esc(s.measured?(s.evidence||''):'Audit score'+(s.evidence?': '+s.evidence:''))}</span></div>`).join('')}</div>`)}
+  ${BOX(`Sub-metrics<span>${live} of ${subs.length} measured live</span>`,`<div class="sml">${subs.map(s=>`<div class="smr" title="${esc(s.evidence||'')}"><span class="smn">${esc(s.name)}<em>${s.measured?'live':'audit'}</em></span><span class="sbar"><span class="tr"><span class="fl ${s.band}" style="display:block;width:${Math.max(2,s.score*10)}%"></span></span><b>${one(s.score)}</b></span><span class="smw">${s.weight}%</span>${s.evidence?`<span class="sme">${esc(s.evidence)}</span>`:''}</div>`).join('')}</div>`)}
   ${acts.length?BOX('Next actions',`<ol class="acts">${acts.map(s=>`<li><span class="sd ${s.gain>=0.1?'high':s.gain>=0.04?'med':''}"></span><span class="at">${esc(s.action)}</span><span class="ao">${esc(OWNER[s.owner]||'')}${s.gain>=0.005?` <b>+${s.gain.toFixed(2)}</b>`:''}</span></li>`).join('')}</ol>`):''}
   ${cards.length?`<div class="pbtns">${cards.map((c,i)=>IDS[c]?`<button class="pbtn${i===0?' primary':''}" data-goto="${IDS[c]}">${esc(c.split(', ')[1]||c)} ↗</button>`:'').join('')}</div>`:''}
  </div>`;}
