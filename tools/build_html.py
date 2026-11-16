@@ -134,19 +134,22 @@ button.heat-row:hover{background:var(--surface-2);color:var(--ink)}
 /* popups (compact, sectioned) */
 .detail.sheet{width:min(820px,calc(100vw - 48px));height:fit-content;max-height:min(860px,calc(100vh - 48px))}
 .detail.sheet .detail-inner{overflow:auto;scrollbar-width:thin}
-.pp-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:20px 24px 14px;border-bottom:1px solid var(--line-soft);position:sticky;top:0;background:var(--canvas);z-index:2}
-.pp-head .detail-title{font-size:24px}
-.pp{padding:16px 24px 22px;display:flex;flex-direction:column;gap:12px}
-.pill{display:inline-block;font-size:12.5px;padding:5px 12px;border-radius:999px;background:var(--surface-2);color:var(--ink-2)}
+.pp-head{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:12px 14px 12px 22px;border-bottom:1px solid var(--line-soft);position:sticky;top:0;background:var(--canvas);z-index:2}
+.ph-t{display:flex;align-items:center;gap:12px;flex-wrap:wrap;min-width:0}
+.pp-head .detail-title{font-size:19px;letter-spacing:-.015em}
+.ph-k{font-size:12px;color:var(--ink-4)}
+.pp-head .detail-close{width:34px;height:34px}
+.pp{padding:12px 22px 18px;display:flex;flex-direction:column;gap:10px}
+.pill{display:inline-block;font-size:12px;padding:3px 10px;border-radius:999px;background:var(--surface-2);color:var(--ink-2)}
 .pill.good{background:color-mix(in srgb,var(--good) 16%,var(--surface));color:var(--good)}
 .pill.warn{background:color-mix(in srgb,var(--warn) 16%,var(--surface));color:var(--warn)}
 .pill.bad{background:color-mix(in srgb,var(--bad) 16%,var(--surface));color:var(--bad)}
-.box{background:var(--surface);border-radius:14px;padding:14px 16px;box-shadow:0 0 0 1px var(--line-soft) inset}
-.box h4{font-size:13.5px;color:var(--ink);margin:0 0 10px;display:flex;justify-content:space-between;gap:12px}
+.box{background:var(--surface);border-radius:12px;padding:11px 14px;box-shadow:0 0 0 1px var(--line-soft) inset}
+.box h4{font-size:13px;color:var(--ink);margin:0 0 7px;display:flex;justify-content:space-between;gap:12px}
 .box h4 span{font-size:12px;color:var(--ink-4)}
 .kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px 18px}
 .kv span{display:block;font-size:12px;color:var(--ink-3)}
-.kv b{display:block;font-size:15px;color:var(--ink);margin-top:3px;font-variant-numeric:tabular-nums;overflow:hidden;text-overflow:ellipsis}
+.kv b{display:block;font-size:14px;color:var(--ink);margin-top:3px;font-variant-numeric:tabular-nums;overflow:hidden;text-overflow:ellipsis}
 .kv b.up{color:var(--good)}.kv b.down{color:var(--bad)}
 .kv small{display:block;font-size:11.5px;color:var(--ink-4);margin-top:2px}
 .sml{display:flex;flex-direction:column}
@@ -276,15 +279,14 @@ function heatmap(id,d){const f=el(id),h=d.heat,n=h.cols.length;const cols=`minma
 const PILL=(tone,t)=>`<span class="pill ${tone}">${esc(t)}</span>`;
 const KV=(items)=>`<div class="kv">${items.filter(Boolean).map(k=>`<div><span>${esc(k.label)}</span><b class="${k.tone||''}">${esc(k.value)}</b>${k.note?`<small>${esc(k.note)}</small>`:''}</div>`).join('')}</div>`;
 const BOX=(title,inner,extra='')=>`<section class="box ${extra}"><h4>${title}</h4>${inner}</section>`;
-const HEAD=(kicker,title)=>`<div class="pp-head"><div><div class="panel-kicker">${esc(kicker)}</div><h2 class="detail-title" id="detailTitle">${esc(title)}</h2></div>${CLOSE_BTN}</div>`;
+const HEAD=(kicker,title,pill='')=>`<div class="pp-head"><div class="ph-t"><h2 class="detail-title" id="detailTitle">${esc(title)}</h2>${pill}<span class="ph-k">${esc(kicker)}</span></div>${CLOSE_BTN}</div>`;
 const IDS={'Site health, Pages live':'pages','Site health, Broken links':'broken','Site health, Server response time':'response','Site health, Home page size':'weight','Site health, Pages with issues':'issues','Authority, Referring domains':'refdomains','Authority, Authority score':'authority','Google Search, Search impressions':'impressions','Google Search, Keywords on page one':'pageone','Enquiries, Profit Review requests':'leads','Enquiries, WhatsApp clicks':'whatsapp','Enquiries, Calculator uses':'tools'};
 function sheetHTML(d,r){const one=(v)=>v===null||v===undefined?'--':Number(v).toFixed(1),now=r.cells.at(-1),gap=r.target-now,ok=gap<=0.05;
  const subs=[...r.subs].map(s=>({...s,gain:r.weight*s.weight*Math.max(0,r.target-s.score)/10000})).sort((a,b)=>b.gain-a.gain);
  const gainAll=subs.reduce((a,s)=>a+s.gain,0),live=subs.filter(s=>s.measured).length;
  const cards=(d.blocks?.[r.id]?.questions||[]).find(q=>q.id==='cards')?.answer?.items||[];
  const acts=subs.filter(s=>s.band!=='good'&&s.action);
- return HEAD(`Search visibility, ${d.heat.stage} stage`,r.name)+`<div class="pp">
-  <div>${PILL(ok?'good':'bad',ok?`On target at ${one(now)}`:`${one(gap)} below the ${one(r.target)} target`)}</div>
+ return HEAD(`Search visibility, ${d.heat.stage} stage`,r.name,PILL(ok?'good':'bad',ok?`On target at ${one(now)}`:`${one(gap)} below the ${one(r.target)} target`))+`<div class="pp">
   ${BOX('Score',KV([{label:'Now',value:one(now)},{label:'Target',value:one(r.target)},{label:'Audit, Nov 13',value:one(r.cells[0])},{label:'Weight',value:r.weight+'%%'},{label:'Points to gain',value:'+'+gainAll.toFixed(2),tone:gainAll>0?'up':''}]))}
   ${BOX(`Sub-metrics<span>${live} of ${subs.length} measured live</span>`,`<div class="sml">${subs.map(s=>`<div class="smr" title="${esc(s.evidence||'')}"><span class="smn">${esc(s.name)}<em>${s.measured?'live':'audit'}</em></span><span class="sbar"><span class="tr"><span class="fl ${s.band}" style="display:block;width:${Math.max(2,s.score*10)}%%"></span></span><b>${one(s.score)}</b></span><span class="smw">${s.weight}%%</span>${s.evidence?`<span class="sme">${esc(s.evidence)}</span>`:''}</div>`).join('')}</div>`)}
   ${acts.length?BOX('Next actions',`<ol class="acts">${acts.map(s=>`<li><span class="sd ${s.gain>=0.1?'high':s.gain>=0.04?'med':''}"></span><span class="at">${esc(s.action)}</span><span class="ao">${esc(OWNER[s.owner]||'')}${s.gain>=0.005?` <b>+${s.gain.toFixed(2)}</b>`:''}</span></li>`).join('')}</ol>`):''}
@@ -299,8 +301,7 @@ function detailHTML(d){const q=(id)=>(d.questions||[]).find(x=>x.id===id)?.answe
  const pats=(d.patterns||[]).slice(0,4);
  const bds=(d.breakdowns||[]).filter(b=>b.rows&&b.rows.length);
  const srcRow=src?.rows?.[0]||[];
- return HEAD(`${d.group||''}, ${d.periodLabel||''}`,d.label)+`<div class="pp">
-  <div>${pill}</div>
+ return HEAD(`${d.group||''}, ${d.periodLabel||''}`,d.label,pill)+`<div class="pp">
   ${BOX('Reading',KV(reading))}
   ${pats.length?BOX('What stands out',`<div class="pl">${pats.map(p=>`<div><span class="pd ${esc(p.type)}"></span><span><b>${esc(p.title)}</b><small>${esc(p.evidence)}</small></span></div>`).join('')}</div>`):''}
   ${bds.length?BOX('Breakdowns',`<div class="bdg">${bds.map(b=>`<div><h5>${esc(b.title)}</h5>${b.rows.slice(0,6).map(r=>`<div class="lr"><span title="${esc(r.label)}">${esc(r.label)}</span><b>${fmt(r.value)}</b></div>`).join('')}</div>`).join('')}</div>`):''}
