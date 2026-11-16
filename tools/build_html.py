@@ -50,6 +50,19 @@ body *{font-weight:400!important}
 /* workspace */
 .ws{min-width:0;display:flex;flex-direction:column;gap:14px;animation:wsIn .45s var(--ease)}
 @keyframes wsIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.ws-top{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:4px 4px 2px}
+.wt-l h2{font-size:24px;letter-spacing:-.02em;color:var(--ink)}
+.wt-l p{font-size:13px;color:var(--ink-3);margin-top:4px}
+.wt-r{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;justify-content:flex-end}
+.wt-r .ws-hero{font-size:44px}
+.wt-r .all{margin-left:10px}
+.slim{display:grid;grid-template-columns:repeat(var(--k),minmax(0,1fr));background:var(--surface);border-radius:var(--r-md);box-shadow:0 0 0 1px #ffffff09 inset}
+.slim>div{padding:10px 18px;display:flex;align-items:baseline;gap:10px;min-width:0}
+.slim>div+div{border-left:1px solid var(--line-soft)}
+.slim span{font-size:12px;color:var(--ink-3);white-space:nowrap}
+.slim b{font-size:16px;color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap}
+.slim small{font-size:11.5px;color:var(--ink-4);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.slim small.down{color:var(--bad)}.slim small.up{color:var(--good)}
 .ws-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;padding:2px 4px 0}
 .ws-head h2{font-size:24px;letter-spacing:-.02em;color:var(--ink)}
 .ws-head p{font-size:13px;color:var(--ink-3);margin-top:4px}
@@ -75,9 +88,9 @@ body *{font-weight:400!important}
 .ws-main.tight>section{padding:16px 18px 14px}
 .ws-main.tight .ph{margin-bottom:8px}
 .ws-main.tight .np{max-height:392px}
-.ws-chart{flex:1;min-height:280px;height:auto}
+.ws-chart{flex:1;min-height:360px;height:auto}
 .demo-note:empty{display:none}
-.np{display:flex;flex-direction:column;gap:18px;max-height:520px;overflow:auto;scrollbar-width:thin}
+.np{display:flex;flex-direction:column;gap:18px;max-height:600px;overflow:auto;scrollbar-width:thin}
 .steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
 .st{display:grid;grid-template-columns:10px minmax(0,1fr);gap:12px;padding:11px 0;border-top:1px solid var(--line-soft)}
 .st:first-child{border-top:0;padding-top:2px}
@@ -210,6 +223,10 @@ function kpisOf(d){if(d.kpis)return d.kpis;const s=d.stats,ser=Object.values(d.m
  return [{label:d.main.tipLabel||'Previous period',value:fmt(s.previousTotal??pt)},
   {label:'Daily average',value:fmt(s.avgPerDay),note:`previous ${fmt(Math.round(pt/(prev.length||1)*10)/10)}`},
   vals[best]?{label:'Best day',value:fmt(vals[best]),note:ser[best]?sd(ser[best].date):''}:{label:'Best day',value:'--',note:'None yet'}];}
+function chipOf(d){const s=d.stats;if(s.deltaText)return {t:s.deltaText,c:s.deltaTone||''};if(s.change!=null)return {t:`${s.change>0?'+':s.change<0?'\u2212':''}${Math.abs(s.change)}%% on the previous ${d.period} days`,c:s.change>0?'up':s.change<0?'down':''};return {t:'',c:''};}
+function headHTML(d){const s=d.stats,ch=chipOf(d),unit=d.kind==='heatmap'?'of 10':esc(d.unit);
+ return `<header class="ws-top"><div class="wt-l"><h2>${esc(d.label)}</h2><p>${esc(d.sub||d.source)}</p></div><div class="wt-r"><span class="ws-hero">${fmt(s.total)}<small>${unit}</small></span>${ch.t?`<span class="chip ${ch.c}">${esc(ch.t)}</span>`:''}<button class="link-quiet all" data-detail="card">All details</button></div></header>`;}
+function slimStrip(d){if(!d.kpis)return '';return `<div class="slim" style="--k:${d.kpis.length}">${d.kpis.map(k=>`<div><span>${esc(k.label)}</span><b>${esc(k.value)}</b>${k.note?`<small class="${k.tone||''}">${esc(k.note)}</small>`:''}</div>`).join('')}</div>`;}
 function stripHTML(d){const s=d.stats,ks=kpisOf(d);
  let chip='',tone='';if(s.deltaText){chip=s.deltaText;tone=s.deltaTone||'';}else if(s.change!=null){chip=`${s.change>0?'+':s.change<0?'−':''}${Math.abs(s.change)}%% on the previous ${d.period} days`;tone=s.change>0?'up':s.change<0?'down':'';}
  const unit=d.kind==='heatmap'?'of 10':esc(d.unit);
@@ -293,8 +310,8 @@ function chartHeading(d){if(d.kind==='heatmap')return `Blocks against the ${esc(
  return `${esc(d.main.heading||'Day by day')}<span>${p?`dashed line: ${esc((d.main.previousLabel||label).toLowerCase())}`:''}</span>`;}
 function isCols(d){if(d.level||d.kind)return false;const v=[...Object.values(d.main.series)[0].map(p=>p?.value||0),...(d.main.previous||[]).map(p=>p?.value||0)];return Math.max(...v)<=10;}
 function drawCard(animate=true){const d=BY[cur];if(!d)return;const ws=el('ws');
- ws.innerHTML=`<header class="ws-head"><div><h2>${esc(d.label)}</h2><p>${esc(d.sub||d.source)}</p></div><button class="link-quiet all" data-detail="card">All details</button></header>
- ${stripHTML(d)}
+ ws.innerHTML=`${headHTML(d)}
+ ${slimStrip(d)}
  <div class="ws-main${d.kind==='heatmap'?' tight':''}"><section class="panel"><h3 class="ph">${chartHeading(d)}</h3><div id="analyticsChart" class="${d.kind==='heatmap'?'':'chart-frame ws-chart'}"></div></section><aside class="panel np">${nextHTML(d)}</aside></div>
  ${bdsHTML(d)}`;
  if(d.kind==='heatmap')heatmap('analyticsChart',d);
