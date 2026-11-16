@@ -29,7 +29,7 @@ html{zoom:.9}
 body *{font-weight:400!important}
 .ws-hero,.detail-value,.ask-stat strong{font-weight:250!important}
 .stop-fnb-performance{stop-color:var(--u0)}
-.app{position:relative;z-index:1;max-width:1840px;margin:0 auto;padding:22px 32px 28px;display:grid;grid-template-columns:292px minmax(0,1fr);gap:0 36px;align-items:start}
+.app{position:relative;z-index:1;max-width:1840px;margin:0 auto;padding:18px 32px 12px;display:grid;grid-template-columns:292px minmax(0,1fr);gap:0 36px;align-items:start}
 .topbar{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;font-size:12.5px;color:var(--ink-3)}
 .snap{display:inline-flex;align-items:center;gap:8px}
 .snap i{width:6px;height:6px;border-radius:50%;background:var(--ink-4)}
@@ -48,7 +48,7 @@ body *{font-weight:400!important}
 .rail-item em{font-style:normal;font-size:12px;text-align:right;font-variant-numeric:tabular-nums;color:var(--ink-4)}
 .rail-item em.up{color:var(--good)}.rail-item em.down{color:var(--bad)}
 /* workspace */
-.ws{min-width:0;display:flex;flex-direction:column;gap:16px;animation:wsIn .45s var(--ease)}
+.ws{min-width:0;display:flex;flex-direction:column;gap:14px;animation:wsIn .45s var(--ease)}
 @keyframes wsIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 .ws-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;padding:2px 4px 0}
 .ws-head h2{font-size:24px;letter-spacing:-.02em;color:var(--ink)}
@@ -71,7 +71,12 @@ body *{font-weight:400!important}
 .ph{font-size:12.5px;color:var(--ink-3);margin:0 0 14px;display:flex;justify-content:space-between;gap:12px}
 .ph span{color:var(--ink-4)}
 .ws-main>section{display:flex;flex-direction:column}
-.ws-chart{flex:1;min-height:300px;height:auto}
+.ws-main.tight{align-items:start}
+.ws-main.tight>section{padding:16px 18px 14px}
+.ws-main.tight .ph{margin-bottom:8px}
+.ws-main.tight .np{max-height:392px}
+.ws-chart{flex:1;min-height:280px;height:auto}
+.demo-note:empty{display:none}
 .np{display:flex;flex-direction:column;gap:18px;max-height:520px;overflow:auto;scrollbar-width:thin}
 .steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
 .st{display:grid;grid-template-columns:10px minmax(0,1fr);gap:12px;padding:11px 0;border-top:1px solid var(--line-soft)}
@@ -99,15 +104,15 @@ body *{font-weight:400!important}
 .col-prev{stroke:var(--ink-4);stroke-width:1.5;stroke-dasharray:3 3}
 .col-val{fill:var(--ink-2);font-size:11.5px}
 /* heatmap */
-.heat{display:flex;flex-direction:column;gap:4px}
-.heat-row{appearance:none;border:0;background:transparent;display:grid;align-items:center;gap:6px;padding:0 8px;height:36px;border-radius:10px;text-align:left;color:var(--ink-2);font-size:13.5px;width:100%;transition:background .2s var(--ease)}
+.heat{display:flex;flex-direction:column;gap:2px}
+.heat-row{appearance:none;border:0;background:transparent;display:grid;align-items:center;gap:6px;padding:0 8px;height:29px;border-radius:8px;text-align:left;color:var(--ink-2);font-size:13px;width:100%;transition:background .2s var(--ease)}
 button.heat-row:hover{background:var(--surface-2);color:var(--ink)}
-.heat-row.head{font-size:11.5px;color:var(--ink-4);height:24px}
+.heat-row.head{font-size:11.5px;color:var(--ink-4);height:20px}
 .heat-row .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:flex;align-items:center;gap:8px}
 .heat-row .nm small{color:var(--ink-4);font-size:11.5px}
 .heat-row .tg{text-align:right;font-variant-numeric:tabular-nums;color:var(--ink-3);font-size:12.5px}
 .heat-row.head span{text-align:center}.heat-row.head span:first-child{text-align:left}.heat-row.head span:last-child{text-align:right}
-.cell{height:28px;border-radius:8px;display:grid;place-items:center;font-size:12.5px;font-variant-numeric:tabular-nums;color:var(--ink)}
+.cell{height:22px;border-radius:6px;display:grid;place-items:center;font-size:12.5px;font-variant-numeric:tabular-nums;color:var(--ink)}
 .cell.good{background:color-mix(in srgb,var(--good) 30%,var(--surface))}.cell.warn{background:color-mix(in srgb,var(--warn) 26%,var(--surface))}.cell.bad{background:color-mix(in srgb,var(--bad) 28%,var(--surface))}
 .cell.now.good{background:color-mix(in srgb,var(--good) 58%,var(--surface));color:#1d1e20}.cell.now.warn{background:color-mix(in srgb,var(--warn) 52%,var(--surface));color:#1d1e20}.cell.now.bad{background:color-mix(in srgb,var(--bad) 58%,var(--surface));color:#1d1e20}
 .cell.none{background:var(--surface-2);color:var(--ink-4)}
@@ -165,7 +170,7 @@ button.heat-row:hover{background:var(--surface-2);color:var(--ink)}
 .disc summary::before{content:"›";display:inline-block;transition:transform .25s var(--ease)}
 .disc[open] summary::before{transform:rotate(90deg)}
 .disc .mini-wrap{margin-top:10px;max-height:260px;overflow:auto}
-.heat-key{display:flex;gap:16px;align-items:center;font-size:11.5px;color:var(--ink-4);padding:10px 8px 0}
+.heat-key{display:flex;gap:16px;align-items:center;font-size:11.5px;color:var(--ink-4);padding:8px 8px 0}
 .heat-key i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
 .heat-key .good{background:color-mix(in srgb,var(--good) 58%,var(--surface))}.heat-key .warn{background:color-mix(in srgb,var(--warn) 52%,var(--surface))}.heat-key .bad{background:color-mix(in srgb,var(--bad) 58%,var(--surface))}
 @media (max-width:1100px){.app{grid-template-columns:1fr;padding:16px}.rail{position:static;flex-direction:row;overflow-x:auto;gap:6px;padding-bottom:8px;scrollbar-width:none}.rail-group{display:none}.rail-item{display:flex;flex:none;gap:8px;white-space:nowrap;background:var(--surface);border-radius:999px;padding:9px 14px}.rail-item span{overflow:visible}.rail-item em{display:none}.ws-main{grid-template-columns:1fr}.strip{grid-template-columns:1fr 1fr}.strip>div+div{border-left:0}.bds{grid-template-columns:1fr}}
@@ -232,7 +237,7 @@ function colChart(id,d){const frame=el(id),ser=Object.values(d.main.series)[0],c
  frame.innerHTML=`<svg role="img" aria-label="Daily ${esc(d.unit)} as columns, dashed marks are ${esc(d.main.tipLabel||'the previous period')}" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}">${grid}${bars}</svg>`;}
 
 /* ---- heatmap with in-place sub-metrics ---- */
-function heatmap(id,d){const f=el(id),h=d.heat,n=h.cols.length;const cols=`minmax(0,1fr) repeat(${n},minmax(44px,92px)) 54px`;
+function heatmap(id,d){const f=el(id),h=d.heat,n=h.cols.length;const cols=`minmax(0,1fr) repeat(${n},minmax(40px,64px)) 44px`;
  const one=(v)=>v===null||v===undefined?'--':Number(v).toFixed(1);
  const head=`<div class="heat-row head" style="grid-template-columns:${cols}"><span>Block, weight</span>${h.cols.map(c=>`<span>${esc(c)}</span>`).join('')}<span>Target</span></div>`;
  const rows=h.rows.map(r=>`<button class="heat-row" style="grid-template-columns:${cols}" data-sheet="${esc(r.id)}" aria-haspopup="dialog"><span class="nm">${esc(r.name)}<small>${r.weight}%%</small></span>${r.cells.map((v,i)=>`<span class="cell ${v===null||v===undefined?'none':r.bands[i]}${i===n-1?' now':''}" title="${esc(h.cols[i])}: ${one(v)}">${one(v)}</span>`).join('')}<span class="tg">${one(r.target)}</span></button>`).join('');
@@ -290,7 +295,7 @@ function isCols(d){if(d.level||d.kind)return false;const v=[...Object.values(d.m
 function drawCard(animate=true){const d=BY[cur];if(!d)return;const ws=el('ws');
  ws.innerHTML=`<header class="ws-head"><div><h2>${esc(d.label)}</h2><p>${esc(d.sub||d.source)}</p></div><button class="link-quiet all" data-detail="card">All details</button></header>
  ${stripHTML(d)}
- <div class="ws-main"><section class="panel"><h3 class="ph">${chartHeading(d)}</h3><div id="analyticsChart" class="${d.kind==='heatmap'?'':'chart-frame ws-chart'}"></div></section><aside class="panel np">${nextHTML(d)}</aside></div>
+ <div class="ws-main${d.kind==='heatmap'?' tight':''}"><section class="panel"><h3 class="ph">${chartHeading(d)}</h3><div id="analyticsChart" class="${d.kind==='heatmap'?'':'chart-frame ws-chart'}"></div></section><aside class="panel np">${nextHTML(d)}</aside></div>
  ${bdsHTML(d)}`;
  if(d.kind==='heatmap')heatmap('analyticsChart',d);
  else if(isCols(d))colChart('analyticsChart',d);
