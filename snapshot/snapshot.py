@@ -448,13 +448,29 @@ def index_status(sess, paths):
             raise RuntimeError(f"URL Inspection {r.status_code}: {r.text[:200]}")
         st = r.json().get("inspectionResult", {}).get("indexStatusResult", {})
         return p, st.get("verdict") == "PASS", st.get("coverageState", "")
-    one(paths[0])                       # fail fast if not permitted
-    with cf.ThreadPoolExecutor(4) as ex:
-        res = list(ex.map(one, paths))
+    # Incremental: indexed pages are rechecked once a day; the rest every run.
+    cache_p = DATA / "index-cache.json"
+    cache = json.loads(cache_p.read_text()) if cache_p.exists() else {}
+    now = dt.datetime.now(dt.timezone.utc)
+    def due(p):
+        e = cache.get(p)
+        if not e:
+            return True
+        age = (now - dt.datetime.fromisoformat(e["checked"])).total_seconds() / 3600
+        return age >= (24 if e["indexed"] else 0)
+    todo = [p for p in paths if due(p)]
+    if todo:
+        one(todo[0])                    # fail fast if not permitted
+        with cf.ThreadPoolExecutor(4) as ex:
+            for p, okk, cs in ex.map(one, todo):
+                cache[p] = {"indexed": okk, "state": cs, "checked": now.isoformat(timespec="minutes")}
+    cache = {p: cache[p] for p in paths if p in cache}
+    cache_p.write_text(json.dumps(cache, ensure_ascii=False, indent=0))
+    res = [(p, cache[p]["indexed"], cache[p]["state"]) for p in paths if p in cache]
     states = {}
     for _, _, cs in res:
         states[cs or "Unknown"] = states.get(cs or "Unknown", 0) + 1
-    return {"checked": len(res), "indexed": sum(1 for x in res if x[1]), "states": states,
+    return {"checked": len(res), "indexed": sum(1 for x in res if x[1]), "states": states, "rechecked_now": len(todo),
             "not_indexed": [page_name(p) for p, okk, _ in res if not okk][:8]}
 
 
