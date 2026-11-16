@@ -101,11 +101,9 @@ body *{font-weight:400!important}
 /* heatmap */
 .heat{display:flex;flex-direction:column;gap:4px}
 .heat-row{appearance:none;border:0;background:transparent;display:grid;align-items:center;gap:6px;padding:0 8px;height:36px;border-radius:10px;text-align:left;color:var(--ink-2);font-size:13.5px;width:100%;transition:background .2s var(--ease)}
-button.heat-row:hover,button.heat-row[aria-expanded="true"]{background:var(--surface-2);color:var(--ink)}
+button.heat-row:hover{background:var(--surface-2);color:var(--ink)}
 .heat-row.head{font-size:11.5px;color:var(--ink-4);height:24px}
 .heat-row .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:flex;align-items:center;gap:8px}
-.heat-row .nm i{font-style:normal;color:var(--ink-4);font-size:11px;transition:transform .25s var(--ease);display:inline-block;width:8px}
-.heat-row[aria-expanded="true"] .nm i{transform:rotate(90deg)}
 .heat-row .nm small{color:var(--ink-4);font-size:11.5px}
 .heat-row .tg{text-align:right;font-variant-numeric:tabular-nums;color:var(--ink-3);font-size:12.5px}
 .heat-row.head span{text-align:center}.heat-row.head span:first-child{text-align:left}.heat-row.head span:last-child{text-align:right}
@@ -113,21 +111,31 @@ button.heat-row:hover,button.heat-row[aria-expanded="true"]{background:var(--sur
 .cell.good{background:color-mix(in srgb,var(--good) 30%,var(--surface))}.cell.warn{background:color-mix(in srgb,var(--warn) 26%,var(--surface))}.cell.bad{background:color-mix(in srgb,var(--bad) 28%,var(--surface))}
 .cell.now.good{background:color-mix(in srgb,var(--good) 58%,var(--surface));color:#1d1e20}.cell.now.warn{background:color-mix(in srgb,var(--warn) 52%,var(--surface));color:#1d1e20}.cell.now.bad{background:color-mix(in srgb,var(--bad) 58%,var(--surface));color:#1d1e20}
 .cell.none{background:var(--surface-2);color:var(--ink-4)}
-.subs{display:flex;flex-direction:column;gap:2px;padding:4px 0 10px;animation:wsIn .35s var(--ease)}
-.sub{display:grid;align-items:center;gap:2px 6px;padding:6px 8px;font-size:12.5px;color:var(--ink-3);border-radius:8px}
-.sub:hover{background:#ffffff05}
-.sub .sx{grid-column:1/-1;padding-left:16px;font-size:12px;color:var(--ink-4);line-height:1.5}
-.sub .sa{display:block;color:var(--ink-2);margin-top:2px}
-.sub .sa i{font-style:normal;color:var(--ink-4);margin-left:8px;font-size:11.5px}
-.sub .sn{padding-left:16px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink-2)}
-.sub .sn em{font-style:normal;font-size:11px;color:var(--ink-4);margin-left:8px}
+/* block popup */
+.detail.sheet{width:min(780px,calc(100vw - 48px));height:fit-content;max-height:min(820px,calc(100vh - 48px))}
+.detail.sheet .detail-inner{overflow:hidden}
+.sheet-body{overflow:auto;padding:20px 28px 26px;display:flex;flex-direction:column;gap:18px;scrollbar-width:thin}
+.sh-hero{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.sh-meta{font-size:12.5px;color:var(--ink-3)}
+.sh-list{display:flex;flex-direction:column}
+.sh-item{padding:13px 0;border-top:1px solid var(--line-soft)}
+.sh-item:first-child{border-top:0}
+.sh-top{display:grid;grid-template-columns:minmax(0,1fr) 220px 44px;gap:14px;align-items:center}
+.sh-n{font-size:13.5px;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sh-n em{font-style:normal;font-size:11px;color:var(--ink-4);margin-left:8px}
+.sh-w{text-align:right;font-size:11.5px;color:var(--ink-4)}
 .sbar{display:grid;grid-template-columns:1fr 3em;gap:10px;align-items:center}
 .sbar .tr{height:6px;border-radius:99px;background:var(--surface-3);overflow:hidden}
 .sbar .fl{height:100%;border-radius:99px}
 .fl.good{background:var(--good)}.fl.warn{background:var(--warn)}.fl.bad{background:var(--bad)}
-.sbar b{text-align:right;color:var(--ink-2);font-variant-numeric:tabular-nums}
-.sub .tg{text-align:right;color:var(--ink-4);font-size:11.5px}
-.subs .more{align-self:flex-start;margin:4px 0 0 32px}
+.sbar b{text-align:right;color:var(--ink-2);font-variant-numeric:tabular-nums;font-size:12.5px}
+.sh-ev{font-size:12.5px;color:var(--ink-3);margin-top:5px;line-height:1.5}
+.sh-act{display:flex;align-items:baseline;gap:10px;font-size:13px;color:var(--ink-2);margin-top:7px;line-height:1.5}
+.sh-act .sd{flex:none;margin-top:0;transform:translateY(-1px)}
+.sh-o{margin-left:auto;flex:none;font-size:11.5px;color:var(--ink-4);white-space:nowrap;padding-left:12px}
+.sh-o b{color:var(--good)}
+.sh-foot{font-size:12.5px;color:var(--ink-3);display:flex;gap:6px 14px;flex-wrap:wrap;align-items:center;border-top:1px solid var(--line-soft);padding-top:14px}
+.sh-foot .link-quiet{margin:0;padding:4px 10px;font-size:12.5px;color:var(--ink-2);background:var(--surface-2)}
 .heat-key{display:flex;gap:16px;align-items:center;font-size:11.5px;color:var(--ink-4);padding:10px 8px 0}
 .heat-key i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
 .heat-key .good{background:color-mix(in srgb,var(--good) 58%,var(--surface))}.heat-key .warn{background:color-mix(in srgb,var(--warn) 52%,var(--surface))}.heat-key .bad{background:color-mix(in srgb,var(--bad) 58%,var(--surface))}
@@ -137,7 +145,7 @@ button.heat-row:hover,button.heat-row[aria-expanded="true"]{background:var(--sur
 JS = r'''
 const SNAP_URL='https://raw.githubusercontent.com/RavenArtStudio/fnb-monitor/main/data/cards.json';
 const SAVED=%s;
-let CARDS=[],ORDER=[],BY={},META={},cur=null,OPEN=new Set();
+let CARDS=[],ORDER=[],BY={},META={},cur=null;
 const when=(iso)=>{const d=new Date(iso);return d.toLocaleDateString('en-US',{month:'short',day:'numeric'})+', '+d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});};
 const OWNER={site:'Site',owner:'Owner',google:'Google'};
 const GROUP_ICON={
@@ -198,13 +206,27 @@ function colChart(id,d){const frame=el(id),ser=Object.values(d.main.series)[0],c
 function heatmap(id,d){const f=el(id),h=d.heat,n=h.cols.length;const cols=`minmax(0,1fr) repeat(${n},minmax(44px,92px)) 54px`;
  const one=(v)=>v===null||v===undefined?'--':Number(v).toFixed(1);
  const head=`<div class="heat-row head" style="grid-template-columns:${cols}"><span>Block, weight</span>${h.cols.map(c=>`<span>${esc(c)}</span>`).join('')}<span>Target</span></div>`;
- const rows=h.rows.map(r=>{const open=OPEN.has(r.id);
-  const gc=`minmax(0,1fr) ${n>1?`repeat(${n},minmax(44px,92px))`:'minmax(44px,92px)'} 54px`;
-  const subs=open?`<div class="subs">${r.subs.map(s=>{const ev=s.measured?(s.evidence||''):`Audit score, Nov 13${s.evidence?': '+s.evidence:''}`;const moved=s.measured&&s.audit!=null&&Math.abs(s.score-s.audit)>=0.05?` Audit ${one(s.audit)}.`:'';
-   return `<div class="sub" style="grid-template-columns:${gc}"><span class="sn">${esc(s.name)}<em>${s.measured?'live':'audit'}</em></span><span class="sbar" style="grid-column:span ${n}"><span class="tr"><span class="fl ${s.band}" style="display:block;width:${Math.max(2,s.score*10)}%%"></span></span><b>${one(s.score)}</b></span><span class="tg">${s.weight}%%</span><span class="sx">${esc(ev+moved)}${s.band!=='good'&&s.action?`<span class="sa">Next: ${esc(s.action)}<i>${esc(OWNER[s.owner]||'')}</i></span>`:''}</span></div>`;}).join('')}</div>`:'';
-  return `<button class="heat-row" style="grid-template-columns:${cols}" data-expand="${esc(r.id)}" aria-expanded="${open}"><span class="nm"><i>›</i>${esc(r.name)}<small>${r.weight}%%</small></span>${r.cells.map((v,i)=>`<span class="cell ${v===null||v===undefined?'none':r.bands[i]}${i===n-1?' now':''}" title="${esc(h.cols[i])}: ${one(v)}">${one(v)}</span>`).join('')}<span class="tg">${one(r.target)}</span></button>${subs}`;}).join('');
- const key=`<div class="heat-key"><span><i class="good"></i>On target</span><span><i class="warn"></i>Within 1.5</span><span><i class="bad"></i>Further below</span><span style="margin-left:auto">Select a block for its sub-metrics, evidence and next action</span></div>`;
+ const rows=h.rows.map(r=>`<button class="heat-row" style="grid-template-columns:${cols}" data-sheet="${esc(r.id)}" aria-haspopup="dialog"><span class="nm">${esc(r.name)}<small>${r.weight}%%</small></span>${r.cells.map((v,i)=>`<span class="cell ${v===null||v===undefined?'none':r.bands[i]}${i===n-1?' now':''}" title="${esc(h.cols[i])}: ${one(v)}">${one(v)}</span>`).join('')}<span class="tg">${one(r.target)}</span></button>`).join('');
+ const key=`<div class="heat-key"><span><i class="good"></i>On target</span><span><i class="warn"></i>Within 1.5</span><span><i class="bad"></i>Further below</span><span style="margin-left:auto">Select a block for its sub-metrics and next actions</span></div>`;
  f.innerHTML=`<div class="heat">${head}${rows}${key}</div>`;}
+
+/* ---- block popup ---- */
+function sheetHTML(d,r){const one=(v)=>v===null||v===undefined?'--':Number(v).toFixed(1),now=r.cells.at(-1),gap=r.target-now,ok=gap<=0.05;
+ const subs=[...r.subs].map(s=>({...s,gain:r.weight*s.weight*Math.max(0,r.target-s.score)/10000})).sort((a,b)=>b.gain-a.gain);
+ const cards=(d.blocks?.[r.id]?.questions||[]).find(q=>q.id==='cards')?.answer?.items||[];
+ const ids={'Site health, Pages live':'pages','Site health, Broken links':'broken','Site health, Server response time':'response','Site health, Home page size':'weight','Site health, Pages with issues':'issues','Authority, Referring domains':'refdomains','Authority, Authority score':'authority','Google Search, Search impressions':'impressions','Google Search, Keywords on page one':'pageone','Enquiries, Profit Review requests':'leads','Enquiries, WhatsApp clicks':'whatsapp','Enquiries, Calculator uses':'tools'};
+ return `<div class="detail-head"><div><div class="panel-kicker">Search visibility, ${esc(d.heat.stage)} stage</div><h2 class="detail-title" id="detailTitle">${esc(r.name)}</h2></div>${CLOSE_BTN}</div>
+ <div class="sheet-body">
+  <div class="sh-hero"><span class="ws-hero">${one(now)}<small>of 10</small></span><span class="chip ${ok?'up':'down'}">Target ${one(r.target)}, ${ok?'on target':one(gap)+' below'}</span><span class="sh-meta">Weight ${r.weight}%% of the overall score. Audit ${one(r.cells[0])}.</span></div>
+  <div class="sh-list">${subs.map(s=>`<div class="sh-item"><div class="sh-top"><span class="sh-n">${esc(s.name)}<em>${s.measured?'live':'audit'}</em></span><span class="sbar"><span class="tr"><span class="fl ${s.band}" style="display:block;width:${Math.max(2,s.score*10)}%%"></span></span><b>${one(s.score)}</b></span><span class="sh-w">${s.weight}%%</span></div>
+   <p class="sh-ev">${esc(s.measured?(s.evidence||''):'Audit score, Nov 13'+(s.evidence?': '+s.evidence:''))}${s.measured&&s.audit!=null&&Math.abs(s.score-s.audit)>=0.05?` Audit ${one(s.audit)}.`:''}</p>
+   ${s.band!=='good'&&s.action?`<p class="sh-act"><span class="sd ${s.gain>=0.1?'high':s.gain>=0.04?'med':''}"></span>${esc(s.action)}<span class="sh-o">${esc(OWNER[s.owner]||'')}${s.gain>=0.005?` <b>+${s.gain.toFixed(2)} points</b>`:''}</span></p>`:''}</div>`).join('')}</div>
+  ${cards.length?`<div class="sh-foot">Shown in detail on ${cards.map(c=>ids[c]?`<button class="link-quiet" data-goto="${ids[c]}">${esc(c)}</button>`:esc(c)).join('')}</div>`:''}
+ </div>`;}
+function openSheet(bid,opener){const d=BY[cur],r=d?.heat?.rows.find(x=>x.id===bid);if(!r)return;detailOpener=opener;const panel=el('detailPanel'),scrim=el('detailScrim'),body=el('detailBody');
+ state.detail=null;panel.classList.add('sheet');body.innerHTML=sheetHTML(d,r);
+ scrim.hidden=false;panel.hidden=false;document.body.classList.add('detail-open');detailClosing=false;
+ requestAnimationFrame(()=>{scrim.classList.add('on');panel.classList.add('on');});body.focus({preventScroll:true});}
 
 /* ---- workspace ---- */
 function chartHeading(d){if(d.kind==='heatmap')return `Blocks against the ${esc(d.heat.stage)} stage target<span>colour shows the latest snapshot against target</span>`;
@@ -228,20 +250,20 @@ function setData(j,mode){META=j.meta||{};CARDS=j.cards||[];ORDER=CARDS.map(c=>c.
  drawRail();drawCard();}
 function pick(id,focus){cur=id;history.replaceState(null,'','#'+id);document.querySelectorAll('.rail-item').forEach(b=>{const on=b.dataset.card===id;b.setAttribute('aria-selected',String(on));b.tabIndex=on?0:-1;if(on&&focus)b.focus();});drawCard();}
 detailOpener=null;detailClosing=false;
-function showDetail(d,metric,opener){detailOpener=opener;const panel=el('detailPanel'),scrim=el('detailScrim'),body=el('detailBody');
+function showDetail(d,metric,opener){detailOpener=opener;el('detailPanel').classList.remove('sheet');const panel=el('detailPanel'),scrim=el('detailScrim'),body=el('detailBody');
  state.detail={metric,intent:'status',open:d.questions?.find(q=>q.intent==='status')?.id||null,data:d};
  scrim.hidden=false;panel.hidden=false;document.body.classList.add('detail-open');detailClosing=false;
  requestAnimationFrame(()=>{scrim.classList.add('on');panel.classList.add('on');});body.focus({preventScroll:true});renderDetail();}
 function closeDetail(){const panel=el('detailPanel'),scrim=el('detailScrim');if(panel.hidden||detailClosing)return;detailClosing=true;
  panel.classList.remove('on');scrim.classList.remove('on');document.body.classList.remove('detail-open');
- setTimeout(()=>{if(!panel.classList.contains('on')){panel.hidden=true;scrim.hidden=true;el('detailBody').innerHTML='';state.detail=null;}detailClosing=false;},reduceMotion?0:420);
+ setTimeout(()=>{if(!panel.classList.contains('on')){panel.hidden=true;scrim.hidden=true;panel.classList.remove('sheet');el('detailBody').innerHTML='';state.detail=null;}detailClosing=false;},reduceMotion?0:420);
  if(detailOpener&&document.contains(detailOpener))detailOpener.focus({preventScroll:true});}
 document.addEventListener('click',e=>{
- const t=e.target.closest('[data-card],[data-expand],[data-block],[data-detail],[data-detail-close],[data-intent],[data-q],[data-raw],[data-copy-csv]');if(!t)return;
+ const t=e.target.closest('[data-card],[data-sheet],[data-goto],[data-detail],[data-detail-close],[data-intent],[data-q],[data-raw],[data-copy-csv]');if(!t)return;
  if(t.dataset.card){pick(t.dataset.card);return;}
- if(t.dataset.expand){const id=t.dataset.expand;OPEN.has(id)?OPEN.delete(id):OPEN.add(id);heatmap('analyticsChart',BY[cur]);document.querySelector(`[data-expand="${id}"]`)?.focus({preventScroll:true});return;}
- if(t.dataset.block){const b=BY[cur]?.blocks?.[t.dataset.block];if(b)showDetail(b,t.dataset.block,t);return;}
- if(t.dataset.detail){showDetail(BY[cur],'card',t);return;}
+ if(t.dataset.sheet){openSheet(t.dataset.sheet,t);return;}
+ if(t.dataset.goto){const id=t.dataset.goto;detailOpener=null;closeDetail();pick(id,true);return;}
+ if(t.dataset.detail){el('detailPanel').classList.remove('sheet');showDetail(BY[cur],'card',t);return;}
  if(t.hasAttribute('data-detail-close')){closeDetail();return;}
  const s=state.detail;if(!s?.data)return;
  if(t.dataset.intent){s.intent=t.dataset.intent;s.open=s.data.questions.find(q=>q.intent===s.intent)?.id||null;renderAsk();return;}
