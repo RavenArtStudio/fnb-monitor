@@ -242,10 +242,17 @@ def series(rows, days, key=lambda d: d[0], val=lambda m: m[0]):
     return [int(by.get(day, 0)) for day in days]
 
 
+def tidy(x):
+    x = str(x)
+    if x in ("(not set)", "", "(other)"):
+        return "Not recorded"
+    return x[:1].upper() + x[1:] if x.islower() else x
+
+
 def top(rows, n=6, label=lambda d: d[0], other=True):
     agg = {}
     for d, m in rows:
-        k = label(d)
+        k = tidy(label(d))
         agg[k] = agg.get(k, 0) + int(m[0])
     items = sorted(((k, v) for k, v in agg.items() if v > 0), key=lambda x: -x[1])
     if other and len(items) > n:
