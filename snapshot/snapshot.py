@@ -114,6 +114,7 @@ def sc(sess, start, end, dims, limit=1000):
 
 # ---------------------------------------------------------------- card builders
 LAUNCH = dt.date(2026, 11, 15)
+CRAWL = {}
 
 
 def prev_days_of(cur_days):
@@ -783,7 +784,10 @@ def cube_card(cs, cube, hist, g):
     order = sorted(cs["blocks"], key=lambda b: (-lost(b), -b["weight"]))
     rows = [{"id": b["id"], "name": b["name"], "weight": b["weight"], "target": b["target"],
              "cells": [val(d, b["id"]) for d in cols],
-             "bands": [band(val(d, b["id"]) or 0, b["target"]) for d in cols]} for b in order]
+             "bands": [band(val(d, b["id"]) or 0, b["target"]) for d in cols],
+             "subs": [{"name": x_["name"], "weight": x_["weight"], "score": x_["score"], "audit": x_["audit"],
+                       "band": band(x_["score"], b["target"]), "measured": x_["source"] == "Measured daily",
+                       "evidence": x_["evidence_now"]} for x_ in b["subs"]]} for b in order]
     day_n = (TODAY - LAUNCH).days + 1
     stage_note = f"{cs['stage']} stage, day {day_n}" + (f", to {short(dt.date.fromisoformat(cs['stage_until']))}" if cs["stage_until"] else "")
     on = sum(1 for b in cs["blocks"] if band(b["score"], b["target"]) == "good")
@@ -857,7 +861,26 @@ def cube_card(cs, cube, hist, g):
         q.insert(3, {"intent": "source", "id": "targets", "text": "Which target searches show the site?",
                      "answer": {"type": "table", "columns": ["Search", "Impressions, 28 days", "Position"],
                                 "rows": [[r[0], f(r[1]), "-" if r[2] is None else f"{r[2]:.1f}"] for r in g["targets"]["rows"]], "note": "Edit the list in data/targets.json."}})
-    return {"id": "cube", "group": "Overview", "kind": "heatmap", "status": "live", "source": "Cube", "short": "Search visibility",
+    ctx = {"missing_n": len(CRAWL.get("missing_from_sitemap", [])), "unknown_n": (g.get("index") or {}).get("checked", 0) - (g.get("index") or {}).get("indexed", 0),
+           "slowest": ", ".join(x_[0] for x_ in CRAWL.get("slowest", [])[:2]), "noshare_n": len(CRAWL.get("issues", {}).get("No share image", []))}
+    gains = []
+    for b in cs["blocks"]:
+        for x_ in b["subs"]:
+            gain = b["weight"] * x_["weight"] * max(0.0, b["target"] - x_["score"]) / 10000
+            if gain >= 0.005 and x_.get("action"):
+                gains.append((gain, b, x_))
+    gains.sort(key=lambda t: -t[0])
+    nxt = [{"t": x_["action"].format(**ctx), "why": f"{b['name']}: {x_['name']} at {x_['score']:.1f}, block target {b['target']:.1f}.",
+            "gain": round(gain, 2), "owner": x_.get("owner", "site"), "impact": "high" if gain >= 0.1 else "med" if gain >= 0.04 else "low"}
+           for gain, b, x_ in gains[:6]]
+    n_meas = sum(1 for b in cs["blocks"] for x_ in b["subs"] if x_["source"] == "Measured daily")
+    n_all = sum(len(b["subs"]) for b in cs["blocks"])
+    left = (dt.date.fromisoformat(cs["stage_until"]) - TODAY).days if cs["stage_until"] else None
+    kpis = [{"label": "Stage target", "value": f"{cs['target']:.2f}", "note": f"{cs['target'] - tot:.2f} to go" if tot < cs["target"] else "Reached", "tone": "down" if tot < cs["target"] else "up"},
+            {"label": "Blocks on target", "value": f"{on} of {len(cs['blocks'])}", "note": f"{cs['stage']} stage"},
+            {"label": "Measured live", "value": f"{n_meas} of {n_all}", "note": "sub-metrics; the rest are audit scores"},
+            {"label": "Stage ends", "value": short(dt.date.fromisoformat(cs["stage_until"])) if left is not None else "-", "note": f"{left} days left" if left is not None else ""}]
+    return {"id": "cube", "group": "Overview", "kind": "heatmap", "next": nxt, "kpis": kpis, "status": "live", "source": "Cube", "short": "Search visibility",
             "level": True, "sub": f"Ten blocks against the {stage_note}", "available": True, "brand": K,
             "period": len(cols), "periodLabel": stage_note, "label": "Search visibility", "unit": "points", "through": cols[-1],
             "stats": {"total": round(tot, 2), "previousTotal": aud, "change": None,
@@ -870,12 +893,93 @@ def cube_card(cs, cube, hist, g):
             "main": {"dates": cols, "heading": "Overall score by snapshot", "previousLabel": "the stage target",
                      "series": {K: [{"date": d, "value": val(d)} for d in cols]},
                      "previous": [{"date": d, "value": cs["target"]} for d in cols], "tipLabel": "Stage target"},
-            "breakdowns": [{"id": "blocks", "title": "Blocks, score of 10", "rows": [{"label": b["name"], "value": round(b["score"], 1)} for b in order]},
-                           {"id": "gain", "title": "Points to gain overall, by block", "rows": [{"label": b["name"], "value": round(lost(b), 2)} for b in gaps if lost(b) > 0]}],
+            "breakdowns": [{"id": "gain", "title": "Points to gain, by block", "rows": [{"label": b["name"], "value": round(lost(b), 2)} for b in gaps if lost(b) > 0]}]
+                          + ([{"id": "index", "title": "Pages in Google's index", "rows": [{"label": {"Submitted and indexed": "Indexed"}.get(k, k.replace("‘", "").replace("’", "")), "value": v} for k, v in sorted(g["index"]["states"].items(), key=lambda kv: -kv[1])]}] if g.get("index") else [])
+                          + ([{"id": "targets", "title": f"Target searches showing, {g['targets']['shown']} of {g['targets']['total']}", "rows": [{"label": r[0], "value": r[1]} for r in sorted(g["targets"]["rows"], key=lambda r: -r[1])[:5]]}] if g.get("targets") else [])
+                          + [{"id": "blocks", "title": "Blocks, score of 10", "rows": [{"label": b["name"], "value": round(b["score"], 1)} for b in order]}],
             "patterns": pats, "questions": q,
             "raw": {"columns": ["Block", "Weight", "Score", "Target", "Audit"],
                     "rows": [[b["name"], b["weight"], b["score"], b["target"], b["audit"]] for b in order]},
             "howCalculated": "Ten blocks with fixed weights, each the weighted mean of its sub-metrics, 0 to 10. The overall score is the weighted sum. Targets follow the stage counted from the Nov 15 launch."}
+
+
+# ---------------------------------------------------------------- Next steps for each card
+def step(t, why, impact="med", owner="site"):
+    return {"t": t, "why": why, "impact": impact, "owner": owner}
+
+
+def next_steps(cards, c, g):
+    by = {x["id"]: x for x in cards}
+    tot = lambda i: by[i]["stats"]["total"] if i in by else None
+    top_row = lambda i, n=0: (by[i]["breakdowns"][n]["rows"][0] if i in by and len(by[i]["breakdowns"]) > n and by[i]["breakdowns"][n]["rows"] else None)
+    ix = g.get("index") or {}
+    unknown = ix.get("checked", 0) - ix.get("indexed", 0)
+    rules = {}
+    if "leads" in by:
+        rules["leads"] = ([step("Send one test Profit Review request after accepting cookies; it should show in Analytics Realtime within minutes.", "No requests recorded this week; confirms the form and the generate_lead event work end to end.", "high", "owner"),
+                           step("Mark generate_lead as a key event in Google Analytics.", "Key events power conversion reports and channel comparisons.", "med", "owner")]
+                          if tot("leads") == 0 else
+                          [step("Reply to every request within the hour and note the outcome.", f"{tot('leads')} requests this week.", "high", "owner")])
+    if "whatsapp" in by:
+        rules["whatsapp"] = [step("Check the header and footer WhatsApp links also send whatsapp_click.", "Only the Ask buttons are confirmed; the rest may go uncounted.", "med", "site")]
+        if top_row("whatsapp"):
+            rules["whatsapp"].append(step(f"Keep a WhatsApp button beside the content on {top_row('whatsapp')['label']}.", "It produces the most clicks.", "low", "site"))
+    if "tools" in by:
+        rules["tools"] = ([step("Use one calculator after accepting cookies and check tool_used in Analytics Realtime.", "No calculator use recorded this week.", "high", "owner"),
+                           step("Register the tool parameter as a custom dimension in Analytics.", "Splits uses by calculator instead of by page.", "med", "owner")]
+                          if not tot("tools") else
+                          [step(f"Feature {top_row('tools')['label'] if top_row('tools') else 'the most used calculator'} on the home page.", "Most used calculator this week.", "med", "site")])
+    if "sessions" in by:
+        cty = {r["label"]: r["value"] for r in by["sessions"]["breakdowns"][1]["rows"]} if len(by["sessions"]["breakdowns"]) > 1 else {}
+        uae, s_ = cty.get("United Arab Emirates", 0), tot("sessions") or 1
+        rules["sessions"] = [step("Exclude team traffic: add the team's IP addresses as internal traffic in Analytics.", f"Only {uae} of {s_} sessions came from the UAE; India and Pakistan are likely the team.", "high", "owner")]
+        ch = top_row("sessions")
+        if ch:
+            rules["sessions"].append(step(f"{ch['label']} brings the most visits; make sure those landing pages carry the Profit Review button.", f"{ch['value']} of {s_} sessions.", "med", "site"))
+    if "engaged" in by:
+        e, s_ = tot("engaged") or 0, tot("sessions") or 1
+        rules["engaged"] = [step("Tighten the first screen of entry pages: one line on who it is for, one figure, one button.", f"{round(100 * e / s_)}% of sessions engaged this week.", "med", "site")]
+    if "newvisitors" in by:
+        rules["newvisitors"] = [step("Watch UAE new visitors as the core number once team traffic is filtered.", "New visitors outside the UAE are mostly not prospects.", "low", "owner")]
+    if "views" in by and top_row("views"):
+        rules["views"] = [step(f"{top_row('views')['label']} is the most viewed page; give it a direct path to the Profit Review form.", f"{top_row('views')['value']} views this week.", "med", "site")]
+    if "impressions" in by:
+        rules["impressions"] = []
+        if unknown:
+            rules["impressions"].append(step(f"Request indexing in Search Console for the {unknown} pages Google does not know yet.", "Pages Google has not indexed cannot show in results.", "high", "google"))
+        rules["impressions"].append(step("Rewrite the title and description of the most shown pages to match the search wording.", "Impressions turn into clicks through the title and description.", "med", "site"))
+    if "searchclicks" in by:
+        rules["searchclicks"] = [step("Track clicks from searches without the brand name; those are new prospects.", "Brand searches come from people who already know the firm.", "low", "owner")]
+    if "pageone" in by:
+        near = by["pageone"]["breakdowns"][0]["rows"] if by["pageone"]["breakdowns"] else []
+        rules["pageone"] = ([step(f"Strengthen the page for '{near[0]['label'].split(' (')[0]}': more depth, internal links, a clear answer at the top.", "Closest keyword to page one.", "high", "site")] if near else
+                            [step("No keyword on page one yet: expected in the first weeks after launch.", "Google is still re-crawling the new site.", "low", "google")])
+    if "pages" in by:
+        rules["pages"] = []
+        if c.get("missing_from_sitemap"):
+            rules["pages"].append(step(f"Add the {len(c['missing_from_sitemap'])} linked pages missing from the sitemap, or noindex them.", "Pages outside the sitemap are found later, if at all.", "med", "site"))
+        gap = c["lang"]["English"] - c["lang"]["Arabic"]
+        if gap > 0:
+            rules["pages"].append(step(f"Publish Arabic versions of the {gap} English-only pages.", "Arabic search targeting is the weakest cube block.", "med", "site"))
+    if "broken" in by:
+        rules["broken"] = ([step("Fix: " + ", ".join(u.replace(SITE, "") for u in c["broken"][:3]), "Broken links waste crawl and lose visitors.", "high", "site")] if c["broken"] else
+                           [step("Nothing to fix. Recheck after each release.", "All internal links work.", "low", "site")])
+    if "issues" in by:
+        rules["issues"] = [step(f"Add share images to the {len(c['issues'].get('No share image', []))} pages without one.", "Links shared on WhatsApp and LinkedIn show no picture.", "med", "site")] if c["issues"].get("No share image") else []
+        if c["issues"].get("Description over 160 characters"):
+            rules["issues"].append(step("Shorten the long descriptions: " + ", ".join(page_name(u) for u in c["issues"]["Description over 160 characters"][:3]) + ".", "Google cuts descriptions at about 160 characters.", "low", "site"))
+    if "response" in by:
+        rules["response"] = [step("No action while the median stays under 500 ms.", f"Median {c['ms_median']} ms.", "low", "site")]
+    if "weight" in by:
+        big = max(c["weight"].items(), key=lambda kv: kv[1])
+        rules["weight"] = [step(f"Minify and split the {big[0].lower()} ({big[1]} KB).", "Largest part of the home page.", "low", "site")]
+    for k in ("refdomains", "authority"):
+        if k in by:
+            rules[k] = [step("Earn one link from a recognised UAE publication or industry body.", "Current links come from low-score blog networks and carry no weight.", "high", "owner"),
+                        step("Get listed on Zoho, Xero and QuickBooks advisor directories.", "Relevant directories add trusted links and local signals.", "med", "owner")]
+    for x in cards:
+        if x["id"] in rules and "next" not in x:
+            x["next"] = rules[x["id"]][:4]
 
 
 # ---------------------------------------------------------------- main
@@ -894,8 +998,10 @@ def main():
     else:
         notes.append("Google key not set: Analytics and Search Console cards are missing.")
 
+    global CRAWL
     c = crawl()
     c["broken_n"] = len(c["broken"])
+    CRAWL = c
     import cube as cube_mod
     cube = json.loads((DATA / "cube.json").read_text())
     g = {"sc_ok": bool(google["sc"]), "bing": cube.get("bing_verified", False)}
@@ -918,6 +1024,7 @@ def main():
     hist = history()
 
     cards = [cube_card(cs, cube, hist, g)] + google["ga"] + google["sc"] + crawl_cards(c, hist) + semrush_cards()
+    next_steps(cards, c, g)
     c.pop("robots", None)
     c.pop("urls", None)
     meta = {"generated": dt.datetime.now(dt.timezone.utc).isoformat(timespec="minutes"),

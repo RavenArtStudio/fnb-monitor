@@ -65,7 +65,9 @@
      "weight": 20,
      "audit": 8.5,
      "auto": null,
-     "evidence": ""
+     "evidence": "",
+     "action": "Review robots.txt and blocked paths after each release.",
+     "owner": "site"
     },
     {
      "id": "sitemap",
@@ -73,7 +75,9 @@
      "weight": 15,
      "audit": 7.5,
      "auto": "sitemap",
-     "evidence": ""
+     "evidence": "",
+     "action": "List the {missing_n} linked pages missing from sitemap.xml, or noindex them.",
+     "owner": "site"
     },
     {
      "id": "status",
@@ -81,7 +85,9 @@
      "weight": 15,
      "audit": 8.5,
      "auto": "status",
-     "evidence": ""
+     "evidence": "",
+     "action": "Fix broken internal links and error pages.",
+     "owner": "site"
     },
     {
      "id": "canon",
@@ -89,7 +95,9 @@
      "weight": 15,
      "audit": 9.5,
      "auto": "canon",
-     "evidence": ""
+     "evidence": "",
+     "action": "Point every page's canonical to its own address.",
+     "owner": "site"
     },
     {
      "id": "index",
@@ -97,7 +105,9 @@
      "weight": 15,
      "audit": 1.5,
      "auto": "index",
-     "evidence": ""
+     "evidence": "",
+     "action": "Request indexing in Search Console for the {unknown_n} pages Google does not know yet.",
+     "owner": "google"
     },
     {
      "id": "speed",
@@ -105,7 +115,9 @@
      "weight": 10,
      "audit": 9.0,
      "auto": "speed",
-     "evidence": ""
+     "evidence": "",
+     "action": "Trim the slowest pages first: {slowest}.",
+     "owner": "site"
     },
     {
      "id": "mobile",
@@ -113,7 +125,9 @@
      "weight": 10,
      "audit": 9.0,
      "auto": "mobile",
-     "evidence": ""
+     "evidence": "",
+     "action": "Set a mobile viewport on every page and force HTTPS.",
+     "owner": "site"
     }
    ]
   },
@@ -132,7 +146,9 @@
      "weight": 20,
      "audit": 8.5,
      "auto": "titles",
-     "evidence": ""
+     "evidence": "",
+     "action": "Rewrite titles that are missing, duplicated or outside 25 to 65 characters.",
+     "owner": "site"
     },
     {
      "id": "meta",
@@ -140,7 +156,9 @@
      "weight": 10,
      "audit": 8.0,
      "auto": "meta",
-     "evidence": ""
+     "evidence": "",
+     "action": "Rewrite descriptions outside 70 to 160 characters.",
+     "owner": "site"
     },
     {
      "id": "h1",
@@ -148,7 +166,9 @@
      "weight": 15,
      "audit": 8.5,
      "auto": "h1",
-     "evidence": ""
+     "evidence": "",
+     "action": "Use exactly one H1 per page.",
+     "owner": "site"
     },
     {
      "id": "intent",
@@ -156,7 +176,9 @@
      "weight": 25,
      "audit": 8.0,
      "auto": null,
-     "evidence": ""
+     "evidence": "",
+     "action": "Give each target search one page and use its wording in the title and H1.",
+     "owner": "site"
     },
     {
      "id": "links",
@@ -164,7 +186,9 @@
      "weight": 20,
      "audit": 5.0,
      "auto": "links",
-     "evidence": ""
+     "evidence": "",
+     "action": "Link to weakly linked pages from related guides and service pages.",
+     "owner": "site"
     },
     {
      "id": "alt",
@@ -172,7 +196,9 @@
      "weight": 10,
      "audit": 6.0,
      "auto": "alt",
-     "evidence": ""
+     "evidence": "",
+     "action": "Add share images to the {noshare_n} pages without one (tool pages, franchise operators).",
+     "owner": "site"
     }
    ]
   },
@@ -189,7 +215,9 @@
      "weight": 30,
      "audit": 7.5,
      "auto": null,
-     "evidence": ""
+     "evidence": "",
+     "action": "Write pages for target searches that have no matching page yet.",
+     "owner": "site"
     },
     {
      "id": "depth",
@@ -197,7 +225,9 @@
      "weight": 20,
      "audit": 7.5,
      "auto": null,
-     "evidence": ""
+     "evidence": "",
+     "action": "Add worked UAE examples and figures to thin sections.",
+     "owner": "site"
     },
     {
      "id": "fresh",
@@ -205,7 +235,9 @@
      "weight": 15,
      "audit": 6.0,
      "auto": "fresh",
-     "evidence": ""
+     "evidence": "",
+     "action": "Date and refresh tax and VAT facts each quarter.",
+     "owner": "site"
     },
     {
      "id": "eeat",
@@ -213,7 +245,9 @@
      "weight": 25,
      "audit": 6.0,
      "auto": null,
-     "evidence": ""
+     "evidence": "",
+     "action": "Add credentials, client proof and named authors on service pages.",
+     "owner": "owner"
     },
     {
      "id": "assets",
@@ -221,7 +255,9 @@
      "weight": 10,
      "audit": 9.0,
      "auto": null,
-     "evidence": ""
+     "evidence": "",
+     "action": "Keep calculators current; add one new tool a month.",
+     "owner": "site"
     }
    ]
   },
@@ -238,7 +274,9 @@
      "weight": 40,
      "audit": 8.5,
      "auto": "schema",
-     "evidence": ""
+     "evidence": "",
+     "action": "Add structured data to pages without it.",
+     "owner": "site"
     },
     {
      "id": "valid",
@@ -246,7 +284,9 @@
      "weight": 35,
      "audit": 7.5,
      "auto": null,
-     "evidence": ""
+     "evidence": "",
+     "action": "Check structured data against visible content in Google's Rich Results Test.",
+     "owner": "site"
     },
     {
      "id": "entity",
@@ -254,7 +294,9 @@
      "weight": 25,
      "audit": 6.5,
      "auto": "sameas",
-     "evidence": ""
+     "evidence": "",
+     "action": "Add LinkedIn, Google listing and directory profiles to the Organization sameAs.",
+     "owner": "site"
     }
    ]
   },
@@ -271,7 +313,9 @@
      "weight": 25,
      "audit": 5.5,
      "auto": null,
-     "evidence": ""
+     "evidence": "",
+     "action": "Use one brand name, F&B Performance, on the site, listing and profiles.",
+     "owner": "owner"
     },
     {
      "id": "nap",
@@ -279,7 +323,9 @@
      "weight": 25,
      "audit": 3.0,
      "auto": null,
-     "evidence": ""
+     "evidence": "",
+     "action": "Show the same address, phone and trade licence on the site and Google listing.",
+     "owner": "owner"
     },
     {
      "id": "gbp",
@@ -287,7 +333,9 @@
      "weight": 20,
      "audit": 3.5,
      "auto": null,
-     "evidence": ""
+     "evidence": "",
+     "action": "Complete the Google Business Profile: services, photos, weekly posts, booking link.",
+     "owner": "owner"
     },
     {
      "id": "social",
@@ -295,7 +343,9 @@
      "weight": 15,
      "audit": 5.0,
      "auto": null,
-     "evidence": ""
+     "evidence": "",
+     "action": "Link LinkedIn and other profiles to the site and back.",
+     "owner": "owner"
     },
     {
      "id": "dirs",
@@ -303,7 +353,9 @@
      "weight": 15,
      "audit": 1.0,
      "auto": null,
-     "evidence": ""
+     "evidence": "",
+     "action": "List the firm in UAE business, Zoho, Xero and QuickBooks advisor directories with identical details.",
+     "owner": "owner"
     }
    ]
   },
@@ -323,7 +375,9 @@
      "weight": 50,
      "audit": 0.5,
      "auto": null,
-     "evidence": ""
+     "evidence": "",
+     "action": "Pitch one data piece (delivery commission take-home, SBR 2029) to Gulf News, Khaleej Times or Hospitality News ME.",
+     "owner": "owner"
     },
     {
      "id": "mentions",
@@ -331,7 +385,9 @@
      "weight": 30,
      "audit": 0.5,
      "auto": null,
-     "evidence": ""
+     "evidence": "",
+     "action": "Get named in partner posts by POS and accounting software vendors.",
+     "owner": "owner"
     },
     {
      "id": "proof",
@@ -339,7 +395,9 @@
      "weight": 20,
      "audit": 1.0,
      "auto": null,
-     "evidence": ""
+     "evidence": "",
+     "action": "Collect Google reviews and LinkedIn recommendations from the first clients.",
+     "owner": "owner"
     }
    ]
   },
@@ -356,7 +414,9 @@
      "weight": 25,
      "audit": 8.0,
      "auto": null,
-     "evidence": ""
+     "evidence": "",
+     "action": "Open each guide with a two-sentence direct answer.",
+     "owner": "site"
     },
     {
      "id": "facts",
@@ -364,7 +424,9 @@
      "weight": 20,
      "audit": 7.5,
      "auto": null,
-     "evidence": ""
+     "evidence": "",
+     "action": "Put the source and date next to every figure.",
+     "owner": "site"
     },
     {
      "id": "clarity",
@@ -372,7 +434,9 @@
      "weight": 15,
      "audit": 7.0,
      "auto": null,
-     "evidence": ""
+     "evidence": "",
+     "action": "State who, where and for whom in the first lines of key pages.",
+     "owner": "site"
     },
     {
      "id": "aibots",
@@ -380,7 +444,9 @@
      "weight": 15,
      "audit": 9.0,
      "auto": "aibots",
-     "evidence": ""
+     "evidence": "",
+     "action": "Allow AI crawlers in robots.txt.",
+     "owner": "site"
     },
     {
      "id": "llms",
@@ -388,7 +454,9 @@
      "weight": 10,
      "audit": 1.0,
      "auto": "llms",
-     "evidence": ""
+     "evidence": "",
+     "action": "Publish llms.txt summarising services, prices and tools.",
+     "owner": "site"
     },
     {
      "id": "consist",
@@ -396,7 +464,9 @@
      "weight": 15,
      "audit": 8.0,
      "auto": null,
-     "evidence": ""
+     "evidence": "",
+     "action": "Keep prices and service names identical across pages.",
+     "owner": "site"
     }
    ]
   },
@@ -416,7 +486,9 @@
      "weight": 50,
      "audit": 0.0,
      "auto": "presence",
-     "evidence": ""
+     "evidence": "",
+     "action": "Strengthen the pages for target searches closest to showing.",
+     "owner": "site"
     },
     {
      "id": "cited",
@@ -424,7 +496,9 @@
      "weight": 30,
      "audit": 0.5,
      "auto": null,
-     "evidence": ""
+     "evidence": "",
+     "action": "Publish short, dated answers to the top owner questions.",
+     "owner": "site"
     },
     {
      "id": "snippet",
@@ -432,7 +506,9 @@
      "weight": 20,
      "audit": 8.0,
      "auto": null,
-     "evidence": ""
+     "evidence": "",
+     "action": "Answer common questions in short question-and-answer blocks.",
+     "owner": "site"
     }
    ]
   },
@@ -451,7 +527,9 @@
      "weight": 25,
      "audit": 9.0,
      "auto": "hreflang",
-     "evidence": ""
+     "evidence": "",
+     "action": "Fix hreflang pairs that do not point back.",
+     "owner": "site"
     },
     {
      "id": "parity",
@@ -459,7 +537,9 @@
      "weight": 25,
      "audit": 6.5,
      "auto": null,
-     "evidence": ""
+     "evidence": "",
+     "action": "Translate the English-only guides into Arabic instead of redirecting to English.",
+     "owner": "site"
     },
     {
      "id": "armeta",
@@ -467,7 +547,9 @@
      "weight": 20,
      "audit": 7.5,
      "auto": null,
-     "evidence": ""
+     "evidence": "",
+     "action": "Write native Arabic titles and descriptions, not translations.",
+     "owner": "site"
     },
     {
      "id": "arquery",
@@ -475,7 +557,9 @@
      "weight": 30,
      "audit": 5.5,
      "auto": "arquery",
-     "evidence": ""
+     "evidence": "",
+     "action": "Retarget the Arabic home, Dubai and services titles to 'محاسبة المطاعم' and 'محاسب مطاعم في دبي'.",
+     "owner": "site"
     }
    ]
   },
@@ -496,7 +580,9 @@
      "weight": 40,
      "audit": 3.0,
      "auto": "sc",
-     "evidence": ""
+     "evidence": "",
+     "action": "Verify the site in Bing Webmaster Tools.",
+     "owner": "owner"
     },
     {
      "id": "indexnow",
@@ -504,7 +590,9 @@
      "weight": 20,
      "audit": 0.5,
      "auto": null,
-     "evidence": ""
+     "evidence": "",
+     "action": "Add an IndexNow key so Bing picks up changes within hours.",
+     "owner": "site"
     },
     {
      "id": "events",
@@ -512,7 +600,9 @@
      "weight": 40,
      "audit": 8.5,
      "auto": null,
-     "evidence": ""
+     "evidence": "",
+     "action": "Confirm generate_lead is a key event in Google Analytics.",
+     "owner": "owner"
     }
    ]
   }
