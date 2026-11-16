@@ -116,6 +116,8 @@ body *{font-weight:400!important}
 .col-cur:hover{opacity:.9}
 .col-prev{stroke:var(--ink-4);stroke-width:1.5;stroke-dasharray:3 3}
 .col-val{fill:var(--ink-2);font-size:11.5px}
+.launch line{stroke:var(--u1);stroke-width:1;stroke-dasharray:2 4;opacity:.8}
+.launch text{fill:var(--u1);font-size:11px}
 /* heatmap */
 .heat{display:flex;flex-direction:column;gap:2px}
 .heat-row{appearance:none;border:0;background:transparent;display:grid;align-items:center;gap:6px;padding:0 8px;height:29px;border-radius:8px;text-align:left;color:var(--ink-2);font-size:13px;width:100%;transition:background .2s var(--ease)}
@@ -234,7 +236,7 @@ function stripHTML(d){const s=d.stats,ks=kpisOf(d);
  return `<div class="strip" style="--k:${ks.length}"><div><div class="hero-line"><span class="ws-hero">${fmt(s.total)}<small>${unit}</small></span>${chip?`<span class="chip ${tone}">${esc(chip)}</span>`:''}</div><div class="hero-cap">${cap}</div></div>${ks.map(k=>`<div class="kpi"><div class="k-l">${esc(k.label)}</div><div class="k-v">${esc(k.value)}</div>${k.note?`<div class="k-n ${k.tone||''}">${esc(k.note)}</div>`:''}</div>`).join('')}</div>`;}
 
 /* ---- next steps + stand-outs ---- */
-function nextHTML(d){const n=d.next||[];const pats=(d.patterns||[]).filter(p=>p.type!=='movement').slice(0,3);
+function nextHTML(d){const n=d.next||[];const pats=[];
  const steps=n.length?`<ol class="steps">${n.map(s=>`<li class="st"><span class="sd ${s.impact||''}"></span><div><p class="st-t">${esc(s.t)}</p>${s.why?`<p class="st-w">${esc(s.why)}</p>`:''}<span class="st-o"><span>${esc(OWNER[s.owner]||'')}</span>${s.gain?`<b>+${s.gain.toFixed(2)} points</b>`:''}<span>${s.impact==='high'?'High impact':s.impact==='med'?'Medium impact':'Low impact'}</span></span></div></li>`).join('')}</ol>`:'<p class="empty-note">Nothing to act on right now.</p>';
  const so=pats.length?`<div><h3 class="ph">What stands out</h3><div class="so">${pats.map(p=>`<div class="so-i ${esc(p.type)}"><span>${esc(p.title)}</span>${esc(p.evidence)}</div>`).join('')}</div></div>`:'';
  return `<div><h3 class="ph">Next steps<span>${n.length?'by impact':''}</span></h3>${steps}</div>${so}`;}
@@ -243,6 +245,15 @@ function nextHTML(d){const n=d.next||[];const pats=(d.patterns||[]).filter(p=>p.
 function bdsHTML(d){const b=(d.breakdowns||[]).filter(x=>x.rows&&x.rows.length).slice(0,3);if(!b.length)return '';
  return `<div class="bds" style="--b:${Math.max(2,b.length)}">${b.map(x=>{const rows=x.rows.slice(0,5),max=Math.max(1,...rows.map(r=>r.value));
   return `<section class="panel"><h3 class="ph">${esc(x.title)}</h3><div class="hbars">${rows.map(r=>`<div class="hbar"><span title="${esc(r.label)}">${esc(r.label)}</span><div class="track"><div class="fill" data-w="${Math.max(1.5,100*r.value/max).toFixed(1)}"></div></div><strong>${fmt(r.value)}</strong></div>`).join('')}</div></section>`;}).join('')}</div>`;}
+
+/* ---- launch marker: one thin line where the new site went live ---- */
+const LAUNCH='2026-11-15';
+function launchMark(id,d,kind){const frame=el(id),svg=frame?.querySelector('svg');if(!svg)return;const dates=d.main.dates,i=dates.indexOf(LAUNCH);if(i<0||!d.main.previous)return;
+ const vb=svg.viewBox.baseVal,W=vb.width,H=vb.height,L=44,R=12,T=kind==='cols'?18:14,B=30,n=dates.length;
+ const x=kind==='cols'?L+(W-L-R)/n*i:L+(n===1?0.5:i/(n-1))*(W-L-R);
+ const g=document.createElementNS('http://www.w3.org/2000/svg','g');g.setAttribute('class','launch');
+ g.innerHTML=`<line x1="${x.toFixed(1)}" x2="${x.toFixed(1)}" y1="${T}" y2="${H-B}"/><text x="${(x>W*0.8?x-6:x+6).toFixed(1)}" y="${T+10}" text-anchor="${x>W*0.8?'end':'start'}">New site</text>`;
+ svg.insertBefore(g,svg.firstChild.nextSibling);}
 
 /* ---- columns chart (small daily counts) ---- */
 function colChart(id,d){const frame=el(id),ser=Object.values(d.main.series)[0],cur=ser.map(p=>p?.value||0),prev=(d.main.previous||[]).map(p=>p?.value||0),dates=d.main.dates;
@@ -315,8 +326,8 @@ function drawCard(animate=true){const d=BY[cur];if(!d)return;const ws=el('ws');
  <div class="ws-main${d.kind==='heatmap'?' tight':''}"><section class="panel"><h3 class="ph">${chartHeading(d)}</h3><div id="analyticsChart" class="${d.kind==='heatmap'?'':'chart-frame ws-chart'}"></div></section><aside class="panel np">${nextHTML(d)}</aside></div>
  ${bdsHTML(d)}`;
  if(d.kind==='heatmap')heatmap('analyticsChart',d);
- else if(isCols(d))colChart('analyticsChart',d);
- else{const key=Object.keys(d.main.series)[0];lineChart('analyticsChart',{dates:d.main.dates,series:d.main.series,unit:d.unit,animate,ghost:d.main.previous?{[key]:d.main.previous}:null,ghostLabel:d.main.tipLabel||'Previous period'});}
+ else if(isCols(d)){colChart('analyticsChart',d);launchMark('analyticsChart',d,'cols');}
+ else{const key=Object.keys(d.main.series)[0];lineChart('analyticsChart',{dates:d.main.dates,series:d.main.series,unit:d.unit,animate,ghost:d.main.previous?{[key]:d.main.previous}:null,ghostLabel:d.main.tipLabel||'Previous period'});launchMark('analyticsChart',d,'line');}
  fillBars(ws);}
 function setData(j,mode){META=j.meta||{};CARDS=j.cards||[];ORDER=CARDS.map(c=>c.id);BY=Object.fromEntries(CARDS.map(c=>[c.id,c]));
  const h=location.hash.slice(1);if(!ORDER.includes(cur))cur=ORDER.includes(h)?h:ORDER[0];
