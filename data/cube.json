@@ -5,15 +5,15 @@
  "stages": [
   {
    "name": "Launch",
-   "until": "2026-12-14"
+   "until": "2026-11-21"
   },
   {
    "name": "Establish",
-   "until": "2027-02-12"
+   "until": "2026-11-28"
   },
   {
    "name": "Grow",
-   "until": "2027-05-14"
+   "until": "2026-12-05"
   },
   {
    "name": "Mature",
@@ -607,5 +607,6 @@
    ]
   }
  ],
- "bing_verified": false
+ "bing_verified": false,
+ "stage_note": "Stages are 7-day spans from the Nov 15 launch."
 }

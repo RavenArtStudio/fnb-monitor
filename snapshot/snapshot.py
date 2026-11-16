@@ -856,7 +856,7 @@ def cube_card(cs, cube, hist, g):
           "answer": {"type": "table", "columns": ["Stage", "Until", "On-site", "Content", "Entity and local", "Off-site, AI answers"],
                      "rows": [[st["name"], short(dt.date.fromisoformat(st["until"])) if st["until"] else "After",
                                *[f"{cube['target_groups'][k][i]:.1f}" for k in ("onsite", "content", "entity", "offsite")]]
-                              for i, st in enumerate(cube["stages"])], "note": "Stages count from the launch on Nov 15."}}]
+                              for i, st in enumerate(cube["stages"])], "note": "Stages are 7-day spans from the launch on Nov 15."}}]
     if g.get("targets"):
         q.insert(3, {"intent": "source", "id": "targets", "text": "Which target searches show the site?",
                      "answer": {"type": "table", "columns": ["Search", "Impressions, 28 days", "Position"],
