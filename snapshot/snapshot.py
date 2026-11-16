@@ -22,6 +22,8 @@ from urllib.parse import urljoin, urlparse
 
 import requests
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
 HIST = DATA / "history"
@@ -111,6 +113,13 @@ def sc(sess, start, end, dims, limit=1000):
 
 
 # ---------------------------------------------------------------- card builders
+LAUNCH = dt.date(2026, 11, 15)
+
+
+def prev_days_of(cur_days):
+    return [d - dt.timedelta(days=len(cur_days)) for d in cur_days]
+
+
 def window(end, n=7):
     cur = [end - dt.timedelta(days=n - 1 - i) for i in range(n)]
     prev = [d - dt.timedelta(days=n) for d in cur]
@@ -133,6 +142,7 @@ def card(id, label, unit, group, source, fields, cur_days, cur, prev, breakdowns
         stats["deltaTone"] = "up"
         stats["railText"], stats["railTone"] = "new", "up"
     pats = []
+    old = cur_days and prev_days_of(cur_days)[-1] < LAUNCH
     if level:
         pats.append({"type": "movement",
                      "title": f"{label} {'up' if diff > 0 else 'down' if diff < 0 else 'level'}{'' if diff == 0 else ' ' + f(abs(diff))} on a week earlier",
@@ -146,6 +156,12 @@ def card(id, label, unit, group, source, fields, cur_days, cur, prev, breakdowns
         if mx > 1:
             pats.append({"type": "peak", "title": f"Strongest day was {short(cur_days[cur.index(mx)])}",
                          "evidence": f"{f(mx)} {unit}, against a daily average of {avg}."})
+    if old:
+        part = cur_days[0] < LAUNCH
+        pats.append({"type": "caution", "title": "Compared with the old site",
+                     "evidence": f"The new site went live on {short(LAUNCH)}. The previous {len(cur)} days are the old site"
+                                 + (", and so are the days before launch in this window." if part else ".")
+                                 + (" Google usually takes two to four weeks to re-crawl and settle after a relaunch." if source == SC else "")})
     for b in breakdowns:
         s = sum(r[1] for r in b[1])
         if s and len(b[1]) > 1 and b[1][0][1] / s >= .45:
@@ -185,7 +201,7 @@ def card(id, label, unit, group, source, fields, cur_days, cur, prev, breakdowns
             "health": [{"site": "FNB Performance", "statusLabel": "Live", "through": days[-1], "via": source}],
             "main": {"dates": days, "series": {K: [{"date": d, "value": v} for d, v in zip(days, cur)]},
                      "previous": [{"date": d, "value": v} for d, v in zip(days, prev)],
-                     "tipLabel": "A week earlier" if level else f"Previous {len(cur)} days"},
+                     "tipLabel": ("Old site, a week earlier" if level else "Old site, same days") if old else ("A week earlier" if level else f"Previous {len(cur)} days")},
             "breakdowns": [{"id": f"b{n}", "title": b[0], "rows": [{"label": r[0], "value": r[1]} for r in b[1]]} for n, b in enumerate(breakdowns)],
             "patterns": pats, "questions": q,
             "raw": {"columns": ["Date", "Site", label, "Previous period"],
@@ -411,13 +427,44 @@ def sc_cards(sess):
     return cards
 
 
+# ---------------------------------------------------------------- Cube inputs from Google
+def target_presence(sess):
+    t = json.loads((DATA / "targets.json").read_text())
+    rows = sc(sess, TODAY - dt.timedelta(days=30), TODAY - dt.timedelta(days=1), ["query"], 25000)
+    seen = {r["keys"][0].strip().lower(): r for r in rows}
+    def hit(q):
+        r = seen.get(q.strip().lower())
+        return (q, int(r["impressions"]), round(r["position"], 1)) if r else (q, 0, None)
+    en, ar = [hit(q) for q in t["en"]], [hit(q) for q in t["ar"]]
+    return {"total": len(en) + len(ar), "shown": sum(1 for x in en + ar if x[1]), "ar_total": len(ar),
+            "ar_shown": sum(1 for x in ar if x[1]), "rows": en + ar}
+
+
+def index_status(sess, paths):
+    url = "https://searchconsole.googleapis.com/v1/urlInspection/index:inspect"
+    def one(p):
+        r = sess.post(url, json={"inspectionUrl": SITE + p, "siteUrl": SC_SITE}, timeout=60)
+        if r.status_code != 200:
+            raise RuntimeError(f"URL Inspection {r.status_code}: {r.text[:200]}")
+        st = r.json().get("inspectionResult", {}).get("indexStatusResult", {})
+        return p, st.get("verdict") == "PASS", st.get("coverageState", "")
+    one(paths[0])                       # fail fast if not permitted
+    with cf.ThreadPoolExecutor(4) as ex:
+        res = list(ex.map(one, paths))
+    states = {}
+    for _, _, cs in res:
+        states[cs or "Unknown"] = states.get(cs or "Unknown", 0) + 1
+    return {"checked": len(res), "indexed": sum(1 for x in res if x[1]), "states": states,
+            "not_indexed": [page_name(p) for p, okk, _ in res if not okk][:8]}
+
+
 # ---------------------------------------------------------------- Site crawl
 class Page(HTMLParser):
     def __init__(self):
         super().__init__()
         self.title, self.in_title, self.desc, self.h1, self.canon, self.noindex = "", False, "", 0, "", False
         self.og, self.imgs, self.noalt, self.links, self.schema, self.lang = False, 0, 0, [], 0, ""
-        self.res = []
+        self.res, self.viewport, self.alts, self.ld, self.in_ld = [], False, [], [], False
 
     def handle_starttag(self, tag, a):
         a = dict(a)
@@ -433,12 +480,16 @@ class Page(HTMLParser):
                 self.noindex = True
             if p == "og:image":
                 self.og = True
+            if n == "viewport":
+                self.viewport = True
         elif tag == "h1":
             self.h1 += 1
         elif tag == "link":
             rel = (a.get("rel") or "").lower()
             if rel == "canonical":
                 self.canon = a.get("href", "")
+            if rel == "alternate" and a.get("hreflang") and a.get("href"):
+                self.alts.append(a["href"])
             if rel in ("stylesheet", "preload", "icon") and a.get("href"):
                 self.res.append(a["href"])
         elif tag == "img":
@@ -452,16 +503,38 @@ class Page(HTMLParser):
         elif tag == "script":
             if a.get("type") == "application/ld+json":
                 self.schema += 1
+                self.in_ld = True
+                self.ld.append("")
             if a.get("src"):
                 self.res.append(a["src"])
 
     def handle_endtag(self, tag):
         if tag == "title":
             self.in_title = False
+        if tag == "script":
+            self.in_ld = False
 
     def handle_data(self, d):
         if self.in_title:
             self.title += d
+        if self.in_ld:
+            self.ld[-1] += d
+
+
+def _sameas(blocks):
+    urls = set()
+    for x in blocks:
+        for m in re.finditer(r'"sameAs"\s*:\s*(\[[^\]]*\]|"[^"]*")', x):
+            urls.update(re.findall(r'https?://[^"\s]+', m.group(1)))
+    return len(urls)
+
+
+def _json_ok(x):
+    try:
+        json.loads(x)
+        return True
+    except Exception:
+        return False
 
 
 def fetch(url):
@@ -475,7 +548,12 @@ def fetch(url):
 
 def crawl():
     sm, _ = fetch(SITE + "/sitemap.xml")
-    urls = re.findall(r"<loc>\s*([^<\s]+)\s*</loc>", sm.text if sm else "")
+    smtext = sm.text if sm is not None else ""
+    urls = re.findall(r"<loc>\s*([^<\s]+)\s*</loc>", smtext)
+    lastmods = []
+    for block in re.findall(r"<url>(.*?)</url>", smtext, re.S):
+        m = re.search(r"<lastmod>\s*([0-9-]{10})", block)
+        lastmods.append(m.group(1) if m else None)
     pages = {}
 
     def one(u):
@@ -488,7 +566,10 @@ def crawl():
             o.update(title=p.title.strip(), desc=p.desc, h1=p.h1, canon=urlparse(p.canon).path if p.canon else "",
                      noindex=p.noindex, og=p.og, imgs=p.imgs, noalt=p.noalt, schema=p.schema, lang=p.lang,
                      links=sorted({urljoin(u, h).split("#")[0] for h in p.links if urljoin(u, h).startswith(SITE)}),
-                     res=[urljoin(u, x) for x in p.res], kb=round(len(r.content) / 1024))
+                     res=[urljoin(u, x) for x in p.res], kb=round(len(r.content) / 1024),
+                     viewport=p.viewport, alts=sorted({urlparse(urljoin(u, x)).path for x in p.alts}),
+                     sameas=_sameas(p.ld),
+                     ld_bad=sum(1 for x in p.ld if not _json_ok(x)))
         return o
 
     with cf.ThreadPoolExecutor(6) as ex:
@@ -499,9 +580,11 @@ def crawl():
 
     def chk(u):
         r, _ = fetch(u)
-        return u, (r.status_code if r is not None else 0)
+        return u, ((r.status_code if r is not None else 0), bool(r is not None and r.history))
     with cf.ThreadPoolExecutor(6) as ex:
-        linkres = dict(ex.map(chk, extra))
+        linkfull = dict(ex.map(chk, extra))
+    linkres = {u: v[0] for u, v in linkfull.items()}
+    missing = [u for u, (st, red) in linkfull.items() if st == 200 and not red]
     ok = [o for o in pages.values() if o["status"] == 200]
     titles, descs = [o["title"] for o in ok], [o["desc"] for o in ok]
     issues = {
@@ -532,6 +615,20 @@ def crawl():
             weight[kind] += len(r.content) / 1024
     weight = {k: round(v) for k, v in weight.items()}
     ms = sorted(o["ms"] for o in ok)
+    inl = {}
+    for o in ok:
+        for l in o.get("links", []):
+            pth = urlparse(l).path.rstrip("/") or "/"
+            if pth != o["u"].rstrip("/"):
+                inl[pth] = inl.get(pth, 0) + 1
+    byp = {o["u"].rstrip("/"): o for o in ok}
+    recip = [o for o in ok if o["alts"]]
+    recip_ok = sum(1 for o in recip if all(o["u"].rstrip("/") in [x.rstrip("/") for x in byp.get(a.rstrip("/"), {}).get("alts", [])] or a.rstrip("/") == o["u"].rstrip("/") for a in o["alts"]))
+    http, _ = fetch(SITE.replace("https://", "http://") + "/")
+    robots, _ = fetch(SITE + "/robots.txt")
+    llms, _ = fetch(SITE + "/llms.txt")
+    home_o = byp.get("/ae") or (ok[0] if ok else {})
+    ages = [(TODAY - dt.date.fromisoformat(x)).days for x in lastmods if x]
     slow = sorted(ok, key=lambda o: -o["ms"])[:5]
     return {
         "date": iso(TODAY),
@@ -543,6 +640,27 @@ def crawl():
         "ms_median": ms[len(ms) // 2] if ms else None, "ms_max": ms[-1] if ms else None,
         "slowest": [[page_name(o["u"]), o["ms"]] for o in slow],
         "weight": weight, "weight_total": sum(weight.values()), "files": nfiles,
+        "missing_from_sitemap": [u.replace(SITE, "") for u in missing],
+        "lastmod_share": round(sum(1 for x in lastmods if x) / len(lastmods), 3) if lastmods else 0,
+        "lastmod_age_median": sorted(ages)[len(ages) // 2] if ages else None,
+        "inlinks_ge3": sum(1 for o in ok if inl.get(o["u"].rstrip("/") or "/", 0) >= 3),
+        "weak_pages": [[page_name(o["u"]), inl.get(o["u"].rstrip("/") or "/", 0)] for o in sorted(ok, key=lambda o: inl.get(o["u"].rstrip("/") or "/", 0))[:6]],
+        "hreflang_pages": len(recip), "hreflang_ok": recip_ok,
+        "viewport_share": round(sum(1 for o in ok if o["viewport"]) / len(ok), 3) if ok else 0,
+        "https_redirect": bool(http is not None and http.url.startswith("https://")),
+        "robots": robots.text if robots is not None and robots.status_code == 200 else "",
+        "llms_txt": bool(llms is not None and llms.status_code == 200 and len(llms.text) > 50),
+        "sameas_home": home_o.get("sameas", 0), "ld_bad": sum(o.get("ld_bad", 0) for o in ok),
+        "n_ok": len(ok),
+        "pass": {
+            "titles": sum(1 for o in ok if o["title"] and titles.count(o["title"]) == 1 and 25 <= len(o["title"]) <= 65),
+            "meta": sum(1 for o in ok if o["desc"] and descs.count(o["desc"]) == 1 and 70 <= len(o["desc"]) <= 160),
+            "h1": sum(1 for o in ok if o["h1"] == 1),
+            "canon": sum(1 for o in ok if o["canon"] and o["canon"].rstrip("/") == o["u"].rstrip("/")),
+            "alt": sum(1 for o in ok if not o["noalt"] and o["og"]),
+            "schema": sum(1 for o in ok if o["schema"]),
+        },
+        "urls": [o["u"] for o in ok],
     }
 
 
@@ -624,6 +742,126 @@ def semrush_cards():
     ]
 
 
+# ---------------------------------------------------------------- Cube card
+CARD_NAMES = {"pages": "Site health, Pages live", "broken": "Site health, Broken links", "response": "Site health, Server response time",
+              "weight": "Site health, Home page size", "issues": "Site health, Pages with issues", "refdomains": "Authority, Referring domains",
+              "authority": "Authority, Authority score", "impressions": "Google Search, Search impressions", "pageone": "Google Search, Keywords on page one",
+              "leads": "Enquiries, Profit Review requests", "whatsapp": "Enquiries, WhatsApp clicks", "tools": "Enquiries, Calculator uses"}
+
+
+def band(score, target):
+    return "good" if score >= target - 0.05 else "warn" if score >= target - 1.5 else "bad"
+
+
+def cube_card(cs, cube, hist, g):
+    audit_day = cube["audit_date"]
+    days = [d for d in sorted(hist) if hist[d].get("cube")][-7:]
+    cols = [audit_day] + days
+    colname = ["Audit"] + [short(dt.date.fromisoformat(d)) for d in days]
+    def val(d, bid=None):
+        if d == audit_day:
+            return cube["audit_overall"] if bid is None else next(b["audit"] for b in cs["blocks"] if b["id"] == bid)
+        h = hist[d]["cube"]
+        return h["overall"] if bid is None else h["blocks"].get(bid)
+    lost = lambda b: max(0.0, b["target"] - b["score"]) * b["weight"] / 100
+    order = sorted(cs["blocks"], key=lambda b: (-lost(b), -b["weight"]))
+    rows = [{"id": b["id"], "name": b["name"], "weight": b["weight"], "target": b["target"],
+             "cells": [val(d, b["id"]) for d in cols],
+             "bands": [band(val(d, b["id"]) or 0, b["target"]) for d in cols]} for b in order]
+    day_n = (TODAY - LAUNCH).days + 1
+    stage_note = f"{cs['stage']} stage, day {day_n}" + (f", to {short(dt.date.fromisoformat(cs['stage_until']))}" if cs["stage_until"] else "")
+    on = sum(1 for b in cs["blocks"] if band(b["score"], b["target"]) == "good")
+    tot, aud = cs["overall"], cube["audit_overall"]
+    x = round(tot - aud, 2)
+
+    def block_obj(b):
+        hist_vals = [val(d, b["id"]) for d in cols]
+        subs = sorted(b["subs"], key=lambda x_: -(max(0, b["target"] - x_["score"]) * x_["weight"]))
+        worst = subs[0]
+        measured_n = sum(1 for x_ in b["subs"] if x_["source"] == "Measured daily")
+        q = [{"intent": "status", "id": "total", "text": "What is the score?",
+              "answer": {"type": "stat", "value": f"{b['score']:.1f}", "label": f"{b['name']}, of 10",
+                         "sub": f"Target {b['target']:.1f} at the {cs['stage']} stage; audit {b['audit']:.1f}"}},
+             {"intent": "source", "id": "subs", "text": "What is it made of?",
+              "answer": {"type": "table", "columns": ["Sub-metric", "Weight", "Score", "Source"],
+                         "rows": [[x_["name"], f"{x_['weight']}%", f"{x_['score']:.1f}", x_["source"]] for x_ in b["subs"]], "note": ""}},
+             {"intent": "next", "id": "next", "text": "What should we work on first?",
+              "answer": {"type": "table", "columns": ["Sub-metric", "Why"],
+                         "rows": [[x_["name"], x_["evidence_now"] or "Scored in the Nov 13 audit."] for x_ in subs[:3]], "note": ""}},
+             {"intent": "trust", "id": "how", "text": "How is it scored?",
+              "answer": {"type": "list", "items": [
+                  f"{measured_n} of {len(b['subs'])} sub-metrics are measured daily; the rest keep the Nov 13 audit score until reviewed.",
+                  "The block score is the weighted mean of its sub-metrics, 0 to 10.",
+                  "Measured sub-metrics use a fixed rule (shown under each one), so they can differ from the audit's judgement on the first day."]}}]
+        if b["cards"]:
+            q.append({"intent": "source", "id": "cards", "text": "Which cards show the detail?",
+                      "answer": {"type": "list", "items": [CARD_NAMES.get(c_, c_) for c_ in b["cards"]]}})
+        return {"id": "block-" + b["id"], "available": True, "brand": K, "period": len(cols),
+                "periodLabel": stage_note, "label": b["name"], "unit": "points", "through": cols[-1],
+                "stats": {"total": round(b["score"], 1), "previousTotal": b["audit"], "change": None,
+                          "deltaText": f"Target {b['target']:.1f}, " + ("on target" if band(b["score"], b["target"]) == "good" else f"{b['target'] - b['score']:.1f} below"),
+                          "deltaTone": "up" if band(b["score"], b["target"]) == "good" else "down"},
+                "health": [{"site": "FNB Performance", "statusLabel": "Live", "through": cols[-1], "via": "Cube"}],
+                "main": {"dates": cols, "heading": "Score by snapshot", "previousLabel": "the stage target",
+                         "series": {K: [{"date": d, "value": v} for d, v in zip(cols, hist_vals)]},
+                         "previous": [{"date": d, "value": b["target"]} for d in cols], "tipLabel": "Stage target"},
+                "breakdowns": [{"id": "subs", "title": "Sub-metrics, score of 10",
+                                "rows": [{"label": x_["name"], "value": round(x_["score"], 1)} for x_ in b["subs"]]}],
+                "patterns": [{"type": "gap", "title": f"Weakest: {worst['name']} at {worst['score']:.1f}",
+                              "evidence": worst["evidence_now"] or "Scored in the Nov 13 audit."}]
+                            + [{"type": "caution", "title": "Partly measured", "evidence": f"{len(b['subs']) - measured_n} of {len(b['subs'])} sub-metrics still carry the audit score."}] * (measured_n < len(b["subs"])),
+                "questions": q,
+                "raw": {"columns": ["Sub-metric", "Weight", "Score", "Source", "Evidence"],
+                        "rows": [[x_["name"], x_["weight"], x_["score"], x_["source"], x_["evidence_now"]] for x_ in b["subs"]]},
+                "howCalculated": "Weighted mean of the sub-metrics. Colour compares the score with the target for the current stage: on target, within 1.5 points, or further below."}
+
+    gaps = sorted(cs["blocks"], key=lambda b: -lost(b))
+    pats = [{"type": "movement", "title": f"{on} of {len(cs['blocks'])} blocks on target for the {cs['stage']} stage",
+             "evidence": f"Overall {tot:.2f} against a stage target of {cs['target']:.2f}; the Nov 13 audit scored {aud:.2f}."}]
+    if lost(gaps[0]) > 0:
+        pats.append({"type": "gap", "title": f"Most points lost: {gaps[0]['name']}",
+                     "evidence": f"{gaps[0]['score']:.1f} against {gaps[0]['target']:.1f}, worth {lost(gaps[0]):.2f} of the overall score."})
+    pats.append({"type": "caution", "title": "New site, warm-up period",
+                 "evidence": f"The site went live on {short(LAUNCH)}. Indexation and search presence usually take two to four weeks to settle; off-site blocks build over months."})
+    q = [{"intent": "status", "id": "total", "text": "What is the overall score?",
+          "answer": {"type": "stat", "value": f"{tot:.2f}", "label": "Search visibility, of 10",
+                     "sub": f"Stage target {cs['target']:.2f}; audit {aud:.2f}"}},
+         {"intent": "status", "id": "blocks", "text": "How does each block stand?",
+          "answer": {"type": "table", "columns": ["Block", "Weight", "Score", "Target"],
+                     "rows": [[b["name"], f"{b['weight']}%", f"{b['score']:.1f}", f"{b['target']:.1f}"] for b in order], "note": ""}},
+         {"intent": "next", "id": "next", "text": "Where are the biggest gains?",
+          "answer": {"type": "table", "columns": ["Block", "Points to gain overall"],
+                     "rows": [[b["name"], f"+{lost(b):.2f}"] for b in gaps if lost(b) > 0][:5], "note": ""}},
+         {"intent": "trust", "id": "how", "text": "How are the targets set?",
+          "answer": {"type": "table", "columns": ["Stage", "Until", "On-site", "Content", "Entity and local", "Off-site, AI answers"],
+                     "rows": [[st["name"], short(dt.date.fromisoformat(st["until"])) if st["until"] else "After",
+                               *[f"{cube['target_groups'][k][i]:.1f}" for k in ("onsite", "content", "entity", "offsite")]]
+                              for i, st in enumerate(cube["stages"])], "note": "Stages count from the launch on Nov 15."}}]
+    if g.get("targets"):
+        q.insert(3, {"intent": "source", "id": "targets", "text": "Which target searches show the site?",
+                     "answer": {"type": "table", "columns": ["Search", "Impressions, 28 days", "Position"],
+                                "rows": [[r[0], f(r[1]), "-" if r[2] is None else f"{r[2]:.1f}"] for r in g["targets"]["rows"]], "note": "Edit the list in data/targets.json."}})
+    return {"id": "cube", "group": "Overview", "kind": "heatmap", "status": "live", "source": "Cube", "short": "Search visibility",
+            "level": True, "sub": f"Ten blocks against the {stage_note}", "available": True, "brand": K,
+            "period": len(cols), "periodLabel": stage_note, "label": "Search visibility", "unit": "points", "through": cols[-1],
+            "stats": {"total": round(tot, 2), "previousTotal": aud, "change": None,
+                      "deltaText": ("Level with" if x == 0 else f"{'+' if x > 0 else '−'}{abs(x):.2f} on") + " the Nov 13 audit",
+                      "deltaTone": "up" if x > 0 else "down" if x < 0 else "",
+                      "railText": "level" if x == 0 else f"{'+' if x > 0 else '−'}{abs(x):.1f}", "railTone": "up" if x > 0 else "down" if x < 0 else ""},
+            "heat": {"cols": colname, "rows": rows, "stage": cs["stage"], "target": cs["target"]},
+            "blocks": {b["id"]: block_obj(b) for b in cs["blocks"]},
+            "health": [{"site": "FNB Performance", "statusLabel": "Live", "through": cols[-1], "via": "Cube"}],
+            "main": {"dates": cols, "heading": "Overall score by snapshot", "previousLabel": "the stage target",
+                     "series": {K: [{"date": d, "value": val(d)} for d in cols]},
+                     "previous": [{"date": d, "value": cs["target"]} for d in cols], "tipLabel": "Stage target"},
+            "breakdowns": [{"id": "blocks", "title": "Blocks, score of 10", "rows": [{"label": b["name"], "value": round(b["score"], 1)} for b in order]},
+                           {"id": "gain", "title": "Points to gain overall, by block", "rows": [{"label": b["name"], "value": round(lost(b), 2)} for b in gaps if lost(b) > 0]}],
+            "patterns": pats, "questions": q,
+            "raw": {"columns": ["Block", "Weight", "Score", "Target", "Audit"],
+                    "rows": [[b["name"], b["weight"], b["score"], b["target"], b["audit"]] for b in order]},
+            "howCalculated": "Ten blocks with fixed weights, each the weighted mean of its sub-metrics, 0 to 10. The overall score is the weighted sum. Targets follow the stage counted from the Nov 15 launch."}
+
+
 # ---------------------------------------------------------------- main
 def main():
     HIST.mkdir(parents=True, exist_ok=True)
@@ -642,15 +880,32 @@ def main():
 
     c = crawl()
     c["broken_n"] = len(c["broken"])
-    today = {"date": iso(TODAY), "crawl": {k: c[k] for k in ("pages_ok", "broken_n", "issue_pages", "ms_median", "weight_total")}}
+    import cube as cube_mod
+    cube = json.loads((DATA / "cube.json").read_text())
+    g = {"sc_ok": bool(google["sc"]), "bing": cube.get("bing_verified", False)}
+    if sess and google["sc"]:
+        try:
+            g["targets"] = target_presence(sess)
+        except Exception as e:
+            notes.append(f"Target searches could not be read: {str(e)[:120]}")
+        try:
+            g["index"] = index_status(sess, c["urls"])
+        except Exception as e:
+            print(e, file=sys.stderr)
+            notes.append("Indexation keeps its audit score: Search Console URL Inspection is not permitted for the service account (needs Full permission).")
+    cs = cube_mod.score(cube, cube_mod.measure(c, g), TODAY)
+    today = {"date": iso(TODAY), "crawl": {k: c[k] for k in ("pages_ok", "broken_n", "issue_pages", "ms_median", "weight_total")},
+             "cube": {"overall": cs["overall"], "blocks": {b["id"]: b["score"] for b in cs["blocks"]}}}
     for card_ in google["ga"] + google["sc"]:
         today[card_["id"]] = card_["stats"]["total"]
     (HIST / f"{iso(TODAY)}.json").write_text(json.dumps(today, indent=1))
     hist = history()
 
-    cards = google["ga"] + google["sc"] + crawl_cards(c, hist) + semrush_cards()
+    cards = [cube_card(cs, cube, hist, g)] + google["ga"] + google["sc"] + crawl_cards(c, hist) + semrush_cards()
+    c.pop("robots", None)
+    c.pop("urls", None)
     meta = {"generated": dt.datetime.now(dt.timezone.utc).isoformat(timespec="minutes"),
-            "date": iso(TODAY), "notes": notes, "crawl": c}
+            "date": iso(TODAY), "notes": notes, "crawl": c, "index": g.get("index"), "launch": iso(LAUNCH)}
     (DATA / "cards.json").write_text(json.dumps({"meta": meta, "cards": cards}, ensure_ascii=False))
     print(f"{len(cards)} cards; notes: {notes}")
 

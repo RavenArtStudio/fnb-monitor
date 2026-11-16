@@ -9,7 +9,10 @@ src = open(rep, encoding='utf-8').read().split('\n')
 css = '\n'.join(src[4:574])
 engine = '\n'.join(src[587:680])
 for a, b in [('>Day by day${', ">${esc(d.main.heading||'Day by day')}${"),
-             ("${esc(where)}, last ${d.period} days", "${esc(where)}, ${esc(d.periodLabel||('last '+d.period+' days'))}")]:
+             ("${esc(where)}, last ${d.period} days", "${esc(where)}, ${esc(d.periodLabel||('last '+d.period+' days'))}"),
+             ("const fmt=(n)=>n===null||n===undefined?'--':Number(n).toLocaleString('en-US',{maximumFractionDigits:0});",
+              "const fmt=(n)=>n===null||n===undefined?'--':Number.isInteger(Number(n))?Number(n).toLocaleString('en-US'):Number(n).toLocaleString('en-US',{minimumFractionDigits:1,maximumFractionDigits:2});"),
+             ("const top=niceTop(Math.max(1,...all)*1.08);", "const top=unit==='points'?10:niceTop(Math.max(1,...all)*1.08);")]:
     assert a in engine, a
     engine = engine.replace(a, b)
 saved = json.load(open(snap, encoding='utf-8'))
@@ -33,6 +36,22 @@ CSS = '''
 .stage{min-width:0}
 .stage .chart-frame{height:min(400px,calc(100vh - 300px));min-height:240px}
 .demo-note{margin-top:12px}
+/* Heatmap card (Search visibility) */
+.heat{display:grid;grid-auto-rows:1fr;height:100%;padding:0 4px;gap:4px}
+.heat-row{appearance:none;border:0;background:transparent;display:grid;align-items:center;gap:6px;padding:0 6px;border-radius:10px;text-align:left;color:var(--ink-2);font-size:13px;min-height:0;transition:background .2s var(--ease)}
+button.heat-row:hover{background:var(--surface-2);color:var(--ink)}
+.heat-row.head{font-size:11.5px;color:var(--ink-4);cursor:default}
+.heat-row .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.heat-row .nm small{color:var(--ink-4);font-size:11.5px;margin-left:6px}
+.heat-row .tg{text-align:right;font-variant-numeric:tabular-nums;color:var(--ink-3);font-size:12.5px}
+.heat-row.head span{text-align:center}.heat-row.head span:first-child{text-align:left}.heat-row.head span:last-child{text-align:right}
+.cell{height:calc(100% - 6px);min-height:22px;border-radius:8px;display:grid;place-items:center;font-size:12.5px;font-variant-numeric:tabular-nums;color:var(--ink)}
+.cell.good{background:color-mix(in srgb,var(--good) 30%,var(--surface))}.cell.warn{background:color-mix(in srgb,var(--warn) 26%,var(--surface))}.cell.bad{background:color-mix(in srgb,var(--bad) 28%,var(--surface))}
+.cell.now.good{background:color-mix(in srgb,var(--good) 58%,var(--surface));color:#1d1e20}.cell.now.warn{background:color-mix(in srgb,var(--warn) 52%,var(--surface));color:#1d1e20}.cell.now.bad{background:color-mix(in srgb,var(--bad) 58%,var(--surface));color:#1d1e20}
+.cell.none{background:var(--surface-2);color:var(--ink-4)}
+.heat-key{display:flex;gap:16px;align-items:center;font-size:11.5px;color:var(--ink-4);padding:2px 6px 0}
+.heat-key i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.heat-key .good{background:color-mix(in srgb,var(--good) 58%,var(--surface))}.heat-key .warn{background:color-mix(in srgb,var(--warn) 52%,var(--surface))}.heat-key .bad{background:color-mix(in srgb,var(--bad) 58%,var(--surface))}
 .snap{display:inline-flex;align-items:center;gap:7px}
 .snap i{width:6px;height:6px;border-radius:50%;background:var(--ink-4)}
 .snap.live i{background:var(--good)}.snap.saved i{background:var(--warn)}
@@ -48,7 +67,18 @@ function deltaOf(d){const s=d.stats;if(s.railText!==undefined)return {t:s.railTe
 function drawRail(){let g='',h='';for(const d of CARDS){if(d.group!==g){g=d.group;h+=`<div class="rail-group">${esc(g)}</div>`;}const x=deltaOf(d);
  h+=`<button class="rail-item" role="tab" id="tab-${d.id}" data-card="${d.id}" aria-selected="${d.id===cur}" tabindex="${d.id===cur?0:-1}"><span>${esc(d.short)}</span><strong>${fmt(d.stats.total)}</strong><em class="${x.c}">${esc(x.t)}</em></button>`;}
  el('rail').innerHTML=h;}
+function heatmap(id,d){const f=el(id),h=d.heat,n=h.cols.length;const cols=`minmax(0,1fr) repeat(${n},minmax(40px,84px)) 52px`;
+ const one=(v)=>v===null||v===undefined?'--':Number(v).toFixed(1);
+ const head=`<div class="heat-row head" style="grid-template-columns:${cols}" role="row"><span>Block, weight</span>${h.cols.map(c=>`<span>${esc(c)}</span>`).join('')}<span>Target</span></div>`;
+ const rows=h.rows.map(r=>`<button class="heat-row" style="grid-template-columns:${cols}" data-block="${esc(r.id)}" aria-label="${esc(r.name)}: ${one(r.cells.at(-1))} against a target of ${one(r.target)}"><span class="nm">${esc(r.name)}<small>${r.weight}%%</small></span>${r.cells.map((v,i)=>`<span class="cell ${v===null||v===undefined?'none':r.bands[i]}${i===n-1?' now':''}" title="${esc(h.cols[i])}: ${one(v)}">${one(v)}</span>`).join('')}<span class="tg">${one(r.target)}</span></button>`).join('');
+ const key=`<div class="heat-key"><span><i class="good"></i>On target</span><span><i class="warn"></i>Within 1.5</span><span><i class="bad"></i>Further below</span><span style="margin-left:auto">Select a block for its sub-metrics</span></div>`;
+ f.innerHTML=`<div class="heat" role="table" style="grid-template-rows:repeat(${h.rows.length+1},1fr) auto">${head}${rows}${key}</div>`;}
+function openBlock(bid,opener){const d=BY[cur]?.blocks?.[bid];if(!d)return;detailOpener=opener;const panel=el('detailPanel'),scrim=el('detailScrim'),body=el('detailBody');
+ state.detail={metric:bid,intent:'status',open:d.questions?.find(q=>q.intent==='status')?.id||null,data:d};
+ scrim.hidden=false;panel.hidden=false;document.body.classList.add('detail-open');detailClosing=false;
+ requestAnimationFrame(()=>{scrim.classList.add('on');panel.classList.add('on');});body.focus({preventScroll:true});renderDetail();}
 function drawCard(animate=true){const d=BY[cur];if(!d)return;el('cardTitle').textContent=d.label;el('cardSub').textContent=d.sub||d.source;
+ if(d.kind==='heatmap'){heatmap('analyticsChart',d);return;}
  const key=Object.keys(d.main.series)[0];
  lineChart('analyticsChart',{dates:d.main.dates,series:d.main.series,unit:d.unit,animate,ghost:d.main.previous?{[key]:d.main.previous}:null,ghostLabel:d.main.tipLabel||'Previous period'});}
 function setData(j,mode){META=j.meta||{};CARDS=j.cards||[];ORDER=CARDS.map(c=>c.id);BY=Object.fromEntries(CARDS.map(c=>[c.id,c]));
@@ -67,8 +97,9 @@ function closeDetail(){const panel=el('detailPanel'),scrim=el('detailScrim');if(
  setTimeout(()=>{if(!panel.classList.contains('on')){panel.hidden=true;scrim.hidden=true;el('detailBody').innerHTML='';state.detail=null;}detailClosing=false;},reduceMotion?0:420);
  if(detailOpener&&document.contains(detailOpener))detailOpener.focus({preventScroll:true});}
 document.addEventListener('click',e=>{
- const t=e.target.closest('[data-card],[data-detail],[data-detail-close],[data-intent],[data-q],[data-raw],[data-copy-csv]');if(!t)return;
+ const t=e.target.closest('[data-card],[data-block],[data-detail],[data-detail-close],[data-intent],[data-q],[data-raw],[data-copy-csv]');if(!t)return;
  if(t.dataset.card){pick(t.dataset.card);return;}
+ if(t.dataset.block){openBlock(t.dataset.block,t);return;}
  if(t.dataset.detail){openDetail(t.dataset.detail,t);return;}
  if(t.hasAttribute('data-detail-close')){closeDetail();return;}
  const s=state.detail;if(!s?.data)return;

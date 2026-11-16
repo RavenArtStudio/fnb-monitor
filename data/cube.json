@@ -1,0 +1,521 @@
+{
+ "audit_date": "2026-11-13",
+ "audit_overall": 5.83,
+ "launch": "2026-11-15",
+ "stages": [
+  {
+   "name": "Launch",
+   "until": "2026-12-14"
+  },
+  {
+   "name": "Establish",
+   "until": "2027-02-12"
+  },
+  {
+   "name": "Grow",
+   "until": "2027-05-14"
+  },
+  {
+   "name": "Mature",
+   "until": null
+  }
+ ],
+ "target_groups": {
+  "onsite": [
+   8.0,
+   8.5,
+   9.0,
+   9.0
+  ],
+  "content": [
+   7.5,
+   8.0,
+   8.5,
+   9.0
+  ],
+  "entity": [
+   5.0,
+   7.0,
+   8.0,
+   8.5
+  ],
+  "offsite": [
+   2.0,
+   4.0,
+   6.0,
+   8.0
+  ]
+ },
+ "blocks": [
+  {
+   "id": "tech",
+   "name": "Technical SEO",
+   "weight": 12,
+   "group": "onsite",
+   "cards": [
+    "pages",
+    "broken",
+    "response",
+    "weight"
+   ],
+   "subs": [
+    {
+     "id": "crawl",
+     "name": "Crawl and robots",
+     "weight": 20,
+     "audit": 8.5,
+     "auto": null,
+     "evidence": ""
+    },
+    {
+     "id": "sitemap",
+     "name": "Sitemap completeness, lastmod, hreflang",
+     "weight": 15,
+     "audit": 7.5,
+     "auto": "sitemap",
+     "evidence": ""
+    },
+    {
+     "id": "status",
+     "name": "Status codes, redirects, 404",
+     "weight": 15,
+     "audit": 8.5,
+     "auto": "status",
+     "evidence": ""
+    },
+    {
+     "id": "canon",
+     "name": "Canonicals",
+     "weight": 15,
+     "audit": 9.5,
+     "auto": "canon",
+     "evidence": ""
+    },
+    {
+     "id": "index",
+     "name": "Indexation (live)",
+     "weight": 15,
+     "audit": 1.5,
+     "auto": "index",
+     "evidence": ""
+    },
+    {
+     "id": "speed",
+     "name": "Page speed proxy",
+     "weight": 10,
+     "audit": 9.0,
+     "auto": "speed",
+     "evidence": ""
+    },
+    {
+     "id": "mobile",
+     "name": "Mobile, HTTPS, basics",
+     "weight": 10,
+     "audit": 9.0,
+     "auto": "mobile",
+     "evidence": ""
+    }
+   ]
+  },
+  {
+   "id": "onpage",
+   "name": "On-page",
+   "weight": 12,
+   "group": "onsite",
+   "cards": [
+    "issues"
+   ],
+   "subs": [
+    {
+     "id": "titles",
+     "name": "Titles",
+     "weight": 20,
+     "audit": 8.5,
+     "auto": "titles",
+     "evidence": ""
+    },
+    {
+     "id": "meta",
+     "name": "Meta descriptions",
+     "weight": 10,
+     "audit": 8.0,
+     "auto": "meta",
+     "evidence": ""
+    },
+    {
+     "id": "h1",
+     "name": "H1 and heading structure",
+     "weight": 15,
+     "audit": 8.5,
+     "auto": "h1",
+     "evidence": ""
+    },
+    {
+     "id": "intent",
+     "name": "Query-intent match to target searches",
+     "weight": 25,
+     "audit": 8.0,
+     "auto": null,
+     "evidence": ""
+    },
+    {
+     "id": "links",
+     "name": "Internal linking and anchors",
+     "weight": 20,
+     "audit": 5.0,
+     "auto": "links",
+     "evidence": ""
+    },
+    {
+     "id": "alt",
+     "name": "Image alt and share images",
+     "weight": 10,
+     "audit": 6.0,
+     "auto": "alt",
+     "evidence": ""
+    }
+   ]
+  },
+  {
+   "id": "content",
+   "name": "Content and topical authority",
+   "weight": 15,
+   "group": "content",
+   "cards": [],
+   "subs": [
+    {
+     "id": "cluster",
+     "name": "Cluster coverage vs UAE F&B owner searches",
+     "weight": 30,
+     "audit": 7.5,
+     "auto": null,
+     "evidence": ""
+    },
+    {
+     "id": "depth",
+     "name": "Depth and accuracy",
+     "weight": 20,
+     "audit": 7.5,
+     "auto": null,
+     "evidence": ""
+    },
+    {
+     "id": "fresh",
+     "name": "Freshness, dated facts",
+     "weight": 15,
+     "audit": 6.0,
+     "auto": "fresh",
+     "evidence": ""
+    },
+    {
+     "id": "eeat",
+     "name": "E-E-A-T signals",
+     "weight": 25,
+     "audit": 6.0,
+     "auto": null,
+     "evidence": ""
+    },
+    {
+     "id": "assets",
+     "name": "Unique assets",
+     "weight": 10,
+     "audit": 9.0,
+     "auto": null,
+     "evidence": ""
+    }
+   ]
+  },
+  {
+   "id": "schema",
+   "name": "Structured data",
+   "weight": 8,
+   "group": "onsite",
+   "cards": [],
+   "subs": [
+    {
+     "id": "coverage",
+     "name": "Coverage",
+     "weight": 40,
+     "audit": 8.5,
+     "auto": "schema",
+     "evidence": ""
+    },
+    {
+     "id": "valid",
+     "name": "Validity and match with visible content",
+     "weight": 35,
+     "audit": 7.5,
+     "auto": null,
+     "evidence": ""
+    },
+    {
+     "id": "entity",
+     "name": "Entity links (sameAs, @id graph)",
+     "weight": 25,
+     "audit": 6.5,
+     "auto": "sameas",
+     "evidence": ""
+    }
+   ]
+  },
+  {
+   "id": "entity",
+   "name": "Entity and local",
+   "weight": 10,
+   "group": "entity",
+   "cards": [],
+   "subs": [
+    {
+     "id": "brand",
+     "name": "Brand name consistency",
+     "weight": 25,
+     "audit": 5.5,
+     "auto": null,
+     "evidence": ""
+    },
+    {
+     "id": "nap",
+     "name": "Address, phone, licence consistency",
+     "weight": 25,
+     "audit": 3.0,
+     "auto": null,
+     "evidence": ""
+    },
+    {
+     "id": "gbp",
+     "name": "Google Business Profile and Maps",
+     "weight": 20,
+     "audit": 3.5,
+     "auto": null,
+     "evidence": ""
+    },
+    {
+     "id": "social",
+     "name": "sameAs and social profiles",
+     "weight": 15,
+     "audit": 5.0,
+     "auto": null,
+     "evidence": ""
+    },
+    {
+     "id": "dirs",
+     "name": "Directory citations",
+     "weight": 15,
+     "audit": 1.0,
+     "auto": null,
+     "evidence": ""
+    }
+   ]
+  },
+  {
+   "id": "offsite",
+   "name": "Off-site authority",
+   "weight": 8,
+   "group": "offsite",
+   "cards": [
+    "refdomains",
+    "authority"
+   ],
+   "subs": [
+    {
+     "id": "refdom",
+     "name": "Referring domains and backlinks",
+     "weight": 50,
+     "audit": 0.5,
+     "auto": null,
+     "evidence": ""
+    },
+    {
+     "id": "mentions",
+     "name": "Brand mentions",
+     "weight": 30,
+     "audit": 0.5,
+     "auto": null,
+     "evidence": ""
+    },
+    {
+     "id": "proof",
+     "name": "Off-site social proof",
+     "weight": 20,
+     "audit": 1.0,
+     "auto": null,
+     "evidence": ""
+    }
+   ]
+  },
+  {
+   "id": "geo",
+   "name": "GEO",
+   "weight": 15,
+   "group": "onsite",
+   "cards": [],
+   "subs": [
+    {
+     "id": "answer",
+     "name": "Answer-first passages",
+     "weight": 25,
+     "audit": 8.0,
+     "auto": null,
+     "evidence": ""
+    },
+    {
+     "id": "facts",
+     "name": "Quotable facts with sources and dates",
+     "weight": 20,
+     "audit": 7.5,
+     "auto": null,
+     "evidence": ""
+    },
+    {
+     "id": "clarity",
+     "name": "Entity clarity",
+     "weight": 15,
+     "audit": 7.0,
+     "auto": null,
+     "evidence": ""
+    },
+    {
+     "id": "aibots",
+     "name": "AI crawler access",
+     "weight": 15,
+     "audit": 9.0,
+     "auto": "aibots",
+     "evidence": ""
+    },
+    {
+     "id": "llms",
+     "name": "llms.txt and machine-readable summaries",
+     "weight": 10,
+     "audit": 1.0,
+     "auto": "llms",
+     "evidence": ""
+    },
+    {
+     "id": "consist",
+     "name": "Consistency of facts across pages",
+     "weight": 15,
+     "audit": 8.0,
+     "auto": null,
+     "evidence": ""
+    }
+   ]
+  },
+  {
+   "id": "aio",
+   "name": "AI-answer visibility",
+   "weight": 8,
+   "group": "offsite",
+   "cards": [
+    "impressions",
+    "pageone"
+   ],
+   "subs": [
+    {
+     "id": "presence",
+     "name": "Presence for the 17 target searches",
+     "weight": 50,
+     "audit": 0.0,
+     "auto": "presence",
+     "evidence": ""
+    },
+    {
+     "id": "cited",
+     "name": "Cited by AI-style answers",
+     "weight": 30,
+     "audit": 0.5,
+     "auto": null,
+     "evidence": ""
+    },
+    {
+     "id": "snippet",
+     "name": "Featured-snippet and PAA-shaped content",
+     "weight": 20,
+     "audit": 8.0,
+     "auto": null,
+     "evidence": ""
+    }
+   ]
+  },
+  {
+   "id": "arabic",
+   "name": "Arabic and international",
+   "weight": 7,
+   "group": "onsite",
+   "cards": [
+    "pages"
+   ],
+   "subs": [
+    {
+     "id": "hreflang",
+     "name": "hreflang correctness and reciprocity",
+     "weight": 25,
+     "audit": 9.0,
+     "auto": "hreflang",
+     "evidence": ""
+    },
+    {
+     "id": "parity",
+     "name": "Arabic content parity",
+     "weight": 25,
+     "audit": 6.5,
+     "auto": null,
+     "evidence": ""
+    },
+    {
+     "id": "armeta",
+     "name": "Arabic metadata quality",
+     "weight": 20,
+     "audit": 7.5,
+     "auto": null,
+     "evidence": ""
+    },
+    {
+     "id": "arquery",
+     "name": "Arabic search targeting",
+     "weight": 30,
+     "audit": 5.5,
+     "auto": "arquery",
+     "evidence": ""
+    }
+   ]
+  },
+  {
+   "id": "measure",
+   "name": "Measurement readiness",
+   "weight": 5,
+   "group": "onsite",
+   "cards": [
+    "leads",
+    "whatsapp",
+    "tools"
+   ],
+   "subs": [
+    {
+     "id": "sc",
+     "name": "Search Console and Bing verification",
+     "weight": 40,
+     "audit": 3.0,
+     "auto": "sc",
+     "evidence": ""
+    },
+    {
+     "id": "indexnow",
+     "name": "IndexNow and sitemap ping",
+     "weight": 20,
+     "audit": 0.5,
+     "auto": null,
+     "evidence": ""
+    },
+    {
+     "id": "events",
+     "name": "Analytics and conversion events",
+     "weight": 40,
+     "audit": 8.5,
+     "auto": null,
+     "evidence": ""
+    }
+   ]
+  }
+ ],
+ "bing_verified": false
+}
