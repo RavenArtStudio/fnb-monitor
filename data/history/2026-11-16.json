@@ -4,8 +4,23 @@
   "pages_ok": 125,
   "broken_n": 0,
   "issue_pages": 22,
-  "ms_median": 348,
+  "ms_median": 362,
   "weight_total": 568
+ },
+ "cube": {
+  "overall": 6.51,
+  "blocks": {
+   "tech": 9.06,
+   "onpage": 9.26,
+   "content": 7.65,
+   "schema": 8.38,
+   "entity": 3.73,
+   "offsite": 0.6,
+   "geo": 8.15,
+   "aio": 2.05,
+   "arabic": 5.62,
+   "measure": 5.9
+  }
  },
  "leads": 0,
  "whatsapp": 1,
