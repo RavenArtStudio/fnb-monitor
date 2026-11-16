@@ -1,0 +1,18 @@
+{
+ "read": "Nov 16",
+ "monthly": [
+  {"date": "2026-09-01", "domains": 53, "backlinks": 53, "score": 2},
+  {"date": "2026-10-01", "domains": 134, "backlinks": 154, "score": 2},
+  {"date": "2026-11-01", "domains": 144, "backlinks": 165, "score": 2}
+ ],
+ "backlinks": 165, "follow": 116, "nofollow": 49, "uae_keywords": 1,
+ "top_domains": [["sweetbonanzacz.com", 12], ["link-pen.com", 6], ["prepaidgiftbalance.online", 6], ["toplikevideo.com", 6], ["answebtechs.site", 5]],
+ "next_domains": ["The strongest linking site scores 12 of 100", "None are food, finance or UAE business sites; links from those are what move authority."],
+ "next_score": ["Score unchanged while referring domains nearly tripled", "The new links carry no weight; one link from a recognised UAE site would do more."],
+ "patterns_domains": [
+  {"type": "movement", "title": "53 to 144 referring domains in two months", "evidence": "53 in September, 134 in October, 144 in November; 165 backlinks."},
+  {"type": "caution", "title": "Quantity without quality", "evidence": "The ten strongest linking sites score between 5 and 12 of 100."}],
+ "patterns_score": [
+  {"type": "movement", "title": "Authority score 2 of 100, unchanged for three months", "evidence": "2 in September, October and November."},
+  {"type": "gap", "title": "One ranking keyword in the UAE", "evidence": "Semrush estimates no search traffic yet."}]
+}
