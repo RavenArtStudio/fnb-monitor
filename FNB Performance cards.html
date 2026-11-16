@@ -627,7 +627,7 @@ body *{font-weight:400!important}
 .kpi .k-v{font-family:var(--display);font-size:22px;letter-spacing:-.02em;color:var(--ink);margin-top:6px;font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .kpi .k-n{font-size:12px;color:var(--ink-3);margin-top:4px}
 .kpi .k-n.up{color:var(--good)}.kpi .k-n.down{color:var(--bad)}
-.ws-main{display:grid;grid-template-columns:minmax(0,1.9fr) minmax(300px,1fr);gap:16px;align-items:stretch}
+.ws-main{display:grid;grid-template-columns:minmax(0,1.9fr) minmax(300px,1fr);gap:16px;align-items:start}
 .ws .panel{padding:20px 22px}
 .ph{font-size:12.5px;color:var(--ink-3);margin:0 0 14px;display:flex;justify-content:space-between;gap:12px}
 .ph span{color:var(--ink-4)}
@@ -636,9 +636,9 @@ body *{font-weight:400!important}
 .ws-main.tight>section{padding:16px 18px 14px}
 .ws-main.tight .ph{margin-bottom:8px}
 .ws-main.tight .np{max-height:392px}
-.ws-chart{flex:1;min-height:360px;height:auto}
+.ws-chart{flex:none;height:clamp(210px,17vw,290px)}
 .demo-note:empty{display:none}
-.np{display:flex;flex-direction:column;gap:18px;max-height:600px;overflow:auto;scrollbar-width:thin}
+.np{display:flex;flex-direction:column;gap:18px;max-height:calc(clamp(210px,17vw,290px) + 74px);overflow:auto;scrollbar-width:thin}
 .steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
 .st{display:grid;grid-template-columns:10px minmax(0,1fr);gap:12px;padding:11px 0;border-top:1px solid var(--line-soft)}
 .st:first-child{border-top:0;padding-top:2px}
@@ -739,7 +739,7 @@ button.heat-row:hover{background:var(--surface-2);color:var(--ink)}
 <body>
 <div id="toast" role="status" aria-live="polite"></div>
 <main class="app">
- <div class="topbar"><span class="snap" id="snap"></span><span>FNB Performance, Checkpoint 16</span></div>
+ <div class="topbar"><span class="snap" id="snap"></span><span>FNB Performance, Checkpoint 17</span></div>
  <nav class="rail" id="rail" role="tablist" aria-label="Cards" aria-orientation="vertical"></nav>
  <div><section class="ws" id="ws" role="tabpanel" aria-live="polite"></section><p class="demo-note" id="note"></p></div>
 </main>
