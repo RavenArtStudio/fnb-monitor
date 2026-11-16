@@ -591,6 +591,8 @@ body *{font-weight:400!important}
 .rail-item{appearance:none;border:0;background:transparent;display:grid;grid-template-columns:minmax(0,1fr) auto 48px;gap:10px;align-items:baseline;text-align:left;padding:5px 10px;border-radius:10px;font-size:13.5px;color:var(--ink-2);transition:background .2s var(--ease),color .2s}
 .rail-item:hover{background:var(--surface);color:var(--ink)}
 .rail-item[aria-selected="true"]{background:var(--surface-2);color:var(--ink)}
+*{scrollbar-width:none!important;-ms-overflow-style:none!important}*::-webkit-scrollbar{display:none!important;width:0!important;height:0!important}
+.heat-key>span{white-space:nowrap}
 .rail-item span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .rail-item strong{font-variant-numeric:tabular-nums;color:var(--ink)}
 .rail-item em{font-style:normal;font-size:12px;text-align:right;font-variant-numeric:tabular-nums;color:var(--ink-4)}
@@ -627,10 +629,21 @@ body *{font-weight:400!important}
 .kpi .k-v{font-family:var(--display);font-size:22px;letter-spacing:-.02em;color:var(--ink);margin-top:6px;font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .kpi .k-n{font-size:12px;color:var(--ink-3);margin-top:4px}
 .kpi .k-n.up{color:var(--good)}.kpi .k-n.down{color:var(--bad)}
+.r1{display:grid;grid-template-columns:minmax(0,2fr) repeat(var(--k),minmax(0,1fr));gap:14px;align-items:stretch}
+.r1>section:first-child{display:flex;flex-direction:column}
+.r1.tight>section:first-child{padding:16px 18px 14px}.r1.tight .ph{margin-bottom:8px}
+.r2{display:grid;grid-template-columns:1fr;gap:14px;align-items:stretch}
+.r2.has3{grid-template-columns:minmax(0,2fr) minmax(0,1fr)}
+.bdp .hbar{grid-template-columns:minmax(80px,46%) 1fr 3.2em;font-size:12.5px}
+.bdp .hbar span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bdp .hbars{gap:10px}
+.r2 .np{max-height:none;overflow:visible}
+.r2 .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:4px 22px}
+.r2 .st{border-top:0;padding:2px 0 6px;border-left:0}
 .ws-main{display:grid;grid-template-columns:minmax(0,1.9fr) minmax(300px,1fr);gap:16px;align-items:start}
 .ws .panel{padding:20px 22px}
 .ph{font-size:12.5px;color:var(--ink-3);margin:0 0 14px;display:flex;justify-content:space-between;gap:12px}
-.ph span{color:var(--ink-4)}
+.ph span{color:var(--ink-4)}.ph .more{font:inherit;color:var(--ink-3);background:none;border:0;padding:0;cursor:pointer}.ph .more:hover{color:var(--ink-1)}
 .ws-main>section{display:flex;flex-direction:column}
 .ws-main.tight{align-items:start}
 .ws-main.tight>section{padding:16px 18px 14px}
@@ -638,7 +651,7 @@ body *{font-weight:400!important}
 .ws-main.tight .np{max-height:392px}
 .ws-chart{flex:none;height:clamp(210px,17vw,290px)}
 .demo-note:empty{display:none}
-.np{display:flex;flex-direction:column;gap:18px;max-height:calc(clamp(210px,17vw,290px) + 74px);overflow:auto;scrollbar-width:thin}
+.np{display:flex;flex-direction:column;gap:18px;max-height:calc(clamp(210px,17vw,290px) + 74px);overflow:auto;scrollbar-width:none}
 .steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
 .st{display:grid;grid-template-columns:10px minmax(0,1fr);gap:12px;padding:11px 0;border-top:1px solid var(--line-soft)}
 .st:first-child{border-top:0;padding-top:2px}
@@ -681,7 +694,7 @@ button.heat-row:hover{background:var(--surface-2);color:var(--ink)}
 .cell.none{background:var(--surface-2);color:var(--ink-4)}
 /* popups (compact, sectioned) */
 .detail.sheet{width:min(820px,calc(100vw - 48px));height:fit-content;max-height:min(860px,calc(100vh - 48px))}
-.detail.sheet .detail-inner{overflow:auto;scrollbar-width:thin}
+.detail.sheet .detail-inner{overflow:auto;scrollbar-width:none}
 .pp-head{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:12px 14px 12px 22px;border-bottom:1px solid var(--line-soft);position:sticky;top:0;background:var(--canvas);z-index:2}
 .ph-t{display:flex;align-items:center;gap:12px;flex-wrap:wrap;min-width:0}
 .pp-head .detail-title{font-size:19px;letter-spacing:-.015em}
@@ -744,7 +757,7 @@ button.heat-row:hover{background:var(--surface-2);color:var(--ink)}
 <body>
 <div id="toast" role="status" aria-live="polite"></div>
 <main class="app">
- <div class="topbar"><span class="snap" id="snap"></span><span>FNB Performance, Checkpoint 19</span></div>
+ <div class="topbar"><span class="snap" id="snap"></span><span>FNB Performance, Checkpoint 20</span></div>
  <nav class="rail" id="rail" role="tablist" aria-label="Cards" aria-orientation="vertical"></nav>
  <div><section class="ws" id="ws" role="tabpanel" aria-live="polite"></section><p class="demo-note" id="note"></p></div>
 </main>
@@ -888,11 +901,14 @@ function stripHTML(d){const s=d.stats,ks=kpisOf(d);
  return `<div class="strip" style="--k:${ks.length}"><div><div class="hero-line"><span class="ws-hero">${fmt(s.total)}<small>${unit}</small></span>${chip?`<span class="chip ${tone}">${esc(chip)}</span>`:''}</div><div class="hero-cap">${cap}</div></div>${ks.map(k=>`<div class="kpi"><div class="k-l">${esc(k.label)}</div><div class="k-v">${esc(k.value)}</div>${k.note?`<div class="k-n ${k.tone||''}">${esc(k.note)}</div>`:''}</div>`).join('')}</div>`;}
 
 /* ---- next steps + stand-outs ---- */
-function nextHTML(d){const n=d.next||[];const pats=[];
+function nextHTML(d,cap){const all=d.next||[];const n=cap?all.slice(0,cap):all;const more=all.length-n.length;const pats=[];
  const steps=n.length?`<ol class="steps">${n.map(s=>`<li class="st"><span class="sd ${s.impact||''}"></span><div><p class="st-t">${esc(s.t)}</p>${s.why?`<p class="st-w">${esc(s.why)}</p>`:''}<span class="st-o"><span>${esc(OWNER[s.owner]||'')}</span>${s.gain?`<b>+${s.gain.toFixed(2)} points</b>`:''}<span>${s.impact==='high'?'High impact':s.impact==='med'?'Medium impact':'Low impact'}</span></span></div></li>`).join('')}</ol>`:'<p class="empty-note">Nothing to act on right now.</p>';
  const so=pats.length?`<div><h3 class="ph">What stands out</h3><div class="so">${pats.map(p=>`<div class="so-i ${esc(p.type)}"><span>${esc(p.title)}</span>${esc(p.evidence)}</div>`).join('')}</div></div>`:'';
- return `<div><h3 class="ph">Next steps<span>${n.length?'by impact':''}</span></h3>${steps}</div>${so}`;}
+ return `<div><h3 class="ph">Next steps<span>${more?`<button class="link-quiet more" data-detail="card">${more} more in All details</button>`:n.length?'by impact':''}</span></h3>${steps}</div>${so}`;}
 
+/* ---- one breakdown panel ---- */
+function bdPanel(x){const rows=x.rows.slice(0,5),max=Math.max(1,...rows.map(r=>r.value));
+ return `<section class="panel bdp"><h3 class="ph">${esc(x.title)}</h3><div class="hbars">${rows.map(r=>`<div class="hbar"><span title="${esc(r.label)}">${esc(r.label)}</span><div class="track"><div class="fill" data-w="${Math.max(1.5,100*r.value/max).toFixed(1)}"></div></div><strong>${fmt(r.value)}</strong></div>`).join('')}</div></section>`;}
 /* ---- breakdowns ---- */
 function bdsHTML(d){const b=(d.breakdowns||[]).filter(x=>x.rows&&x.rows.length).slice(0,3);if(!b.length)return '';
  return `<div class="bds" style="--b:${Math.max(2,b.length)}">${b.map(x=>{const rows=x.rows.slice(0,5),max=Math.max(1,...rows.map(r=>r.value));
@@ -921,7 +937,7 @@ function heatmap(id,d){const f=el(id),h=d.heat,n=h.cols.length;const cols=`minma
  const one=(v)=>v===null||v===undefined?'--':Number(v).toFixed(1);
  const head=`<div class="heat-row head" style="grid-template-columns:${cols}"><span>Block, weight</span>${h.cols.map(c=>`<span>${esc(c)}</span>`).join('')}<span>Target</span></div>`;
  const rows=h.rows.map(r=>`<button class="heat-row" style="grid-template-columns:${cols}" data-sheet="${esc(r.id)}" aria-haspopup="dialog"><span class="nm">${esc(r.name)}<small>${r.weight}%</small></span>${r.cells.map((v,i)=>`<span class="cell ${v===null||v===undefined?'none':r.bands[i]}${i===n-1?' now':''}" title="${esc(h.cols[i])}: ${one(v)}">${one(v)}</span>`).join('')}<span class="tg">${one(r.target)}</span></button>`).join('');
- const key=`<div class="heat-key"><span><i class="good"></i>On target</span><span><i class="warn"></i>Within 1.5</span><span><i class="bad"></i>Further below</span><span style="margin-left:auto">Select a block for its sub-metrics and next actions</span></div>`;
+ const key=`<div class="heat-key"><span><i class="good"></i>On target</span><span><i class="warn"></i>Within 1.5</span><span><i class="bad"></i>Further below</span><span style="margin-left:auto">Select a block for detail</span></div>`;
  f.innerHTML=`<div class="heat">${head}${rows}${key}</div>`;}
 
 /* ---- block popup ---- */
@@ -970,11 +986,11 @@ function chartHeading(d){if(d.kind==='heatmap')return `Blocks against the ${esc(
  if(isCols(d))return `Day by day<span>${p?`dashed marks: ${esc(label.toLowerCase())}`:''}</span>`;
  return `${esc(d.main.heading||'Day by day')}<span>${p?`dashed line: ${esc((d.main.previousLabel||label).toLowerCase())}`:''}</span>`;}
 function isCols(d){if(d.level||d.kind)return false;const v=[...Object.values(d.main.series)[0].map(p=>p?.value||0),...(d.main.previous||[]).map(p=>p?.value||0)];return Math.max(...v)<=10;}
-function drawCard(animate=true){const d=BY[cur];if(!d)return;const ws=el('ws');
+function drawCard(animate=true){const d=BY[cur];if(!d)return;const ws=el('ws');const B=(d.breakdowns||[]).filter(x=>x.rows&&x.rows.length).slice(0,3);
  ws.innerHTML=`${headHTML(d)}
  ${slimStrip(d)}
- <div class="ws-main${d.kind==='heatmap'?' tight':''}"><section class="panel"><h3 class="ph">${chartHeading(d)}</h3><div id="analyticsChart" class="${d.kind==='heatmap'?'':'chart-frame ws-chart'}"></div></section><aside class="panel np">${nextHTML(d)}</aside></div>
- ${bdsHTML(d)}`;
+ <div class="r1${d.kind==='heatmap'?' tight':''}" style="--k:${Math.min(2,B.length)}"><section class="panel"><h3 class="ph">${chartHeading(d)}</h3><div id="analyticsChart" class="${d.kind==='heatmap'?'':'chart-frame ws-chart'}"></div></section>${B.slice(0,2).map(bdPanel).join('')}</div>
+ <div class="r2${B[2]?' has3':''}"><aside class="panel np">${nextHTML(d,d.kind==='heatmap'?4:0)}</aside>${B[2]?bdPanel(B[2]):''}</div>`;
  if(d.kind==='heatmap')heatmap('analyticsChart',d);
  else if(isCols(d)){colChart('analyticsChart',d);launchMark('analyticsChart',d,'cols');}
  else{const key=Object.keys(d.main.series)[0];lineChart('analyticsChart',{dates:d.main.dates,series:d.main.series,unit:d.unit,animate,ghost:d.main.previous?{[key]:d.main.previous}:null,ghostLabel:d.main.tipLabel||'Previous period'});launchMark('analyticsChart',d,'line');}
