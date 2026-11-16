@@ -114,8 +114,12 @@ button.heat-row:hover,button.heat-row[aria-expanded="true"]{background:var(--sur
 .cell.now.good{background:color-mix(in srgb,var(--good) 58%,var(--surface));color:#1d1e20}.cell.now.warn{background:color-mix(in srgb,var(--warn) 52%,var(--surface));color:#1d1e20}.cell.now.bad{background:color-mix(in srgb,var(--bad) 58%,var(--surface));color:#1d1e20}
 .cell.none{background:var(--surface-2);color:var(--ink-4)}
 .subs{display:flex;flex-direction:column;gap:2px;padding:4px 0 10px;animation:wsIn .35s var(--ease)}
-.sub{display:grid;align-items:center;gap:6px;padding:0 8px;height:30px;font-size:12.5px;color:var(--ink-3)}
-.sub .sn{padding-left:16px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sub{display:grid;align-items:center;gap:2px 6px;padding:6px 8px;font-size:12.5px;color:var(--ink-3);border-radius:8px}
+.sub:hover{background:#ffffff05}
+.sub .sx{grid-column:1/-1;padding-left:16px;font-size:12px;color:var(--ink-4);line-height:1.5}
+.sub .sa{display:block;color:var(--ink-2);margin-top:2px}
+.sub .sa i{font-style:normal;color:var(--ink-4);margin-left:8px;font-size:11.5px}
+.sub .sn{padding-left:16px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink-2)}
 .sub .sn em{font-style:normal;font-size:11px;color:var(--ink-4);margin-left:8px}
 .sbar{display:grid;grid-template-columns:1fr 3em;gap:10px;align-items:center}
 .sbar .tr{height:6px;border-radius:99px;background:var(--surface-3);overflow:hidden}
@@ -195,9 +199,11 @@ function heatmap(id,d){const f=el(id),h=d.heat,n=h.cols.length;const cols=`minma
  const one=(v)=>v===null||v===undefined?'--':Number(v).toFixed(1);
  const head=`<div class="heat-row head" style="grid-template-columns:${cols}"><span>Block, weight</span>${h.cols.map(c=>`<span>${esc(c)}</span>`).join('')}<span>Target</span></div>`;
  const rows=h.rows.map(r=>{const open=OPEN.has(r.id);
-  const subs=open?`<div class="subs">${r.subs.map(s=>`<div class="sub" style="grid-template-columns:minmax(0,1fr) ${n>1?`repeat(${n},minmax(44px,92px))`:'minmax(44px,92px)'} 54px"><span class="sn" title="${esc(s.evidence||'')}">${esc(s.name)}<em>${s.measured?'live':'audit'}</em></span><span class="sbar" style="grid-column:span ${n}"><span class="tr"><span class="fl ${s.band}" style="display:block;width:${Math.max(2,s.score*10)}%%"></span></span><b>${one(s.score)}</b></span><span class="tg">${s.weight}%%</span></div>`).join('')}<button class="link-quiet more" data-block="${esc(r.id)}">Block details</button></div>`:'';
+  const gc=`minmax(0,1fr) ${n>1?`repeat(${n},minmax(44px,92px))`:'minmax(44px,92px)'} 54px`;
+  const subs=open?`<div class="subs">${r.subs.map(s=>{const ev=s.measured?(s.evidence||''):`Audit score, Nov 13${s.evidence?': '+s.evidence:''}`;const moved=s.measured&&s.audit!=null&&Math.abs(s.score-s.audit)>=0.05?` Audit ${one(s.audit)}.`:'';
+   return `<div class="sub" style="grid-template-columns:${gc}"><span class="sn">${esc(s.name)}<em>${s.measured?'live':'audit'}</em></span><span class="sbar" style="grid-column:span ${n}"><span class="tr"><span class="fl ${s.band}" style="display:block;width:${Math.max(2,s.score*10)}%%"></span></span><b>${one(s.score)}</b></span><span class="tg">${s.weight}%%</span><span class="sx">${esc(ev+moved)}${s.band!=='good'&&s.action?`<span class="sa">Next: ${esc(s.action)}<i>${esc(OWNER[s.owner]||'')}</i></span>`:''}</span></div>`;}).join('')}</div>`:'';
   return `<button class="heat-row" style="grid-template-columns:${cols}" data-expand="${esc(r.id)}" aria-expanded="${open}"><span class="nm"><i>›</i>${esc(r.name)}<small>${r.weight}%%</small></span>${r.cells.map((v,i)=>`<span class="cell ${v===null||v===undefined?'none':r.bands[i]}${i===n-1?' now':''}" title="${esc(h.cols[i])}: ${one(v)}">${one(v)}</span>`).join('')}<span class="tg">${one(r.target)}</span></button>${subs}`;}).join('');
- const key=`<div class="heat-key"><span><i class="good"></i>On target</span><span><i class="warn"></i>Within 1.5</span><span><i class="bad"></i>Further below</span><span style="margin-left:auto">Select a block to open its sub-metrics</span></div>`;
+ const key=`<div class="heat-key"><span><i class="good"></i>On target</span><span><i class="warn"></i>Within 1.5</span><span><i class="bad"></i>Further below</span><span style="margin-left:auto">Select a block for its sub-metrics, evidence and next action</span></div>`;
  f.innerHTML=`<div class="heat">${head}${rows}${key}</div>`;}
 
 /* ---- workspace ---- */

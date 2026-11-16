@@ -863,6 +863,10 @@ def cube_card(cs, cube, hist, g):
                                 "rows": [[r[0], f(r[1]), "-" if r[2] is None else f"{r[2]:.1f}"] for r in g["targets"]["rows"]], "note": "Edit the list in data/targets.json."}})
     ctx = {"missing_n": len(CRAWL.get("missing_from_sitemap", [])), "unknown_n": (g.get("index") or {}).get("checked", 0) - (g.get("index") or {}).get("indexed", 0),
            "slowest": ", ".join(x_[0] for x_ in CRAWL.get("slowest", [])[:2]), "noshare_n": len(CRAWL.get("issues", {}).get("No share image", []))}
+    acts = {(b["id"], x_["name"]): (x_.get("action", "").format(**ctx), x_.get("owner", "site")) for b in cs["blocks"] for x_ in b["subs"]}
+    for r in rows:
+        for x_ in r["subs"]:
+            x_["action"], x_["owner"] = acts.get((r["id"], x_["name"]), ("", "site"))
     gains = []
     for b in cs["blocks"]:
         for x_ in b["subs"]:
