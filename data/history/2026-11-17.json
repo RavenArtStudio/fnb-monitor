@@ -4,13 +4,13 @@
   "pages_ok": 127,
   "broken_n": 0,
   "issue_pages": 22,
-  "ms_median": 397,
+  "ms_median": 266,
   "weight_total": 644
  },
  "cube": {
-  "overall": 6.5,
+  "overall": 6.51,
   "blocks": {
-   "tech": 9.03,
+   "tech": 9.09,
    "onpage": 9.22,
    "content": 7.65,
    "schema": 8.38,
