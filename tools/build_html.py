@@ -45,6 +45,8 @@ body *{font-weight:400!important}
 .rail-item[aria-selected="true"]{background:var(--surface-2);color:var(--ink)}
 *{scrollbar-width:none!important;-ms-overflow-style:none!important}*::-webkit-scrollbar{display:none!important;width:0!important;height:0!important}
 .heat-key>span{white-space:nowrap}
+.r1.hm{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)}.r1.hm>.np{max-height:none;position:relative}.r1.hm>.np>div{position:absolute;inset:18px 20px 16px;overflow:auto}.r1.hm .steps{display:flex;flex-direction:column;gap:2px}
+.r3{display:grid;grid-template-columns:repeat(var(--k),minmax(0,1fr));gap:14px}
 .rail-item span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .rail-item strong{font-variant-numeric:tabular-nums;color:var(--ink)}
 .rail-item em{font-style:normal;font-size:12px;text-align:right;font-variant-numeric:tabular-nums;color:var(--ink-4)}
@@ -340,8 +342,11 @@ function isCols(d){if(d.level||d.kind)return false;const v=[...Object.values(d.m
 function drawCard(animate=true){const d=BY[cur];if(!d)return;const ws=el('ws');const B=(d.breakdowns||[]).filter(x=>x.rows&&x.rows.length).slice(0,3);
  ws.innerHTML=`${headHTML(d)}
  ${slimStrip(d)}
- <div class="r1${d.kind==='heatmap'?' tight':''}" style="--k:${Math.min(2,B.length)}"><section class="panel"><h3 class="ph">${chartHeading(d)}</h3><div id="analyticsChart" class="${d.kind==='heatmap'?'':'chart-frame ws-chart'}"></div></section>${B.slice(0,2).map(bdPanel).join('')}</div>
- <div class="r2${B[2]?' has3':''}"><aside class="panel np">${nextHTML(d,d.kind==='heatmap'?4:0)}</aside>${B[2]?bdPanel(B[2]):''}</div>`;
+ ${d.kind==='heatmap'?(()=>{const H=(d.breakdowns||[]).filter(x=>x.rows&&x.rows.length&&!/^Points to gain|^Blocks/.test(x.title)).slice(0,3);
+ return `<div class="r1 tight hm"><section class="panel"><h3 class="ph">${chartHeading(d)}</h3><div id="analyticsChart"></div></section><aside class="panel np">${nextHTML(d)}</aside></div>
+ ${H.length?`<div class="r3" style="--k:${H.length}">${H.map(bdPanel).join('')}</div>`:''}`;})()
+ :`<div class="r1" style="--k:${Math.min(2,B.length)}"><section class="panel"><h3 class="ph">${chartHeading(d)}</h3><div id="analyticsChart" class="chart-frame ws-chart"></div></section>${B.slice(0,2).map(bdPanel).join('')}</div>
+ <div class="r2${B[2]?' has3':''}"><aside class="panel np">${nextHTML(d)}</aside>${B[2]?bdPanel(B[2]):''}</div>`}`;
  if(d.kind==='heatmap')heatmap('analyticsChart',d);
  else if(isCols(d)){colChart('analyticsChart',d);launchMark('analyticsChart',d,'cols');}
  else{const key=Object.keys(d.main.series)[0];lineChart('analyticsChart',{dates:d.main.dates,series:d.main.series,unit:d.unit,animate,ghost:d.main.previous?{[key]:d.main.previous}:null,ghostLabel:d.main.tipLabel||'Previous period'});launchMark('analyticsChart',d,'line');}
