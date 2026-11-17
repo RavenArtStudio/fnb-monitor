@@ -134,6 +134,36 @@ body *{font-weight:400!important}
 .col-val{fill:var(--ink-2);font-size:11.5px}
 .launch line{stroke:var(--u1);stroke-width:1;stroke-dasharray:2 4;opacity:.8}
 .launch text{fill:var(--u1);font-size:11px}
+.early rect{fill:var(--ink-4);opacity:.1}
+/* page speed: page list beside the chart, file types in a popup */
+.r1.sp{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr)}
+.pgp{display:flex;flex-direction:column;padding-bottom:10px}
+.pgl{position:relative;flex:1;min-height:0;margin:0 -8px}
+.pgl>div{position:absolute;inset:0;overflow:auto}
+.pgr,.pgh{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(50px,1fr) 4.4em 4.6em 5.6em;gap:12px;align-items:center;padding:6px 8px;text-align:left}
+.pgh{position:sticky;top:0;z-index:1;background:var(--surface);font-size:11.5px;color:var(--ink-4);padding-top:0}
+.pgh span:nth-child(n+3){text-align:right}
+.pgr{appearance:none;border:0;background:transparent;width:100%;border-radius:8px;font-size:12.5px;color:var(--ink-2);cursor:pointer;transition:background .2s var(--ease),color .2s}
+.pgr:hover,.pgr:focus-visible{background:var(--surface-2);color:var(--ink);outline:0}
+.pgn{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pgb{height:5px;border-radius:99px;background:var(--surface-3);overflow:hidden}
+.pgb i{display:block;height:100%;border-radius:99px;background:var(--u0);opacity:.55}
+.pgr b,.pgr em{text-align:right;font-style:normal;font-variant-numeric:tabular-nums}
+.pgr b{color:var(--ink)}.pgr b.warn{color:var(--warn)}.pgr b.bad{color:var(--bad)}
+.pgr em{color:var(--ink-3)}
+.pgr small{font-size:11.5px;color:var(--ink-4);text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.detail.sheet.pg{width:min(560px,calc(100vw - 48px))}
+.ftl{display:flex;flex-direction:column}
+.ftr{display:grid;grid-template-columns:6.5em minmax(0,1fr) 4em 3em;gap:12px;align-items:center;padding:6px 0;font-size:12.5px;color:var(--ink-3);border-top:1px solid var(--line-soft)}
+.ftr:first-child{border-top:0;padding-top:2px}
+.ftr .tr{height:6px;border-radius:99px;background:var(--surface-3);overflow:hidden}
+.ftr .fl{display:block;height:100%;border-radius:99px;background:var(--ink-4)}
+.ftr b,.ftr em{text-align:right;font-style:normal;font-variant-numeric:tabular-nums;color:var(--ink-2)}
+.ftr em{color:var(--ink-4)}
+.ftr.top{color:var(--ink)}.ftr.top .fl{background:var(--u0)}.ftr.top b{color:var(--ink)}
+.lr small{color:var(--ink-4);margin-left:6px}
+a.pbtn{text-decoration:none;display:inline-flex;align-items:center}
+.early text{fill:var(--ink-3);font-size:11px}
 /* heatmap */
 .heat{display:flex;flex-direction:column;gap:2px}
 .heat-row{appearance:none;border:0;background:transparent;display:grid;align-items:center;gap:6px;padding:0 8px;height:29px;border-radius:8px;text-align:left;color:var(--ink-2);font-size:13px;width:100%;transition:background .2s var(--ease)}
@@ -277,13 +307,40 @@ function launchMark(id,d,kind){const frame=el(id),svg=frame?.querySelector('svg'
  g.innerHTML=`<line x1="${x.toFixed(1)}" x2="${x.toFixed(1)}" y1="${T}" y2="${H-B}"/><text x="${(x>W*0.8?x-6:x+6).toFixed(1)}" y="${T+10}" text-anchor="${x>W*0.8?'end':'start'}">New site</text>`;
  svg.insertBefore(g,svg.firstChild.nextSibling);}
 
+/* ---- early figures: soft band over days Google has not finalised ---- */
+function earlyMark(id,d,kind){const e=d.main.earlyFrom;if(!e)return;const frame=el(id),svg=frame?.querySelector('svg');if(!svg)return;const dates=d.main.dates,i=dates.indexOf(e);if(i<0)return;
+ const vb=svg.viewBox.baseVal,W=vb.width,H=vb.height,L=44,R=12,T=kind==='cols'?18:14,B=30,n=dates.length,step=(W-L-R)/(kind==='cols'?n:Math.max(1,n-1));
+ const x0=kind==='cols'?L+step*i:Math.max(L,L+step*(i-.5)),x1=W-R;
+ const g=document.createElementNS('http://www.w3.org/2000/svg','g');g.setAttribute('class','early');
+ g.innerHTML=`<title>Early figures: Google is still counting these days</title><rect x="${x0.toFixed(1)}" y="${T}" width="${(x1-x0).toFixed(1)}" height="${H-B-T}" rx="6"/><text x="${(x1-6).toFixed(1)}" y="${T+10}" text-anchor="end">Early</text>`;
+ svg.insertBefore(g,svg.firstChild);}
+
+/* ---- page speed: pages slowest first; a page opens its size by file type ---- */
+const SITE_URL='https://fnbperformance.com';
+const msTone=(ms)=>ms>=1000?'bad':ms>=500?'warn':'';
+function pagesPanel(d){const P=d.pages||[],mx=Math.max(1,...P.map(p=>p.ms));
+ return `<section class="panel pgp"><h3 class="ph">Pages, slowest first<span>${P.length} pages</span></h3><div class="pgl"><div>
+  <div class="pgh"><span>Page</span><span>Response</span><span>ms</span><span>KB</span><span>Heaviest</span></div>
+  ${P.map(p=>`<button class="pgr" data-page="${esc(p.path)}" title="${esc(p.path)}"><span class="pgn">${esc(p.name)}</span><span class="pgb"><i style="width:${Math.max(2,100*p.ms/mx).toFixed(1)}%%"></i></span><b class="${msTone(p.ms)}">${fmt(p.ms)}</b><em>${fmt(p.kb)}</em><small>${esc(p.types[0]?.[0]||'')}</small></button>`).join('')}</div></div></section>`;}
+function pageSheet(d,p){const tot=Math.max(1,p.kb),top=p.types[0],pct=(v)=>Math.round(100*v/tot)+'%%';
+ return HEAD(`Page speed, ${p.path}`,p.name,PILL(msTone(p.ms)||'good',`${fmt(p.ms)} ms response`))+`<div class="pp">
+  ${BOX('Reading',KV([{label:'Response',value:fmt(p.ms)+' ms'},{label:'Page size',value:fmt(p.kb)+' KB'},{label:'Files',value:fmt(p.n)}]))}
+  ${BOX('By file type<span>KB, share of the page</span>',`<div class="ftl">${p.types.map((t,i)=>`<div class="ftr${i===0?' top':''}"><span>${esc(t[0])}</span><span class="tr"><span class="fl" style="width:${Math.max(2,100*t[1]/top[1]).toFixed(1)}%%"></span></span><b>${fmt(t[1])}</b><em>${pct(t[1])}</em></div>`).join('')}</div>`)}
+  ${p.files?.length?BOX('Largest files',p.files.map(f=>`<div class="lr"><span title="${esc(f[0])}">${esc(f[0])}<small>${esc(f[1])}</small></span><b>${fmt(f[2])} KB</b></div>`).join('')):''}
+  <div class="pbtns"><a class="pbtn primary" href="${esc(SITE_URL+p.path)}" target="_blank" rel="noopener">Open page ↗</a><button class="pbtn" data-detail-close>Close</button></div>
+ </div>`;}
+function openPage(path,opener){const d=BY[cur],p=(d?.pages||[]).find(x=>x.path===path);if(!p)return;detailOpener=opener;const panel=el('detailPanel'),scrim=el('detailScrim'),body=el('detailBody');
+ state.detail={metric:'page',data:{raw:null}};panel.classList.add('sheet','pg');body.innerHTML=pageSheet(d,p);
+ scrim.hidden=false;panel.hidden=false;document.body.classList.add('detail-open');detailClosing=false;
+ requestAnimationFrame(()=>{scrim.classList.add('on');panel.classList.add('on');});body.focus({preventScroll:true});}
+
 /* ---- columns chart (small daily counts) ---- */
 function colChart(id,d){const frame=el(id),ser=Object.values(d.main.series)[0],cur=ser.map(p=>p?.value||0),prev=(d.main.previous||[]).map(p=>p?.value||0),dates=d.main.dates;
  const W=Math.max(280,frame.clientWidth||700),H=Math.max(180,frame.clientHeight||300),L=44,R=12,T=18,B=30,n=cur.length;
  const top=niceTop(Math.max(1,...cur,...prev)*1.15),y=v=>T+(1-v/top)*(H-T-B),slot=(W-L-R)/n,bw=Math.min(30,slot*.34);
  const grid=[0,.25,.5,.75,1].map(t=>`<line class="chart-grid" x1="${L}" x2="${W-R}" y1="${y(top*t).toFixed(1)}" y2="${y(top*t).toFixed(1)}"/><text class="chart-axis" x="${L-12}" y="${(y(top*t)+4).toFixed(1)}" text-anchor="end">${fmt(top*t)}</text>`).join('');
  let bars='';cur.forEach((v,i)=>{const cx=L+slot*(i+.5),h=Math.max(v?2:0,y(0)-y(v));
-  bars+=`<g><title>${esc(nice(dates[i]))}: ${fmt(v)}${prev.length?`, ${esc(d.main.tipLabel||'previous')} ${fmt(prev[i])}`:''}</title><rect class="col-cur" x="${(cx-bw/2).toFixed(1)}" y="${(y(0)-h).toFixed(1)}" width="${bw.toFixed(1)}" height="${h.toFixed(1)}" rx="4"/>${v?`<text class="col-val" x="${cx.toFixed(1)}" y="${(y(v)-7).toFixed(1)}" text-anchor="middle">${fmt(v)}</text>`:''}<text class="chart-axis" x="${cx.toFixed(1)}" y="${H-6}" text-anchor="middle">${esc(shortDate(dates[i]))}</text></g>`;});
+  bars+=`<g><title>${esc(nice(dates[i]))}: ${fmt(v)}${d.main.earlyFrom&&dates[i]>=d.main.earlyFrom?' (early)':''}${prev.length?`, ${esc(d.main.tipLabel||'previous')} ${fmt(prev[i])}`:''}</title><rect class="col-cur" x="${(cx-bw/2).toFixed(1)}" y="${(y(0)-h).toFixed(1)}" width="${bw.toFixed(1)}" height="${h.toFixed(1)}" rx="4"/>${v?`<text class="col-val" x="${cx.toFixed(1)}" y="${(y(v)-7).toFixed(1)}" text-anchor="middle">${fmt(v)}</text>`:''}<text class="chart-axis" x="${cx.toFixed(1)}" y="${H-6}" text-anchor="middle">${esc(shortDate(dates[i]))}</text></g>`;});
  const pts=prev.map((v,i)=>`${(L+slot*(i+.5)).toFixed(1)},${y(v).toFixed(1)}`);const pl=prev.length?`<polyline class="col-trend" points="${pts.join(' ')}"/>${pts.map(q=>{const[a,b]=q.split(',');return `<circle class="col-dot" cx="${a}" cy="${b}" r="2.2"/>`}).join('')}`:'';
  frame.innerHTML=`<svg role="img" aria-label="Daily ${esc(d.unit)} as columns, dotted line is ${esc(d.main.tipLabel||'the previous period')}" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}">${grid}${bars}${pl}</svg>`;}
 
@@ -300,7 +357,7 @@ const PILL=(tone,t)=>`<span class="pill ${tone}">${esc(t)}</span>`;
 const KV=(items)=>`<div class="kv">${items.filter(Boolean).map(k=>`<div><span>${esc(k.label)}</span><b class="${k.tone||''}">${esc(k.value)}</b>${k.note?`<small>${esc(k.note)}</small>`:''}</div>`).join('')}</div>`;
 const BOX=(title,inner,extra='')=>`<section class="box ${extra}"><h4>${title}</h4>${inner}</section>`;
 const HEAD=(kicker,title,pill='')=>`<div class="pp-head"><div class="ph-t"><h2 class="detail-title" id="detailTitle">${esc(title)}</h2>${pill}<span class="ph-k">${esc(kicker)}</span></div>${CLOSE_BTN}</div>`;
-const IDS={'Site health, Pages live':'pages','Site health, Broken links':'broken','Site health, Server response time':'response','Site health, Home page size':'weight','Site health, Pages with issues':'issues','Authority, Referring domains':'refdomains','Authority, Authority score':'authority','Google Search, Search impressions':'impressions','Google Search, Keywords on page one':'pageone','Enquiries, Profit Review requests':'leads','Enquiries, WhatsApp clicks':'whatsapp','Enquiries, Calculator uses':'tools'};
+const IDS={'Site health, Pages live':'pages','Site health, Broken links':'broken','Site health, Server response time':'response','Site health, Home page size':'weight','Site health, Page speed':'speed','Site health, Pages with issues':'issues','Authority, Referring domains':'refdomains','Authority, Authority score':'authority','Google Search, Search impressions':'impressions','Google Search, Keywords on page one':'pageone','Enquiries, Profit Review requests':'leads','Enquiries, WhatsApp clicks':'whatsapp','Enquiries, Calculator uses':'tools'};
 function sheetHTML(d,r){const one=(v)=>v===null||v===undefined?'--':Number(v).toFixed(1),now=r.cells.at(-1),gap=r.target-now,ok=gap<=0.05;
  const subs=[...r.subs].map(s=>({...s,gain:r.weight*s.weight*Math.max(0,r.target-s.score)/10000})).sort((a,b)=>b.gain-a.gain);
  const gainAll=subs.reduce((a,s)=>a+s.gain,0),live=subs.filter(s=>s.measured).length;
@@ -347,11 +404,13 @@ function drawCard(animate=true){const d=BY[cur];if(!d)return;const ws=el('ws');c
  ${d.kind==='heatmap'?(()=>{const H=(d.breakdowns||[]).filter(x=>x.rows&&x.rows.length&&!/^Points to gain|^Blocks/.test(x.title)).slice(0,3);
  return `<div class="r1 tight hm"><section class="panel"><h3 class="ph">${chartHeading(d)}</h3><div id="analyticsChart"></div></section><aside class="panel np">${nextHTML(d)}</aside></div>
  ${H.length?`<div class="r3" style="--k:${H.length}">${H.map(bdPanel).join('')}</div>`:''}`;})()
+ :d.pages?`<div class="r1 sp"><section class="panel"><h3 class="ph">${chartHeading(d)}</h3><div id="analyticsChart" class="chart-frame ws-chart"></div></section>${pagesPanel(d)}</div>
+ <div class="r2${B[0]?' has3':''}"><aside class="panel np">${nextHTML(d)}</aside>${B[0]?bdPanel(B[0]):''}</div>`
  :`<div class="r1" style="--k:${Math.min(2,B.length)}"><section class="panel"><h3 class="ph">${chartHeading(d)}</h3><div id="analyticsChart" class="chart-frame ws-chart"></div></section>${B.slice(0,2).map(bdPanel).join('')}</div>
  <div class="r2${B[2]?' has3':''}"><aside class="panel np">${nextHTML(d)}</aside>${B[2]?bdPanel(B[2]):''}</div>`}`;
  if(d.kind==='heatmap')heatmap('analyticsChart',d);
- else if(isCols(d)){colChart('analyticsChart',d);launchMark('analyticsChart',d,'cols');}
- else{const key=Object.keys(d.main.series)[0];lineChart('analyticsChart',{dates:d.main.dates,series:d.main.series,unit:d.unit,animate,ghost:d.main.previous?{[key]:d.main.previous}:null,ghostLabel:d.main.tipLabel||'Previous period'});launchMark('analyticsChart',d,'line');}
+ else if(isCols(d)){colChart('analyticsChart',d);launchMark('analyticsChart',d,'cols');earlyMark('analyticsChart',d,'cols');}
+ else{const key=Object.keys(d.main.series)[0];lineChart('analyticsChart',{dates:d.main.dates,series:d.main.series,unit:d.unit,animate,ghost:d.main.previous?{[key]:d.main.previous}:null,ghostLabel:d.main.tipLabel||'Previous period'});launchMark('analyticsChart',d,'line');earlyMark('analyticsChart',d,'line');}
  fillBars(ws);}
 function setData(j,mode){META=j.meta||{};CARDS=j.cards||[];ORDER=CARDS.map(c=>c.id);BY=Object.fromEntries(CARDS.map(c=>[c.id,c]));
  const h=location.hash.slice(1);if(!ORDER.includes(cur))cur=ORDER.includes(h)?h:ORDER[0];
@@ -366,11 +425,12 @@ function showDetail(d,metric,opener){detailOpener=opener;const panel=el('detailP
  requestAnimationFrame(()=>{scrim.classList.add('on');panel.classList.add('on');});body.focus({preventScroll:true});}
 function closeDetail(){const panel=el('detailPanel'),scrim=el('detailScrim');if(panel.hidden||detailClosing)return;detailClosing=true;
  panel.classList.remove('on');scrim.classList.remove('on');document.body.classList.remove('detail-open');
- setTimeout(()=>{if(!panel.classList.contains('on')){panel.hidden=true;scrim.hidden=true;panel.classList.remove('sheet');el('detailBody').innerHTML='';state.detail=null;}detailClosing=false;},reduceMotion?0:420);
+ setTimeout(()=>{if(!panel.classList.contains('on')){panel.hidden=true;scrim.hidden=true;panel.classList.remove('sheet','pg');el('detailBody').innerHTML='';state.detail=null;}detailClosing=false;},reduceMotion?0:420);
  if(detailOpener&&document.contains(detailOpener))detailOpener.focus({preventScroll:true});}
 document.addEventListener('click',e=>{
- const t=e.target.closest('[data-card],[data-sheet],[data-goto],[data-detail],[data-detail-close],[data-intent],[data-q],[data-raw],[data-copy-csv]');if(!t)return;
+ const t=e.target.closest('[data-card],[data-page],[data-sheet],[data-goto],[data-detail],[data-detail-close],[data-intent],[data-q],[data-raw],[data-copy-csv]');if(!t)return;
  if(t.dataset.card){pick(t.dataset.card);return;}
+ if(t.dataset.page){openPage(t.dataset.page,t);return;}
  if(t.dataset.sheet){openSheet(t.dataset.sheet,t);return;}
  if(t.dataset.goto){const id=t.dataset.goto;detailOpener=null;closeDetail();pick(id,true);return;}
  if(t.dataset.detail){showDetail(BY[cur],'card',t);return;}

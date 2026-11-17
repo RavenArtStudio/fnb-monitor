@@ -102,11 +102,11 @@ def ga(sess, start, end, dims, metrics, flt=None, limit=1000, order=None):
     return out
 
 
-def sc(sess, start, end, dims, limit=1000):
+def sc(sess, start, end, dims, limit=1000, state="all"):
     url = ("https://searchconsole.googleapis.com/webmasters/v3/sites/"
            + requests.utils.quote(SC_SITE, safe="") + "/searchAnalytics/query")
     r = sess.post(url, json={"startDate": iso(start), "endDate": iso(end),
-                             "dimensions": dims, "rowLimit": limit, "dataState": "final"}, timeout=60)
+                             "dimensions": dims, "rowLimit": limit, "dataState": state}, timeout=60)
     if r.status_code != 200:
         raise RuntimeError(f"SC {r.status_code}: {r.text[:300]}")
     return r.json().get("rows", [])
@@ -382,6 +382,11 @@ def sc_cards(sess):
         return []
     last = max(dt.date.fromisoformat(r["keys"][0]) for r in rows)
     cur_days, prev_days = window(last)
+    # Early figures: days after the latest day Google has finalised; Google still adds to them.
+    fin = sc(sess, TODAY - dt.timedelta(days=30), TODAY - dt.timedelta(days=1), ["date"], state="final")
+    last_final = max((dt.date.fromisoformat(r["keys"][0]) for r in fin), default=None)
+    early = [d for d in cur_days if last_final is None or d > last_final]
+    span = (short(early[0]) if len(early) == 1 else f"{short(early[0])} to {short(early[-1])}") if early else ""
     by = {dt.date.fromisoformat(r["keys"][0]): r for r in rows}
     get = lambda days, k: [int(by[d][k]) if d in by else 0 for d in days]
     w = (cur_days[0], last)
@@ -389,9 +394,11 @@ def sc_cards(sess):
     pg = sc(sess, *w, ["page"], 100)
     qtop = lambda k: [(r["keys"][0], int(r[k])) for r in sorted(q, key=lambda r: -r[k]) if r[k] > 0][:6]
     ptop = lambda k: [(page_name(urlparse(r["keys"][0]).path), int(r[k])) for r in sorted(pg, key=lambda r: -r[k]) if r[k] > 0][:6]
-    lag = ["Google reports search data two to three days late, so the window ends on the latest complete day.",
+    lag = [(f"Google reports search data two to three days late. {span} {'is an early figure' if len(early) == 1 else 'are early figures'} "
+            "that Google usually raises over the next two days.") if early else
+           "Google reports search data two to three days late, so the window ends on the latest complete day.",
            "Rare queries are withheld by Google for privacy, so query rows add up to less than the total."]
-    sub = f"{SC}, {short(cur_days[0])} to {short(last)}"
+    sub = f"{SC}, {short(cur_days[0])} to {short(last)}" + (f", {span} early" if early else "")
     imp_c, imp_p = get(cur_days, "impressions"), get(prev_days, "impressions")
     clk_c, clk_p = get(cur_days, "clicks"), get(prev_days, "clicks")
     cards = [card("impressions", "Search impressions", "impressions", "Google Search", SC, "date, impressions, query, page",
@@ -425,7 +432,25 @@ def sc_cards(sess):
                       "Number of search queries where the site ranked in the first ten results that day. Compared with the same day a week earlier.",
                       ["Position is the average across all searches that day, so a keyword can move in and out of the count."] + lag[:1],
                       level=True, sub=sub))
+    if early:
+        for c in cards:
+            mark_early(c, early, span)
     return cards
+
+
+def mark_early(c, early, span):
+    """Flag days Google has not finalised: shaded band on the chart, a caution, the source status."""
+    one = len(early) == 1
+    c["main"]["earlyFrom"] = iso(early[0])
+    c["early"] = [iso(d) for d in early]
+    c["patterns"].insert(1 if c["patterns"] else 0, {
+        "type": "caution", "title": f"{span} {'is an early figure' if one else 'are early figures'}",
+        "evidence": f"Google is still counting {'this day' if one else 'these days'} and usually adds to the figure "
+                    "over the next two days" + (f", so the count on {short(early[-1])} can still move." if c["level"]
+                    else ", so the change against the previous days reads low until it settles.")})
+    for q in c["questions"]:
+        if q["id"] == "source":
+            q["answer"]["rows"][0][2] = f"Live figures, {span} early"
 
 
 # ---------------------------------------------------------------- Cube inputs from Google
@@ -615,22 +640,43 @@ def crawl():
         "Images without alt text": [o["u"] for o in ok if o["noalt"]],
         "No structured data": [o["u"] for o in ok if not o["schema"]],
     }
-    # Home page size: the page plus every file it references directly
-    home = pages.get("/ae") or next(iter(ok), None)
-    weight = {"Page": home["kb"] if home else 0, "Fonts": 0, "Styles": 0, "Scripts": 0, "Images": 0}
-    nfiles = 1
-    if home:
-        for u in sorted(set(home["res"])):
-            if not u.startswith(SITE):
+    # Page size: each page plus every same-site file it references directly. Shared files are fetched once.
+    def kind_of(u):
+        last = urlparse(u).path.rsplit("/", 1)[-1].lower()
+        ext = last.rsplit(".", 1)[-1] if "." in last else ""
+        return "Fonts" if ext in ("woff2", "woff", "ttf", "otf") else "Styles" if ext == "css" else "Scripts" if ext in ("js", "mjs") else "Images"
+    assets = sorted({u.split("#")[0] for o in ok for u in o["res"] if u.startswith(SITE)})
+
+    def get_asset(u):
+        r, _ = fetch(u)
+        return u, (len(r.content) / 1024 if r is not None and r.status_code == 200 else None)
+    with cf.ThreadPoolExecutor(6) as ex:
+        asize = dict(ex.map(get_asset, assets))
+
+    def weigh(o):
+        t = {"Page code": o["kb"], "Images": 0, "Scripts": 0, "Styles": 0, "Fonts": 0}
+        files = []
+        for u in sorted({x.split("#")[0] for x in o["res"] if x.startswith(SITE)}):
+            kb = asize.get(u)
+            if kb is None:
                 continue
-            r, _ = fetch(u)
-            if r is None or r.status_code != 200:
-                continue
-            nfiles += 1
-            ext = urlparse(u).path.rsplit(".", 1)[-1].lower()
-            kind = "Fonts" if ext in ("woff2", "woff", "ttf") else "Styles" if ext == "css" else "Scripts" if ext == "js" else "Images"
-            weight[kind] += len(r.content) / 1024
-    weight = {k: round(v) for k, v in weight.items()}
+            k = kind_of(u)
+            t[k] += kb
+            files.append((urlparse(u).path.rsplit("/", 1)[-1] or u, k, kb))
+        return t, files
+    speed, site_t = [], {}
+    for o in sorted(ok, key=lambda o: -o["ms"]):
+        t, files = weigh(o)
+        for k, v in t.items():
+            site_t[k] = site_t.get(k, 0) + v
+        speed.append({"name": page_name(o["u"]), "path": o["u"], "ms": o["ms"], "kb": round(sum(t.values())), "n": len(files) + 1,
+                      "types": sorted(([k, round(v)] for k, v in t.items() if round(v) > 0), key=lambda x: -x[1]),
+                      "files": [[n, k, round(kb)] for n, k, kb in sorted(files, key=lambda x: -x[2])[:4]]})
+    home = next((p for p in speed if p["path"].rstrip("/") == "/ae"), speed[0] if speed else None)
+    weight = {k: v for k, v in home["types"]} if home else {}
+    nfiles = home["n"] if home else 1
+    site_types = sorted(([k, round(v / len(speed))] for k, v in site_t.items() if round(v / len(speed)) > 0), key=lambda x: -x[1]) if speed else []
+    kbs = sorted(p["kb"] for p in speed)
     ms = sorted(o["ms"] for o in ok)
     inl = {}
     for o in ok:
@@ -657,6 +703,7 @@ def crawl():
         "ms_median": ms[len(ms) // 2] if ms else None, "ms_max": ms[-1] if ms else None,
         "slowest": [[page_name(o["u"]), o["ms"]] for o in slow],
         "weight": weight, "weight_total": sum(weight.values()), "files": nfiles,
+        "speed_pages": speed, "site_types": site_types, "kb_median": kbs[len(kbs) // 2] if kbs else None,
         "missing_from_sitemap": [u.replace(SITE, "") for u in missing],
         "lastmod_share": round(sum(1 for x in lastmods if x) / len(lastmods), 3) if lastmods else 0,
         "lastmod_age_median": sorted(ages)[len(ages) // 2] if ages else None,
@@ -718,20 +765,48 @@ def crawl_cards(c, hist):
                 [("By issue", iss, "Which issues were found?", "Issue", "Pages")],
                 None, "Each sitemap page is tested against nine checks; a page counts once however many checks it fails.",
                 ["Checks cover the page code, not how Google has indexed it."] + once, lower_better=True),
-        reading("response", "Server response time", "Response time, ms", "ms", "Site health", CR, "time to fetch each page, in milliseconds",
-                dates, v("ms_median"), sub,
-                [("Slowest pages, ms", c["slowest"], "Which pages are slowest?", "Page", "ms")],
-                None, "Median time to download the page code across the sitemap pages, in milliseconds.",
-                ["Measured from a GitHub server in the United States; visitors in the UAE will see different times.",
-                 "This is the page code only, not the time to draw the page."] + once, lower_better=True),
-        reading("weight", "Home page size", "Home page size, KB", "KB", "Site health", CR, "size of the home page and each file it references",
-                dates, v("weight_total"), sub,
-                [("By file type, KB", sorted(c["weight"].items(), key=lambda x: -x[1]), "What makes up the size?", "Type", "KB")],
-                None, f"Uncompressed size of the home page and the {c['files'] - 1} files it references directly.",
-                ["Uncompressed sizes; the transfer over the network is smaller.",
-                 "Google Analytics, which loads after cookies are accepted, is not included."] + once, lower_better=True),
     ]
+    cards.append(speed_card(c, hist, dates, v, sub, once))
     return cards
+
+
+def speed_card(c, hist, dates, v, sub, once):
+    """Page speed: median response time, with every page listed slowest first and its size by file type."""
+    sp, st = c["speed_pages"], c["site_types"]
+    stot = sum(x[1] for x in st) or 1
+    home = next((p for p in sp if p["path"].rstrip("/") == "/ae"), None)
+    over = [p for p in sp if p["ms"] >= 1000]
+    w = [(d, x) for d, x in zip(dates, v("weight_total")) if x is not None]
+    wd = w[-1][1] - w[-2][1] if len(w) > 1 else None
+    wnote = ("First reading" if wd is None else ("Level with " if wd == 0 else f"{'+' if wd > 0 else '−'}{f(abs(wd))} KB on ")
+             + short(dt.date.fromisoformat(w[-2][0]))) if w else ""
+    card_ = reading("speed", "Page speed", "Page speed, ms", "ms", "Site health", CR,
+                    "time to fetch each page; size of each page and the same-site files it references",
+                    dates, v("ms_median"), sub,
+                    [("Average page by file type, KB", st, "What makes up an average page?", "Type", "KB"),
+                     ("Slowest pages, ms", [(p["name"], p["ms"]) for p in sp[:6]], "Which pages are slowest?", "Page", "ms")],
+                    None, "Median time to download the page code across the sitemap pages, in milliseconds. "
+                          "Page size is the page code plus every file on the site it references directly.",
+                    ["Measured from a GitHub server in the United States; visitors in the UAE will see different times.",
+                     "Response time is the page code only; images, scripts, styles and fonts load after it.",
+                     "Uncompressed sizes; the transfer over the network is smaller. A file shared by many pages counts on each page.",
+                     "Google Analytics, which loads after cookies are accepted, is not included."] + once, lower_better=True)
+    card_["pages"] = sp
+    card_["kpis"] = [
+        {"label": "Slowest page", "value": f"{f(sp[0]['ms'])} ms" if sp else "--", "note": sp[0]["name"] if sp else "",
+         "tone": "down" if sp and sp[0]["ms"] >= 1000 else ""},
+        {"label": "Over 1 second", "value": f"{len(over)} pages", "note": f"of {len(sp)}", "tone": "down" if over else "up"},
+        {"label": "Home page", "value": f"{f(home['kb'])} KB" if home else "--", "note": wnote,
+         "tone": "down" if wd and wd > 0 else "up" if wd and wd < 0 else ""},
+        {"label": "Heaviest type", "value": st[0][0] if st else "--",
+         "note": f"{round(100 * st[0][1] / stot)}% of an average page" if st else ""}]
+    if sp:
+        card_["patterns"].append({"type": "peak", "title": f"Slowest page: {sp[0]['name']}",
+                                  "evidence": f"{f(sp[0]['ms'])} ms; {f(sp[0]['kb'])} KB, mostly {sp[0]['types'][0][0].lower()}." if sp[0]["types"] else f"{f(sp[0]['ms'])} ms."})
+    if st:
+        card_["patterns"].append({"type": "concentration", "title": f"{st[0][0]} are {round(100 * st[0][1] / stot)}% of an average page",
+                                  "evidence": f"{f(st[0][1])} of {f(stot)} KB; median page size {f(c['kb_median'])} KB."})
+    return card_
 
 
 def semrush_cards():
@@ -760,8 +835,7 @@ def semrush_cards():
 
 
 # ---------------------------------------------------------------- Cube card
-CARD_NAMES = {"pages": "Site health, Pages live", "broken": "Site health, Broken links", "response": "Site health, Server response time",
-              "weight": "Site health, Home page size", "issues": "Site health, Pages with issues", "refdomains": "Authority, Referring domains",
+CARD_NAMES = {"pages": "Site health, Pages live", "broken": "Site health, Broken links", "speed": "Site health, Page speed", "issues": "Site health, Pages with issues", "refdomains": "Authority, Referring domains",
               "authority": "Authority, Authority score", "impressions": "Google Search, Search impressions", "pageone": "Google Search, Keywords on page one",
               "leads": "Enquiries, Profit Review requests", "whatsapp": "Enquiries, WhatsApp clicks", "tools": "Enquiries, Calculator uses"}
 
@@ -972,11 +1046,24 @@ def next_steps(cards, c, g):
         rules["issues"] = [step(f"Add share images to the {len(c['issues'].get('No share image', []))} pages without one.", "Links shared on WhatsApp and LinkedIn show no picture.", "med", "site")] if c["issues"].get("No share image") else []
         if c["issues"].get("Description over 160 characters"):
             rules["issues"].append(step("Shorten the long descriptions: " + ", ".join(page_name(u) for u in c["issues"]["Description over 160 characters"][:3]) + ".", "Google cuts descriptions at about 160 characters.", "low", "site"))
-    if "response" in by:
-        rules["response"] = [step("No action while the median stays under 500 ms.", f"Median {c['ms_median']} ms.", "low", "site")]
-    if "weight" in by:
-        big = max(c["weight"].items(), key=lambda kv: kv[1])
-        rules["weight"] = [step(f"Minify and split the {big[0].lower()} ({big[1]} KB).", "Largest part of the home page.", "low", "site")]
+    if "speed" in by:
+        sp = c.get("speed_pages", [])
+        slow = [p for p in sp if p["ms"] >= 1000]
+        heavy = max(sp, key=lambda p: p["kb"], default=None)
+        rules["speed"] = []
+        if c["ms_median"] and c["ms_median"] >= 500:
+            rules["speed"].append(step("Bring the median under 500 ms: check server caching of the page code.", f"Median {c['ms_median']} ms.", "high", "site"))
+        if slow:
+            rules["speed"].append(step("Check the slowest pages first: " + "; ".join(p["name"] for p in slow[:3]) + ".",
+                                       f"{len(slow)} of {len(sp)} pages took over a second to answer.", "med", "site"))
+        if heavy and heavy["types"] and heavy["kb"] >= 500:
+            t0 = heavy["types"][0]
+            rules["speed"].append(step(f"Reduce the {t0[0].lower()} on {heavy['name']} ({f(t0[1])} of {f(heavy['kb'])} KB).", "Heaviest page on the site.", "med", "site"))
+        if c["weight"]:
+            big = max(c["weight"].items(), key=lambda kv: kv[1])
+            rules["speed"].append(step(f"Minify and split the home page {big[0].lower()} ({big[1]} KB).", "Largest part of the home page.", "low", "site"))
+        if not rules["speed"]:
+            rules["speed"] = [step("No action while the median stays under 500 ms.", f"Median {c['ms_median']} ms.", "low", "site")]
     for k in ("refdomains", "authority"):
         if k in by:
             rules[k] = [step("Earn one link from a recognised UAE publication or industry body.", "Current links come from low-score blog networks and carry no weight.", "high", "owner"),
@@ -1031,6 +1118,7 @@ def main():
     next_steps(cards, c, g)
     c.pop("robots", None)
     c.pop("urls", None)
+    c.pop("speed_pages", None)
     meta = {"generated": dt.datetime.now(dt.timezone.utc).isoformat(timespec="minutes"),
             "date": iso(TODAY), "notes": notes, "crawl": c, "index": g.get("index"), "launch": iso(LAUNCH)}
     (DATA / "cards.json").write_text(json.dumps({"meta": meta, "cards": cards}, ensure_ascii=False))
