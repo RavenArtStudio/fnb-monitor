@@ -58,6 +58,7 @@ def page_name(path):
     else:
         name = p.strip("/").split("/")[-1].replace("-", " ")
         name = name[:1].upper() + name[1:]
+        name = re.sub(r"\b(uae|vat|kpi|fnb|f&b)\b", lambda m: {"fnb": "FnB", "f&b": "F&B"}.get(m.group(1).lower(), m.group(1).upper()), name, flags=re.I)
     return name + (", Arabic" if ar else "")
 
 
@@ -672,6 +673,13 @@ def crawl():
         speed.append({"name": page_name(o["u"]), "path": o["u"], "ms": o["ms"], "kb": round(sum(t.values())), "n": len(files) + 1,
                       "types": sorted(([k, round(v)] for k, v in t.items() if round(v) > 0), key=lambda x: -x[1]),
                       "files": [[n, k, round(kb)] for n, k, kb in sorted(files, key=lambda x: -x[2])[:4]]})
+    uses = {}
+    for o in ok:
+        for u in {x.split("#")[0] for x in o["res"] if x.startswith(SITE)}:
+            if asize.get(u):
+                uses[u] = uses.get(u, 0) + 1
+    big = max(uses, key=lambda u: asize[u] * uses[u], default=None)
+    top_shared = [urlparse(big).path.rsplit("/", 1)[-1], kind_of(big), round(asize[big]), uses[big]] if big else None
     home = next((p for p in speed if p["path"].rstrip("/") == "/ae"), speed[0] if speed else None)
     weight = {k: v for k, v in home["types"]} if home else {}
     nfiles = home["n"] if home else 1
@@ -703,7 +711,7 @@ def crawl():
         "ms_median": ms[len(ms) // 2] if ms else None, "ms_max": ms[-1] if ms else None,
         "slowest": [[page_name(o["u"]), o["ms"]] for o in slow],
         "weight": weight, "weight_total": sum(weight.values()), "files": nfiles,
-        "speed_pages": speed, "site_types": site_types, "kb_median": kbs[len(kbs) // 2] if kbs else None,
+        "speed_pages": speed, "site_types": site_types, "top_shared": top_shared, "kb_median": kbs[len(kbs) // 2] if kbs else None,
         "missing_from_sitemap": [u.replace(SITE, "") for u in missing],
         "lastmod_share": round(sum(1 for x in lastmods if x) / len(lastmods), 3) if lastmods else 0,
         "lastmod_age_median": sorted(ages)[len(ages) // 2] if ages else None,
@@ -1059,7 +1067,11 @@ def next_steps(cards, c, g):
         if heavy and heavy["types"] and heavy["kb"] >= 500:
             t0 = heavy["types"][0]
             rules["speed"].append(step(f"Reduce the {t0[0].lower()} on {heavy['name']} ({f(t0[1])} of {f(heavy['kb'])} KB).", "Heaviest page on the site.", "med", "site"))
-        if c["weight"]:
+        ts = c.get("top_shared")
+        if ts and ts[3] >= len(sp) / 2 and ts[2] >= 50:
+            rules["speed"].append(step(f"Trim {ts[0]} ({f(ts[2])} KB, loaded on {ts[3]} of {len(sp)} pages).",
+                                       "The largest file most pages load; one change speeds up the whole site.", "med", "site"))
+        elif c["weight"]:
             big = max(c["weight"].items(), key=lambda kv: kv[1])
             rules["speed"].append(step(f"Minify and split the home page {big[0].lower()} ({big[1]} KB).", "Largest part of the home page.", "low", "site"))
         if not rules["speed"]:
