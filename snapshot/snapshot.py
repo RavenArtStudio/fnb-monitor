@@ -58,7 +58,7 @@ def page_name(path):
     else:
         name = p.strip("/").split("/")[-1].replace("-", " ")
         name = name[:1].upper() + name[1:]
-        name = re.sub(r"\b(uae|vat|kpi|fnb|f&b)\b", lambda m: {"fnb": "FnB", "f&b": "F&B"}.get(m.group(1).lower(), m.group(1).upper()), name, flags=re.I)
+        name = re.sub(r"\b(uae|vat|kpi|qsr|fnb|f&b)\b", lambda m: {"fnb": "FnB", "f&b": "F&B"}.get(m.group(1).lower(), m.group(1).upper()), name, flags=re.I)
     return name + (", Arabic" if ar else "")
 
 
