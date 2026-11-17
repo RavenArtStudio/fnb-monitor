@@ -595,6 +595,7 @@ body *{font-weight:400!important}
 .heat-key>span{white-space:nowrap}
 .r1.hm{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)}.r1.hm>.np{max-height:none;position:relative}.r1.hm>.np>div{position:absolute;inset:18px 20px 16px;overflow:auto}.r1.hm .steps{display:flex;flex-direction:column;gap:2px}
 .r3{display:grid;grid-template-columns:repeat(var(--k),minmax(0,1fr));gap:14px}
+.col-trend{fill:none;stroke:var(--ink-3,#9a9a9a);stroke-width:1.6;stroke-dasharray:1.5 4.5;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}.col-dot{fill:var(--ink-3,#9a9a9a);pointer-events:none}
 .rail-item span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .rail-item strong{font-variant-numeric:tabular-nums;color:var(--ink)}
 .rail-item em{font-style:normal;font-size:12px;text-align:right;font-variant-numeric:tabular-nums;color:var(--ink-4)}
@@ -759,7 +760,7 @@ button.heat-row:hover{background:var(--surface-2);color:var(--ink)}
 <body>
 <div id="toast" role="status" aria-live="polite"></div>
 <main class="app">
- <div class="topbar"><span class="snap" id="snap"></span><span>FNB Performance, Checkpoint 21</span></div>
+ <div class="topbar"><span class="snap" id="snap"></span><span>FNB Performance, Checkpoint 22</span></div>
  <nav class="rail" id="rail" role="tablist" aria-label="Cards" aria-orientation="vertical"></nav>
  <div><section class="ws" id="ws" role="tabpanel" aria-live="polite"></section><p class="demo-note" id="note"></p></div>
 </main>
@@ -931,8 +932,9 @@ function colChart(id,d){const frame=el(id),ser=Object.values(d.main.series)[0],c
  const top=niceTop(Math.max(1,...cur,...prev)*1.15),y=v=>T+(1-v/top)*(H-T-B),slot=(W-L-R)/n,bw=Math.min(30,slot*.34);
  const grid=[0,.25,.5,.75,1].map(t=>`<line class="chart-grid" x1="${L}" x2="${W-R}" y1="${y(top*t).toFixed(1)}" y2="${y(top*t).toFixed(1)}"/><text class="chart-axis" x="${L-12}" y="${(y(top*t)+4).toFixed(1)}" text-anchor="end">${fmt(top*t)}</text>`).join('');
  let bars='';cur.forEach((v,i)=>{const cx=L+slot*(i+.5),h=Math.max(v?2:0,y(0)-y(v));
-  bars+=`<g><title>${esc(nice(dates[i]))}: ${fmt(v)}${prev.length?`, ${esc(d.main.tipLabel||'previous')} ${fmt(prev[i])}`:''}</title><rect class="col-cur" x="${(cx-bw/2).toFixed(1)}" y="${(y(0)-h).toFixed(1)}" width="${bw.toFixed(1)}" height="${h.toFixed(1)}" rx="4"/>${prev.length?`<line class="col-prev" x1="${(cx-bw/2-5).toFixed(1)}" x2="${(cx+bw/2+5).toFixed(1)}" y1="${y(prev[i]).toFixed(1)}" y2="${y(prev[i]).toFixed(1)}"/>`:''}${v?`<text class="col-val" x="${cx.toFixed(1)}" y="${(y(v)-7).toFixed(1)}" text-anchor="middle">${fmt(v)}</text>`:''}<text class="chart-axis" x="${cx.toFixed(1)}" y="${H-6}" text-anchor="middle">${esc(shortDate(dates[i]))}</text></g>`;});
- frame.innerHTML=`<svg role="img" aria-label="Daily ${esc(d.unit)} as columns, dashed marks are ${esc(d.main.tipLabel||'the previous period')}" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}">${grid}${bars}</svg>`;}
+  bars+=`<g><title>${esc(nice(dates[i]))}: ${fmt(v)}${prev.length?`, ${esc(d.main.tipLabel||'previous')} ${fmt(prev[i])}`:''}</title><rect class="col-cur" x="${(cx-bw/2).toFixed(1)}" y="${(y(0)-h).toFixed(1)}" width="${bw.toFixed(1)}" height="${h.toFixed(1)}" rx="4"/>${v?`<text class="col-val" x="${cx.toFixed(1)}" y="${(y(v)-7).toFixed(1)}" text-anchor="middle">${fmt(v)}</text>`:''}<text class="chart-axis" x="${cx.toFixed(1)}" y="${H-6}" text-anchor="middle">${esc(shortDate(dates[i]))}</text></g>`;});
+ const pts=prev.map((v,i)=>`${(L+slot*(i+.5)).toFixed(1)},${y(v).toFixed(1)}`);const pl=prev.length?`<polyline class="col-trend" points="${pts.join(' ')}"/>${pts.map(q=>{const[a,b]=q.split(',');return `<circle class="col-dot" cx="${a}" cy="${b}" r="2.2"/>`}).join('')}`:'';
+ frame.innerHTML=`<svg role="img" aria-label="Daily ${esc(d.unit)} as columns, dotted line is ${esc(d.main.tipLabel||'the previous period')}" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}">${grid}${bars}${pl}</svg>`;}
 
 /* ---- heatmap with in-place sub-metrics ---- */
 function heatmap(id,d){const f=el(id),h=d.heat,n=h.cols.length;const cols=`minmax(0,1fr) repeat(${n},minmax(40px,64px)) 44px`;
@@ -985,7 +987,7 @@ function openSheet(bid,opener){const d=BY[cur],r=d?.heat?.rows.find(x=>x.id===bi
 /* ---- workspace ---- */
 function chartHeading(d){if(d.kind==='heatmap')return `Blocks against the ${esc(d.heat.stage)} stage target<span>colour shows the latest snapshot against target</span>`;
  const p=d.main.previous;const label=d.main.tipLabel||'previous period';
- if(isCols(d))return `Day by day<span>${p?`dashed marks: ${esc(label.toLowerCase())}`:''}</span>`;
+ if(isCols(d))return `Day by day<span>${p?`dotted line: ${esc(label.toLowerCase())}`:''}</span>`;
  return `${esc(d.main.heading||'Day by day')}<span>${p?`dashed line: ${esc((d.main.previousLabel||label).toLowerCase())}`:''}</span>`;}
 function isCols(d){if(d.level||d.kind)return false;const v=[...Object.values(d.main.series)[0].map(p=>p?.value||0),...(d.main.previous||[]).map(p=>p?.value||0)];return Math.max(...v)<=10;}
 function drawCard(animate=true){const d=BY[cur];if(!d)return;const ws=el('ws');const B=(d.breakdowns||[]).filter(x=>x.rows&&x.rows.length).slice(0,3);
