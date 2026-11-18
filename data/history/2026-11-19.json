@@ -1,0 +1,35 @@
+{
+ "date": "2026-11-19",
+ "crawl": {
+  "pages_ok": 127,
+  "broken_n": 0,
+  "issue_pages": 22,
+  "ms_median": 388,
+  "weight_total": 644
+ },
+ "cube": {
+  "overall": 6.57,
+  "blocks": {
+   "tech": 9.16,
+   "onpage": 9.22,
+   "content": 7.65,
+   "schema": 8.38,
+   "entity": 3.73,
+   "offsite": 0.6,
+   "geo": 8.15,
+   "aio": 2.65,
+   "arabic": 5.62,
+   "measure": 5.9
+  }
+ },
+ "leads": 1,
+ "whatsapp": 1,
+ "tools": 0,
+ "sessions": 50,
+ "engaged": 34,
+ "newvisitors": 10,
+ "views": 161,
+ "impressions": 41,
+ "searchclicks": 1,
+ "pageone": 0
+}
