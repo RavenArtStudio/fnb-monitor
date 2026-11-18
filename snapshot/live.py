@@ -10,6 +10,8 @@ before each) can be built from it. Writes, into the folder given as the first ar
 Both are published on the `live` branch as one overwritten commit, so the repo does not grow.
 Realtime has no session, engagement, traffic-source, entry-page or host-name fields: sessions are
 counted from session_start events, new visitors from first_visit, and Engaged sessions has no live view.
+Realtime will not combine eventName with unifiedScreenName (checked 19 Nov), so pages come from
+screenPageViews by page title, and the enquiry events are split by country and device instead.
 """
 import datetime as dt
 import json
@@ -51,29 +53,38 @@ def inlist(names):
     return {"filter": {"fieldName": "eventName", "inListFilter": {"values": names}}}
 
 
+ENQ = ["generate_lead", "whatsapp_click", "tool_used"]
+
+
 def read_minutes(sess, now):
-    """Realtime rows -> {minute key: record}. minutesAgo 00 is the current minute, still filling."""
+    """Realtime rows -> {minute key: record}. minutesAgo 00 is the current minute, still filling.
+    Only the first request is essential; the breakdowns are skipped with a warning if Google refuses them."""
     rec = {}
     def slot(ago):
         k = zkey(now - dt.timedelta(minutes=int(ago)))
-        return rec.setdefault(k, {"e": {}, "sc": {}, "sd": {}, "nc": {}, "pp": {}, "ep": {}})
+        return rec.setdefault(k, {"e": {}, "sc": {}, "sd": {}, "nc": {}, "pp": {}, "ec": {}, "ed": {}})
     add = lambda d, k, v: d.__setitem__(k, d.get(k, 0) + int(v))
+    def soft(*a):
+        try:
+            return realtime(sess, *a)
+        except RuntimeError as e:
+            print("Realtime breakdown skipped:", str(e)[:200], file=sys.stderr)
+            return []
     for (ago, name), (n,) in realtime(sess, ["minutesAgo", "eventName"], ["eventCount"]):
         add(slot(ago)["e"], name, n)
-    for (ago, name, cty, dev), (n,) in realtime(sess, ["minutesAgo", "eventName", "country", "deviceCategory"], ["eventCount"], inlist(["session_start", "first_visit"])):
+    for (ago, name, cty, dev), (n,) in soft(["minutesAgo", "eventName", "country", "deviceCategory"], ["eventCount"], inlist(["session_start", "first_visit"] + ENQ)):
         r = slot(ago)
         if name == "session_start":
             add(r["sc"], S.tidy(cty), n)
             add(r["sd"], S.tidy(dev), n)
-        else:
+        elif name == "first_visit":
             add(r["nc"], S.tidy(cty), n)
-    for (ago, name, scr), (n,) in realtime(sess, ["minutesAgo", "eventName", "unifiedScreenName"], ["eventCount"], inlist(["page_view", "generate_lead", "whatsapp_click", "tool_used"])):
-        r = slot(ago)
-        if name == "page_view":
-            add(r["pp"], title(scr), n)
         else:
-            add(r["ep"].setdefault(name, {}), title(scr), n)
-    au = realtime(sess, [], ["activeUsers"])
+            add(r["ec"].setdefault(name, {}), S.tidy(cty), n)
+            add(r["ed"].setdefault(name, {}), S.tidy(dev), n)
+    for (ago, scr), (n,) in soft(["minutesAgo", "unifiedScreenName"], ["screenPageViews"]):
+        add(slot(ago)["pp"], title(scr), n)
+    au = soft([], ["activeUsers"])
     active = int(au[0][1][0]) if au else 0
     return {k: {a: b for a, b in v.items() if b} for k, v in rec.items()}, active
 
@@ -160,7 +171,8 @@ def build(log, now, active):
         return items
 
     ev = lambda name: (lambda r: r.get("e", {}).get(name, 0))
-    epage = lambda name: (lambda r: r.get("ep", {}).get(name, {}))
+    ecty = lambda name: (lambda r: r.get("ec", {}).get(name, {}))
+    edev = lambda name: (lambda r: r.get("ed", {}).get(name, {}))
     feed = ("Google Analytics Realtime: events of the last 30 minutes, saved every 15 minutes. "
             "Longer live windows are built from those saved minutes.")
     nohost = "The live feed has no traffic source, entry page or host name, so visits from development hosts count here too."
@@ -171,7 +183,7 @@ def build(log, now, active):
         early = zkey(now) if wkey == "30m" else None
         common = dict(keys=keys, step_min=step, launch=S.LAUNCH, sub_source=f"{S.GA}, live", early_from=early)
         defs = {
-            "sessions": ("Website sessions", "sessions", "session_start", "eventName = session_start, eventCount, country, deviceCategory, unifiedScreenName",
+            "sessions": ("Website sessions", "sessions", "session_start", "eventName = session_start, eventCount, country, deviceCategory; screenPageViews by unifiedScreenName",
                          [("Country", agg(cur_b, lambda r: r.get("sc", {})), "Which countries are they in?", "Country"),
                           ("Device", agg(cur_b, lambda r: r.get("sd", {})), "What are they browsing on?", "Device"),
                           ("Pages viewed", agg(cur_b, lambda r: r.get("pp", {})), "Which pages are they reading?", "Page title")],
@@ -181,19 +193,23 @@ def build(log, now, active):
                             [("Country of new visitors", agg(cur_b, lambda r: r.get("nc", {})), "Where are new visitors from?", "Country")],
                             "First visits, counted from first_visit events in Google Analytics' live feed.",
                             ["Team members count as new on each new device until internal traffic is filtered.", nohost]),
-            "views": ("Page views", "views", "page_view", "eventName = page_view, eventCount, unifiedScreenName",
+            "views": ("Page views", "views", "page_view", "eventName = page_view, eventCount; screenPageViews by unifiedScreenName",
                       [("By page", agg(cur_b, lambda r: r.get("pp", {})), "Which pages are viewed most?", "Page title")],
                       "Every page load, counted from page_view events in Google Analytics' live feed.", [nohost]),
-            "leads": ("Profit Review requests", "requests", "generate_lead", "eventName = generate_lead, eventCount, unifiedScreenName",
-                      [("Page the request was sent from", agg(cur_b, epage("generate_lead")), "Which page were requests sent from?", "Page title")],
+            "leads": ("Profit Review requests", "requests", "generate_lead", "eventName = generate_lead, eventCount, country, deviceCategory",
+                      [("Country", agg(cur_b, ecty("generate_lead")), "Which countries were requests sent from?", "Country"),
+                       ("Device", agg(cur_b, edev("generate_lead")), "Which devices were they sent from?", "Device")],
                       "Count of the generate_lead event the site sends when the Profit Review form is sent successfully.",
                       ["Requests made by phone, email or WhatsApp are not counted here.", nohost]),
-            "whatsapp": ("WhatsApp clicks", "clicks", "whatsapp_click", "eventName = whatsapp_click, eventCount, unifiedScreenName",
-                         [("Page the click came from", agg(cur_b, epage("whatsapp_click")), "Which pages produce WhatsApp clicks?", "Page title")],
+            "whatsapp": ("WhatsApp clicks", "clicks", "whatsapp_click", "eventName = whatsapp_click, eventCount, country, deviceCategory",
+                         [("Country", agg(cur_b, ecty("whatsapp_click")), "Where do WhatsApp clicks come from?", "Country"),
+                          ("Device", agg(cur_b, edev("whatsapp_click")), "Which devices click WhatsApp?", "Device")],
                          "Count of the whatsapp_click event the site sends.", ["A click opens WhatsApp; it does not prove a message was sent.", nohost]),
-            "tools": ("Calculator uses", "uses", "tool_used", "eventName = tool_used, eventCount, unifiedScreenName",
-                      [("By calculator page", agg(cur_b, epage("tool_used")), "Which calculators are used most?", "Page title")],
-                      "Count of the tool_used event the site sends when a calculator is used.", [nohost]),
+            "tools": ("Calculator uses", "uses", "tool_used", "eventName = tool_used, eventCount, country, deviceCategory",
+                      [("Country", agg(cur_b, ecty("tool_used")), "Where are calculators used from?", "Country"),
+                       ("Device", agg(cur_b, edev("tool_used")), "Which devices use them?", "Device")],
+                      "Count of the tool_used event the site sends when a calculator is used.",
+                      ["The live feed cannot split events by page, so the calculator name shows only in the 7-day view.", nohost]),
         }
         for cid, (label, unit, name, fields, bds, how, cav) in defs.items():
             cur, part = values(cur_b, ev(name))
