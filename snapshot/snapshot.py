@@ -879,9 +879,15 @@ def band(score, target):
 
 def cube_card(cs, cube, hist, g):
     audit_day = cube["audit_date"]
-    days = [d for d in sorted(hist) if hist[d].get("cube")][-7:]
-    cols = [audit_day] + days
-    colname = ["Audit"] + [short(dt.date.fromisoformat(d)) for d in days]
+    all_days = [d for d in sorted(hist) if hist[d].get("cube")][-63:]   # heatmap: rolling history, 7 days in view
+    days = all_days[-7:]
+    cols = [audit_day] + days                                            # charts and popups: audit plus the last 7
+    hcols = [audit_day] + all_days
+    colname = ["Audit"] + [short(dt.date.fromisoformat(d)) for d in all_days]
+    import cube as cube_mod
+    group = {b["id"]: b["group"] for b in cube["blocks"]}
+    def tgt(d, bid):   # target of the stage that day was in
+        return cube["target_groups"][group[bid]][cube_mod.stage_of(cube, dt.date.fromisoformat(d))[0]]
     def val(d, bid=None):
         if d == audit_day:
             return cube["audit_overall"] if bid is None else next(b["audit"] for b in cs["blocks"] if b["id"] == bid)
@@ -890,8 +896,9 @@ def cube_card(cs, cube, hist, g):
     lost = lambda b: max(0.0, b["target"] - b["score"]) * b["weight"] / 100
     order = sorted(cs["blocks"], key=lambda b: (-lost(b), -b["weight"]))
     rows = [{"id": b["id"], "name": b["name"], "weight": b["weight"], "target": b["target"],
-             "cells": [val(d, b["id"]) for d in cols],
-             "bands": [band(val(d, b["id"]) or 0, b["target"]) for d in cols],
+             "cells": [val(d, b["id"]) for d in hcols],
+             "bands": [band(val(d, b["id"]) or 0, tgt(d, b["id"])) for d in hcols],
+             "targets": [tgt(d, b["id"]) for d in hcols],
              "subs": [{"name": x_["name"], "weight": x_["weight"], "score": x_["score"], "audit": x_["audit"],
                        "band": band(x_["score"], b["target"]), "measured": x_["source"] == "Measured daily",
                        "evidence": x_["evidence_now"]} for x_ in b["subs"]]} for b in order]
@@ -998,7 +1005,7 @@ def cube_card(cs, cube, hist, g):
                       "deltaText": ("Level with" if x == 0 else f"{'+' if x > 0 else '−'}{abs(x):.2f} on") + " the Nov 13 audit",
                       "deltaTone": "up" if x > 0 else "down" if x < 0 else "",
                       "railText": "level" if x == 0 else f"{'+' if x > 0 else '−'}{abs(x):.1f}", "railTone": "up" if x > 0 else "down" if x < 0 else ""},
-            "heat": {"cols": colname, "rows": rows, "stage": cs["stage"], "target": cs["target"]},
+            "heat": {"cols": colname, "dates": hcols, "stages": cube["stages"], "rows": rows, "stage": cs["stage"], "target": cs["target"]},
             "blocks": {b["id"]: block_obj(b) for b in cs["blocks"]},
             "health": [{"site": "FNB Performance", "statusLabel": "Live", "through": cols[-1], "via": "Cube"}],
             "main": {"dates": cols, "heading": "Overall score by snapshot", "previousLabel": "the stage target",
@@ -1011,7 +1018,7 @@ def cube_card(cs, cube, hist, g):
             "patterns": pats, "questions": q,
             "raw": {"columns": ["Block", "Weight", "Score", "Target", "Audit"],
                     "rows": [[b["name"], b["weight"], b["score"], b["target"], b["audit"]] for b in order]},
-            "howCalculated": "Ten blocks with fixed weights, each the weighted mean of its sub-metrics, 0 to 10. The overall score is the weighted sum. Targets follow the stage counted from the Nov 15 launch."}
+            "howCalculated": "Ten blocks with fixed weights, each the weighted mean of its sub-metrics, 0 to 10. The overall score is the weighted sum. Targets follow the stage counted from the Nov 15 launch; in the heatmap each day is coloured against the target of its own stage."}
 
 
 # ---------------------------------------------------------------- Next steps for each card
@@ -1151,7 +1158,7 @@ def main():
     (HIST / f"{iso(TODAY)}.json").write_text(json.dumps(today, indent=1))
     hist = history()
 
-    cards = [cube_card(cs, cube, hist, g)] + google["ga"] + google["sc"] + crawl_cards(c, hist) + semrush_cards()
+    cards = [cube_card(cs, cube, history(days=70), g)] + google["ga"] + google["sc"] + crawl_cards(c, hist) + semrush_cards()
     next_steps(cards, c, g)
     c.pop("robots", None)
     c.pop("urls", None)

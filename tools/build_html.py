@@ -45,7 +45,7 @@ body *{font-weight:400!important}
 .rail-item[aria-selected="true"]{background:var(--surface-2);color:var(--ink)}
 *{scrollbar-width:none!important;-ms-overflow-style:none!important}*::-webkit-scrollbar{display:none!important;width:0!important;height:0!important}
 .heat-key>span{white-space:nowrap}
-.r1.hm{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)}.r1.hm>.np{max-height:none;position:relative}.r1.hm>.np>div{position:absolute;inset:18px 20px 16px;overflow:auto}.r1.hm .steps{display:flex;flex-direction:column;gap:2px}
+.r1.hm{grid-template-columns:minmax(0,1.7fr) minmax(0,1fr)}.r1.hm>.np{max-height:none;position:relative}.r1.hm>.np>div{position:absolute;inset:18px 20px 16px;overflow:auto}.r1.hm .steps{display:flex;flex-direction:column;gap:2px}
 .r3{display:grid;grid-template-columns:repeat(var(--k),minmax(0,1fr));gap:14px}
 .col-trend{fill:none;stroke:var(--ink-3,#9a9a9a);stroke-width:1.6;stroke-dasharray:1.5 4.5;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}.col-dot{fill:var(--ink-3,#9a9a9a);pointer-events:none}
 .rail-item span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -177,6 +177,32 @@ button.heat-row:hover{background:var(--surface-2);color:var(--ink)}
 .cell.good{background:color-mix(in srgb,var(--good) 30%,var(--surface))}.cell.warn{background:color-mix(in srgb,var(--warn) 26%,var(--surface))}.cell.bad{background:color-mix(in srgb,var(--bad) 28%,var(--surface))}
 .cell.now.good{background:color-mix(in srgb,var(--good) 58%,var(--surface));color:#1d1e20}.cell.now.warn{background:color-mix(in srgb,var(--warn) 52%,var(--surface));color:#1d1e20}.cell.now.bad{background:color-mix(in srgb,var(--bad) 58%,var(--surface));color:#1d1e20}
 .cell.none{background:var(--surface-2);color:var(--ink-4)}
+/* heatmap, Checkpoint 24: 7 days in view, earlier days scroll left behind pinned names, audit and target */
+.hscroll{overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain}
+.hscroll.drag{cursor:grabbing;user-select:none}
+.hgrid{position:relative;display:flex;flex-direction:column;gap:2px;width:max-content;min-width:100%}
+.hgrid .heat-row{--hb:var(--surface);grid-template-columns:calc(var(--nw) + 6px + var(--cw)) repeat(var(--n),var(--cw)) 52px;column-gap:6px;padding:0}
+.hgrid button.heat-row:hover{--hb:var(--surface-2)}
+.hgrid .lead{position:sticky;left:0;z-index:2;align-self:stretch;display:grid;grid-template-columns:minmax(0,1fr) var(--cw);gap:6px;align-items:center;padding-left:8px;background:var(--hb);border-radius:8px 0 0 8px;box-shadow:6px 0 0 var(--hb),-3px 0 0 var(--surface);transition:background .2s var(--ease),box-shadow .2s var(--ease)}
+.hgrid .tg{position:sticky;right:0;z-index:2;align-self:stretch;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;background:var(--hb);border-radius:0 8px 8px 0;box-shadow:-6px 0 0 var(--hb),3px 0 0 var(--surface);transition:background .2s var(--ease),box-shadow .2s var(--ease)}
+.hgrid .lead::after,.hgrid .tg::before{content:"";position:absolute;top:0;bottom:0;width:26px;pointer-events:none;opacity:0;transition:opacity .3s var(--ease)}
+.hgrid .lead::after{right:-32px;background:linear-gradient(90deg,var(--hb),transparent)}
+.hgrid .tg::before{left:-32px;background:linear-gradient(270deg,var(--hb),transparent)}
+.heat.more-l .hgrid .lead::after,.heat.more-r .hgrid .tg::before{opacity:1}
+.hgrid .heat-row.stage .lead::after,.hgrid .heat-row.stage .tg::before{display:none}
+.hgrid .heat-row.head .lead span:first-child{text-align:left}.hgrid .heat-row.head .hc{text-align:center}.hgrid .heat-row.head .tg{text-align:right}
+.hgrid .hc.fut{opacity:.55}
+.hgrid .heat-row.head .tg,.hgrid .heat-row.stage .tg{font-size:11.5px;color:var(--ink-4)}
+.hgrid .stg .sl{position:sticky;left:calc(var(--nw) + 13px + var(--cw))}
+.r1.hm>.np>div.fade-b{-webkit-mask-image:linear-gradient(180deg,#000 calc(100% - 44px),transparent);mask-image:linear-gradient(180deg,#000 calc(100% - 44px),transparent)}
+.hgrid .heat-row.stage{height:16px;font-size:11px;color:var(--ink-4)}
+.hgrid .stg{display:flex;align-items:center;gap:8px;min-width:0;white-space:nowrap;overflow:clip;padding-left:1px}
+.hgrid .stg::after{content:"";flex:1;height:1px;background:var(--line-soft)}
+.hgrid .stg.cur{color:var(--ink-3)}
+.hgrid .sline{position:absolute;top:2px;bottom:0;width:1px;background:var(--line);pointer-events:none;z-index:1}
+.cell.slot{background:transparent;box-shadow:0 0 0 1px var(--line-soft) inset}
+.heat-key .hint{color:var(--ink-3)}
+@media (max-width:1100px){.r1.hm{grid-template-columns:minmax(0,1fr)}.r1.hm>.np>div{position:static}.heat-key{flex-wrap:wrap;row-gap:4px}}
 /* popups (compact, sectioned) */
 .detail.sheet{width:min(820px,calc(100vw - 48px));height:fit-content;max-height:min(860px,calc(100vh - 48px))}
 .detail.sheet .detail-inner{overflow:auto;scrollbar-width:none}
@@ -344,13 +370,40 @@ function colChart(id,d){const frame=el(id),ser=Object.values(d.main.series)[0],c
  const pts=prev.map((v,i)=>`${(L+slot*(i+.5)).toFixed(1)},${y(v).toFixed(1)}`);const pl=prev.length?`<polyline class="col-trend" points="${pts.join(' ')}"/>${pts.map(q=>{const[a,b]=q.split(',');return `<circle class="col-dot" cx="${a}" cy="${b}" r="2.2"/>`}).join('')}`:'';
  frame.innerHTML=`<svg role="img" aria-label="Daily ${esc(d.unit)} as columns, dotted line is ${esc(d.main.tipLabel||'the previous period')}" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}">${grid}${bars}${pl}</svg>`;}
 
-/* ---- heatmap with in-place sub-metrics ---- */
-function heatmap(id,d){const f=el(id),h=d.heat,n=h.cols.length;const cols=`minmax(0,1fr) repeat(${n},minmax(40px,64px)) 44px`;
- const one=(v)=>v===null||v===undefined?'--':Number(v).toFixed(1);
- const head=`<div class="heat-row head" style="grid-template-columns:${cols}"><span>Block, weight</span>${h.cols.map(c=>`<span>${esc(c)}</span>`).join('')}<span>Target</span></div>`;
- const rows=h.rows.map(r=>`<button class="heat-row" style="grid-template-columns:${cols}" data-sheet="${esc(r.id)}" aria-haspopup="dialog"><span class="nm">${esc(r.name)}<small>${r.weight}%%</small></span>${r.cells.map((v,i)=>`<span class="cell ${v===null||v===undefined?'none':r.bands[i]}${i===n-1?' now':''}" title="${esc(h.cols[i])}: ${one(v)}">${one(v)}</span>`).join('')}<span class="tg">${one(r.target)}</span></button>`).join('');
- const key=`<div class="heat-key"><span><i class="good"></i>On target</span><span><i class="warn"></i>Within 1.5</span><span><i class="bad"></i>Further below</span><span style="margin-left:auto">Select a block for detail</span></div>`;
- f.innerHTML=`<div class="heat">${head}${rows}${key}</div>`;}
+/* ---- heatmap: names and audit pinned left, target pinned right; 7 days in view, earlier days scroll left ---- */
+let HS=0;
+const addDays=(iso,n)=>{const t=new Date(iso.slice(0,10)+'T12:00:00Z');t.setUTCDate(t.getUTCDate()+n);return t.toISOString().slice(0,10);};
+function heatmap(id,d){const f=el(id),h=d.heat,one=(v)=>v===null||v===undefined?'--':Number(v).toFixed(1);
+ const nd=h.cols.length-1,iso=(h.dates||d.main.dates||[]),days=iso.slice(1,1+nd),L=META.launch||'2026-11-15';
+ const stages=h.stages||['Launch','Establish','Grow','Mature'].map((nm,i)=>({name:nm,until:i<3?addDays(L,7*i+6):null}));
+ const stageOf=(x)=>(stages.find(s=>!s.until||x<=s.until)||stages[stages.length-1]).name;
+ const fut=[];for(let k=days.length;k<7;k++)fut.push(addDays(days[days.length-1]||L,k-days.length+1));
+ const all=[...days,...fut],N=all.length,now=days.length-1,st=all.map(stageOf),curStage=st[Math.max(0,now)];
+ const bnd=all.map((x,i)=>i>0&&st[i]!==st[i-1]);
+ const segs=[];all.forEach((x,i)=>{if(i===0||bnd[i])segs.push({name:st[i],k:1,i});else segs[segs.length-1].k++;});
+ const stageRow=`<div class="heat-row stage" aria-hidden="true"><span class="lead"></span>${segs.map(g=>`<span class="stg${g.name===curStage?' cur':''}" style="grid-column:span ${g.k}"><span class="sl">${esc(g.name)}</span></span>`).join('')}<span class="tg"></span></div>`;
+ const head=`<div class="heat-row head"><span class="lead"><span>Block, weight</span><span class="hc">Audit</span></span>${all.map((x,i)=>`<span class="hc${i>now?' fut':''}">${esc(i<=now?h.cols[i+1]:shortDate(x))}</span>`).join('')}<span class="tg">Target</span></div>`;
+ const rows=h.rows.map(r=>{const tg=(i)=>(r.targets&&r.targets[i]!=null)?r.targets[i]:r.target;
+  const audit=`<span class="cell ${r.cells[0]==null?'none':r.bands[0]}" title="Audit, Nov 13: ${one(r.cells[0])}">${one(r.cells[0])}</span>`;
+  const cells=all.map((x,i)=>{if(i>now)return `<span class="cell slot" title="${esc(shortDate(x))}: next snapshots"></span>`;const v=r.cells[i+1];
+   return `<span class="cell ${v===null||v===undefined?'none':r.bands[i+1]}${i===now?' now':''}" title="${esc(h.cols[i+1])}: ${one(v)}, ${esc(st[i])} target ${one(tg(i+1))}">${one(v)}</span>`;}).join('');
+  return `<button class="heat-row" data-sheet="${esc(r.id)}" aria-haspopup="dialog"><span class="lead"><span class="nm">${esc(r.name)}<small>${r.weight}%%</small></span>${audit}</span>${cells}<span class="tg">${one(r.target)}</span></button>`;}).join('');
+ const lines=all.map((x,i)=>bnd[i]?`<i class="sline" style="left:calc(var(--nw) + 6px + var(--cw) + 6px + ${i} * (var(--cw) + 6px) - 3.5px)"></i>`:'').join('');
+ const key=`<div class="heat-key"><span><i class="good"></i>On target</span><span><i class="warn"></i>Within 1.5</span><span><i class="bad"></i>Further below</span><span class="hint" hidden>Earlier days to the left</span><span style="margin-left:auto">Select a block for detail</span></div>`;
+ f.innerHTML=`<div class="heat"><div class="hscroll"><div class="hgrid" style="--n:${N}">${lines}${stageRow}${head}${rows}</div></div>${key}</div>`;
+ const box=f.querySelector('.heat'),sc=f.querySelector('.hscroll'),g=f.querySelector('.hgrid'),hint=f.querySelector('.hint');
+ const W=sc.clientWidth,cw=Math.max(40,Math.min(66,Math.floor((W-106-210)/8))),nw=Math.max(140,W-106-8*cw);
+ g.style.setProperty('--cw',cw+'px');g.style.setProperty('--nw',nw+'px');
+ const max=()=>Math.max(0,sc.scrollWidth-sc.clientWidth);
+ const mark=()=>{const l=sc.scrollLeft>1,r=max()-sc.scrollLeft>1;box.classList.toggle('more-l',l);box.classList.toggle('more-r',r);hint.textContent=l?'Earlier days to the left':r?'Later days to the right':'';HS=max()-sc.scrollLeft;};
+ hint.hidden=max()<1;if(!hint.hidden){hint.style.marginLeft='auto';hint.nextElementSibling.style.marginLeft='16px';}
+ sc.scrollLeft=Math.max(0,max()-HS);mark();sc.addEventListener('scroll',mark,{passive:true});
+ sc.addEventListener('wheel',e=>{if(max()<1)return;const dx=Math.abs(e.deltaX)>Math.abs(e.deltaY)?e.deltaX:e.deltaY,nx=Math.max(0,Math.min(max(),sc.scrollLeft+dx));if(nx===sc.scrollLeft)return;e.preventDefault();sc.scrollLeft=nx;},{passive:false});
+ let x0=null,l0=0,moved=false;
+ sc.addEventListener('pointerdown',e=>{if(e.pointerType!=='mouse'||e.button!==0||max()<1)return;x0=e.clientX;l0=sc.scrollLeft;moved=false;});
+ sc.addEventListener('pointermove',e=>{if(x0===null)return;const dx=e.clientX-x0;if(!moved&&Math.abs(dx)>4){moved=true;sc.setPointerCapture(e.pointerId);sc.classList.add('drag');}if(moved)sc.scrollLeft=l0-dx;});
+ const end=()=>{x0=null;sc.classList.remove('drag');};sc.addEventListener('pointerup',end);sc.addEventListener('pointercancel',end);
+ sc.addEventListener('click',e=>{if(moved){e.stopPropagation();e.preventDefault();moved=false;}},true);}
 
 /* ---- block popup ---- */
 const PILL=(tone,t)=>`<span class="pill ${tone}">${esc(t)}</span>`;
@@ -393,7 +446,7 @@ function openSheet(bid,opener){const d=BY[cur],r=d?.heat?.rows.find(x=>x.id===bi
  requestAnimationFrame(()=>{scrim.classList.add('on');panel.classList.add('on');});body.focus({preventScroll:true});}
 
 /* ---- workspace ---- */
-function chartHeading(d){if(d.kind==='heatmap')return `Blocks against the ${esc(d.heat.stage)} stage target<span>colour shows the latest snapshot against target</span>`;
+function chartHeading(d){if(d.kind==='heatmap')return `Blocks against the ${esc(d.heat.stage)} stage target<span>colour shows each day against its stage target</span>`;
  const p=d.main.previous;const label=d.main.tipLabel||'previous period';
  if(isCols(d))return `Day by day<span>${p?`dotted line: ${esc(label.toLowerCase())}`:''}</span>`;
  return `${esc(d.main.heading||'Day by day')}<span>${p?`dashed line: ${esc((d.main.previousLabel||label).toLowerCase())}`:''}</span>`;}
@@ -408,7 +461,7 @@ function drawCard(animate=true){const d=BY[cur];if(!d)return;const ws=el('ws');c
  <div class="r2${B[0]?' has3':''}"><aside class="panel np">${nextHTML(d)}</aside>${B[0]?bdPanel(B[0]):''}</div>`
  :`<div class="r1" style="--k:${Math.min(2,B.length)}"><section class="panel"><h3 class="ph">${chartHeading(d)}</h3><div id="analyticsChart" class="chart-frame ws-chart"></div></section>${B.slice(0,2).map(bdPanel).join('')}</div>
  <div class="r2${B[2]?' has3':''}"><aside class="panel np">${nextHTML(d)}</aside>${B[2]?bdPanel(B[2]):''}</div>`}`;
- if(d.kind==='heatmap')heatmap('analyticsChart',d);
+ if(d.kind==='heatmap'){heatmap('analyticsChart',d);const nb=ws.querySelector('.r1.hm>.np>div');if(nb){const fb=()=>nb.classList.toggle('fade-b',nb.scrollHeight-nb.clientHeight-nb.scrollTop>2);fb();nb.addEventListener('scroll',fb,{passive:true});}}
  else if(isCols(d)){colChart('analyticsChart',d);launchMark('analyticsChart',d,'cols');earlyMark('analyticsChart',d,'cols');}
  else{const key=Object.keys(d.main.series)[0];lineChart('analyticsChart',{dates:d.main.dates,series:d.main.series,unit:d.unit,animate,ghost:d.main.previous?{[key]:d.main.previous}:null,ghostLabel:d.main.tipLabel||'Previous period'});launchMark('analyticsChart',d,'line');earlyMark('analyticsChart',d,'line');}
  fillBars(ws);}
