@@ -15,6 +15,7 @@ import json
 import os
 import re
 import sys
+import threading
 import time
 from html.parser import HTMLParser
 from pathlib import Path
@@ -580,13 +581,37 @@ def _json_ok(x):
         return False
 
 
+# Pacing (18 Nov 2026): every request to the site goes through one shared limiter, so the crawl never sends more
+# than about 3 requests a second however many threads run. Unpaced, six threads sent 20-25 a second and pushed the
+# hosting account over its limit of 20 new database connections a second (17 Nov 21:19 and 18 Nov 03:07 UTC).
+# The wait is taken before the timer starts, so the response times on the cards are unchanged.
+PACE_S = max(0.0, float(os.environ.get("CRAWL_PACE_S", "0.35")))
+_pace_lock = threading.Lock()
+_next_at = [0.0]
+
+
+def _pace():
+    with _pace_lock:
+        now = time.monotonic()
+        wait = _next_at[0] - now
+        _next_at[0] = max(now, _next_at[0]) + PACE_S
+    if wait > 0:
+        time.sleep(wait)
+
+
 def fetch(url):
-    t = time.perf_counter()
-    try:
-        r = requests.get(url, headers={"User-Agent": UA}, timeout=30, allow_redirects=True)
-        return r, round((time.perf_counter() - t) * 1000)
-    except requests.RequestException:
-        return None, round((time.perf_counter() - t) * 1000)
+    for attempt in range(2):
+        _pace()
+        t = time.perf_counter()
+        try:
+            r = requests.get(url, headers={"User-Agent": UA}, timeout=30, allow_redirects=True)
+        except requests.RequestException:
+            return None, round((time.perf_counter() - t) * 1000)
+        ms = round((time.perf_counter() - t) * 1000)
+        if r.status_code in (429, 503) and attempt == 0:
+            time.sleep(5)   # the server asked us to slow down: wait, then try once more
+            continue
+        return r, ms
 
 
 def crawl():
