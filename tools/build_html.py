@@ -1,7 +1,9 @@
 """Builds 'FNB Performance cards.html' from the board engine (replica of public/app.js r3.30).
 
-Usage: python tools/build_html.py <replica.html> <cards.json for the saved copy> <out.html> <checkpoint label> [paper]
-The optional fifth argument "paper" adds tools/theme-paper.css (Paper edition) with Bodoni Moda embedded.
+Usage: python tools/build_html.py <replica.html> <cards.json for the saved copy> <out.html> <checkpoint label> [default theme]
+Both looks are in every build (Checkpoint 26): Charcoal, and Paper from tools/theme-paper.css scoped under html.paper,
+with Bodoni Moda embedded. A switch in the top bar flips between them and remembers the choice (localStorage);
+?theme=paper or ?theme=charcoal in the address picks one. The optional fifth argument sets the default (charcoal).
 The page draws the saved copy at once, then loads data/cards.json from GitHub and redraws if newer.
 
 Layout (Checkpoint 9): card rail on the left; on the right a workspace for the selected card:
@@ -11,6 +13,7 @@ The engine's chart, bars and Details dialog are reused unchanged.
 import base64
 import json
 import os
+import re
 import sys
 
 rep, snap, out, cp = sys.argv[1:5]
@@ -206,6 +209,15 @@ button.heat-row:hover{background:var(--surface-2);color:var(--ink)}
 .hgrid .sline{position:absolute;top:2px;bottom:0;width:1px;background:var(--line);pointer-events:none;z-index:1}
 .cell.slot{background:transparent;box-shadow:0 0 0 1px var(--line-soft) inset}
 .heat-key .hint{color:var(--ink-3)}
+/* look switch, Checkpoint 26 */
+.tb-r{display:flex;align-items:center;gap:16px}
+.theme-tg{display:inline-flex;gap:2px;padding:2px;border-radius:999px;box-shadow:0 0 0 1px var(--line) inset}
+.theme-tg button{appearance:none;border:0;background:transparent;color:var(--ink-3);font:inherit;font-size:12px;line-height:1;padding:5px 11px 5px 8px;border-radius:999px;cursor:pointer;display:inline-flex;align-items:center;gap:7px;transition:background .25s var(--ease),color .25s}
+.theme-tg button:hover{color:var(--ink)}
+.theme-tg button i{width:9px;height:9px;border-radius:50%;box-shadow:0 0 0 1px #8a8984 inset}
+.theme-tg button[data-theme="charcoal"] i{background:#27282b}.theme-tg button[data-theme="paper"] i{background:#e8e3d8}
+.theme-tg button[aria-pressed="true"]{background:var(--surface-2);color:var(--ink)}
+html.paper .theme-tg button[aria-pressed="true"]{background:var(--black);color:var(--onblack)}
 @media (max-width:1100px){.r1.hm{grid-template-columns:minmax(0,1fr)}.r1.hm>.np>div{position:static}.heat-key{flex-wrap:wrap;row-gap:4px}}
 /* popups (compact, sectioned) */
 .detail.sheet{width:min(820px,calc(100vw - 48px));height:fit-content;max-height:min(860px,calc(100vh - 48px))}
@@ -505,6 +517,10 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!el('detailPanel').
  if(e.key==='ArrowDown'||e.key==='ArrowRight'){e.preventDefault();pick(ORDER[(i+1)%%ORDER.length],true);}
  if(e.key==='ArrowUp'||e.key==='ArrowLeft'){e.preventDefault();pick(ORDER[(i-1+ORDER.length)%%ORDER.length],true);}});
 let rz;window.addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(()=>drawCard(false),150);});
+function setTheme(t,save){document.documentElement.classList.toggle('paper',t==='paper');document.querySelectorAll('.theme-tg button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.theme===t)));
+ if(save){try{localStorage.setItem('fnb-theme',t);}catch(e){}try{const u=new URL(location.href);if(u.searchParams.has('theme')){u.searchParams.delete('theme');history.replaceState(null,'',u.pathname+u.search+u.hash);}}catch(e){}}}
+document.querySelectorAll('.theme-tg button').forEach(b=>b.addEventListener('click',()=>{if(b.getAttribute('aria-pressed')==='true')return;setTheme(b.dataset.theme,true);drawCard(false);}));
+setTheme(document.documentElement.classList.contains('paper')?'paper':'charcoal',false);
 setData(SAVED,'saved');
 fetch(SNAP_URL+'?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():Promise.reject(r.status)).then(j=>setData(j,'live')).catch(()=>{});
 ''' % json.dumps(saved, ensure_ascii=False).replace('</', '<\\/')
@@ -512,19 +528,40 @@ fetch(SNAP_URL+'?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():Promis
 BODY = '''<body>
 <div id="toast" role="status" aria-live="polite"></div>
 <main class="app">
- <div class="topbar"><span class="snap" id="snap"></span><span>FNB Performance, %s</span></div>
+ <div class="topbar"><span class="snap" id="snap"></span><span class="tb-r"><span class="theme-tg" role="group" aria-label="Board look"><button type="button" data-theme="charcoal" aria-pressed="true"><i></i>Charcoal</button><button type="button" data-theme="paper" aria-pressed="false"><i></i>Paper</button></span><span>FNB Performance, %s</span></span></div>
  <nav class="rail" id="rail" role="tablist" aria-label="Cards" aria-orientation="vertical"></nav>
  <div><section class="ws" id="ws" role="tabpanel" aria-live="polite"></section><p class="demo-note" id="note"></p></div>
 </main>
 <div class="detail-scrim" id="detailScrim" hidden></div>
 <aside class="detail" id="detailPanel" role="dialog" aria-modal="true" aria-labelledby="detailTitle" hidden><div class="detail-inner" id="detailBody" tabindex="-1"></div></aside>
 ''' % cp
-THEME_CSS = ''
-if theme == 'paper':
-    here = os.path.dirname(os.path.abspath(__file__))
-    font = base64.b64encode(open(os.path.join(here, 'fonts', 'bodoni-moda-latin-400-normal.woff2'), 'rb').read()).decode()
-    THEME_CSS = open(os.path.join(here, 'theme-paper.css'), encoding='utf-8').read().replace('__BODONI__', font)
+def scoped(css, cls='paper'):
+    """Prefix every rule of a theme sheet with html.<cls> so both looks live in one file."""
+    css = re.sub(r'/\*.*?\*/', '', css, flags=re.S)
+    out = []
+    for m in re.finditer(r'([^{}]+)\{([^{}]*)\}', css):
+        sel, body = m.group(1).strip(), m.group(2)
+        if sel.startswith('@'):
+            out.append(sel + '{' + body + '}')
+            continue
+        parts = []
+        for x in (t.strip() for t in sel.split(',')):
+            if x in (':root', 'html'):
+                parts.append('html.' + cls)
+            elif x.startswith('html'):
+                parts.append('html.' + cls + x[4:])
+            else:
+                parts.append('html.' + cls + ' ' + x)
+        out.append(','.join(parts) + '{' + body + '}')
+    return '\n'.join(out) + '\n'
+
+
+here = os.path.dirname(os.path.abspath(__file__))
+font = base64.b64encode(open(os.path.join(here, 'fonts', 'bodoni-moda-latin-400-normal.woff2'), 'rb').read()).decode()
+THEME_CSS = scoped(open(os.path.join(here, 'theme-paper.css'), encoding='utf-8').read()).replace('__BODONI__', font)
+HEAD_JS = ("<script>try{var t=new URLSearchParams(location.search).get('theme')||localStorage.getItem('fnb-theme')||'%s';"
+           "if(t==='paper')document.documentElement.classList.add('paper');}catch(e){}</script>\n") % ('paper' if theme == 'paper' else 'charcoal')
 html = ('<!doctype html>\n<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">\n'
-        '<title>FNB Performance cards</title>\n<style>\n' + css + CSS + THEME_CSS + '</style></head>\n' + BODY + '<script>\n' + engine + JS + '</script></body></html>\n')
+        '<title>FNB Performance cards</title>\n' + HEAD_JS + '<style>\n' + css + CSS + THEME_CSS + '</style></head>\n' + BODY + '<script>\n' + engine + JS + '</script></body></html>\n')
 open(out, 'w', encoding='utf-8').write(html)
 print(len(html), len(saved.get('cards', [])))
