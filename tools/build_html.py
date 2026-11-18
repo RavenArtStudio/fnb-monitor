@@ -1,16 +1,20 @@
 """Builds 'FNB Performance cards.html' from the board engine (replica of public/app.js r3.30).
 
-Usage: python tools/build_html.py <replica.html> <cards.json for the saved copy> <out.html> <checkpoint label>
+Usage: python tools/build_html.py <replica.html> <cards.json for the saved copy> <out.html> <checkpoint label> [paper]
+The optional fifth argument "paper" adds tools/theme-paper.css (Paper edition) with Bodoni Moda embedded.
 The page draws the saved copy at once, then loads data/cards.json from GitHub and redraws if newer.
 
 Layout (Checkpoint 9): card rail on the left; on the right a workspace for the selected card:
 header, live strip, chart with next steps beside it, then up to three breakdowns.
 The engine's chart, bars and Details dialog are reused unchanged.
 """
+import base64
 import json
+import os
 import sys
 
 rep, snap, out, cp = sys.argv[1:5]
+theme = sys.argv[5] if len(sys.argv) > 5 else 'charcoal'
 src = open(rep, encoding='utf-8').read().split('\n')
 css = '\n'.join(src[4:574])
 engine = '\n'.join(src[587:680])
@@ -193,7 +197,7 @@ button.heat-row:hover{background:var(--surface-2);color:var(--ink)}
 .hgrid .heat-row.head .lead span:first-child{text-align:left}.hgrid .heat-row.head .hc{text-align:center}.hgrid .heat-row.head .tg{text-align:right}
 .hgrid .hc.fut{opacity:.55}
 .hgrid .heat-row.head .tg,.hgrid .heat-row.stage .tg{font-size:11.5px;color:var(--ink-4)}
-.hgrid .stg .sl{position:sticky;left:calc(var(--nw) + 13px + var(--cw))}
+.hgrid .stg .sl{position:sticky;left:calc(var(--nw) + 13px + var(--cw));z-index:1;background:var(--surface);padding-right:6px;margin-right:-6px}
 .r1.hm>.np>div.fade-b{-webkit-mask-image:linear-gradient(180deg,#000 calc(100% - 44px),transparent);mask-image:linear-gradient(180deg,#000 calc(100% - 44px),transparent)}
 .hgrid .heat-row.stage{height:16px;font-size:11px;color:var(--ink-4)}
 .hgrid .stg{display:flex;align-items:center;gap:8px;min-width:0;white-space:nowrap;overflow:clip;padding-left:1px}
@@ -515,7 +519,12 @@ BODY = '''<body>
 <div class="detail-scrim" id="detailScrim" hidden></div>
 <aside class="detail" id="detailPanel" role="dialog" aria-modal="true" aria-labelledby="detailTitle" hidden><div class="detail-inner" id="detailBody" tabindex="-1"></div></aside>
 ''' % cp
+THEME_CSS = ''
+if theme == 'paper':
+    here = os.path.dirname(os.path.abspath(__file__))
+    font = base64.b64encode(open(os.path.join(here, 'fonts', 'bodoni-moda-latin-400-normal.woff2'), 'rb').read()).decode()
+    THEME_CSS = open(os.path.join(here, 'theme-paper.css'), encoding='utf-8').read().replace('__BODONI__', font)
 html = ('<!doctype html>\n<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">\n'
-        '<title>FNB Performance cards</title>\n<style>\n' + css + CSS + '</style></head>\n' + BODY + '<script>\n' + engine + JS + '</script></body></html>\n')
+        '<title>FNB Performance cards</title>\n<style>\n' + css + CSS + THEME_CSS + '</style></head>\n' + BODY + '<script>\n' + engine + JS + '</script></body></html>\n')
 open(out, 'w', encoding='utf-8').write(html)
 print(len(html), len(saved.get('cards', [])))

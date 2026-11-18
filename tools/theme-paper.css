@@ -1,0 +1,104 @@
+/* ===== Paper edition (Checkpoint 25) =====
+   Same layout as Charcoal. Editorial paper: greige page, lighter sheets, fibre grain,
+   olive / ink-black / rust patches (after the Saffron Avenue "Palma" palette), Bodoni Moda for titles and figures. */
+@font-face{font-family:"Bodoni Moda";src:url(data:font/woff2;base64,__BODONI__) format("woff2");font-weight:400;font-style:normal;font-display:swap}
+:root{
+ --canvas:#e8e3d8;--side:#e2dccf;--surface:#f4f0e7;--surface-2:#ebe5d9;--surface-3:#ddd5c6;
+ --line:#c9c1b1;--line-soft:#dbd4c6;
+ --ink:#1d1c19;--ink-2:#45413a;--ink-3:#777166;--ink-4:#a29b8f;
+ --A1:#545a3c;--FNB:#545a3c;--TUR:#7b6a8c;--u0:#545a3c;--u1:#8b6a4c;--u2:#6f7c88;--u3:#ad4f27;--u4:#7f8b5f;--u5:#a6756a;
+ --good:#66733f;--warn:#a87732;--bad:#ad4a26;
+ --olive:#575c40;--onolive:#f1ece1;--onolive-2:#d3d0be;--onolive-3:#adae95;--line-olive:#ffffff21;
+ --black:#1c1b18;--onblack:#efe9de;--onblack-2:#bdb6a8;--onblack-3:#8e887c;
+ --rust:#a8471f;
+ --r-lg:12px;--r-md:9px;--r-sm:7px;
+ --display:"Bodoni Moda","Bodoni 72","Didot","Playfair Display",Georgia,serif;
+}
+body{background:var(--canvas);color:var(--ink)}
+/* paper: soft uneven light under the sheets, fibre grain over everything */
+body::before{opacity:1;background-image:radial-gradient(110% 70% at 12% -10%,#fbf8f0d9,transparent 62%),radial-gradient(80% 60% at 105% 110%,#d6cdbb80,transparent 60%),radial-gradient(60% 50% at 70% 30%,#f2ede266,transparent 70%)}
+body::after{content:"";position:fixed;inset:0;z-index:300;pointer-events:none;mix-blend-mode:multiply;opacity:.9;
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .29 0 0 0 0 .2 0 0 0 .22 0'/%3E%3C/filter%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012 .32' numOctaves='2' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .4 0 0 0 0 .34 0 0 0 0 .24 0 0 0 .1 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23g)'/%3E%3Crect width='240' height='240' filter='url(%23f)'/%3E%3C/svg%3E")}
+/* sheets */
+.panel,.ws .panel{background:var(--surface);box-shadow:0 0 0 1px var(--line-soft) inset,0 1px 1px #5b4b3012,0 16px 32px -26px #5b4b3066}
+.box{background:var(--surface);box-shadow:0 0 0 1px var(--line-soft) inset}
+/* type */
+.wt-l h2,.ws-head h2{font-family:var(--display);font-size:33px;letter-spacing:-.012em;line-height:1.08;color:var(--ink)}
+.wt-l p,.ws-head p{color:var(--ink-3)}
+.ws-hero{font-family:var(--display);font-weight:400!important;letter-spacing:-.025em;font-variant-numeric:lining-nums tabular-nums}
+.wt-r .ws-hero{font-size:50px}
+.ws-hero small{font-family:var(--sans);letter-spacing:0}
+.detail-title{font-family:var(--display);font-weight:400!important;letter-spacing:-.01em}
+.topbar{color:var(--ink-3)}
+.ph{font-family:var(--display);font-size:15px;letter-spacing:-.005em;color:var(--ink-2)}
+.ph span,.ph button{font-family:var(--sans);font-size:12px;letter-spacing:0}
+.np .ph{color:var(--onolive)}
+/* rail: paper column, the selected card is an olive patch */
+.rail-group{color:var(--ink-3);text-transform:uppercase;letter-spacing:.14em;font-size:10.5px}
+.rail-group svg{stroke:var(--ink-3)}
+.rail-group::after{background:var(--line)}
+.rail-item{color:var(--ink-2)}
+.rail-item:hover{background:var(--surface-2);color:var(--ink)}
+.rail-item[aria-selected="true"]{background:var(--olive);color:var(--onolive)}
+.rail-item[aria-selected="true"] strong{color:var(--onolive)}
+.rail-item[aria-selected="true"] em{color:var(--onolive-3)}
+.rail-item[aria-selected="true"] em.up{color:#d5dcae}.rail-item[aria-selected="true"] em.down{color:#efb193}
+/* change chip */
+.chip{background:transparent;box-shadow:0 0 0 1px var(--line) inset;color:var(--ink-2)}
+.chip.up{color:var(--good);background:color-mix(in srgb,var(--good) 9%,transparent);box-shadow:0 0 0 1px color-mix(in srgb,var(--good) 30%,transparent) inset}
+.chip.down{color:var(--bad);background:color-mix(in srgb,var(--bad) 8%,transparent);box-shadow:0 0 0 1px color-mix(in srgb,var(--bad) 30%,transparent) inset}
+/* KPI strip: a black patch */
+.slim{background:var(--black);box-shadow:0 18px 30px -26px #000a}
+.slim>div+div{border-left-color:#ffffff17}
+.slim span{color:var(--onblack-3)}
+.slim b{color:var(--onblack);font-family:var(--display);font-size:20px;font-variant-numeric:lining-nums tabular-nums}
+.slim small{color:var(--onblack-3)}.slim small.down{color:#e8a184}.slim small.up{color:#c8d29d}
+/* Next steps: an olive patch */
+.np,.ws .panel.np{background:var(--olive);box-shadow:0 18px 32px -24px #2e301f80}
+.np .ph{color:var(--onolive-2)}.np .ph span,.np .ph .more{color:var(--onolive-3)}
+.np .st-t{color:var(--onolive)}.np .st-w{color:var(--onolive-2)}.np .st-o{color:var(--onolive-3)}.np .st-o b{color:#dfe5b9}
+.np .st,.np li{border-color:var(--line-olive)!important}
+.np .sd{background:var(--onolive-3)}.np .sd.high{background:#e7a27c}.np .sd.med{background:#d8d0ad}
+.np .so-i{color:var(--onolive-2)}.np .so-i span{color:var(--onolive)}.np .empty-note{color:var(--onolive-2)}
+/* bars */
+.track,.ftr .tr,.sbar .tr{background:var(--surface-3)}
+.fill{background:linear-gradient(90deg,#8d9071,var(--olive))}
+.ftr .fl{background:var(--ink-4)}.ftr.top .fl{background:var(--olive)}
+.fl.good{background:var(--good)}.fl.warn{background:var(--warn)}.fl.bad{background:var(--bad)}
+/* heatmap on paper */
+.cell{color:var(--ink)}
+.cell.good{background:color-mix(in srgb,var(--good) 22%,var(--surface))}
+.cell.warn{background:color-mix(in srgb,var(--warn) 24%,var(--surface))}
+.cell.bad{background:color-mix(in srgb,var(--bad) 21%,var(--surface))}
+.cell.now.good{background:color-mix(in srgb,var(--good) 78%,var(--surface));color:#f7f3ea}
+.cell.now.warn{background:color-mix(in srgb,var(--warn) 74%,var(--surface));color:#fbf6ec}
+.cell.now.bad{background:color-mix(in srgb,var(--bad) 80%,var(--surface));color:#fbf3ec}
+.cell.none{background:var(--surface-2);color:var(--ink-4)}
+.cell.slot{background:transparent;box-shadow:0 0 0 1px var(--line) inset}
+.heat-key .good{background:color-mix(in srgb,var(--good) 78%,var(--surface))}.heat-key .warn{background:color-mix(in srgb,var(--warn) 74%,var(--surface))}.heat-key .bad{background:color-mix(in srgb,var(--bad) 80%,var(--surface))}
+.hgrid .sline{background:var(--ink-4)}
+.hgrid .stg::after{background:var(--line)}
+.hgrid .stg.cur{color:var(--ink-2)}
+/* charts */
+.chart-grid{stroke:var(--line-soft)}
+.chart-axis{fill:var(--ink-3)}
+.col-cur{fill:var(--olive);opacity:.78}
+.col-val{fill:var(--ink-2)}
+.col-trend{stroke:var(--rust);opacity:.75}.col-dot{fill:var(--rust);opacity:.75}
+.chart-ghost{stroke:var(--rust);opacity:.6}
+.chart-tip,#toast{background:#1c1b18f2;color:var(--onblack)}
+.chart-tip b,.chart-tip div strong{color:var(--onblack)}.chart-tip div{color:var(--onblack-2)}
+/* popups: paper sheet with a black header patch */
+.detail-scrim{background:#2b251c66;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.detail{background:var(--canvas);box-shadow:0 0 0 1px var(--line) inset,0 40px 90px -30px #3a2e1c99}
+.pp-head{background:var(--black);border-bottom:0}
+.pp-head .detail-title{color:var(--onblack)}
+.pp-head .ph-k{color:var(--onblack-3)}
+.pp-head .detail-close,.pp-head button{color:var(--onblack-2);background:#ffffff12}
+.pp-head .pill{background:#ffffff14;color:var(--onblack)}
+.pp-head .pill.good{color:#c8d29d}.pp-head .pill.warn{color:#e5c48f}.pp-head .pill.bad{color:#eca184}
+.pill.good{background:color-mix(in srgb,var(--good) 14%,var(--surface))}.pill.warn{background:color-mix(in srgb,var(--warn) 14%,var(--surface))}.pill.bad{background:color-mix(in srgb,var(--bad) 12%,var(--surface))}
+.pbtn.primary{background:var(--rust);color:#f8f1e6}.pbtn.primary:hover{background:#8e3b18}
+.sd.high{background:var(--rust)}.sd.med{background:var(--u1)}
+.pp-head .pill,.pp-head .pill.good,.pp-head .pill.warn,.pp-head .pill.bad{background:#ffffff14}
+.pp-head .pill.good{color:#c8d29d}.pp-head .pill.warn{color:#e5c48f}.pp-head .pill.bad{color:#eca184}
