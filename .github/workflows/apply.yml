@@ -1,0 +1,39 @@
+name: Apply patch
+
+# Applies a git patch uploaded to the repo root as <name>.patch.gz (or <name>.patch), commits the
+# result and removes the patch file. Used when a builder can upload files on github.com but cannot
+# push. Patches must not touch .github/workflows (the Actions token cannot change workflow files).
+
+on:
+  push:
+    branches: [main]
+    paths: ["*.patch.gz", "*.patch"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: snapshot
+  cancel-in-progress: false
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply and commit
+        run: |
+          shopt -s nullglob
+          files=(*.patch.gz *.patch)
+          [ ${#files[@]} -eq 0 ] && { echo "No patch files"; exit 0; }
+          for f in *.patch.gz; do gunzip -c "$f" | git apply --whitespace=nowarn; done
+          for f in *.patch; do git apply --whitespace=nowarn "$f"; done
+          git rm -q -- "${files[@]}"
+          git config user.name "fnb-monitor"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Apply ${files[*]}"
+          git pull --rebase
+          git push

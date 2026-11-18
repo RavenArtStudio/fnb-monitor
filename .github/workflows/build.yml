@@ -1,0 +1,51 @@
+name: Build board
+
+# Rebuilds index.html (GitHub Pages) and "FNB Performance cards.html" (the desktop file) from the
+# board engine, saving the latest data/cards.json and the live feed inside them. Run it by hand
+# after changing tools/ or the board look; data changes reach the board by themselves.
+
+on:
+  workflow_dispatch:
+    inputs:
+      checkpoint:
+        description: "Checkpoint label shown in the top bar"
+        default: "Checkpoint 27"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: snapshot
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Fetch the live feed
+        run: |
+          if git fetch --depth 1 origin live 2>/dev/null; then
+            git show FETCH_HEAD:data/live.json > /tmp/live.json || rm -f /tmp/live.json
+          fi
+      - name: Build
+        env:
+          CP: ${{ inputs.checkpoint }}
+        run: |
+          python -B tools/build_html.py tools/board-replica.html data/cards.json "FNB Performance cards.html" "$CP" charcoal /tmp/live.json
+          cp "FNB Performance cards.html" index.html
+      - name: Commit
+        env:
+          CP: ${{ inputs.checkpoint }}
+        run: |
+          git config user.name "fnb-monitor"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html "FNB Performance cards.html"
+          git diff --cached --quiet && exit 0
+          git commit -m "Board, $CP"
+          git pull --rebase
+          git push
