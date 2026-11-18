@@ -24,6 +24,7 @@ from urllib.parse import urljoin, urlparse
 import requests
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+from windows import ORDER as WORDER, WIN, wbundle, level_bundle, day_window, klab, zkey, parse as wparse, span_label  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
@@ -219,10 +220,10 @@ def reading(id, label, short_label, unit, group, source, fields, dates, vals, su
     tot = have[-1][1]
     prior = have[-2] if len(have) > 1 else None
     if prior is None:
-        delta, rail, tone = f"First reading, {short(dt.date.fromisoformat(have[-1][0]))}", "new", ""
+        delta, rail, tone = f"First reading, {klab(have[-1][0], True)}", "new", ""
     else:
         x = tot - prior[1]
-        when = short(dt.date.fromisoformat(prior[0]))
+        when = klab(prior[0], True)
         delta = "Level with " + when if x == 0 else f"{'+' if x > 0 else '−'}{f(abs(x))} on {when}"
         rail = "level" if x == 0 else f"{'+' if x > 0 else '−'}{f(abs(x))}"
         good = (x < 0) if lower_better else (x > 0)
@@ -374,7 +375,90 @@ def ga_cards(sess):
         "date, screenPageViews, pagePath", cur_days, v_c, v_p,
         [("By page", top(pv, 8, label=lambda d: page_name(d[0])), "Which pages are viewed most?", "Page")],
         None, "Every page load on the live site, repeats included.", fx([])))
+    try:
+        ga_windows(sess, cards, end, tool_dim)
+    except Exception as e:
+        print("GA windows:", e, file=sys.stderr)
     return cards
+
+
+def attach(c, wkey, bundle):
+    """Add a window's view to a card. The card's own fields stay the 7-day view."""
+    c.setdefault("w", {})[wkey] = bundle
+    wins = set(c.get("wins") or ["7d"]) | {wkey}
+    c["wins"] = [k for k in WORDER if k in wins]
+
+
+def ga_windows(sess, cards, end, tool_dim):
+    """30 days and since launch for the Analytics cards, from the processed daily reports."""
+    by = {c["id"]: c for c in cards}
+    span0 = min(end - dt.timedelta(days=59), LAUNCH)
+    names = ["generate_lead", "whatsapp_click", "tool_used"]
+    ev = ga(sess, span0, end, ["date", "eventName"], ["eventCount"],
+            {"filter": {"fieldName": "eventName", "inListFilter": {"values": names}}})
+    daily = ga(sess, span0, end, ["date"], ["sessions", "engagedSessions", "newUsers", "screenPageViews"])
+    fx = lambda caveats: caveats + [CONSENT]
+
+    def safe(*a, **k):
+        try:
+            return ga(sess, *a, **k)
+        except RuntimeError as e:
+            print(e, file=sys.stderr)
+            return []
+
+    for wkey in ("30d", "all"):
+        cur_days, prev_days = day_window(end, wkey, LAUNCH)
+        w0 = cur_days[0]
+        keys = [iso(d) for d in cur_days]
+        old_prev = bool(prev_days) and prev_days[-1] < LAUNCH
+        old_part = cur_days[0] < LAUNCH
+        evs = lambda name, days: series([(d, m) for d, m in ev if d[1] == name], days) if days else None
+        col = lambda i, days: series(daily, days, val=lambda m: m[i]) if days else None
+        evb = lambda name, dims: safe(w0, end, dims, ["eventCount"], {"filter": {"fieldName": "eventName", "stringFilter": {"value": name}}}, order="eventCount")
+        common = dict(keys=keys, old_prev=old_prev, old_part=old_part, launch=LAUNCH, sub_source=GA)
+        span_note = "since the launch" if wkey == "all" else "over 30 days"
+        defs = {
+            "leads": dict(label="Profit Review requests", unit="requests", fields="eventName = generate_lead, eventCount, pagePath, sessionDefaultChannelGroup",
+                          cur=evs("generate_lead", cur_days), prev=evs("generate_lead", prev_days),
+                          breakdowns=[("Page the request was sent from", top(evb("generate_lead", ["pagePath"]), label=lambda d: page_name(d[0])), "Which page were requests sent from?", "Page"),
+                                      ("Channel that brought them", top(evb("generate_lead", ["sessionDefaultChannelGroup"])), "Which channel brought them?", "Channel")],
+                          how="Count of the generate_lead event the site sends when the Profit Review form is sent successfully.",
+                          caveats=fx(["Requests made by phone, email or WhatsApp are not counted here."])),
+            "whatsapp": dict(label="WhatsApp clicks", unit="clicks", fields="eventName = whatsapp_click, eventCount, pagePath",
+                             cur=evs("whatsapp_click", cur_days), prev=evs("whatsapp_click", prev_days),
+                             breakdowns=[("Page the click came from", top(evb("whatsapp_click", ["pagePath"]), label=lambda d: page_name(d[0])), "Which pages produce WhatsApp clicks?", "Page")],
+                             how="Count of the whatsapp_click event the site sends.",
+                             caveats=fx(["A click opens WhatsApp; it does not prove a message was sent."])),
+            "tools": dict(label="Calculator uses", unit="uses", fields=f"eventName = tool_used, eventCount, {tool_dim}",
+                          cur=evs("tool_used", cur_days), prev=evs("tool_used", prev_days),
+                          breakdowns=[("By calculator", top(evb("tool_used", [tool_dim]), 8, label=lambda d: (d[0].replace('-', ' ').capitalize() if tool_dim != 'pagePath' else page_name(d[0]))), "Which calculators are used most?", "Calculator")],
+                          how="Count of the tool_used event the site sends when a calculator is used.", caveats=fx([])),
+            "sessions": dict(label="Website sessions", unit="sessions", fields="date, sessions, sessionDefaultChannelGroup, country, landingPage, deviceCategory",
+                             cur=col(0, cur_days), prev=col(0, prev_days),
+                             breakdowns=[("Where visitors come from", top(safe(w0, end, ["sessionDefaultChannelGroup"], ["sessions"], order="sessions")), "Where do visitors come from?", "Channel"),
+                                         ("Country", top(safe(w0, end, ["country"], ["sessions"], order="sessions")), "Which countries are they in?", "Country"),
+                                         ("Entry page", top(safe(w0, end, ["landingPage"], ["sessions"], order="sessions", limit=50), label=lambda d: page_name(d[0])), "Which pages do visits start on?", "Entry page"),
+                                         ("Device", top(safe(w0, end, ["deviceCategory"], ["sessions"], order="sessions")), "What are they browsing on?", "Device")],
+                             how=f"Sessions on the live site hostnames, {span_note}.",
+                             caveats=fx(["Visits by the team count until internal traffic is filtered in Google Analytics."])),
+            "engaged": dict(label="Engaged sessions", unit="sessions", fields="date, engagedSessions, landingPage",
+                            cur=col(1, cur_days), prev=col(1, prev_days),
+                            breakdowns=[("Entry page of engaged sessions", top(safe(w0, end, ["landingPage"], ["engagedSessions"], order="engagedSessions", limit=50), label=lambda d: page_name(d[0])), "Which entry pages hold attention?", "Entry page")],
+                            how="Sessions that lasted over 10 seconds, viewed two or more pages, or fired a key event.", caveats=fx([])),
+            "newvisitors": dict(label="New visitors", unit="visitors", fields="date, newUsers, newVsReturning, country",
+                                cur=col(2, cur_days), prev=col(2, prev_days),
+                                breakdowns=[("New against returning", top(safe(w0, end, ["newVsReturning"], ["activeUsers"], order="activeUsers"), label=lambda d: d[0].capitalize() if d[0] else "Unknown"), "How many are new?", "Visitor"),
+                                            ("Country of new visitors", top(safe(w0, end, ["country"], ["newUsers"], order="newUsers")), "Where are new visitors from?", "Country")],
+                                how="People with no earlier visit to the site.",
+                                caveats=fx(["Team members count as new on each new device until internal traffic is filtered."])),
+            "views": dict(label="Page views", unit="views", fields="date, screenPageViews, pagePath",
+                          cur=col(3, cur_days), prev=col(3, prev_days),
+                          breakdowns=[("By page", top(safe(w0, end, ["pagePath"], ["screenPageViews"], order="screenPageViews", limit=50), 8, label=lambda d: page_name(d[0])), "Which pages are viewed most?", "Page")],
+                          how="Every page load on the live site, repeats included.", caveats=fx([])),
+        }
+        for cid, d in defs.items():
+            if cid in by:
+                attach(by[cid], wkey, wbundle(wkey, source=GA, **common, **d))
 
 
 # ---------------------------------------------------------------- Search Console cards
@@ -437,7 +521,132 @@ def sc_cards(sess):
     if early:
         for c in cards:
             mark_early(c, early, span)
+    try:
+        sc_windows(sess, cards, last, last_final)
+    except Exception as e:
+        print("SC windows:", e, file=sys.stderr)
     return cards
+
+
+def sc_raw(sess, start, end, dims, limit=1000, state="all"):
+    url = ("https://searchconsole.googleapis.com/webmasters/v3/sites/"
+           + requests.utils.quote(SC_SITE, safe="") + "/searchAnalytics/query")
+    r = sess.post(url, json={"startDate": iso(start), "endDate": iso(end),
+                             "dimensions": dims, "rowLimit": limit, "dataState": state}, timeout=60)
+    if r.status_code != 200:
+        raise RuntimeError(f"SC {r.status_code}: {r.text[:300]}")
+    return r.json()
+
+
+def sc_windows(sess, cards, last, last_final):
+    """30 days and since launch by day; 12 and 24 hours by hour (Google's hourly data, partial for the latest hours)."""
+    by = {c["id"]: c for c in cards}
+    lag = "Google reports search data hours to days late; the latest figures are early and usually rise."
+    priv = "Rare queries are withheld by Google for privacy, so query rows add up to less than the total."
+    rows = sc(sess, min(last - dt.timedelta(days=60), LAUNCH), last, ["date"])
+    dby = {dt.date.fromisoformat(r["keys"][0]): r for r in rows}
+    get = lambda days, k: [int(dby[d][k]) if d in dby else 0 for d in days] if days else None
+    for wkey in ("30d", "all"):
+        cur_days, prev_days = day_window(last, wkey, LAUNCH)
+        w = (cur_days[0], last)
+        q = sc(sess, *w, ["query"], 200)
+        pg = sc(sess, *w, ["page"], 100)
+        qtop = lambda k: [(r["keys"][0], int(r[k])) for r in sorted(q, key=lambda r: -r[k]) if r[k] > 0][:6]
+        ptop = lambda k: [(page_name(urlparse(r["keys"][0]).path), int(r[k])) for r in sorted(pg, key=lambda r: -r[k]) if r[k] > 0][:6]
+        early = next((iso(d) for d in cur_days if last_final is None or d > last_final), None)
+        common = dict(keys=[iso(d) for d in cur_days], old_prev=bool(prev_days) and prev_days[-1] < LAUNCH,
+                      old_part=cur_days[0] < LAUNCH, launch=LAUNCH, early_from=early, sub_source=SC)
+        if "impressions" in by:
+            attach(by["impressions"], wkey, wbundle(wkey, label="Search impressions", unit="impressions", source=SC, fields="date, impressions, query, page",
+                   cur=get(cur_days, "impressions"), prev=get(prev_days, "impressions"),
+                   breakdowns=[("By search query", qtop("impressions"), "Which searches show the site?", "Query"),
+                               ("By page shown", ptop("impressions"), "Which pages does Google show?", "Page")],
+                   how="Times any page of the site appeared in Google results.", caveats=[lag, priv], **common))
+        if "searchclicks" in by:
+            attach(by["searchclicks"], wkey, wbundle(wkey, label="Search clicks", unit="clicks", source=SC, fields="date, clicks, query, page",
+                   cur=get(cur_days, "clicks"), prev=get(prev_days, "clicks"),
+                   breakdowns=[("By search query", qtop("clicks"), "Which searches bring visits?", "Query"),
+                               ("By page", ptop("clicks"), "Which pages get the clicks?", "Page")],
+                   how="Clicks from Google results to the site.", caveats=[lag, priv], **common))
+        if "pageone" in by:
+            qd = sc(sess, (prev_days or cur_days)[0], last, ["date", "query"], 25000)
+            cnt = {}
+            for r in qd:
+                if r["position"] <= 10:
+                    d = dt.date.fromisoformat(r["keys"][0])
+                    cnt[d] = cnt.get(d, 0) + 1
+            near = sorted([r for r in q if 10 < r["position"] <= 20], key=lambda r: -r["impressions"])[:5]
+            attach(by["pageone"], wkey, level_bundle(wkey, label="Keywords on page one", unit="keywords", source=SC,
+                   fields="date, query, position (count of queries at 10 or better)", keys=[iso(d) for d in cur_days],
+                   vals=[cnt.get(d, 0) for d in cur_days], prev_vals=[cnt.get(d, 0) for d in prev_days] if prev_days else None,
+                   breakdowns=[("Closest to page one, by impressions", [(f"{r['keys'][0]} (position {round(r['position'])})", int(r["impressions"])) for r in near],
+                                "Which keywords are closest to page one?", "Query")],
+                   how="Number of search queries where the site ranked in the first ten results that day.",
+                   caveats=["Position is the average across all searches that day, so a keyword can move in and out of the count.", lag],
+                   sub_source=SC, early_from=early, compare_label="Old site, 30 days earlier" if prev_days and prev_days[-1] < LAUNCH else None))
+
+    # Hourly: up to 10 days back, partial for the latest hours.
+    now = dt.datetime.now(dt.timezone.utc)
+    end_h = now.replace(minute=0, second=0, microsecond=0) - dt.timedelta(hours=1)
+    HOUR = "HOUR"
+    try:
+        hj = sc_raw(sess, (now - dt.timedelta(days=3)).date(), now.date(), [HOUR], 500, state="HOURLY_ALL")
+    except RuntimeError:
+        HOUR = "hour"
+        hj = sc_raw(sess, (now - dt.timedelta(days=3)).date(), now.date(), [HOUR], 500, state="HOURLY_ALL")
+    hk = lambda s: zkey(dt.datetime.fromisoformat(s))
+    hby = {hk(r["keys"][0]): r for r in hj.get("rows", [])}
+    meta = hj.get("metadata") or {}
+    inc = meta.get("firstIncompleteHour")
+    if inc:
+        inc = hk(inc)
+    elif hby:
+        inc = zkey(max(dt.datetime.strptime(k, "%Y-%m-%dT%H:%MZ") for k in hby).replace(tzinfo=dt.timezone.utc) + dt.timedelta(hours=1))
+    try:
+        hq = sc_raw(sess, (now - dt.timedelta(days=3)).date(), now.date(), [HOUR, "query"], 25000, state="HOURLY_ALL").get("rows", [])
+    except RuntimeError as e:
+        print("SC hourly by query:", e, file=sys.stderr)
+        hq = None
+    for wkey in ("12h", "24h"):
+        n = WIN[wkey]["n"]
+        hours = [end_h - dt.timedelta(hours=n - 1 - i) for i in range(n)]
+        keys = [zkey(h) for h in hours]
+        pkeys = [zkey(h - dt.timedelta(hours=n)) for h in hours]
+        val = lambda ks, k: [int(hby[x][k]) if x in hby else 0 for x in ks]
+        early = next((x for x in keys if inc and x >= inc), None)
+        inw = set(keys)
+        def qtop(k):
+            if hq is None:
+                return []
+            agg = {}
+            for r in hq:
+                if hk(r["keys"][0]) in inw and r[k] > 0:
+                    agg[r["keys"][1]] = agg.get(r["keys"][1], 0) + int(r[k])
+            return sorted(agg.items(), key=lambda x: -x[1])[:6]
+        cav = ["Google's hourly figures are partial for the latest hours and usually rise over the next day.", priv]
+        common = dict(keys=keys, step_min=60, early_from=early, sub_source=f"{SC}, by hour", launch=LAUNCH)
+        if "impressions" in by:
+            attach(by["impressions"], wkey, wbundle(wkey, label="Search impressions", unit="impressions", source=SC, fields="HOUR, impressions, query (dataState HOURLY_ALL)",
+                   cur=val(keys, "impressions"), prev=val(pkeys, "impressions"),
+                   breakdowns=[("By search query", qtop("impressions"), "Which searches show the site?", "Query")] if hq is not None else [],
+                   how="Times any page of the site appeared in Google results, by hour.", caveats=cav, **common))
+        if "searchclicks" in by:
+            attach(by["searchclicks"], wkey, wbundle(wkey, label="Search clicks", unit="clicks", source=SC, fields="HOUR, clicks, query (dataState HOURLY_ALL)",
+                   cur=val(keys, "clicks"), prev=val(pkeys, "clicks"),
+                   breakdowns=[("By search query", qtop("clicks"), "Which searches bring visits?", "Query")] if hq is not None else [],
+                   how="Clicks from Google results to the site, by hour.", caveats=cav, **common))
+        if "pageone" in by and hq is not None:
+            cnt = {}
+            for r in hq:
+                if r["position"] <= 10:
+                    x = hk(r["keys"][0])
+                    cnt[x] = cnt.get(x, 0) + 1
+            attach(by["pageone"], wkey, level_bundle(wkey, label="Keywords on page one", unit="keywords", source=SC,
+                   fields="HOUR, query, position (count of queries at 10 or better)", keys=keys,
+                   vals=[cnt.get(x, 0) for x in keys], prev_vals=[cnt.get(x, 0) for x in pkeys], breakdowns=[],
+                   how="Number of search queries where the site ranked in the first ten results in that hour.",
+                   caveats=["An hour has few searches, so the count moves more than the daily one.", cav[0]],
+                   sub_source=f"{SC}, by hour", step_min=60, early_from=early))
 
 
 def mark_early(c, early, span):
@@ -803,6 +1012,53 @@ def crawl_cards(c, hist):
     return cards
 
 
+RUNS = DATA / "runs.json"
+CRAWL_KEYS = ("pages_ok", "broken_n", "issue_pages", "ms_median", "weight_total")
+
+
+def crawl_windows(cards, hist_all, runs):
+    """Site checks by window: 12 and 24 hours use each 3-hourly run; 30 days and since launch use one reading a day."""
+    by = {x["id"]: x for x in cards}
+    now = dt.datetime.now(dt.timezone.utc)
+    spec = {"pages": ("pages_ok", False), "broken": ("broken_n", True), "issues": ("issue_pages", True), "speed": ("ms_median", True)}
+    for wkey in ("12h", "24h", "30d", "all"):
+        if wkey in ("12h", "24h"):
+            since = now - dt.timedelta(hours=WIN[wkey]["n"])
+            rs = [r for r in runs if dt.datetime.strptime(r["t"], "%Y-%m-%dT%H:%MZ").replace(tzinfo=dt.timezone.utc) > since]
+            if not rs:
+                continue
+            dates = [r["t"] for r in rs]
+            val = lambda k: [r.get(k) for r in rs]
+            heading, once = "Check by check", [f"One reading per check, about every 3 hours; {len(rs)} checks in the last {WIN[wkey]['span']}."]
+        else:
+            ds = [d for d in sorted(hist_all) if hist_all[d].get("crawl") and d >= iso(LAUNCH)]
+            if wkey == "30d":
+                ds = ds[-30:]
+            if not ds:
+                continue
+            dates = ds
+            val = lambda k: [hist_all[d]["crawl"].get(k) for d in ds]
+            heading, once = "Day by day", ["One reading a day, the last check of the day."]
+        span = span_label(dates, wkey)
+        for cid, (k, lower) in spec.items():
+            base = by.get(cid)
+            if not base or not any(v is not None for v in val(k)):
+                continue
+            src_q = next((q for q in base["questions"] if q["id"] == "source"), None)
+            cav = next((q["answer"]["items"] for q in base["questions"] if q["id"] == "caveats"), [])
+            b = reading(cid, base["label"], base["short"], base["unit"], base["group"], CR,
+                        src_q["answer"]["rows"][0][1] if src_q else "", dates, val(k), f"{CR}, {span}",
+                        [(x["title"], [(r["label"], r["value"]) for r in x["rows"]], x["title"], "Item", base["unit"]) for x in base["breakdowns"]],
+                        None, base["howCalculated"], [x for x in cav if not x.startswith("One reading")] + once,
+                        heading=heading, lower_better=lower)
+            b["win"], b["periodLabel"] = wkey, span
+            b["main"]["bucket"] = "check" if wkey in ("12h", "24h") else "day"
+            for extra in ("pages", "kpis"):
+                if extra in base:
+                    b[extra] = base[extra]
+            attach(base, wkey, b)
+
+
 def speed_card(c, hist, dates, v, sub, once):
     """Page speed: median response time, with every page listed slowest first and its size by file type."""
     sp, st = c["speed_pages"], c["site_types"]
@@ -1021,6 +1277,41 @@ def cube_card(cs, cube, hist, g):
             "howCalculated": "Ten blocks with fixed weights, each the weighted mean of its sub-metrics, 0 to 10. The overall score is the weighted sum. Targets follow the stage counted from the Nov 15 launch; in the heatmap each day is coloured against the target of its own stage."}
 
 
+def cube_windows(cc):
+    """Search visibility by window: 7 days as day columns (the card itself), 30 days as a strip of day cells,
+    since launch as one column per week, each week's average against its stage target."""
+    h = cc["heat"]
+    attach(cc, "30d", {"win": "30d", "heat": {**h, "mode": "dense", "inview": 30,
+                                               "note": "each cell is a day against its stage target"},
+                       "periodLabel": cc["periodLabel"]})
+    dates = h["dates"][1:]
+    launch_iso = iso(LAUNCH)
+    days = [d for d in dates if d >= launch_iso]
+    if not days:
+        return
+    weeks = sorted({(dt.date.fromisoformat(d) - LAUNCH).days // 7 for d in days})
+    wk0 = [LAUNCH + dt.timedelta(days=7 * w) for w in weeks]
+    rows = []
+    for r in h["rows"]:
+        cells, bands, tgts = [r["cells"][0]], [r["bands"][0]], [r["targets"][0]]
+        for w, d0 in zip(weeks, wk0):
+            idx = [i + 1 for i, d in enumerate(dates) if d >= launch_iso and (dt.date.fromisoformat(d) - LAUNCH).days // 7 == w]
+            vals = [r["cells"][i] for i in idx if r["cells"][i] is not None]
+            v = round(sum(vals) / len(vals), 2) if vals else None
+            t = r["targets"][idx[-1]] if idx else r["target"]
+            cells.append(v)
+            tgts.append(t)
+            bands.append(band(v or 0, t))
+        rows.append({**r, "cells": cells, "bands": bands, "targets": tgts})
+    end = lambda d0: min(d0 + dt.timedelta(days=6), TODAY)
+    attach(cc, "all", {"win": "all", "periodLabel": f"Since {short(LAUNCH)}, by week",
+                       "heat": {**h, "mode": "weeks", "inview": 4, "step": 7,
+                                "note": "each week's average against its stage target",
+                                "cols": ["Audit"] + [f"{short(d0)}" for d0 in wk0],
+                                "spans": [""] + [f"{short(d0)} to {short(end(d0))}" for d0 in wk0],
+                                "dates": [h["dates"][0]] + [iso(d0) for d0 in wk0], "rows": rows}})
+
+
 # ---------------------------------------------------------------- Next steps for each card
 def step(t, why, impact="med", owner="site"):
     return {"t": t, "why": why, "impact": impact, "owner": owner}
@@ -1158,7 +1449,22 @@ def main():
     (HIST / f"{iso(TODAY)}.json").write_text(json.dumps(today, indent=1))
     hist = history()
 
+    now_t = dt.datetime.now(dt.timezone.utc)
+    runs = json.loads(RUNS.read_text()) if RUNS.exists() else []
+    runs.append({"t": zkey(now_t), **{k: c[k] for k in CRAWL_KEYS}})
+    runs = [r for r in runs if wparse(r["t"]) > now_t - dt.timedelta(days=40)]
+    RUNS.write_text(json.dumps(runs))
+
     cards = [cube_card(cs, cube, history(days=70), g)] + google["ga"] + google["sc"] + crawl_cards(c, hist) + semrush_cards()
+    try:
+        crawl_windows(cards, history(days=400), runs)
+        cube_windows(cards[0])
+    except Exception as e:
+        print("Windows:", e, file=sys.stderr)
+    for x in cards:
+        x.setdefault("wins", ["7d"])
+        if x["source"] == SM:
+            x["wins"], x["fixed"] = [], "Semrush is read by hand once a month, so this card shows month by month in every window."
     next_steps(cards, c, g)
     c.pop("robots", None)
     c.pop("urls", None)
