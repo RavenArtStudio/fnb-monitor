@@ -1007,6 +1007,8 @@ def crawl():
     rtext = robots.text if robots is not None and robots.status_code == 200 else ""
     import cube as cube_mod
     cfg = json.loads((DATA / "cube.json").read_text())
+    ikey = str(cfg.get("indexnow_key") or "")
+    ikr, _ = fetch(f"{SITE}/{ikey}.txt") if ikey else (None, None)
     tg = json.loads((DATA / "targets.json").read_text())
     try:
         q = Q.site_quality(ok, SITE, cfg, tg["en"] + tg["ar"], lambda pth: cube_mod.path_allowed(rtext, "Googlebot", pth))
@@ -1042,6 +1044,7 @@ def crawl():
         "https_redirect": bool(http is not None and http.url.startswith("https://")),
         "robots": rtext,
         "llms_txt": bool(llms is not None and llms.status_code == 200 and len(llms.text) > 50),
+        "indexnow_key_ok": bool(ikey and ikr is not None and ikr.status_code == 200 and ikr.text.strip() == ikey),
         "sameas_home": home_o.get("sameas", 0), "ld_bad": sum(o.get("ld_bad", 0) for o in ok),
         "n_ok": len(ok),
         "pass": {

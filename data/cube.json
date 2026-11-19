@@ -588,9 +588,9 @@
      "name": "IndexNow and sitemap ping",
      "weight": 20,
      "audit": 0.5,
-     "auto": null,
+     "auto": "indexnow",
      "evidence": "",
-     "action": "Add an IndexNow key so Bing picks up changes within hours.",
+     "action": "Serve the IndexNow key file at the site root so Bing picks up changes within hours.",
      "owner": "site"
     },
     {
@@ -607,6 +607,7 @@
   }
  ],
  "bing_verified": false,
+ "indexnow_key": "ca843419a0bb7357a3352759f7e44548",
  "stage_note": "Stages are 7-day spans from the Nov 15 launch.",
  "clusters_note": "Topics an F&B owner in the UAE searches for. A page belongs to a topic when its title or H1 contains one of the words. Three pages per language is full coverage.",
  "clusters": [

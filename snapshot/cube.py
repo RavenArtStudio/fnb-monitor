@@ -94,6 +94,14 @@ def measure(c, g, sm=None):
     allowed = [b for b in AI_BOTS if bot_allowed(c["robots"], b)]
     out["aibots"] = (clamp(10 * len(allowed) / len(AI_BOTS)), f"robots.txt allows {len(allowed)} of {len(AI_BOTS)} AI crawlers ({', '.join(allowed) or 'none'}).")
     out["llms"] = (9.0 if c["llms_txt"] else 1.0, "llms.txt is published." if c["llms_txt"] else "No llms.txt at the site root.")
+    if "indexnow_key_ok" in c:
+        # Key file live and matching: 7 (IndexNow engines accept the site's pings). Sitemap named in robots.txt: 2.
+        # The last point needs Bing Webmaster Tools, where IndexNow receipts can be confirmed.
+        k, smap, bing = c["indexnow_key_ok"], c.get("robots_sitemap", False), bool(g.get("bing"))
+        out["indexnow"] = (clamp(7.0 * k + 2.0 * smap + 1.0 * (k and bing)),
+                           f"IndexNow key file {'is live and matches' if k else 'is missing or does not match'}; "
+                           f"robots.txt {'names' if smap else 'does not name'} the sitemap; "
+                           + ("Bing verified, so receipts can be confirmed." if bing else "receipts can be confirmed once Bing Webmaster Tools is verified."))
     if c["hreflang_pages"]:
         out["hreflang"] = (clamp(10 * c["hreflang_ok"] / c["hreflang_pages"]),
                            f"{c['hreflang_ok']} of {c['hreflang_pages']} pages have hreflang pairs that point back.")
