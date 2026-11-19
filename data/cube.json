@@ -323,7 +323,7 @@
      "audit": 3.0,
      "auto": "nap",
      "evidence": "",
-     "action": "Show the same address, phone and trade licence on the site and Google listing.",
+     "action": "Add the street and city to the structured-data address (it shows only the country) and show the trade licence number in the footer.",
      "owner": "owner"
     },
     {

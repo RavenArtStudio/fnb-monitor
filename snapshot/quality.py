@@ -150,6 +150,30 @@ def types(n):
     return set(t) if isinstance(t, list) else {t} if t else set()
 
 
+def walk_type(x, t):
+    """Every object of @type t anywhere in a JSON-LD tree."""
+    if isinstance(x, list):
+        for y in x:
+            yield from walk_type(y, t)
+    elif isinstance(x, dict):
+        if t in types(x):
+            yield x
+        for v in x.values():
+            yield from walk_type(v, t)
+
+
+def walk_key(x, k):
+    """Every value of key k anywhere in a JSON-LD tree."""
+    if isinstance(x, list):
+        for y in x:
+            yield from walk_key(y, k)
+    elif isinstance(x, dict):
+        if k in x:
+            yield x[k]
+        for v in x.values():
+            yield from walk_key(v, k)
+
+
 def page_doc(html):
     """Everything the quality rules need from one page. Keys starting with '_' stay in memory only."""
     d = Doc()
@@ -177,7 +201,8 @@ def page_name(path):
     else:
         name = p.strip("/").split("/")[-1].replace("-", " ")
         name = name[:1].upper() + name[1:]
-        name = re.sub(r"\b(uae|vat|kpi|qsr|fnb|f&b)\b", lambda m: {"fnb": "FnB", "f&b": "F&B"}.get(m.group(1).lower(), m.group(1).upper()), name, flags=re.I)
+        name = re.sub(r"\b(uae|vat|kpi|qsr|fnb|f&b|cfo|wps)\b", lambda m: {"fnb": "FnB", "f&b": "F&B"}.get(m.group(1).lower(), m.group(1).upper()), name, flags=re.I)
+        name = re.sub(r"\b(dubai|abu dhabi|sharjah|talabat|deliveroo)\b", lambda m: m.group(1).title(), name, flags=re.I)
     return name + (", Arabic" if ar else "")
 
 
@@ -269,11 +294,15 @@ def phone_key(s):
     return d.lstrip("0") or None
 
 
+PRICE_QUAL = re.compile(r"(before|after|excl\.?|excluding|incl\.?|including|plus|ex|net of|قبل|بعد|شامل|غير شامل|بدون)\s*$", re.I)
+
+
 def pct_hits(rx, text):
-    """Rates written right after a tax name; skipped when another tax is named in between."""
+    """Rates written right after a tax name; skipped when another tax is named in between, or when the tax name
+    only qualifies a price ('AED 20 before VAT is 20.8%')."""
     out = []
     for m in rx.finditer(text):
-        if OTHER_TAX.search(m.group("gap")):
+        if OTHER_TAX.search(m.group("gap")) or PRICE_QUAL.search(text[max(0, m.start() - 14): m.start()]):
             continue
         v = float(m.group("num").translate(AR_DIGITS))
         ctx = text[max(0, m.start() - 80): m.end() + 80]
@@ -468,11 +497,11 @@ def site_quality(ok, site, cfg, targets, robots_allowed):
                     ps.add(k)
             if isinstance(n.get("email"), str):
                 es.add(n["email"].replace("mailto:", "").strip().lower())
-            a = n.get("address")
-            for x in (a if isinstance(a, list) else [a]):
-                if isinstance(x, dict) and (x.get("streetAddress") or x.get("addressLocality")):
-                    digits = re.sub(r"\D", "", str(x.get("streetAddress", "")).translate(AR_DIGITS))
-                    ad.add(((x.get("addressCountry") if isinstance(x.get("addressCountry"), str) else "") or "", digits or flat(str(x.get("addressLocality", "")))))
+        for x in walk_type(o["_nodes"], "PostalAddress"):
+            o["any_addr"] = True
+            if x.get("streetAddress") or x.get("addressLocality"):
+                digits = re.sub(r"\D", "", str(x.get("streetAddress", "")).translate(AR_DIGITS))
+                ad.add(((x.get("addressCountry") if isinstance(x.get("addressCountry"), str) else "") or "", digits or flat(str(x.get("addressLocality", "")))))
         for k in ps:
             phones[k] = phones.get(k, 0) + 1
         for k in es:
@@ -483,14 +512,13 @@ def site_quality(ok, site, cfg, targets, robots_allowed):
         if LICENCE.search(o.get("_body", "").translate(AR_DIGITS)):
             lic += 1
     q["nap"] = {"n": len(ok), "phones": phones, "phone_pages": max(phones.values(), default=0),
-                "addr_pages": sum(1 for o in ok if o["has_addr"]), "addr_forms": len(addrs), "licence_pages": lic, "emails": emails}
+                "addr_pages": sum(1 for o in ok if o["has_addr"]), "addr_any": sum(1 for o in ok if o.get("any_addr")), "addr_forms": len(addrs), "licence_pages": lic, "emails": emails}
 
     # social: profiles linked from the home page (sameAs and links).
     home = byp.get("/ae") or (ok[0] if ok else {})
     nets = set()
-    for n in home.get("_nodes", []):
-        sa = n.get("sameAs")
-        for u in (sa if isinstance(sa, list) else [sa] if isinstance(sa, str) else []):
+    for n in walk_key(home.get("_nodes", []), "sameAs"):
+        for u in (n if isinstance(n, list) else [n] if isinstance(n, str) else []):
             if social_of(u):
                 nets.add(social_of(u))
     for h, _ in home.get("links_all", []):

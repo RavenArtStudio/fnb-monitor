@@ -107,7 +107,8 @@ def measure(c, g, sm=None):
         ni = len(c.get("noindex", []))
         out["index"] = (clamp(10 * ix["indexed"] / max(1, ix["checked"])),
                         f"{ix['indexed']} of {ix['checked']} indexable pages are in Google (URL Inspection)"
-                        + (f"; {pl(ni, 'page')} set to noindex on purpose are left out." if ni else "."))
+                        + (f"; {pl(ni, 'page')} set to noindex on purpose are left out" if ni else "")
+                        + (f"; {pl(ix['failed_now'], 'page')} kept the last reading after Search Console did not answer." if ix.get("failed_now") else "."))
     if g.get("sc_ok"):
         out["sc"] = (10.0 if g.get("bing") else 6.0,
                      "Search Console verified and feeding daily" + ("; Bing verified." if g.get("bing") else "; Bing Webmaster Tools not verified yet."))
@@ -218,8 +219,8 @@ def r_nap(c, q, g, sm):
     ad = p["addr_pages"] / n * (1 if p["addr_forms"] <= 1 else 0.5)
     li = min(1, p["licence_pages"] / n * 2)
     return (clamp(10 * (0.4 * ph + 0.4 * ad + 0.2 * li)),
-            f"Phone on {p['phone_pages']} of {n} pages ({pl(len(p['phones']), 'number')}); address in structured data on {p['addr_pages']} "
-            f"({pl(p['addr_forms'], 'form')}); trade licence number on {p['licence_pages']}. The Google listing keeps the audit score.", 0.75)
+            f"Phone on {p['phone_pages']} of {n} pages ({pl(len(p['phones']), 'number')}); structured-data address on {p.get('addr_any', 0)} pages, "
+            f"with a street or city on {p['addr_pages']}; trade licence number on {p['licence_pages']}. The Google listing keeps the audit score.", 0.75)
 
 
 def r_social(c, q, g, sm):

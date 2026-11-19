@@ -669,12 +669,35 @@ def target_presence(sess):
 
 def index_status(sess, paths):
     url = "https://searchconsole.googleapis.com/v1/urlInspection/index:inspect"
+    def ask(p):
+        # Retries (19 Nov 2026): one read timeout used to drop the whole indexation reading for the run.
+        err = None
+        for attempt in range(3):
+            try:
+                r = sess.post(url, json={"inspectionUrl": SITE + p, "siteUrl": SC_SITE}, timeout=60)
+            except Exception as e:
+                err = "Search Console did not answer in time" if "Timeout" in type(e).__name__ else type(e).__name__
+                time.sleep(3)
+                continue
+            if r.status_code == 200:
+                st = r.json().get("inspectionResult", {}).get("indexStatusResult", {})
+                return p, st.get("verdict") == "PASS", st.get("coverageState", "")
+            err = f"URL Inspection {r.status_code}: {r.text[:160]}"
+            if r.status_code in (401, 403):
+                raise RuntimeError(err)
+            time.sleep(3)
+        raise RuntimeError(err or "URL Inspection failed")
+
+    failed = []
+
     def one(p):
-        r = sess.post(url, json={"inspectionUrl": SITE + p, "siteUrl": SC_SITE}, timeout=60)
-        if r.status_code != 200:
-            raise RuntimeError(f"URL Inspection {r.status_code}: {r.text[:200]}")
-        st = r.json().get("inspectionResult", {}).get("indexStatusResult", {})
-        return p, st.get("verdict") == "PASS", st.get("coverageState", "")
+        try:
+            return ask(p)
+        except RuntimeError as e:
+            if " 401" in str(e) or " 403" in str(e):
+                raise
+            failed.append(str(e))
+            return p, None, None
     # Incremental: indexed pages are rechecked once a day; the rest every run.
     cache_p = DATA / "index-cache.json"
     cache = json.loads(cache_p.read_text()) if cache_p.exists() else {}
@@ -687,10 +710,17 @@ def index_status(sess, paths):
         return age >= (24 if e["indexed"] else 0)
     todo = [p for p in paths if due(p)]
     if todo:
-        one(todo[0])                    # fail fast if not permitted
+        try:
+            ask(todo[0])                # fail fast if not permitted
+        except RuntimeError as e:
+            if " 401" in str(e) or " 403" in str(e):
+                raise
         with cf.ThreadPoolExecutor(4) as ex:
             for p, okk, cs in ex.map(one, todo):
-                cache[p] = {"indexed": okk, "state": cs, "checked": now.isoformat(timespec="minutes")}
+                if okk is not None:     # a page that failed keeps its last reading
+                    cache[p] = {"indexed": okk, "state": cs, "checked": now.isoformat(timespec="minutes")}
+        if len(failed) == len(todo) and not any(p in cache for p in paths):
+            raise RuntimeError(failed[0])
     cache = {p: cache[p] for p in paths if p in cache}
     cache_p.write_text(json.dumps(cache, ensure_ascii=False, indent=0))
     res = [(p, cache[p]["indexed"], cache[p]["state"]) for p in paths if p in cache]
@@ -701,11 +731,14 @@ def index_status(sess, paths):
     for _, okk, cs in res:
         if not okk:
             miss[cs or "Unknown"] = miss.get(cs or "Unknown", 0) + 1
-    return {"checked": len(res), "indexed": sum(1 for x in res if x[1]), "states": states, "rechecked_now": len(todo),
+    return {"checked": len(res), "indexed": sum(1 for x in res if x[1]), "states": states, "rechecked_now": len(todo) - len(failed),
+            "failed_now": len(failed),
             "not_states": miss, "not_indexed": [page_name(p) for p, okk, _ in res if not okk][:8]}
 
 
 STATE_WORDS = {"URL is unknown to Google": "unknown to Google", "Discovered - currently not indexed": "found but not crawled yet",
+               "Excluded by ‘noindex’ tag": "still marked noindex from an earlier Google visit",
+               "Excluded by 'noindex' tag": "still marked noindex from an earlier Google visit",
                "Crawled - currently not indexed": "crawled but not indexed", "Unknown": "status not returned"}
 pl = lambda k, w, s="s": f"{k} {w}{'' if k == 1 else s}"
 
@@ -1304,7 +1337,8 @@ def cube_card(cs, cube, hist, g):
     for b in cs["blocks"]:
         for x_ in b["subs"]:
             gain = b["weight"] * x_["weight"] * max(0.0, b["target"] - x_["score"]) / 10000
-            if gain >= 0.005 and x_.get("action"):
+            # An action whose count came out as zero (its reading was missing this run) is left out, not shown as "the 0 pages".
+            if gain >= 0.005 and x_.get("action") and not re.search(r"\bthe 0 \w", x_["action"].format(**ctx)):
                 gains.append((gain, b, x_))
     gains.sort(key=lambda t: -t[0])
     nxt = [{"t": x_["action"].format(**ctx), "why": f"{b['name']}: {x_['name']} at {x_['score']:.1f}, block target {b['target']:.1f}.",
@@ -1394,7 +1428,9 @@ def next_steps(cards, c, g):
                           if tot("leads") == 0 else
                           [step("Reply to every request within the hour and note the outcome.", f"{pl(tot('leads'), 'request')} this week.", "high", "owner")])
     if "whatsapp" in by:
-        rules["whatsapp"] = [step("Check the header and footer WhatsApp links also send whatsapp_click.", "Only the Ask buttons are confirmed; the rest may go uncounted.", "med", "site")]
+        rules["whatsapp"] = ([step("Tap a WhatsApp button after accepting cookies and check whatsapp_click in Analytics Realtime.",
+                                   "No WhatsApp clicks this week; every wa.me link on the site sends whatsapp_click (site code, Nov 19).", "med", "owner")]
+                             if not tot("whatsapp") else [])
         if top_row("whatsapp"):
             rules["whatsapp"].append(step(f"Keep a WhatsApp button beside the content on {top_row('whatsapp')['label']}.", "It produces the most clicks.", "low", "site"))
     if "tools" in by:
@@ -1512,7 +1548,9 @@ def main():
             g["index"] = index_status(sess, [u for u in c["urls"] if u not in set(c.get("noindex", []))])
         except Exception as e:
             print(e, file=sys.stderr)
-            notes.append("Indexation keeps its audit score: Search Console URL Inspection is not permitted for the service account (needs Full permission).")
+            msg = str(e)
+            notes.append("Indexation keeps its audit score: Search Console URL Inspection is not permitted for the service account (needs Full permission)."
+                         if " 401" in msg or " 403" in msg else f"Indexation keeps its audit score: URL Inspection could not be read this run ({msg[:80]}).")
     if sess and google["ga"]:
         for k, fn in (("ai", ai_sessions), ("events", events_check)):
             try:
