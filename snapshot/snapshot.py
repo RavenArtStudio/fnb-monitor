@@ -1459,7 +1459,7 @@ def next_steps(cards, c, g):
         rules["impressions"] = []
         if unknown:
             rules["impressions"].append(step(f"Request indexing in Search Console for the {pl(unknown, 'page')} not in Google yet ({not_indexed_text(ix)}).",
-                                             "" "high", "google"))
+                                             "", "high", "google"))
         rules["impressions"].append(step("Rewrite the title and description of the most shown pages to match the search wording.", "", "med", "site"))
     if "searchclicks" in by:
         rules["searchclicks"] = [step("Track clicks from searches without the brand name.", "", "low", "owner")]
@@ -1472,15 +1472,15 @@ def next_steps(cards, c, g):
         ms = c.get("missing_from_sitemap") or []
         if ms:
             rules["pages"].append(step(f"Add the {pl(len(ms), 'linked page')} missing from the sitemap, or noindex {'it' if len(ms) == 1 else 'them'}: "
-                                       + "; ".join(page_name(u) for u in ms[:3]) + ".", "" "med", "site"))
+                                       + "; ".join(page_name(u) for u in ms[:3]) + ".", "", "med", "site"))
         ni = c.get("noindex") or []
         if ni:
             rules["pages"].append(step(f"Take the {pl(len(ni), 'noindex page')} out of the sitemap: " + "; ".join(page_name(u) for u in ni[:4]) + ".",
-                                       "" "low", "site"))
+                                       "", "low", "site"))
         eo = (q.get("parity") or {}).get("en_only") or []
         if eo:
             rules["pages"].append(step(f"Publish Arabic versions of the {pl(len(eo), 'English-only page')}, starting with "
-                                       + "; ".join(page_name(u) for u in eo[:3]) + ".", "" "med", "site"))
+                                       + "; ".join(page_name(u) for u in eo[:3]) + ".", "", "med", "site"))
     if "broken" in by:
         rules["broken"] = ([step("Fix: " + "; ".join(u.replace(SITE, "") for u in c["broken"][:3]) + ".", "", "high", "site")] if c["broken"] else
                            [step("Nothing to fix. Recheck after each release.", "", "low", "site")])
@@ -1504,7 +1504,7 @@ def next_steps(cards, c, g):
         ts = c.get("top_shared")
         if ts and ts[3] >= len(sp) / 2 and ts[2] >= 50:
             rules["speed"].append(step(f"Trim {ts[0]} ({f(ts[2])} KB, loaded on {ts[3]} of {len(sp)} pages).",
-                                       "" "med", "site"))
+                                       "", "med", "site"))
         elif c["weight"]:
             big = max(c["weight"].items(), key=lambda kv: kv[1])
             rules["speed"].append(step(f"Minify and split the home page {big[0].lower()} ({big[1]} KB).", "Largest part of the home page.", "low", "site"))
