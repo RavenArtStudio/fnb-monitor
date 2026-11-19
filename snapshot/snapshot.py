@@ -1072,7 +1072,7 @@ def history(days=14):
 def crawl_cards(c, hist):
     dates = sorted(hist)[-7:]
     v = lambda k: [hist[d].get("crawl", {}).get(k) for d in dates]
-    sub = f"{CR}, read {short(TODAY)}, live figures"
+    sub = f"{CR}, read {short(TODAY)}"
     once = ["One reading a day; the line fills in as the snapshot repeats."]
     iss = sorted(((k, len(u)) for k, u in c["issues"].items()), key=lambda x: -x[1])
     cards = [
@@ -1351,11 +1351,11 @@ def cube_card(cs, cube, hist, g):
     n_all = sum(len(b["subs"]) for b in cs["blocks"])
     left = (dt.date.fromisoformat(cs["stage_until"]) - TODAY).days if cs["stage_until"] else None
     kpis = [{"label": "Stage target", "value": f"{cs['target']:.2f}", "note": f"{cs['target'] - tot:.2f} to go" if tot < cs["target"] else "Reached", "tone": "down" if tot < cs["target"] else "up"},
-            {"label": "Blocks on target", "value": f"{on} of {len(cs['blocks'])}", "note": f"{cs['stage']} stage"},
-            {"label": "Measured live", "value": f"{n_meas} of {n_all}", "note": "sub-metrics; the rest are audit scores"},
+            {"label": "Blocks on target", "value": f"{on} of {len(cs['blocks'])}"},
+            {"label": "Measured live", "value": f"{n_meas} of {n_all}"},
             {"label": "Stage ends", "value": short(dt.date.fromisoformat(cs["stage_until"])) if left is not None else "-", "note": f"{left} days left" if left is not None else ""}]
     return {"id": "cube", "group": "Overview", "kind": "heatmap", "next": nxt, "kpis": kpis, "status": "live", "source": "Cube", "short": "Search visibility",
-            "level": True, "sub": f"Ten blocks against the {stage_note}", "available": True, "brand": K,
+            "level": True, "sub": stage_note, "available": True, "brand": K,
             "period": len(cols), "periodLabel": stage_note, "label": "Search visibility", "unit": "points", "through": cols[-1],
             "stats": {"total": round(tot, 2), "previousTotal": aud, "change": None,
                       "deltaText": ("Level with" if x == 0 else f"{'+' if x > 0 else '−'}{abs(x):.2f} on") + " the Nov 13 audit",
@@ -1426,75 +1426,75 @@ def next_steps(cards, c, g):
     q = c.get("q") or {}
     rules = {}
     if "leads" in by:
-        rules["leads"] = ([step("Send one test Profit Review request after accepting cookies; it should show in Analytics Realtime within minutes.", "No requests recorded this week; confirms the form and the generate_lead event work end to end.", "high", "owner"),
-                           step("Mark generate_lead as a key event in Google Analytics.", "Key events power conversion reports and channel comparisons.", "med", "owner")]
+        rules["leads"] = ([step("Send one test Profit Review request after accepting cookies; it should show in Analytics Realtime within minutes.", "No requests recorded this week.", "high", "owner"),
+                           step("Mark generate_lead as a key event in Google Analytics.", "", "med", "owner")]
                           if tot("leads") == 0 else
                           [step("Reply to every request within the hour and note the outcome.", f"{pl(tot('leads'), 'request')} this week.", "high", "owner")])
     if "whatsapp" in by:
         rules["whatsapp"] = ([step("Tap a WhatsApp button after accepting cookies and check whatsapp_click in Analytics Realtime.",
-                                   "No WhatsApp clicks this week; every wa.me link on the site sends whatsapp_click (site code, Nov 19).", "med", "owner")]
+                                   "No WhatsApp clicks this week.", "med", "owner")]
                              if not tot("whatsapp") else [])
         if top_row("whatsapp"):
-            rules["whatsapp"].append(step(f"Keep a WhatsApp button beside the content on {top_row('whatsapp')['label']}.", "It produces the most clicks.", "low", "site"))
+            rules["whatsapp"].append(step(f"Keep a WhatsApp button beside the content on {top_row('whatsapp')['label']}.", f"{top_row('whatsapp')['value']} of {pl(tot('whatsapp'), 'click')} came from it.", "low", "site"))
     if "tools" in by:
         rules["tools"] = ([step("Use one calculator after accepting cookies and check tool_used in Analytics Realtime.", "No calculator use recorded this week.", "high", "owner"),
-                           step("Register the tool parameter as a custom dimension in Analytics.", "Splits uses by calculator instead of by page.", "med", "owner")]
+                           step("Register the tool parameter as a custom dimension in Analytics.", "", "med", "owner")]
                           if not tot("tools") else
-                          [step(f"Feature {top_row('tools')['label'] if top_row('tools') else 'the most used calculator'} on the home page.", "Most used calculator this week.", "med", "site")])
+                          [step(f"Feature {top_row('tools')['label'] if top_row('tools') else 'the most used calculator'} on the home page.", f"{top_row('tools')['value']} of {pl(tot('tools'), 'use')}." if top_row("tools") else "", "med", "site")])
     if "sessions" in by:
         cty = {r["label"]: r["value"] for r in by["sessions"]["breakdowns"][1]["rows"]} if len(by["sessions"]["breakdowns"]) > 1 else {}
         uae, s_ = cty.get("United Arab Emirates", 0), tot("sessions") or 1
-        rules["sessions"] = [step("Exclude team traffic: add the team's IP addresses as internal traffic in Analytics.", f"Only {uae} of {s_} sessions came from the UAE; India and Pakistan are likely the team.", "high", "owner")]
+        rules["sessions"] = [step("Exclude team traffic: add the team's IP addresses as internal traffic in Analytics.", f"{uae} of {s_} sessions came from the UAE.", "high", "owner")]
         ch = top_row("sessions")
         if ch:
-            rules["sessions"].append(step(f"{ch['label']} brings the most visits; make sure those landing pages carry the Profit Review button.", f"{ch['value']} of {s_} sessions.", "med", "site"))
+            rules["sessions"].append(step(f"Make sure the {ch['label']} landing pages carry the Profit Review button.", f"{ch['value']} of {s_} sessions.", "med", "site"))
     if "engaged" in by:
         e, s_ = tot("engaged") or 0, tot("sessions") or 1
         rules["engaged"] = [step("Tighten the first screen of entry pages: one line on who it is for, one figure, one button.", f"{round(100 * e / s_)}% of sessions engaged this week.", "med", "site")]
     if "newvisitors" in by:
-        rules["newvisitors"] = [step("Watch UAE new visitors as the core number once team traffic is filtered.", "New visitors outside the UAE are mostly not prospects.", "low", "owner")]
+        rules["newvisitors"] = [step("Watch UAE new visitors as the core number once team traffic is filtered.", "", "low", "owner")]
     if "views" in by and top_row("views"):
-        rules["views"] = [step(f"{top_row('views')['label']} is the most viewed page; give it a direct path to the Profit Review form.", f"{top_row('views')['value']} views this week.", "med", "site")]
+        rules["views"] = [step(f"Give {top_row('views')['label']} a direct path to the Profit Review form.", f"Most viewed page: {top_row('views')['value']} of {pl(tot('views'), 'view')}.", "med", "site")]
     if "impressions" in by:
         rules["impressions"] = []
         if unknown:
             rules["impressions"].append(step(f"Request indexing in Search Console for the {pl(unknown, 'page')} not in Google yet ({not_indexed_text(ix)}).",
-                                             "Pages Google has not indexed cannot show in results.", "high", "google"))
-        rules["impressions"].append(step("Rewrite the title and description of the most shown pages to match the search wording.", "Impressions turn into clicks through the title and description.", "med", "site"))
+                                             "" "high", "google"))
+        rules["impressions"].append(step("Rewrite the title and description of the most shown pages to match the search wording.", "", "med", "site"))
     if "searchclicks" in by:
-        rules["searchclicks"] = [step("Track clicks from searches without the brand name; those are new prospects.", "Brand searches come from people who already know the firm.", "low", "owner")]
+        rules["searchclicks"] = [step("Track clicks from searches without the brand name.", "", "low", "owner")]
     if "pageone" in by:
         near = by["pageone"]["breakdowns"][0]["rows"] if by["pageone"]["breakdowns"] else []
-        rules["pageone"] = ([step(f"Strengthen the page for '{near[0]['label'].split(' (')[0]}': more depth, internal links, a clear answer at the top.", "Closest keyword to page one.", "high", "site")] if near else
-                            [step("No keyword on page one yet: expected in the first weeks after launch.", "Google is still re-crawling the new site.", "low", "google")])
+        rules["pageone"] = ([step(f"Strengthen the page for '{near[0]['label'].split(' (')[0]}': more depth, internal links, a clear answer at the top.", (lambda m: f"Position {m.group(1)}, {pl(near[0]['value'], 'impression')}." if m else "")(re.search(r"position (\d+)", near[0]['label'])), "high", "site")] if near else
+                            [step("No keyword on page one yet: expected in the first weeks after launch.", "", "low", "google")])
     if "pages" in by:
         rules["pages"] = []
         ms = c.get("missing_from_sitemap") or []
         if ms:
             rules["pages"].append(step(f"Add the {pl(len(ms), 'linked page')} missing from the sitemap, or noindex {'it' if len(ms) == 1 else 'them'}: "
-                                       + "; ".join(page_name(u) for u in ms[:3]) + ".", "Pages outside the sitemap are found later, if at all.", "med", "site"))
+                                       + "; ".join(page_name(u) for u in ms[:3]) + ".", "" "med", "site"))
         ni = c.get("noindex") or []
         if ni:
             rules["pages"].append(step(f"Take the {pl(len(ni), 'noindex page')} out of the sitemap: " + "; ".join(page_name(u) for u in ni[:4]) + ".",
-                                       "A sitemap should list only pages meant for Google; Search Console reports listed noindex pages as errors.", "low", "site"))
+                                       "" "low", "site"))
         eo = (q.get("parity") or {}).get("en_only") or []
         if eo:
             rules["pages"].append(step(f"Publish Arabic versions of the {pl(len(eo), 'English-only page')}, starting with "
-                                       + "; ".join(page_name(u) for u in eo[:3]) + ".", "Each has no Arabic page paired through hreflang.", "med", "site"))
+                                       + "; ".join(page_name(u) for u in eo[:3]) + ".", "" "med", "site"))
     if "broken" in by:
-        rules["broken"] = ([step("Fix: " + "; ".join(u.replace(SITE, "") for u in c["broken"][:3]) + ".", "Broken links waste crawl and lose visitors.", "high", "site")] if c["broken"] else
-                           [step("Nothing to fix. Recheck after each release.", "All internal links work.", "low", "site")])
+        rules["broken"] = ([step("Fix: " + "; ".join(u.replace(SITE, "") for u in c["broken"][:3]) + ".", "", "high", "site")] if c["broken"] else
+                           [step("Nothing to fix. Recheck after each release.", "", "low", "site")])
     if "issues" in by:
-        rules["issues"] = [step(f"Add share images to the {pl(len(c['issues'].get('No share image', [])), 'page')} without one.", "Links shared on WhatsApp and LinkedIn show no picture.", "med", "site")] if c["issues"].get("No share image") else []
+        rules["issues"] = [step(f"Add share images to the {pl(len(c['issues'].get('No share image', [])), 'page')} without one.", "", "med", "site")] if c["issues"].get("No share image") else []
         if c["issues"].get("Description over 160 characters"):
-            rules["issues"].append(step("Shorten the long descriptions: " + "; ".join(page_name(u) for u in c["issues"]["Description over 160 characters"][:3]) + ".", "Google cuts descriptions at about 160 characters.", "low", "site"))
+            rules["issues"].append(step("Shorten the long descriptions: " + "; ".join(page_name(u) for u in c["issues"]["Description over 160 characters"][:3]) + ".", "", "low", "site"))
     if "speed" in by:
         sp = c.get("speed_pages", [])
         slow = [p for p in sp if p["ms"] >= 1000]
         heavy = max(sp, key=lambda p: p["kb"], default=None)
         rules["speed"] = []
         if c["ms_median"] and c["ms_median"] >= 500:
-            rules["speed"].append(step("Bring the median under 500 ms: check server caching of the page code.", f"Median {c['ms_median']} ms.", "high", "site"))
+            rules["speed"].append(step("Bring the median under 500 ms: check server caching of the page code.", "", "high", "site"))
         if slow:
             rules["speed"].append(step("Check the slowest pages first: " + "; ".join(p["name"] for p in slow[:3]) + ".",
                                        f"{len(slow)} of {len(sp)} pages took over a second to answer.", "med", "site"))
@@ -1504,16 +1504,16 @@ def next_steps(cards, c, g):
         ts = c.get("top_shared")
         if ts and ts[3] >= len(sp) / 2 and ts[2] >= 50:
             rules["speed"].append(step(f"Trim {ts[0]} ({f(ts[2])} KB, loaded on {ts[3]} of {len(sp)} pages).",
-                                       "The largest file most pages load; one change speeds up the whole site.", "med", "site"))
+                                       "" "med", "site"))
         elif c["weight"]:
             big = max(c["weight"].items(), key=lambda kv: kv[1])
             rules["speed"].append(step(f"Minify and split the home page {big[0].lower()} ({big[1]} KB).", "Largest part of the home page.", "low", "site"))
         if not rules["speed"]:
-            rules["speed"] = [step("No action while the median stays under 500 ms.", f"Median {c['ms_median']} ms.", "low", "site")]
+            rules["speed"] = [step("No action while the median stays under 500 ms.", "", "low", "site")]
     for k in ("refdomains", "authority"):
         if k in by:
-            rules[k] = [step("Earn one link from a recognised UAE publication or industry body.", "Current links come from low-score blog networks and carry no weight.", "high", "owner"),
-                        step("Get listed on Zoho, Xero and QuickBooks advisor directories.", "Relevant directories add trusted links and local signals.", "med", "owner")]
+            rules[k] = [step("Earn one link from a recognised UAE publication or industry body.", "", "high", "owner"),
+                        step("Get listed on Zoho, Xero and QuickBooks advisor directories.", "", "med", "owner")]
     for x in cards:
         if x["id"] in rules and "next" not in x:
             x["next"] = rules[x["id"]][:4]

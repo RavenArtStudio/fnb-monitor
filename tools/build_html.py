@@ -374,7 +374,7 @@ function nextHTML(d,cap){const all=d.next||[];const n=cap?all.slice(0,cap):all;c
  const steps=n.length?`<ol class="steps">${n.map(s=>`<li class="st"><span class="sd ${s.impact||''}"></span><div><p class="st-t">${esc(s.t)}</p>${s.why?`<p class="st-w">${esc(s.why)}</p>`:''}<span class="st-o"><span>${esc(OWNER[s.owner]||'')}</span>${s.gain?`<b>+${s.gain.toFixed(2)} points</b>`:''}<span>${s.impact==='high'?'High impact':s.impact==='med'?'Medium impact':'Low impact'}</span></span></div></li>`).join('')}</ol>`:'<p class="empty-note">Nothing to act on right now.</p>';
  const so=pats.length?`<div><h3 class="ph">What stands out</h3><div class="so">${pats.map(p=>`<div class="so-i ${esc(p.type)}"><span>${esc(p.title)}</span>${esc(p.evidence)}</div>`).join('')}</div></div>`:'';
  const from=d._win&&d._win!=='7d'&&n.length?(/^Google/.test(d.source)?'from the 7-day review, ':d.source==='Site crawl'?'from the latest check, ':''):'';
- return `<div><h3 class="ph">Next steps<span>${more?`<button class="link-quiet more" data-detail="card">${more} more in All details</button>`:n.length?from+'by impact':''}</span></h3>${steps}</div>${so}`;}
+ return `<div><h3 class="ph">Next steps<span>${more?`<button class="link-quiet more" data-detail="card">${more} more in All details</button>`:''}</span></h3>${steps}</div>${so}`;}
 
 /* ---- one breakdown panel ---- */
 function bdPanel(x){const rows=x.rows.slice(0,5),max=Math.max(1,...rows.map(r=>r.value));
@@ -459,16 +459,16 @@ function heatmap(id,d){const f=el(id),h=d.heat,one=(v)=>v===null||v===undefined?
    return `<span class="cell ${v===null||v===undefined?'none':r.bands[j]}${i===now?' now':''}" title="${esc(h.spans?h.spans[j]:h.cols[j])}: ${one(v)}${STEP===7?' average':''}, ${esc(st[i])} target ${one(tg(j))}">${dense?'':one(v)}</span>`;}).join('');
   return `<button class="heat-row" data-sheet="${esc(r.id)}" aria-haspopup="dialog"><span class="lead"><span class="nm">${esc(r.name)}<small>${r.weight}%%</small></span>${audit}</span>${cells}<span class="tg">${one(r.target)}</span></button>`;}).join('');
  const lines=all.map((x,i)=>bnd[i]?`<i class="sline" style="left:calc(var(--nw) + 6px + var(--aw) + var(--gp) + ${i} * (var(--cw) + var(--gp)) - var(--gp) / 2 - .5px)"></i>`:'').join('');
- const key=`<div class="heat-key"><span><i class="good"></i>On target</span><span><i class="warn"></i>Within 1.5</span><span><i class="bad"></i>Further below</span><span class="hint" hidden>Earlier ${UN} to the left</span><span style="margin-left:auto">Select a block for detail</span></div>`;
+ const key='';
  f.innerHTML=`<div class="heat"><div class="hscroll"><div class="hgrid${dense?' dense':''}" style="--n:${N}">${lines}${stageRow}${head}${rows}</div></div>${key}</div>`;
- const box=f.querySelector('.heat'),sc=f.querySelector('.hscroll'),g=f.querySelector('.hgrid'),hint=f.querySelector('.hint');
+ const box=f.querySelector('.heat'),sc=f.querySelector('.hscroll'),g=f.querySelector('.hgrid'),hint=document.createElement('span');
  const W=sc.clientWidth;let cw,nw,aw,gp=6;
  if(dense){gp=3;aw=44;nw=Math.round(Math.max(190,Math.min(240,W*.25)));cw=Math.max(12,Math.floor((W-nw-6-aw-52-gp*(IV+1)-4)/IV));}
  else{cw=Math.max(40,Math.min(66,Math.floor((W-106-210)/(IV+1))));aw=cw;nw=Math.max(140,W-106-(IV+1)*cw);}
  g.style.setProperty('--cw',cw+'px');g.style.setProperty('--nw',nw+'px');g.style.setProperty('--aw',aw+'px');g.style.setProperty('--gp',gp+'px');
  const max=()=>Math.max(0,sc.scrollWidth-sc.clientWidth);
  const mark=()=>{const l=sc.scrollLeft>1,r=max()-sc.scrollLeft>1;box.classList.toggle('more-l',l);box.classList.toggle('more-r',r);hint.textContent=l?`Earlier ${UN} to the left`:r?`Later ${UN} to the right`:'';HS=max()-sc.scrollLeft;};
- hint.hidden=max()<1;if(!hint.hidden){hint.style.marginLeft='auto';hint.nextElementSibling.style.marginLeft='16px';}
+ 
  sc.scrollLeft=Math.max(0,max()-HS);mark();sc.addEventListener('scroll',mark,{passive:true});
  sc.addEventListener('wheel',e=>{if(max()<1)return;const dx=Math.abs(e.deltaX)>Math.abs(e.deltaY)?e.deltaX:e.deltaY,nx=Math.max(0,Math.min(max(),sc.scrollLeft+dx));if(nx===sc.scrollLeft)return;e.preventDefault();sc.scrollLeft=nx;},{passive:false});
  let x0=null,l0=0,moved=false;
@@ -500,7 +500,7 @@ function detailHTML(d){const q=(id)=>(d.questions||[]).find(x=>x.id===id)?.answe
  const caution=(d.patterns||[]).find(p=>p.type==='caution');
  const pill=caution?PILL('warn',caution.title):PILL('good',`Live, data through ${shortDate(d.through)}`);
  const reading=[{label:'Total',value:fmt(s.total)+(d.kind==='heatmap'?' of 10':' '+d.unit)},s.deltaText?{label:'Change',value:s.deltaText,tone:s.deltaTone}:s.change!=null?{label:'Change',value:`${s.change>0?'+':''}${s.change}%%`,note:`on the previous ${d.period} days`,tone:s.change>0?'up':s.change<0?'down':''}:null,...ks];
- const pats=(d.patterns||[]).slice(0,4);
+ const pats=(d.patterns||[]).filter(p=>p.type!=='movement').slice(0,4);
  const bds=(d.breakdowns||[]).filter(b=>b.rows&&b.rows.length);
  const srcRow=src?.rows?.[0]||[];
  return HEAD(`${d.group||''}, ${d.periodLabel||''}`,d.label,pill)+`<div class="pp">
@@ -518,10 +518,10 @@ function openSheet(bid,opener){const d=BY[cur],r=d?.heat?.rows.find(x=>x.id===bi
  requestAnimationFrame(()=>{scrim.classList.add('on');panel.classList.add('on');});body.focus({preventScroll:true});}
 
 /* ---- workspace ---- */
-function chartHeading(d){if(d.kind==='heatmap')return `Blocks against the ${esc(d.heat.stage)} stage target<span>${esc(d.heat.note||'colour shows each day against its stage target')}</span>`;
+function chartHeading(d){if(d.kind==='heatmap')return `Blocks against the ${esc(d.heat.stage)} stage target`;
  const p=d.main.previous;const label=d.main.tipLabel||'previous period';
- if(isCols(d))return `${esc(d.main.heading||headingOf(d))}<span>${p?`${d.main.dates.length>14?'outlined bars':'dotted line'}: ${esc(label.toLowerCase())}`:''}</span>`;
- return `${esc(d.main.heading||headingOf(d))}<span>${p?`dashed line: ${esc((d.main.previousLabel||label).toLowerCase())}`:''}</span>`;}
+ if(isCols(d))return esc(d.main.heading||headingOf(d));
+ return esc(d.main.heading||headingOf(d));}
 function isCols(d){if(d.level||d.kind)return false;const v=[...Object.values(d.main.series)[0].map(p=>p?.value||0),...(d.main.previous||[]).map(p=>p?.value||0)];return Math.max(...v)<=10;}
 function drawCard(animate=true){if(!BY[cur])return;const d=view(BY[cur]);CUR_STEP=d.main.step||0;const ws=el('ws');const B=(d.breakdowns||[]).filter(x=>x.rows&&x.rows.length).slice(0,3);
  ws.innerHTML=`${headHTML(d)}
@@ -556,9 +556,9 @@ function whyNot(d){if(d.id==='engaged')return 'Google gives no live engagement f
  if(s==='Google Analytics')return LIVE?'The live feed has no reading for this window.':'The live feed is not loaded yet.';
  if(s==='Google Search Console')return WIN==='30m'?'Google reports search by the hour at best, and hours late.':'';
  if(s==='Site crawl')return 'The site is checked about every 3 hours.';if(s==='Cube')return 'The score is worked out once per snapshot.';return '';}
-function wnote(d){if(d.fixed)return {t:d.fixed,c:''};
- if(d._win&&d._win!==WIN)return {t:`${WLAB[WIN]} is not measured here, showing ${WNAME[d._win]}. ${whyNot(d)}`.trim(),c:'fb'};
- if(d._live&&liveStale())return {t:`Live feed paused since ${LIVE?.meta?tlab(LIVE.meta.minute,true):'--'}; showing its last reading.`,c:'warn'};
+function wnote(d){if(d.fixed)return null;
+ if(d._win&&d._win!==WIN)return {t:`Showing ${WNAME[d._win]}`,c:'fb'};
+ if(d._live&&liveStale())return {t:`Live feed paused since ${LIVE?.meta?tlab(LIVE.meta.minute,true):'--'}`,c:'warn'};
  return null;}
 function mergeLive(){if(!LIVE?.cards)return;for(const id in LIVE.cards){const c=BY[id],L=LIVE.cards[id];if(!c)continue;
  c.w=Object.assign({},c.w||{},L.w);const s=new Set([...(c.wins||['7d']),...(L.wins||[])]);c.wins=WINS.filter(k=>s.has(k));}}
