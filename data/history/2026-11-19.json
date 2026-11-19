@@ -4,22 +4,22 @@
   "pages_ok": 127,
   "broken_n": 0,
   "issue_pages": 22,
-  "ms_median": 306,
+  "ms_median": 289,
   "weight_total": 644
  },
  "cube": {
-  "overall": 6.58,
+  "overall": 7.15,
   "blocks": {
-   "tech": 9.27,
-   "onpage": 9.22,
-   "content": 7.65,
-   "schema": 8.38,
-   "entity": 3.73,
-   "offsite": 0.6,
-   "geo": 8.15,
-   "aio": 2.65,
-   "arabic": 5.62,
-   "measure": 5.9
+   "tech": 8.72,
+   "onpage": 9.72,
+   "content": 9.37,
+   "schema": 9.25,
+   "entity": 4.29,
+   "offsite": 0.45,
+   "geo": 8.85,
+   "aio": 3.06,
+   "arabic": 6.53,
+   "measure": 5.93
   }
  },
  "leads": 1,

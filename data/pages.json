@@ -1,0 +1,3779 @@
+{
+"date": "2026-11-19",
+"pages": [
+{
+"u": "/ae",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Restaurant Finance UAE | F&B Performance",
+"desc": "Finance for UAE restaurants, cafés and cloud kitchens: free profit tools, VAT and Corporate Tax help, and monthly books that show what each outlet earns.",
+"h1t": "Restaurant finance for UAE food and beverage operators",
+"words": 801,
+"types": [
+"AccountingService",
+"FAQPage",
+"WebSite"
+],
+"ext": [],
+"byline": true,
+"dated": false,
+"nums": 20,
+"answer": true,
+"first_w": 53,
+"first": "A full dining room does not prove a profit. Food cost, labour, rent and delivery commission decide it. Check your own numbers in two minutes with the free tools",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "مالية المطاعم في الإمارات | F&B Performance",
+"desc": "مالية المطاعم والمقاهي والمطابخ السحابية في الإمارات: أدوات ربحية مجانية، ضريبة القيمة المضافة وضريبة الشركات، ودفاتر شهرية تبيّن ربح كل فرع.",
+"h1t": "الإدارة المالية للمطاعم والمقاهي في الإمارات",
+"words": 752,
+"types": [
+"AccountingService",
+"FAQPage",
+"WebSite"
+],
+"ext": [],
+"byline": true,
+"dated": false,
+"nums": 18,
+"answer": true,
+"first_w": 49,
+"first": "امتلاء الصالة لا يعني أن المطعم يربح. الذي يحسم الربح هو تكلفة الطعام والعمالة والإيجار وعمولة تطبيقات التوصيل. افحص أرقامك في دقيقتين بالأدوات المجانية أدناه، ",
+"qheads": 1,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/contact",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Contact F&B Performance | Free Profit Review",
+"desc": "Send a short note or WhatsApp with your outlet type and the number that worries you. We reply within one business day.",
+"h1t": "Contact us",
+"words": 379,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"ContactPage",
+"FAQPage",
+"WebPage"
+],
+"ext": [],
+"byline": true,
+"dated": false,
+"nums": 1,
+"answer": true,
+"first_w": 30,
+"first": "Send a short note or WhatsApp us with your outlet type and the number that worries you. We reply within one business day and start with a free Profit Review.",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/contact",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "تواصل مع F&B Performance | مراجعة ربحية مجانية",
+"desc": "أرسل رسالة قصيرة أو راسلنا عبر واتساب، واذكر نوع منشأتك والرقم الذي يقلقك. نرد خلال يوم عمل واحد، ونبدأ بمراجعة ربحية مجانية دون أي التزام.",
+"h1t": "تواصل معنا",
+"words": 354,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"ContactPage",
+"FAQPage",
+"WebPage"
+],
+"ext": [],
+"byline": true,
+"dated": false,
+"nums": 0,
+"answer": true,
+"first_w": 27,
+"first": "أرسل لنا رسالة قصيرة أو تواصل عبر واتساب، واذكر نوع منشأتك والرقم الذي يقلقك في مطعمك أو مقهاك. نرد خلال يوم عمل واحد، ونبدأ بمراجعة ربحية مجانية.",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/about",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "About F&B Performance | Founder-led Restaurant Finance UAE",
+"desc": "Meet Babar Shabir, founder of F&B Performance, and Manpreet Singh Juneja: a lean UAE restaurant-finance team built on clear scope, sound method and proof.",
+"h1t": "Small enough to know who is accountable. Serious enough to make the numbers answer the question.",
+"words": 747,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"Person"
+],
+"ext": [],
+"byline": true,
+"dated": true,
+"nums": 1,
+"answer": true,
+"first_w": 31,
+"first": "F&B Performance is a founder-led UAE restaurant-finance business. We connect reliable accounting, outlet performance, cash visibility and CFO judgement through ",
+"qheads": 0,
+"faq": false,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/about",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "من نحن | F&B Performance لمالية المطاعم في الإمارات",
+"desc": "تعرّف على Babar Shabir مؤسس F&B Performance وManpreet Singh Juneja من الفريق. عمل مالي رشيق للمطاعم في الإمارات قائم على وضوح النطاق والمنهجية والإثبات قبل الادعاء.",
+"h1t": "صغير بما يكفي لتعرف من يتحمل المسؤولية. وجاد بما يكفي لجعل الأرقام تجيب عن السؤال.",
+"words": 675,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"Person"
+],
+"ext": [],
+"byline": true,
+"dated": false,
+"nums": 0,
+"answer": true,
+"first_w": 29,
+"first": "نحن F&B Performance، مكتب متخصص في مالية المطاعم في الإمارات يقوده مؤسسه. نربط المحاسبة الموثوقة بأداء الفروع والسيولة، وندعم قرارات المدير المالي، بفريق صغير و",
+"qheads": 0,
+"faq": false,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/pricing",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Restaurant Accounting Prices UAE: From AED 2,950",
+"desc": "UAE restaurant finance plans: Finance Control from AED 2,950, F&B Performance from AED 6,500, Fractional CFO AED 12,500+. Profit Diagnostic AED 4,500.",
+"h1t": "Pricing",
+"words": 801,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"WebPage"
+],
+"ext": [],
+"byline": true,
+"dated": true,
+"nums": 12,
+"answer": true,
+"first_w": 26,
+"first": "Three monthly plans. Finance Control from AED 2,950 a month: clean books, a monthly P&L and balance sheet, and VAT and Corporate Tax coordination.",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/pricing",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "أسعار محاسبة المطاعم في الإمارات: من 2,950 درهم",
+"desc": "خطط مالية شهرية لمطاعم الإمارات: Finance Control من 2,950 درهم، F&B Performance من 6,500، Fractional CFO من 12,500 فأكثر، وتشخيص ربحية بـ4,500 درهم.",
+"h1t": "الأسعار",
+"words": 793,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"WebPage"
+],
+"ext": [],
+"byline": true,
+"dated": true,
+"nums": 10,
+"answer": true,
+"first_w": 25,
+"first": "ثلاث خطط شهرية، أولها Finance Control من 2,950 درهم شهريًا: دفاتر منضبطة وقائمة أرباح وخسائر وميزانية عمومية وتنسيق ضريبة القيمة المضافة وضريبة الشركات.",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/corporate-tax",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Corporate Tax in UAE for Restaurants | Rate and Deadlines",
+"desc": "UAE Corporate Tax: 0% up to AED 375,000 of taxable income, 9% above. Who registers, when the return is due, Small Business Relief and free zones.",
+"h1t": "Corporate Tax in the UAE for restaurants and cafés",
+"words": 884,
+"types": [
+"AccountingService",
+"Article",
+"BreadcrumbList",
+"FAQPage"
+],
+"ext": [
+"mof.gov.ae",
+"tax.gov.ae"
+],
+"byline": true,
+"dated": true,
+"nums": 17,
+"answer": true,
+"first_w": 58,
+"first": "Corporate Tax is 0% on taxable income up to AED 375,000 and 9% on the part above. Resident companies must register even if they will pay nothing. A restaurant n",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/corporate-tax",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "ضريبة الشركات في الإمارات للمطاعم | النسبة والمواعيد",
+"desc": "ضريبة الشركات في الإمارات: 0% حتى 375,000 درهم من الدخل الخاضع للضريبة و9% على ما زاد. من يسجّل، موعد الإقرار، تسهيلات الأعمال الصغيرة والمناطق الحرة.",
+"h1t": "ضريبة الشركات في الإمارات للمطاعم والمقاهي",
+"words": 874,
+"types": [
+"AccountingService",
+"Article",
+"BreadcrumbList",
+"FAQPage"
+],
+"ext": [
+"mof.gov.ae",
+"tax.gov.ae"
+],
+"byline": true,
+"dated": true,
+"nums": 13,
+"answer": true,
+"first_w": 54,
+"first": "ضريبة الشركات 0% على الدخل الخاضع للضريبة حتى 375,000 درهم و9% على ما زاد. يجب على الشركات المقيمة التسجيل حتى لو لم تدفع شيئًا. يحتاج المطعم إلى دفاتر تسند الإ",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/intelligence",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Restaurant Finance Guides UAE | Cash, Costs, Tax, Books",
+"desc": "Practical finance guides for UAE restaurant owners: prime cost, 13-week cash flow, month-end close, receipts, opening costs and when you need a CFO.",
+"h1t": "Restaurant finance guides",
+"words": 339,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"WebPage"
+],
+"ext": [],
+"byline": false,
+"dated": false,
+"nums": 1,
+"answer": true,
+"first_w": 58,
+"first": "Four things send owners here: cash, margin, tax and books. For cash, read the 13-week cash flow guide; for margin, prime cost; for tax, the VAT and Corporate Ta",
+"qheads": 1,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/intelligence",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "أدلة مالية المطاعم في الإمارات | النقد والتكاليف والضرائب",
+"desc": "أدلة مالية عملية لأصحاب المطاعم في الإمارات: التكلفة الأولية، النقد على 13 أسبوعًا، الإقفال الشهري، الإيصالات، تكاليف الافتتاح ومتى تحتاج إلى مدير مالي.",
+"h1t": "أدلة مالية المطاعم",
+"words": 342,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"WebPage"
+],
+"ext": [],
+"byline": false,
+"dated": false,
+"nums": 1,
+"answer": true,
+"first_w": 55,
+"first": "أربعة أمور تأتي بأصحاب المطاعم إلى هنا: النقد، وهامش الربح، والضرائب، والدفاتر. للنقد اقرأ دليل التدفق النقدي على 13 أسبوعًا، ولهامش الربح دليل التكلفة الأولية،",
+"qheads": 1,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/services",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Services for Restaurants and Cafés",
+"desc": "Outsourced accounting for UAE F&B: bookkeeping, VAT and Corporate Tax, delivery reconciliation, payroll, outlet P&Ls and CFO support. Plans from AED 2,950.",
+"h1t": "Accounting services for restaurants, cafés and cloud kitchens",
+"words": 575,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"WebPage"
+],
+"ext": [],
+"byline": true,
+"dated": false,
+"nums": 4,
+"answer": false,
+"first_w": 63,
+"first": "Five problems bring an owner here: books you can't trust, a VAT or Corporate Tax deadline, delivery payouts that don't add up, outlets you can't compare, and ca",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/services",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "خدمات محاسبة المطاعم والمقاهي في الإمارات",
+"desc": "محاسبة المطاعم في الإمارات من خارج المنشأة: مسك الدفاتر، الضرائب، مطابقة تطبيقات التوصيل، الرواتب، أرباح كل فرع ودعم المدير المالي. الخطط من 2,950 درهم.",
+"h1t": "خدمات محاسبية للمطاعم والمقاهي والمطابخ السحابية",
+"words": 556,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"WebPage"
+],
+"ext": [],
+"byline": true,
+"dated": false,
+"nums": 3,
+"answer": true,
+"first_w": 56,
+"first": "خمس مشكلات تأتي بصاحب المطعم إلينا: دفاتر لا يثق بها، موعد لضريبة القيمة المضافة أو ضريبة الشركات، تحويلات تطبيقات التوصيل التي لا تتطابق، فروع لا يستطيع المقار",
+"qheads": 1,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/locations",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Accounting Services UAE for F&B | Dubai, Abu Dhabi, Sharjah",
+"desc": "Accounting for restaurants, cafés and cloud kitchens across the UAE. Pages for Dubai, Abu Dhabi and Sharjah, and how the work runs in every emirate.",
+"h1t": "Where we work in the UAE",
+"words": 317,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"WebPage"
+],
+"ext": [],
+"byline": false,
+"dated": false,
+"nums": 0,
+"answer": true,
+"first_w": 46,
+"first": "We take on food and beverage businesses in all seven emirates. The work runs on cloud accounting systems, shared POS and delivery reports, and video or WhatsApp",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/locations",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "محاسبة المطاعم في الإمارات | دبي وأبوظبي والشارقة",
+"desc": "محاسبة المطاعم والمقاهي والمطابخ السحابية في كل إمارات الدولة. صفحات لدبي وأبوظبي والشارقة، وكيف يجري العمل في كل إمارة.",
+"h1t": "أين نعمل في الإمارات",
+"words": 293,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"WebPage"
+],
+"ext": [],
+"byline": false,
+"dated": false,
+"nums": 0,
+"answer": true,
+"first_w": 43,
+"first": "نتعاقد مع منشآت الأغذية والمشروبات في الإمارات السبع كلها. يجري العمل عبر أنظمة محاسبة سحابية، وتقارير نقاط البيع والتوصيل التي تشاركها معنا، ومكالمات بالفيديو ",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/uae-einvoicing",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "E-Invoicing UAE for Restaurants | Dates and Readiness Check",
+"desc": "UAE eInvoicing goes live from 1 Jan 2027 for larger businesses and 1 Jul 2027 for the rest. Check your phase and what to ask your POS and ERP vendor.",
+"h1t": "UAE eInvoicing: your phase, dates and vendor questions",
+"words": 1685,
+"types": [
+"AccountingService",
+"Article",
+"BreadcrumbList",
+"FAQPage"
+],
+"ext": [
+"grantthornton.ae",
+"mof.gov.ae",
+"sovos.com",
+"taxnews.ey.com"
+],
+"byline": true,
+"dated": true,
+"nums": 6,
+"answer": false,
+"first_w": 77,
+"first": "UAE eInvoicing (electronic invoicing) runs through Accredited Service Providers (ASPs) on a Peppol-based network (Peppol: a shared international e-invoice excha",
+"qheads": 2,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/uae-einvoicing",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "الفوترة الإلكترونية في الإمارات للمطاعم | المواعيد",
+"desc": "تبدأ الفوترة الإلكترونية في الإمارات في 1 يناير 2027 للمنشآت الأكبر و1 يوليو 2027 للبقية. اعرف مرحلتك وما تسأل عنه مزوّد نقاط البيع والمحاسبة.",
+"h1t": "الفوترة الإلكترونية في الإمارات: مرحلتك والمواعيد وأسئلة المزوّد",
+"words": 1573,
+"types": [
+"AccountingService",
+"Article",
+"BreadcrumbList",
+"FAQPage"
+],
+"ext": [
+"grantthornton.ae",
+"mof.gov.ae",
+"sovos.com",
+"taxnews.ey.com"
+],
+"byline": true,
+"dated": true,
+"nums": 4,
+"answer": false,
+"first_w": 75,
+"first": "تعمل الفوترة الإلكترونية في الإمارات عبر مزودي خدمة معتمدين ASP (جهات معتمدة تنقل فواتيرك عبر الشبكة) على شبكة تعتمد «بيبول» Peppol (معيار دولي لتبادل الفواتير ",
+"qheads": 2,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/locations/accounting-services-dubai",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Dubai Restaurant Finance: DET, Municipality Fees, VAT",
+"desc": "Accounting services in Dubai for F&B: bookkeeping, VAT, Corporate Tax, payroll, outlet P&Ls for mainland and free-zone restaurants. Plans from AED 2,950.",
+"h1t": "Accounting services in Dubai for restaurants, cafés and cloud kitchens",
+"words": 690,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"WebPage"
+],
+"ext": [
+"mediaoffice.ae",
+"mof.gov.ae"
+],
+"byline": true,
+"dated": true,
+"nums": 6,
+"answer": false,
+"first_w": 66,
+"first": "We keep the books and coordinate VAT and Corporate Tax for food and beverage businesses in Dubai, on the mainland and in free zones, from AED 2,950 a month on F",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/locations/accounting-services-dubai",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "مالية المطاعم في دبي: دائرة الاقتصاد ورسوم البلدية والضريبة",
+"desc": "محاسبة المطاعم في دبي: مسك الدفاتر، ضريبة القيمة المضافة وضريبة الشركات، الرواتب وأرباح كل فرع في البر الرئيسي والمناطق الحرة. الخطط من 2,950 درهم.",
+"h1t": "خدمات محاسبية في دبي للمطاعم والمقاهي والمطابخ السحابية",
+"words": 723,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"WebPage"
+],
+"ext": [
+"mediaoffice.ae",
+"mof.gov.ae"
+],
+"byline": true,
+"dated": false,
+"nums": 3,
+"answer": false,
+"first_w": 64,
+"first": "نمسك الدفاتر وننسّق ضريبة القيمة المضافة وضريبة الشركات لمنشآت الأغذية والمشروبات في دبي، في البر الرئيسي والمناطق الحرة، ابتداءً من 2,950 درهم شهريًا في خطة Fi",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/locations/accounting-services-abu-dhabi",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Restaurant Accounting & CFO Abu Dhabi | F&B Performance",
+"desc": "Restaurant finance control, outlet reporting, cash forecasting and fractional CFO support for operators in Abu Dhabi.",
+"h1t": "Accounting services in Abu Dhabi, built for longer payment cycles.",
+"words": 721,
+"types": [
+"AccountingService",
+"Service"
+],
+"ext": [],
+"byline": true,
+"dated": false,
+"nums": 4,
+"answer": true,
+"first_w": 24,
+"first": "Bookkeeping, Corporate Tax compliance, management reporting and CFO support for Abu Dhabi businesses — including ADGM entities, government and semi-government s",
+"qheads": 0,
+"faq": false,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/locations/accounting-services-abu-dhabi",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "محاسبة المطاعم وخدمات المدير المالي في أبوظبي",
+"desc": "رقابة مالية وتقارير فروع وتوقعات سيولة ودعم مدير مالي لمشغلي المطاعم في أبوظبي.",
+"h1t": "خدمات محاسبة ومالية في أبوظبي، مع رؤية تناسب دورات التحصيل الأطول.",
+"words": 551,
+"types": [
+"AccountingService",
+"Service"
+],
+"ext": [],
+"byline": true,
+"dated": false,
+"nums": 0,
+"answer": true,
+"first_w": 18,
+"first": "وظيفة مالية للشركات في أبوظبي: إقفال موثوق، تقارير إدارية، سيولة، دعم ضريبي ومدير مالي بدوام جزئي عند الحاجة.",
+"qheads": 0,
+"faq": false,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/locations/accounting-services-sharjah",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Restaurant Accounting & CFO Sharjah | F&B Performance",
+"desc": "Restaurant accounting, performance reporting and finance support for operators in Sharjah and the Northern Emirates.",
+"h1t": "Accounting services in Sharjah, where margin discipline decides the year.",
+"words": 687,
+"types": [
+"AccountingService",
+"Service"
+],
+"ext": [],
+"byline": true,
+"dated": false,
+"nums": 6,
+"answer": true,
+"first_w": 27,
+"first": "Bookkeeping, VAT and Corporate Tax compliance, costing and management reporting for Sharjah businesses — trading, manufacturing, F&B and family-owned SMEs acros",
+"qheads": 0,
+"faq": false,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/locations/accounting-services-sharjah",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "محاسبة المطاعم والدعم المالي في الشارقة | F&B Performance",
+"desc": "محاسبة المطاعم وتقارير الأداء والدعم المالي لمشغلي المطاعم في الشارقة والإمارات الشمالية.",
+"h1t": "خدمات محاسبة ومالية في الشارقة، حيث يحتاج كلٌّ من الهامش والمخزون والنقد إلى رقابة.",
+"words": 546,
+"types": [
+"AccountingService",
+"Service"
+],
+"ext": [],
+"byline": true,
+"dated": false,
+"nums": 0,
+"answer": true,
+"first_w": 13,
+"first": "محاسبة وتقارير وسيولة ودعم مالي للشركات الصناعية والتجارية والخدمية في الشارقة والإمارات الشمالية.",
+"qheads": 0,
+"faq": false,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/privacy",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Privacy notice | F&B Performance",
+"desc": "How F&B Performance handles information you choose to send through this website.",
+"h1t": "Privacy notice",
+"words": 913,
+"types": [
+"AccountingService"
+],
+"ext": [],
+"byline": true,
+"dated": true,
+"nums": 2,
+"answer": true,
+"first_w": 13,
+"first": "How F&B Performance handles information you choose to send through this website.",
+"qheads": 0,
+"faq": false,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/privacy",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "إشعار الخصوصية | F&B Performance",
+"desc": "كيف تتعامل F&B Performance مع المعلومات التي تختار إرسالها عبر هذا الموقع.",
+"h1t": "إشعار الخصوصية",
+"words": 819,
+"types": [
+"AccountingService"
+],
+"ext": [],
+"byline": true,
+"dated": true,
+"nums": 2,
+"answer": true,
+"first_w": 13,
+"first": "كيف تتعامل F&B Performance مع المعلومات التي تختار إرسالها عبر هذا الموقع.",
+"qheads": 0,
+"faq": false,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/terms",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Website terms | F&B Performance",
+"desc": "Terms that apply to use of the F&B Performance website, published tools and general information.",
+"h1t": "Website terms",
+"words": 490,
+"types": [
+"AccountingService"
+],
+"ext": [],
+"byline": false,
+"dated": true,
+"nums": 0,
+"answer": true,
+"first_w": 33,
+"first": "F&B Performance operates this website. Questions about these terms can be sent to support@fnbperformance.com. The legal counterparty for any paid engagement is ",
+"qheads": 0,
+"faq": false,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/terms",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "شروط استخدام الموقع | F&B Performance",
+"desc": "الشروط التي تنطبق على استخدام موقع F&B Performance والأدوات المنشورة والمعلومات العامة.",
+"h1t": "شروط استخدام الموقع",
+"words": 462,
+"types": [
+"AccountingService"
+],
+"ext": [],
+"byline": false,
+"dated": true,
+"nums": 0,
+"answer": true,
+"first_w": 13,
+"first": "الشروط التي تنطبق على استخدام موقع F&B Performance والأدوات المنشورة والمعلومات العامة.",
+"qheads": 0,
+"faq": false,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/legal/cookies",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Cookie policy | F&B Performance",
+"desc": "Which cookies and similar technologies the F&B Performance website uses, why, and how to accept, refuse or change your choice.",
+"h1t": "Cookie policy",
+"words": 789,
+"types": [
+"AccountingService"
+],
+"ext": [],
+"byline": false,
+"dated": true,
+"nums": 0,
+"answer": true,
+"first_w": 21,
+"first": "Which cookies and similar technologies the F&B Performance website uses, why, and how to accept, refuse or change your choice.",
+"qheads": 0,
+"faq": false,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/legal/cookies",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "سياسة ملفات الارتباط | F&B Performance",
+"desc": "ملفات الارتباط والتقنيات المشابهة التي يستخدمها موقع F&B Performance، ولماذا، وكيف تقبلها أو ترفضها أو تغيّر اختيارك.",
+"h1t": "سياسة ملفات الارتباط",
+"words": 759,
+"types": [
+"AccountingService"
+],
+"ext": [],
+"byline": false,
+"dated": true,
+"nums": 0,
+"answer": true,
+"first_w": 19,
+"first": "ملفات الارتباط والتقنيات المشابهة التي يستخدمها موقع F&B Performance، ولماذا، وكيف تقبلها أو ترفضها أو تغيّر اختيارك.",
+"qheads": 0,
+"faq": false,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/tools",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Restaurant Calculators UAE | Free F&B Finance Tools",
+"desc": "Free restaurant calculators for UAE operators: delivery app margin, food cost, break-even, rent, cash runway, gratuity and VAT. No sign-up.",
+"h1t": "Restaurant calculators for UAE operators",
+"words": 1064,
+"types": [
+"AccountingService",
+"BreadcrumbList"
+],
+"ext": [],
+"byline": false,
+"dated": true,
+"nums": 5,
+"answer": false,
+"first_w": 62,
+"first": "Twelve free calculators for the costs that decide restaurant profit. If app orders feel thin, open the delivery profit calculator; if suppliers have raised pric",
+"qheads": 1,
+"faq": false,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/tools",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "حاسبات المطاعم في الإمارات | أدوات مالية مجانية",
+"desc": "حاسبات مجانية لأصحاب المطاعم في الإمارات: هامش تطبيقات التوصيل، تكلفة الطعام، نقطة التعادل، الإيجار، كفاية النقد، نهاية الخدمة والضريبة. دون تسجيل.",
+"h1t": "حاسبات المطاعم لأصحاب المنشآت في الإمارات",
+"words": 947,
+"types": [
+"AccountingService",
+"BreadcrumbList"
+],
+"ext": [],
+"byline": false,
+"dated": false,
+"nums": 3,
+"answer": true,
+"first_w": 56,
+"first": "اثنتا عشرة حاسبة مجانية للتكاليف التي تحسم ربح المطعم. إذا شعرت أن طلبات التطبيقات لا تترك شيئًا فافتح حاسبة ربح التوصيل، وإذا رفع الموردون أسعارهم فحاسبة تكلفة",
+"qheads": 1,
+"faq": false,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/tools/cash-runway-calculator",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Cash Runway Calculator for Restaurants | Weeks of Cash",
+"desc": "How many weeks will your cash last? Enter cash, fixed costs, sales and payment terms to see runway, working-capital gap and safe credit terms.",
+"h1t": "Cash runway calculator for restaurants",
+"words": 738,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"WebApplication"
+],
+"ext": [],
+"byline": true,
+"dated": true,
+"nums": 19,
+"answer": true,
+"first_w": 60,
+"first": "Divide the cash you can spend by what you lose each week after expected sales. Enter cash in bank, monthly fixed costs, expected sales, your variable cost and y",
+"qheads": 0,
+"faq": false,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/tools/cash-runway-calculator",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "حاسبة كفاية النقد للمطاعم | كم أسبوعًا يكفي نقدك",
+"desc": "كم أسبوعًا يكفي نقدك؟ أدخل النقد والتكاليف الثابتة والمبيعات ومهل السداد لترى مدة الكفاية وفجوة رأس المال العامل ومهلة الائتمان الآمنة.",
+"h1t": "حاسبة كفاية النقد للمطاعم",
+"words": 686,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"WebApplication"
+],
+"ext": [],
+"byline": true,
+"dated": false,
+"nums": 20,
+"answer": true,
+"first_w": 48,
+"first": "اقسم النقد المتاح للإنفاق على ما تخسره كل أسبوع بعد المبيعات المتوقعة. أدخل رصيد البنك، والتكاليف الثابتة الشهرية، والمبيعات المتوقعة، ونسبة التكلفة المتغيرة، و",
+"qheads": 2,
+"faq": false,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/tools/books-reliability-score",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Bookkeeping Health Check for Restaurants | 8 Questions",
+"desc": "Eight questions on reconciliations, month-end, POS and delivery matching and VAT records. Get a reliability score and the three fixes to make first.",
+"h1t": "Books reliability score",
+"words": 614,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"WebApplication"
+],
+"ext": [],
+"byline": true,
+"dated": true,
+"nums": 1,
+"answer": true,
+"first_w": 51,
+"first": "Eight questions on reconciliations, month-end close, POS and delivery matching, and VAT records give a reliability score and your top three fixes. A low score u",
+"qheads": 0,
+"faq": false,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/tools/books-reliability-score",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "فحص سلامة دفاتر المطعم المحاسبية | 8 أسئلة",
+"desc": "ثمانية أسئلة عن المطابقات والإقفال الشهري ومطابقة نقاط البيع والتوصيل وسجلات ضريبة القيمة المضافة. احصل على درجة الموثوقية وأول ثلاثة إصلاحات.",
+"h1t": "مؤشر موثوقية الدفاتر",
+"words": 629,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"WebApplication"
+],
+"ext": [],
+"byline": true,
+"dated": false,
+"nums": 0,
+"answer": true,
+"first_w": 47,
+"first": "ثمانية أسئلة عن المطابقات، والإقفال الشهري، ومطابقة نظام نقاط البيع والتوصيل، وسجلات ضريبة القيمة المضافة تعطيك درجة موثوقية وأهم ثلاثة إصلاحات. الدرجة المنخفضة",
+"qheads": 0,
+"faq": false,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/tools/restaurant-profit-score",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Restaurant Profit Calculator UAE | Prime Cost & Rent Check",
+"desc": "Enter sales, food cost, labour and rent. See prime cost and rent as a share of sales, a band for your format, and the cost to fix first.",
+"h1t": "Restaurant profit calculator",
+"words": 551,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"WebApplication"
+],
+"ext": [],
+"byline": true,
+"dated": true,
+"nums": 16,
+"answer": true,
+"first_w": 54,
+"first": "Enter monthly sales, food cost, labour and rent. You get prime cost and rent as a share of sales, a green, amber or red band for each, and the one cost that is ",
+"qheads": 0,
+"faq": false,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/tools/restaurant-profit-score",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "حاسبة ربحية المطعم | التكلفة الأولية ونسبة الإيجار",
+"desc": "أدخل المبيعات وتكلفة الطعام والعمالة والإيجار. اعرف التكلفة الأولية والإيجار كنسبة من المبيعات، ونطاق منشأتك، والبند الأولى بالمعالجة.",
+"h1t": "حاسبة ربحية المطعم",
+"words": 477,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"WebApplication"
+],
+"ext": [],
+"byline": true,
+"dated": false,
+"nums": 15,
+"answer": true,
+"first_w": 42,
+"first": "أدخل المبيعات الشهرية وتكلفة الطعام والعمالة والإيجار. تحصل على التكلفة الأولية (Prime Cost) والإيجار كنسبة من المبيعات، ولون أخضر أو برتقالي أو أحمر لكل منهما،",
+"qheads": 0,
+"faq": false,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/who-we-help",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Who We Help | Restaurants, Cafés, Cloud Kitchens, Groups",
+"desc": "F&B Performance works only with UAE food and beverage operators: cafés, bakeries, cloud kitchens, QSR, restaurant groups and franchise operators.",
+"h1t": "Who we help",
+"words": 306,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"WebPage"
+],
+"ext": [],
+"byline": false,
+"dated": false,
+"nums": 0,
+"answer": true,
+"first_w": 56,
+"first": "We take on only food and beverage operators in the UAE: cafés and bakeries, cloud kitchens, quick-service and fast-casual outlets, restaurant groups and franchi",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/who-we-help",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "من نخدم | مطاعم ومقاهٍ ومطابخ سحابية ومجموعات",
+"desc": "نعمل في F&B Performance مع منشآت الأغذية والمشروبات في الإمارات فقط: مقاهٍ ومخابز ومطابخ سحابية ووجبات سريعة ومجموعات مطاعم وأصحاب امتياز.",
+"h1t": "من نخدم",
+"words": 284,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"WebPage"
+],
+"ext": [],
+"byline": false,
+"dated": false,
+"nums": 0,
+"answer": true,
+"first_w": 41,
+"first": "نتعاقد فقط مع منشآت الأغذية والمشروبات في الإمارات: المقاهي والمخابز، والمطابخ السحابية، ومطاعم الوجبات السريعة والفاست كاجوال، ومجموعات المطاعم، وأصحاب الامتيا",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/who-we-help/cafes-bakeries",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Accounting for Coffee Shops Dubai | Cafés and Bakeries",
+"desc": "Accounting for UAE cafés and bakeries: cup and recipe costing, waste, daily receipts, VAT and Corporate Tax, plus tools to price a cup.",
+"h1t": "Accounting for cafés, coffee shops and bakeries",
+"words": 571,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"WebPage"
+],
+"ext": [
+"moet.gov.ae",
+"mof.gov.ae"
+],
+"byline": true,
+"dated": true,
+"nums": 11,
+"answer": true,
+"first_w": 58,
+"first": "Cafés and bakeries protect margin in three places: what each cup or loaf really costs, how much is wasted, and whether daily receipts reach the books. Cost your",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/who-we-help/cafes-bakeries",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "محاسبة كوفي شوب في دبي | المقاهي والمخابز",
+"desc": "محاسبة للمقاهي والمخابز في الإمارات: تكلفة الكوب والوصفة، الهدر، الإيصالات اليومية، ضريبة القيمة المضافة وضريبة الشركات، وأدوات لتسعير الكوب.",
+"h1t": "محاسبة للمقاهي والكوفي شوب والمخابز",
+"words": 551,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"WebPage"
+],
+"ext": [
+"moet.gov.ae",
+"mof.gov.ae"
+],
+"byline": true,
+"dated": false,
+"nums": 7,
+"answer": true,
+"first_w": 51,
+"first": "يحمي المقهى أو المخبز هامش ربحه في ثلاثة مواضع: التكلفة الحقيقية لكل كوب أو رغيف، ومقدار الهدر، ووصول الإيصالات اليومية إلى الدفاتر. احسب تكلفة قائمتك بوضعَي ال",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/who-we-help/cloud-kitchens",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Cloud Kitchen Accounting UAE | Profit After Commission",
+"desc": "Accounting for UAE cloud kitchens: what each order leaves after commission, orders a day to break even, fixed rent or revenue share, and payout checks.",
+"h1t": "Cloud kitchen accounting: is each order making money?",
+"words": 539,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"WebPage"
+],
+"ext": [],
+"byline": true,
+"dated": false,
+"nums": 6,
+"answer": true,
+"first_w": 54,
+"first": "A cloud kitchen makes money only if each order leaves enough after commission, payment fees, the discounts you fund, packaging and food cost to cover rent and s",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/who-we-help/cloud-kitchens",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "محاسبة المطابخ السحابية في الإمارات | الربح بعد العمولة",
+"desc": "محاسبة للمطابخ السحابية في الإمارات: ما يبقى من كل طلب بعد العمولة، عدد الطلبات اليومية للتعادل، إيجار ثابت أم نسبة من الإيرادات، ومراجعة التحويلات.",
+"h1t": "محاسبة المطابخ السحابية: هل يربح كل طلب؟",
+"words": 522,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"WebPage"
+],
+"ext": [],
+"byline": true,
+"dated": false,
+"nums": 5,
+"answer": true,
+"first_w": 47,
+"first": "المطبخ السحابي لا يربح إلا إذا بقي من كل طلب، بعد العمولة ورسوم الدفع والخصم الذي تتحمله والتغليف وتكلفة الطعام، ما يكفي لتغطية الإيجار والموظفين. احسب ما يبقى ",
+"qheads": 3,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/who-we-help/franchise-operators",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Franchise Accounting Services Dubai UAE | F&B Performance",
+"desc": "Finance support for UAE franchise operators across outlet P&Ls, royalties, food cost, labour, cash and expansion decisions.",
+"h1t": "Franchise unit economics have to satisfy you and the franchisor.",
+"words": 755,
+"types": [
+"AccountingService",
+"BreadcrumbList"
+],
+"ext": [],
+"byline": true,
+"dated": false,
+"nums": 2,
+"answer": true,
+"first_w": 21,
+"first": "Royalty and marketing fee accounting, franchisor reporting compliance, unit-level returns after royalty and multi-brand structure for Dubai franchise operators.",
+"qheads": 0,
+"faq": false,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/who-we-help/franchise-operators",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "مشغلو الامتياز | محاسبة ومالية في الإمارات | F&B Performance",
+"desc": "دعم مالي لمشغلي الامتياز في الإمارات: رسوم الامتياز والتسويق، ربحية المتجر، تقارير مانح الامتياز، تكلفة الفرع واسترداد رأس المال.",
+"h1t": "اقتصاديات الفرع يجب أن ترضي المشغّل ومانح الامتياز معاً.",
+"words": 304,
+"types": [
+"AccountingService",
+"BreadcrumbList"
+],
+"ext": [],
+"byline": false,
+"dated": false,
+"nums": 0,
+"answer": true,
+"first_w": 30,
+"first": "الامتياز يضيف طبقة تكلفة والتزام فوق اقتصاديات المطعم العادية. الإيراد قد يكون جيداً قبل الرسوم، لكن العائد للمشغّل يتحدد بعد الإتاوة وصندوق التسويق والتكاليف ا",
+"qheads": 1,
+"faq": false,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/who-we-help/qsr-fast-casual",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Fast Food Restaurant Accounting Dubai | QSR Food Cost",
+"desc": "Accounting for UAE QSR and fast-casual outlets: food cost at volume, supplier price rises, drinks pricing with the 2026 excise tiers, and outlet P&Ls.",
+"h1t": "Accounting for QSR and fast-casual restaurants",
+"words": 529,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"WebPage"
+],
+"ext": [
+"tax.gov.ae"
+],
+"byline": true,
+"dated": true,
+"nums": 7,
+"answer": false,
+"first_w": 66,
+"first": "A burger outlet selling 600 a day loses AED 18,000 a month for each dirham a burger runs over recipe cost. Control food cost by costing every item, re-costing w",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/who-we-help/qsr-fast-casual",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "محاسبة مطاعم الوجبات السريعة في دبي | تكلفة الطعام",
+"desc": "محاسبة لمطاعم الوجبات السريعة والفاست كاجوال في الإمارات: تكلفة الطعام، أسعار الموردين، تسعير المشروبات بشرائح الضريبة الانتقائية 2026، وأرباح كل فرع.",
+"h1t": "محاسبة مطاعم الوجبات السريعة والفاست كاجوال",
+"words": 552,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"WebPage"
+],
+"ext": [
+"tax.gov.ae"
+],
+"byline": true,
+"dated": true,
+"nums": 5,
+"answer": false,
+"first_w": 64,
+"first": "فرع برغر يبيع 600 برغر في اليوم يخسر 18,000 درهم شهريًا عن كل درهم يزيد به البرغر على تكلفة الوصفة. اضبط تكلفة الطعام باحتساب تكلفة كل صنف، وإعادة احتسابها حين ",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/who-we-help/restaurant-groups",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Restaurant Group Accounting UAE | P&L for Every Outlet",
+"desc": "Accounting for UAE restaurant groups: a P&L for every outlet to four-wall margin, head-office allocation, group cash forecast and Corporate Tax.",
+"h1t": "Accounting for restaurant groups: see which outlet drags the group",
+"words": 472,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"WebPage"
+],
+"ext": [],
+"byline": false,
+"dated": false,
+"nums": 0,
+"answer": false,
+"first_w": 79,
+"first": "Build a P&L for each outlet that stops at four-wall margin: sales minus food, labour, rent, delivery commission and local costs, before head office. Our working",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/who-we-help/restaurant-groups",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "محاسبة مجموعات المطاعم في الإمارات | أرباح كل فرع",
+"desc": "محاسبة لمجموعات المطاعم في الإمارات: قائمة أرباح وخسائر لكل فرع حتى هامش الفرع، توزيع تكاليف الإدارة المركزية، توقعات نقد المجموعة وضريبة الشركات.",
+"h1t": "محاسبة مجموعات المطاعم: اعرف أي فرع يثقل المجموعة",
+"words": 458,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"WebPage"
+],
+"ext": [],
+"byline": false,
+"dated": false,
+"nums": 0,
+"answer": false,
+"first_w": 85,
+"first": "ابنِ لكل فرع قائمة أرباح وخسائر (P&L) تقف عند هامش الفرع قبل تكاليف الإدارة المركزية (Four-Wall Margin): المبيعات ناقص الطعام والعمالة والإيجار وعمولة التوصيل و",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/services/accounting-bookkeeping",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Restaurant Bookkeeping UAE: Daily Sales to Monthly P&L",
+"desc": "Monthly bookkeeping for UAE restaurants: POS, delivery-app and supplier invoices in Zoho, QuickBooks or Xero, closed by day 10. From AED 2,950.",
+"h1t": "Bookkeeping services for restaurants in Dubai and the UAE",
+"words": 734,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"Service"
+],
+"ext": [],
+"byline": true,
+"dated": false,
+"nums": 3,
+"answer": true,
+"first_w": 57,
+"first": "We record your POS, delivery-app and supplier invoices in Zoho Books, QuickBooks or Xero, reconcile bank and card settlements, close the month by day 10 and sen",
+"qheads": 1,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/services/accounting-bookkeeping",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "مسك دفاتر مطاعم الإمارات: من مبيعات اليوم إلى أرباح الشهر",
+"desc": "محاسبة المطاعم شهريًا في الإمارات: نقاط البيع وتطبيقات التوصيل وفواتير الموردين في Zoho أو QuickBooks أو Xero، وإقفال قبل اليوم العاشر. من 2,950 درهم.",
+"h1t": "مسك الدفاتر ومحاسبة المطاعم في دبي والإمارات",
+"words": 702,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"Service"
+],
+"ext": [],
+"byline": true,
+"dated": false,
+"nums": 2,
+"answer": false,
+"first_w": 61,
+"first": "نقيّد مبيعات نظام نقاط البيع (POS) وكشوف تطبيقات التوصيل وفواتير الموردين في Zoho Books أو QuickBooks أو Xero، ونطابق حسابات البنك وتسويات البطاقات، ونقفل الشهر",
+"qheads": 1,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/services/delivery-platform-reconciliation",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Talabat Reconciliation for Restaurants | Delivery Payouts",
+"desc": "Each month we match every delivery app's statement to your POS and bank, list the exceptions, prepare the claims and post sales and fees correctly.",
+"h1t": "Delivery platform reconciliation: every app, matched to POS and bank each month",
+"words": 850,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"Service"
+],
+"ext": [],
+"byline": true,
+"dated": true,
+"nums": 2,
+"answer": false,
+"first_w": 78,
+"first": "Each month we take every delivery app's statements, Talabat, Deliveroo, Keeta, Careem Food, noon Food or any other, and match them to your POS orders and your b",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/services/delivery-platform-reconciliation",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "مطابقة كشف حساب طلبات للمطاعم | تسوية تحويلات التوصيل",
+"desc": "كل شهر نطابق كشوف كل تطبيقات التوصيل مع نظام نقاط البيع والبنك، ونعدّ قائمة الاستثناءات، ونجهّز المطالبات، ونقيّد المبيعات والرسوم بشكل صحيح.",
+"h1t": "مطابقة منصات التوصيل: كل تطبيق مع نقاط البيع والبنك كل شهر",
+"words": 737,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"Service"
+],
+"ext": [],
+"byline": true,
+"dated": false,
+"nums": 1,
+"answer": false,
+"first_w": 67,
+"first": "كل شهر نأخذ كشوف كل تطبيقات التوصيل، طلبات وديليفرو وكيتا وكريم ونون فود وغيرها، ونطابقها مع طلبات نظام نقاط البيع (POS) ومع حسابك البنكي. يصلك كشف بالاستثناءات",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/services/management-accounting",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Restaurant P&L by Outlet | Management Accounting UAE",
+"desc": "A monthly P&L for each outlet after rent, labour and delivery commission, with four-wall margin and a short KPI pack. Free per-outlet P&L template.",
+"h1t": "Restaurant P&L by outlet: management accounting for groups",
+"words": 759,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"Service"
+],
+"ext": [
+"mof.gov.ae"
+],
+"byline": false,
+"dated": true,
+"nums": 42,
+"answer": true,
+"first_w": 50,
+"first": "A P&L per outlet, after rent, labour and delivery commission, shows which site carries the group and which drags it. We build it monthly with four-wall margin a",
+"qheads": 1,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/services/payroll-wps",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Payroll Outsourcing Dubai for Restaurants | WPS Payroll",
+"desc": "Monthly payroll and WPS salary files for UAE restaurants and cafés: shifts, overtime, payslips, gratuity and final settlements. You release the pay.",
+"h1t": "Payroll and WPS salary processing for restaurants and cafés",
+"words": 1757,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"Service"
+],
+"ext": [
+"centralbank.ae",
+"clydeco.com",
+"jafza.ae",
+"lylawyers.com",
+"mediaoffice.ae",
+"mohre.gov.ae",
+"morganlewis.com",
+"netbanking.mashreqbank.com",
+"u.ae"
+],
+"byline": true,
+"dated": true,
+"nums": 7,
+"answer": false,
+"first_w": 69,
+"first": "We run your monthly payroll from the rota and attendance: overtime, leave salary, payslips, the WPS salary file for your bank or exchange house, the gratuity ac",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/services/payroll-wps",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "إدارة رواتب المطاعم في دبي | نظام حماية الأجور (WPS)",
+"desc": "رواتب شهرية وملف نظام حماية الأجور لمطاعم ومقاهي الإمارات: الورديات والعمل الإضافي، قسائم الرواتب، مخصص نهاية الخدمة والتسويات النهائية. والتحويل يبقى بيدك",
+"h1t": "تجهيز الرواتب وملف نظام حماية الأجور للمطاعم والمقاهي",
+"words": 1709,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"Service"
+],
+"ext": [
+"centralbank.ae",
+"clydeco.com",
+"jafza.ae",
+"lylawyers.com",
+"mediaoffice.ae",
+"mohre.gov.ae",
+"morganlewis.com",
+"netbanking.mashreqbank.com",
+"u.ae"
+],
+"byline": true,
+"dated": true,
+"nums": 6,
+"answer": false,
+"first_w": 63,
+"first": "نجهّز رواتبك الشهرية من جدول الورديات وسجل الحضور: العمل الإضافي، وأجر الإجازة، وقسائم الرواتب، وملف الرواتب لنظام حماية الأجور (WPS) لبنكك أو شركة الصرافة، ومخ",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/industries/fnb-hospitality",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Restaurant Accounting Services Dubai | F&B Finance Only",
+"desc": "Accounting for UAE restaurants, cafés, cloud kitchens and groups: books, VAT and Corporate Tax, plus outlet margin and prime cost every month.",
+"h1t": "Restaurant accounting services in Dubai and across the UAE",
+"words": 381,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"WebPage"
+],
+"ext": [],
+"byline": false,
+"dated": false,
+"nums": 0,
+"answer": true,
+"first_w": 54,
+"first": "We work only on the numbers that decide F&B profit: food and prime cost, labour, rent, delivery commission and outlet contribution. Monthly books, VAT and Corpo",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/industries/fnb-hospitality",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "محاسبة المطاعم في الإمارات | مكتب لمالية المطاعم فقط",
+"desc": "محاسبة المطاعم والمقاهي والمطابخ السحابية والمجموعات في الإمارات: الدفاتر وضريبة القيمة المضافة وضريبة الشركات، مع هامش كل فرع والتكلفة الأولية شهريًا.",
+"h1t": "خدمات محاسبة المطاعم في دبي وجميع إمارات الدولة",
+"words": 354,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"WebPage"
+],
+"ext": [],
+"byline": false,
+"dated": false,
+"nums": 0,
+"answer": true,
+"first_w": 48,
+"first": "نعمل فقط على الأرقام التي تحسم ربح المطاعم والمقاهي: تكلفة الطعام والتكلفة الأولية، والعمالة، والإيجار، وعمولة التوصيل، وما يساهم به كل فرع. الدفاتر الشهرية وضر",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/corporate-tax/corporate-tax-registration-deadlines",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Corporate Tax Registration Deadline UAE | Am I Late?",
+"desc": "Check your UAE Corporate Tax registration deadline by licence date, your first return date and whether the AED 10,000 late penalty applies.",
+"h1t": "Corporate Tax registration deadlines: check yours",
+"words": 733,
+"types": [
+"AccountingService",
+"Article",
+"BreadcrumbList",
+"FAQPage"
+],
+"ext": [
+"mof.gov.ae",
+"tax.gov.ae"
+],
+"byline": true,
+"dated": true,
+"nums": 6,
+"answer": true,
+"first_w": 58,
+"first": "A company set up on or after 1 March 2024 must register within three months of incorporation. For companies that existed before then, the deadline depended on t",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/corporate-tax/corporate-tax-registration-deadlines",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "مواعيد التسجيل في ضريبة الشركات في الإمارات | هل تأخرت؟",
+"desc": "اعرف موعد التسجيل في ضريبة الشركات في الإمارات حسب تاريخ الرخصة، وموعد أول إقرار، وهل تنطبق غرامة التأخر في التسجيل البالغة 10,000 درهم.",
+"h1t": "مواعيد التسجيل في ضريبة الشركات: تحقق من موعدك",
+"words": 730,
+"types": [
+"AccountingService",
+"Article",
+"BreadcrumbList",
+"FAQPage"
+],
+"ext": [
+"mof.gov.ae",
+"tax.gov.ae"
+],
+"byline": true,
+"dated": true,
+"nums": 4,
+"answer": true,
+"first_w": 56,
+"first": "الشركة المؤسسة في 1 مارس 2024 أو بعده يجب أن تسجّل في ضريبة الشركات خلال ثلاثة أشهر من التأسيس. أما الشركات القائمة قبل ذلك فكان موعدها يتوقف على شهر إصدار الرخ",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/corporate-tax/small-business-relief",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Small Business Relief UAE | Corporate Tax Eligibility Check",
+"desc": "Revenue of AED 3m or less in each period? Check if your restaurant or café can elect Small Business Relief, now extended to 2029, and what you still file.",
+"h1t": "Small Business Relief: do you qualify?",
+"words": 621,
+"types": [
+"AccountingService",
+"Article",
+"BreadcrumbList",
+"FAQPage"
+],
+"ext": [
+"mof.gov.ae",
+"tax.gov.ae"
+],
+"byline": true,
+"dated": true,
+"nums": 5,
+"answer": true,
+"first_w": 59,
+"first": "If your revenue is AED 3 million or less in the tax period and in every earlier period, you can elect Small Business Relief and be treated as having no taxable ",
+"qheads": 1,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/corporate-tax/small-business-relief",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "تسهيلات الأعمال الصغيرة في ضريبة الشركات | هل أنت مؤهل؟",
+"desc": "إيرادات 3 ملايين درهم أو أقل في كل فترة؟ تحقق هل يستطيع مطعمك أو مقهاك اختيار تسهيلات الأعمال الصغيرة الممددة حتى 2029، وما الذي تقدّمه مع ذلك.",
+"h1t": "تسهيلات الأعمال الصغيرة (إعفاء الأعمال الصغيرة من ضريبة الشركات): هل أنت مؤهل؟",
+"words": 592,
+"types": [
+"AccountingService",
+"Article",
+"BreadcrumbList",
+"FAQPage"
+],
+"ext": [
+"mof.gov.ae",
+"tax.gov.ae"
+],
+"byline": true,
+"dated": true,
+"nums": 1,
+"answer": true,
+"first_w": 59,
+"first": "إذا كانت إيراداتك 3 ملايين درهم أو أقل في الفترة الضريبية وفي كل فترة سابقة، يمكنك اختيار تسهيلات الأعمال الصغيرة في ضريبة الشركات فتُعامَل كمن ليس له دخل خاضع ",
+"qheads": 1,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/vat",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "VAT in UAE for Restaurants and Cafés | Rules and Returns",
+"desc": "UAE VAT is 5%. Registration thresholds, return deadlines, penalties and what a restaurant can reclaim, with the FTA source and date for each rule.",
+"h1t": "VAT in the UAE for food and beverage businesses",
+"words": 1164,
+"types": [
+"AccountingService",
+"Article",
+"BreadcrumbList",
+"FAQPage"
+],
+"ext": [
+"mof.gov.ae",
+"tax.gov.ae",
+"uaelegislation.gov.ae"
+],
+"byline": true,
+"dated": true,
+"nums": 29,
+"answer": true,
+"first_w": 58,
+"first": "UAE VAT is 5%. You must register once taxable supplies and imports pass AED 375,000 over 12 months, and may register from AED 187,500. Registered businesses cha",
+"qheads": 1,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/vat",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "ضريبة القيمة المضافة في الإمارات للمطاعم والمقاهي",
+"desc": "ضريبة القيمة المضافة في الإمارات 5%. حدود التسجيل، مواعيد الإقرارات، الغرامات وما يمكن للمطعم استرداده، مع مصدر الهيئة الاتحادية للضرائب وتاريخه.",
+"h1t": "ضريبة القيمة المضافة في الإمارات لمنشآت الأغذية والمشروبات",
+"words": 1240,
+"types": [
+"AccountingService",
+"Article",
+"BreadcrumbList",
+"FAQPage"
+],
+"ext": [
+"mof.gov.ae",
+"tax.gov.ae",
+"uaelegislation.gov.ae"
+],
+"byline": true,
+"dated": true,
+"nums": 27,
+"answer": false,
+"first_w": 61,
+"first": "ضريبة القيمة المضافة (VAT) في الإمارات 5%. يجب التسجيل متى تجاوزت التوريدات الخاضعة للضريبة والواردات 375,000 درهم خلال 12 شهرًا، ويجوز التسجيل اختياريًا من 187",
+"qheads": 1,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/vat/registration",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Documents Required for VAT Registration in UAE | Checklist",
+"desc": "The documents the FTA asks for, the AED 375,000 and AED 187,500 tests, EmaraTax steps and when to deregister. For UAE restaurants and cafés.",
+"h1t": "VAT registration in the UAE: documents, threshold test and steps",
+"words": 1031,
+"types": [
+"AccountingService",
+"Article",
+"BreadcrumbList",
+"FAQPage"
+],
+"ext": [
+"mof.gov.ae",
+"tax.gov.ae"
+],
+"byline": true,
+"dated": true,
+"nums": 9,
+"answer": true,
+"first_w": 52,
+"first": "You typically need your trade licence, the certificate of incorporation or memorandum, Emirates IDs and passports of owners and signatories, proof of authority,",
+"qheads": 1,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/vat/registration",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "التسجيل في ضريبة القيمة المضافة في الإمارات | المستندات",
+"desc": "المستندات التي تطلبها الهيئة الاتحادية للضرائب، اختبارا 375,000 و187,500 درهم، خطوات «إمارات تاكس» ومتى تلغي التسجيل. للمطاعم والمقاهي في الإمارات.",
+"h1t": "التسجيل في ضريبة القيمة المضافة في الإمارات: المستندات واختبار الحد والخطوات",
+"words": 1045,
+"types": [
+"AccountingService",
+"Article",
+"BreadcrumbList",
+"FAQPage"
+],
+"ext": [
+"mof.gov.ae",
+"tax.gov.ae"
+],
+"byline": true,
+"dated": true,
+"nums": 8,
+"answer": true,
+"first_w": 58,
+"first": "تحتاج عادةً إلى الرخصة التجارية، وشهادة التأسيس أو عقد التأسيس، والهوية الإماراتية وجواز السفر للملاك والمفوضين بالتوقيع، وما يثبت التفويض بالتوقيع، وإقرار موقّ",
+"qheads": 1,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/vat/restaurants",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "VAT on Restaurant Service Charge UAE | Bills, Tips, Excise",
+"desc": "How a UAE restaurant bill should show VAT: invoice fields, service charge and tips, the municipality fee, app commission and excise on sweetened drinks.",
+"h1t": "VAT for restaurants: service charge, tips, fees and excise",
+"words": 1321,
+"types": [
+"AccountingService",
+"Article",
+"BreadcrumbList",
+"FAQPage"
+],
+"ext": [
+"mediaoffice.ae",
+"tax.gov.ae",
+"uaelegislation.gov.ae"
+],
+"byline": true,
+"dated": true,
+"nums": 10,
+"answer": true,
+"first_w": 58,
+"first": "Practitioner reading: yes, VAT at 5% applies to a service charge added to the bill: it is part of what the guest pays for the meal. A tip the guest chooses to l",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/vat/restaurants",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "ضريبة القيمة المضافة على المطاعم في الإمارات | رسوم الخدمة",
+"desc": "كيف تُظهر فاتورة المطعم في الإمارات ضريبة القيمة المضافة: بيانات الفاتورة، رسوم الخدمة والبقشيش، رسوم البلدية، عمولة التطبيقات والضريبة الانتقائية.",
+"h1t": "ضريبة القيمة المضافة للمطاعم: رسوم الخدمة والبقشيش والرسوم والضريبة الانتقائية",
+"words": 1235,
+"types": [
+"AccountingService",
+"Article",
+"BreadcrumbList",
+"FAQPage"
+],
+"ext": [
+"mediaoffice.ae",
+"tax.gov.ae",
+"uaelegislation.gov.ae"
+],
+"byline": true,
+"dated": true,
+"nums": 8,
+"answer": true,
+"first_w": 51,
+"first": "وفق قراءتنا المهنية: نعم، تخضع رسوم الخدمة المضافة إلى الفاتورة لضريبة القيمة المضافة (VAT) بنسبة 5% لأنها جزء مما يدفعه الضيف مقابل الوجبة. أما الإكرامية (البق",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/guides/opening-a-restaurant-in-dubai",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Cost of Opening a Restaurant in Dubai | Budget and Payback",
+"desc": "Work out the cost of opening a restaurant in Dubai from your own quotes: fit-out, licences, runway and payback for a restaurant, café or cloud kitchen.",
+"h1t": "Cost of opening a restaurant in Dubai: budget, runway and payback",
+"words": 1307,
+"types": [
+"AccountingService",
+"Article",
+"BreadcrumbList",
+"FAQPage"
+],
+"ext": [
+"mof.gov.ae",
+"tax.gov.ae"
+],
+"byline": true,
+"dated": true,
+"nums": 26,
+"answer": false,
+"first_w": 86,
+"first": "The cost of opening a restaurant in Dubai is best built from your own quotes, not from averages: fit-out, equipment, licences, deposits, pre-opening salaries an",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/intelligence/receipt-to-ledger-for-cafes",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Bookkeeping for Cafés: A Receipt-to-Ledger Routine",
+"desc": "How a café gets daily receipts, supplier invoices and POS Z-reports into Zoho, QuickBooks or Xero without retyping them: tools, 6 setup steps, a checklist.",
+"h1t": "Bookkeeping for cafés: getting receipts into the books without chaos",
+"words": 989,
+"types": [
+"AccountingService",
+"Article",
+"BreadcrumbList",
+"FAQPage"
+],
+"ext": [],
+"byline": true,
+"dated": true,
+"nums": 1,
+"answer": true,
+"first_w": 60,
+"first": "Photograph every receipt and supplier invoice on the day, send it to your accounting system's capture tool, and post the POS Z-report daily. Review and match on",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/sample-month-end-pack",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Sample Month-End Pack for a UAE Café | F&B Performance",
+"desc": "What a client gets each month: outlet P&L against budget, a written read, cash and VAT due, and a delivery app reconciliation. Illustrative café figures.",
+"h1t": "Sample month-end pack: what you get each month",
+"words": 829,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"WebPage"
+],
+"ext": [],
+"byline": true,
+"dated": true,
+"nums": 83,
+"answer": false,
+"first_w": 66,
+"first": "Sample Café, illustrative figures — not a real client. This is what arrives after each month-end close, shown for a made-up one-outlet café in Dubai. The pack h",
+"qheads": 1,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/sample-month-end-pack",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "نموذج حزمة الإقفال الشهري لمقهى | F&B Performance",
+"desc": "ما يصلك كل شهر: قائمة أرباح وخسائر للفرع مقابل الموازنة، وقراءة مكتوبة، والنقد وضريبة القيمة المضافة المستحقة، ومطابقة تطبيقات التوصيل. بأرقام توضيحية.",
+"h1t": "نموذج حزمة الإقفال الشهري: ما يصلك كل شهر",
+"words": 793,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"WebPage"
+],
+"ext": [],
+"byline": true,
+"dated": false,
+"nums": 81,
+"answer": false,
+"first_w": 64,
+"first": "«مقهى العيّنة» (Sample Café)، أرقام توضيحية — ليس عميلًا حقيقيًا. هذا ما يصلك بعد كل إقفال شهري، معروضًا على مقهى افتراضي بفرع واحد في دبي. تتكون الحزمة من أربع",
+"qheads": 1,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/guides/talabat-deliveroo-statements",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Talabat and Deliveroo Statements Explained | Check Payouts",
+"desc": "What each line on a Talabat or Deliveroo partner statement means, how VAT on commission works, and how to match every payout to your bank and POS.",
+"h1t": "How to read your Talabat and Deliveroo statements and check every payout",
+"words": 2252,
+"types": [
+"AccountingService",
+"Article",
+"BreadcrumbList",
+"FAQPage"
+],
+"ext": [
+"communicateonline.me",
+"foodrohelp.noon.com",
+"government.ae",
+"help.deliveroo.com",
+"khaleejtimes.com"
+],
+"byline": true,
+"dated": true,
+"nums": 27,
+"answer": false,
+"first_w": 91,
+"first": "A delivery app statement starts with what customers ordered and ends with what the app pays you. In between sit commission, other fees, discounts and promotions",
+"qheads": 1,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/guides/talabat-deliveroo-statements",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "شرح كشف حساب طلبات وديليفرو | راجع كل تحويل",
+"desc": "ماذا يعني كل سطر في كشف طلبات أو ديليفرو، وكيف تُحتسب ضريبة القيمة المضافة على العمولة، وكيف تطابق كل تحويل مع البنك ونظام نقاط البيع.",
+"h1t": "كيف تقرأ كشوف طلبات وديليفرو وتراجع كل تحويل",
+"words": 2059,
+"types": [
+"AccountingService",
+"Article",
+"BreadcrumbList",
+"FAQPage"
+],
+"ext": [
+"communicateonline.me",
+"foodrohelp.noon.com",
+"government.ae",
+"help.deliveroo.com",
+"khaleejtimes.com"
+],
+"byline": true,
+"dated": true,
+"nums": 25,
+"answer": false,
+"first_w": 77,
+"first": "يبدأ كشف تطبيق التوصيل بما طلبه الزبائن، وينتهي بما يحوّله لك التطبيق. وبينهما العمولة، والرسوم الأخرى، والخصومات والعروض التي تتحملها، والمبالغ المستردة، والإل",
+"qheads": 1,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/services/tax-compliance",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "UAE Corporate Tax & VAT Compliance Services Dubai",
+"desc": "UAE Corporate Tax and VAT compliance support in Dubai: 9% CT registration, Small Business Relief, free zone QFZP analysis, VAT returns and FTA-ready documentation.",
+"h1t": "Corporate Tax and VAT, handled before the deadline — not during it.",
+"words": 1871,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"Service"
+],
+"ext": [],
+"byline": true,
+"dated": true,
+"nums": 7,
+"answer": true,
+"first_w": 34,
+"first": "UAE Corporate Tax and VAT compliance support for Dubai and UAE businesses: registration, taxable income computation, Small Business Relief analysis, free zone s",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/services/tax-compliance",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "دعم ضريبة الشركات والقيمة المضافة | F&B Performance",
+"desc": "سجلات جاهزة لضريبة الشركات وضريبة القيمة المضافة، ومطابقة الإقرارات، وملفات داعمة وتقويم للمواعيد في الإمارات، مع إحالة المسائل المنظمة إلى متخصص مرخص.",
+"h1t": "الضريبة تُدار قبل الموعد، لا في أسبوع الموعد.",
+"words": 940,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"Service"
+],
+"ext": [],
+"byline": true,
+"dated": false,
+"nums": 0,
+"answer": true,
+"first_w": 24,
+"first": "نربط السجلات المحاسبية بالتزامات ضريبة القيمة المضافة وضريبة الشركات ونبني ملف الإثبات خلال السنة، حتى لا تبدأ كل فترة إقرار بمحاولة اكتشاف ما حدث.",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/services/virtual-cfo",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Fractional CFO Services Dubai & UAE | Outsourced CFO",
+"desc": "Fractional CFO for Dubai and UAE firms: forecasting, 13-week cash, board reporting and capital decisions from AED 12,500/month, no full-time hire.",
+"h1t": "A CFO for the decisions, not for the headcount.",
+"words": 1663,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"Service"
+],
+"ext": [],
+"byline": true,
+"dated": true,
+"nums": 9,
+"answer": true,
+"first_w": 33,
+"first": "Senior financial leadership for Dubai and UAE businesses that have outgrown their bookkeeper but cannot yet justify a AED 60,000-a-month CFO — forecasting, cash",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/services/virtual-cfo",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "خدمات المدير المالي بدوام جزئي في دبي والإمارات",
+"desc": "قيادة مالية جزئية للشركات النامية في الإمارات: تدفق نقدي على 13 أسبوعًا، توقعات وسيناريوهات، تقارير مجلس الإدارة وقرارات رأس المال دون تكلفة مدير مالي متفرغ.",
+"h1t": "مدير مالي للقرار، لا لزيادة عدد الموظفين.",
+"words": 1022,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"Service"
+],
+"ext": [],
+"byline": true,
+"dated": true,
+"nums": 2,
+"answer": true,
+"first_w": 30,
+"first": "للشركات التي تجاوزت مرحلة المحاسب لكنها لا تحتاج مديرًا ماليًا متفرغًا بعد: توقعات وسيولة وتسعير وتمويل وتقارير مجلس إدارة ورأي مالي واضح عندما تكون تكلفة الخطأ",
+"qheads": 1,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/services/cash-working-capital",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Cash Flow Forecasting & Working Capital Advisory Dubai",
+"desc": "13-week cash flow forecasting and working capital advice for Dubai and UAE firms: free cash from receivables, stock and supplier terms before you borrow.",
+"h1t": "Profitable businesses do not fail. They run out of cash.",
+"words": 1367,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"Service"
+],
+"ext": [],
+"byline": true,
+"dated": true,
+"nums": 10,
+"answer": true,
+"first_w": 28,
+"first": "13-week rolling cash forecasting, receivables and inventory control, and working capital release for Dubai and UAE businesses — so that funding becomes a choice",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/services/cash-working-capital",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "إدارة التدفق النقدي ورأس المال العامل في الإمارات",
+"desc": "توقع نقدي 13 أسبوعاً، تحصيل، موردون ومخزون ورأس مال عامل — رؤية أسبوعية تساعد شركات الإمارات على حماية السيولة قبل أن تصبح المشكلة أزمة.",
+"h1t": "الشركات الرابحة لا تتعطل لأنها ربحت أقل. تتعطل عندما ينفد النقد.",
+"words": 874,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"Service"
+],
+"ext": [],
+"byline": true,
+"dated": true,
+"nums": 1,
+"answer": true,
+"first_w": 29,
+"first": "نحوّل النقد من مفاجأة في حساب البنك إلى نظام أسبوعي: ما سيدخل، ما سيخرج، أين يوجد ضغط، وما الإجراء الذي يجب أن يبدأ الآن وليس بعد ستة أسابيع.",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/services/budgeting-forecasting",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Budgeting & Financial Forecasting Services Dubai",
+"desc": "Driver-based budgets, rolling forecasts and scenario planning for Dubai and UAE businesses. A budget that stays useful past March.",
+"h1t": "A budget that survives contact with the year.",
+"words": 973,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"Service"
+],
+"ext": [],
+"byline": true,
+"dated": true,
+"nums": 5,
+"answer": true,
+"first_w": 27,
+"first": "Driver-based annual budgets, quarterly reforecasts and scenario modelling for UAE businesses — built so the plan remains a control instrument rather than a docu",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/services/budgeting-forecasting",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "إعداد الميزانيات والتوقعات المالية في دبي والإمارات",
+"desc": "ميزانيات وتوقعات مبنية على محركات النشاط لا نسب عامة، مع سيناريوهات وتحديثات تساعد الإدارة في التسعير والتوظيف والسيولة والتوسع.",
+"h1t": "ميزانية تتحمل الاحتكاك بالواقع.",
+"words": 673,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"Service"
+],
+"ext": [],
+"byline": true,
+"dated": true,
+"nums": 1,
+"answer": true,
+"first_w": 25,
+"first": "نبني خطة مرتبطة بما يحرك العمل فعلاً — حجم، سعر، هامش، موظفون، مواقع، تحصيل — ثم نحدثها عندما يتغير الواقع بدلاً من الدفاع عن رقم أصبح قديماً.",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/services/audit-readiness",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Audit Readiness & Audit File Preparation Dubai UAE",
+"desc": "Audit preparation for UAE businesses: reconciled schedules, supporting documentation and auditor liaison. Shorter audits, fewer adjustments, no surprises.",
+"h1t": "Make the audit boring.",
+"words": 1208,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"Service"
+],
+"ext": [],
+"byline": true,
+"dated": false,
+"nums": 3,
+"answer": true,
+"first_w": 29,
+"first": "Audit file preparation, balance sheet substantiation and auditor liaison for UAE businesses — so the audit is a review of work already done rather than three we",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/services/audit-readiness",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "الجاهزية للتدقيق وإعداد ملفات المراجعة في الإمارات",
+"desc": "تنظيف الحسابات والجداول المساندة وملف PBC وتسويات ما قبل التدقيق لتقليل الأسئلة والتعديلات والوقت الضائع عند المراجعة السنوية.",
+"h1t": "اجعل التدقيق مملاً. هذه هي النتيجة الجيدة.",
+"words": 710,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"Service"
+],
+"ext": [],
+"byline": true,
+"dated": false,
+"nums": 0,
+"answer": true,
+"first_w": 24,
+"first": "نرتب السجلات والجداول والمستندات قبل وصول المدقق، بحيث يكون كل رصيد قابلاً للتتبع وكل سؤال متوقعاً بدلاً من أن يتحول التدقيق إلى مشروع طوارئ.",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/services/financial-modelling",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Financial Modelling Services Dubai UAE | F&B Performance",
+"desc": "Investor-grade three-statement financial models, valuations and scenario analysis for Dubai and UAE businesses. Built to be interrogated.",
+"h1t": "Models built to be interrogated, not admired.",
+"words": 987,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"Service"
+],
+"ext": [],
+"byline": true,
+"dated": false,
+"nums": 4,
+"answer": true,
+"first_w": 25,
+"first": "Three-statement financial models, fundraising models, unit economics and scenario analysis for UAE businesses — transparent assumptions, working logic, and a st",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/services/financial-modelling",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "النمذجة المالية ودراسات السيناريو في الإمارات",
+"desc": "نماذج مالية قابلة للاختبار للتمويل والتوسع والتسعير والتخطيط، مبنية على محركات واضحة وسيناريوهات وحساسية لا على أرقام مخفية داخل ملف.",
+"h1t": "نموذج صُمم ليُختبر، لا ليُعجب به أحد.",
+"words": 602,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"Service"
+],
+"ext": [],
+"byline": true,
+"dated": false,
+"nums": 0,
+"answer": true,
+"first_w": 25,
+"first": "نبني نماذج يفهمها صاحب القرار ويمكن تحدي افتراضاتها: ما الذي يحرك الإيراد؟ متى ينفد النقد؟ ما نقطة التعادل؟ وماذا يحدث إذا تأخر الواقع عن الخطة؟",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/services/margin-optimisation",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Cost & Margin Optimisation Consulting Dubai UAE",
+"desc": "Find and fix margin leakage: product costing, pricing architecture, procurement and cost control for Dubai and UAE businesses.",
+"h1t": "Find the margin you are already earning and losing.",
+"words": 1117,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"Service"
+],
+"ext": [],
+"byline": true,
+"dated": false,
+"nums": 6,
+"answer": true,
+"first_w": 23,
+"first": "Product and channel costing, pricing architecture, procurement review and cost control for UAE businesses — quantified in dirhams, sequenced by payback, with ow",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/services/margin-optimisation",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "تحسين هامش الربح والتكاليف في الإمارات | F&B Performance",
+"desc": "تحليل السعر والمزيج والتكلفة والهدر والخصومات لاكتشاف أين يُصنع الهامش وأين يتسرب، مع إجراءات يمكن قياس أثرها بالدرهم.",
+"h1t": "اكتشف الهامش الذي تكسبه… ثم تخسره في الطريق.",
+"words": 718,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"Service"
+],
+"ext": [],
+"byline": true,
+"dated": false,
+"nums": 0,
+"answer": true,
+"first_w": 23,
+"first": "نفكك الربح إلى سعر وحجم ومزيج وتكلفة وهدر وعمولات، ثم نرتب الفرص حسب أثرها وقابليتها للتنفيذ بدلاً من إطلاق حملة عامة لخفض المصروفات.",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/services/expansion-feasibility",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Expansion Feasibility & New Site Financial Analysis Dubai",
+"desc": "Feasibility studies and investment appraisal for new sites, branches and markets in the UAE. Model the decision before you sign the lease.",
+"h1t": "Model it before you sign the lease.",
+"words": 1198,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"Service"
+],
+"ext": [],
+"byline": true,
+"dated": false,
+"nums": 4,
+"answer": true,
+"first_w": 25,
+"first": "Feasibility studies, new site appraisal and market entry analysis for UAE businesses — payback, IRR, funding requirement and the downside case, before the commi",
+"qheads": 6,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/services/expansion-feasibility",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "دراسات الجدوى والتوسع في دبي والإمارات | F&B Performance",
+"desc": "تقييم مواقع وتوسع واستثمار للشركات في الإمارات: تكلفة كاملة، تعادل نقدي، IRR وNPV وحاجة التمويل وحالة ضغط قبل توقيع الالتزام.",
+"h1t": "احسبها قبل أن يصبح التراجع أغلى من القرار.",
+"words": 771,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"Service"
+],
+"ext": [],
+"byline": true,
+"dated": false,
+"nums": 1,
+"answer": true,
+"first_w": 29,
+"first": "قبل توقيع الإيجار أو فتح سوق جديد، نبني الحالة كاملة: الاستثمار، الإيراد من أسفل إلى أعلى، التكلفة، التعادل النقدي، التمويل المطلوب، والسيناريو الذي لا تسير فيه",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/services/investor-board-readiness",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Investor & Board Reporting Services Dubai UAE",
+"desc": "Data room preparation, board packs and investor reporting for UAE businesses raising capital or reporting to shareholders.",
+"h1t": "Survive diligence without losing the valuation.",
+"words": 1068,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"Service"
+],
+"ext": [],
+"byline": true,
+"dated": false,
+"nums": 4,
+"answer": true,
+"first_w": 29,
+"first": "Data room preparation, board reporting and investor communication for UAE businesses raising capital, taking on debt or reporting to shareholders — before dilig",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/services/investor-board-readiness",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "الجاهزية للمستثمر ومجلس الإدارة في الإمارات",
+"desc": "حزم مجلس إدارة، نموذج مالي، غرفة البيانات وسرد مالي وعناية واجبة للشركات التي تستعد لتمويل أو مستثمر أو مستوى أعلى من الحوكمة.",
+"h1t": "ادخل العناية الواجبة دون أن تدفع من التقييم ثمن فوضى البيانات.",
+"words": 705,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"Service"
+],
+"ext": [],
+"byline": true,
+"dated": false,
+"nums": 0,
+"answer": true,
+"first_w": 23,
+"first": "نربط الدفاتر بالنموذج وبالمؤشرات وبقصة الإدارة، ونجهز المعلومات التي يحتاجها المستثمر أو المجلس قبل أن يبدأ كل سؤال رحلة بحث جديدة داخل الشركة.",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/services/finance-function-setup",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Finance Function Setup & Finance Transformation Dubai",
+"desc": "Build a finance function that scales: chart of accounts, systems, controls, close calendar and team design for growing Dubai and UAE businesses.",
+"h1t": "Build the finance function once, properly.",
+"words": 1174,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"Service"
+],
+"ext": [],
+"byline": true,
+"dated": false,
+"nums": 4,
+"answer": true,
+"first_w": 26,
+"first": "System selection, chart of accounts design, controls, approval workflows, close calendar and team structure — for UAE businesses outgrowing the finance setup th",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/services/finance-function-setup",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "بناء وإعادة تنظيم وظيفة المالية في الإمارات",
+"desc": "تصميم فريق المالية والعمليات والرقابة والإقفال والصلاحيات والأنظمة للشركات النامية، بحيث لا يعتمد كل شيء على شخص واحد أو ملف واحد.",
+"h1t": "ابنِ وظيفة المالية مرة واحدة… بطريقة يمكنها أن تكبر معك.",
+"words": 633,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"Service"
+],
+"ext": [],
+"byline": true,
+"dated": false,
+"nums": 0,
+"answer": true,
+"first_w": 21,
+"first": "نصمم الأدوار والعمليات والصلاحيات وتقويم الإقفال والأنظمة من نقطة البيع أو الفاتورة حتى تقرير الإدارة، ثم نساعد الفريق على تشغيلها فعلياً.",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/services/performance-dashboards",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Financial KPI Dashboards & Reporting Automation Dubai",
+"desc": "Live financial dashboards for UAE businesses: KPI definition, data integration and automated reporting from your accounting, POS and payroll systems.",
+"h1t": "A dashboard is only as honest as the ledger beneath it.",
+"words": 904,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"Service"
+],
+"ext": [],
+"byline": true,
+"dated": false,
+"nums": 3,
+"answer": true,
+"first_w": 20,
+"first": "KPI definition, data integration and automated financial dashboards for UAE businesses — built on accounting data that has actually been reconciled.",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/services/performance-dashboards",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "لوحات الأداء المالية والإدارية في الإمارات | F&B Performance",
+"desc": "لوحات أداء تربط مؤشرات المبيعات والهامش والنقد والتشغيل بمصدر مالي موثوق، مع تعريفات واضحة بدلاً من لوحات جميلة بأرقام متناقضة.",
+"h1t": "اللوحة لا تكون أصدق من الدفتر الذي تحتها.",
+"words": 635,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"Service"
+],
+"ext": [],
+"byline": true,
+"dated": true,
+"nums": 0,
+"answer": true,
+"first_w": 23,
+"first": "نصمم لوحات قليلة وواضحة، لكل رقم تعريف ومصدر ومالك، ونربطها بدورة الإقفال حتى ترى الإدارة اليوم ما ستثق به أيضاً في نهاية الشهر.",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/corporate-tax/uae-corporate-tax-guide",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Corporate Tax for restaurant groups: a worked return",
+"desc": "Corporate Tax for UAE restaurant groups: a worked return from accounting profit to tax due, one 0% band per tax group, records, deadlines and audits.",
+"h1t": "UAE Corporate Tax: what a finance team should have under control",
+"words": 1099,
+"types": [
+"AccountingService",
+"Article",
+"BreadcrumbList",
+"FAQPage"
+],
+"ext": [],
+"byline": true,
+"dated": true,
+"nums": 13,
+"answer": true,
+"first_w": 36,
+"first": "Corporate Tax is not a once-a-year filing exercise. The outcome starts with the quality of the books, the evidence behind adjustments and a close process that m",
+"qheads": 1,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/corporate-tax/uae-corporate-tax-guide",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "ضريبة الشركات لمجموعات المطاعم: مثال محلول للإقرار",
+"desc": "ضريبة الشركات لمجموعات المطاعم في الإمارات: مثال محلول من الربح المحاسبي إلى الضريبة المستحقة، وشريحة 0% واحدة للمجموعة الضريبية، والسجلات والمواعيد.",
+"h1t": "ضريبة الشركات في الإمارات: ما الذي يجب أن يكون تحت سيطرة فريقك المالي؟",
+"words": 980,
+"types": [
+"AccountingService",
+"Article",
+"BreadcrumbList",
+"FAQPage"
+],
+"ext": [],
+"byline": true,
+"dated": true,
+"nums": 11,
+"answer": true,
+"first_w": 26,
+"first": "ضريبة الشركات ليست مهمة سنوية عند موعد الإقرار فقط. النتيجة تبدأ من جودة الدفاتر، والأدلة الداعمة للتعديلات، وإقفال مالي يجعل الموقف الضريبي واضحاً قبل الموعد ا",
+"qheads": 1,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/corporate-tax/free-zone-corporate-tax",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "UAE Free Zone Corporate Tax: QFZP Practical Guide",
+"desc": "A practical guide to UAE Free Zone Corporate Tax, Qualifying Free Zone Person conditions, qualifying income, audit requirements and finance controls.",
+"h1t": "Free Zone Corporate Tax: 0% is a status to maintain, not a licence benefit",
+"words": 792,
+"types": [
+"AccountingService",
+"Article",
+"BreadcrumbList",
+"FAQPage"
+],
+"ext": [],
+"byline": true,
+"dated": true,
+"nums": 2,
+"answer": true,
+"first_w": 25,
+"first": "A Free Zone trade licence does not automatically create a 0% Corporate Tax outcome. Qualification depends on the entity, its activities, income and ongoing comp",
+"qheads": 1,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/corporate-tax/free-zone-corporate-tax",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "ضريبة المناطق الحرة: دليل QFZP عملي | F&B Performance",
+"desc": "دليل عملي لضريبة الشركات في المناطق الحرة وشروط الشخص المؤهل والدخل المؤهل ومتطلبات التدقيق والضوابط المالية.",
+"h1t": "ضريبة المناطق الحرة: نسبة 0% حالة يجب الحفاظ عليها وليست ميزة تلقائية للرخصة",
+"words": 677,
+"types": [
+"AccountingService",
+"Article",
+"BreadcrumbList",
+"FAQPage"
+],
+"ext": [],
+"byline": true,
+"dated": true,
+"nums": 1,
+"answer": true,
+"first_w": 20,
+"first": "الرخصة الصادرة من منطقة حرة لا تخلق تلقائياً نتيجة ضريبية بنسبة 0%. الأهلية تعتمد على الكيان والأنشطة والدخل والامتثال المستمر.",
+"qheads": 3,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/corporate-tax/vat-vs-corporate-tax-uae",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "VAT vs Corporate Tax in the UAE: Finance Guide",
+"desc": "VAT and Corporate Tax are different UAE tax systems. See what each taxes, the 5% VAT rate, Corporate Tax profit basis, and why both depend on clean accounting.",
+"h1t": "VAT and Corporate Tax use the same books — but answer different questions",
+"words": 775,
+"types": [
+"AccountingService",
+"Article",
+"BreadcrumbList",
+"FAQPage"
+],
+"ext": [],
+"byline": true,
+"dated": true,
+"nums": 2,
+"answer": true,
+"first_w": 21,
+"first": "VAT follows taxable transactions. Corporate Tax follows taxable income. Confusing the two creates bad reconciliations, bad forecasts and avoidable filing proble",
+"qheads": 3,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/corporate-tax/vat-vs-corporate-tax-uae",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "القيمة المضافة وضريبة الشركات في الإمارات | F&B Performance",
+"desc": "ضريبة القيمة المضافة وضريبة الشركات نظامان مختلفان في الإمارات. تعرف على ما يخضع لكل منهما ولماذا يعتمد الاثنان على محاسبة نظيفة.",
+"h1t": "القيمة المضافة وضريبة الشركات تستخدمان نفس الدفاتر لكنهما تجيبان عن سؤالين مختلفين",
+"words": 681,
+"types": [
+"AccountingService",
+"Article",
+"BreadcrumbList",
+"FAQPage"
+],
+"ext": [],
+"byline": true,
+"dated": true,
+"nums": 1,
+"answer": true,
+"first_w": 21,
+"first": "ضريبة القيمة المضافة تتبع المعاملات الخاضعة للضريبة، بينما ضريبة الشركات تتبع الدخل الخاضع للضريبة. الخلط بينهما يخلق مطابقة وتوقعات وإقرارات أضعف.",
+"qheads": 4,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/intelligence/restaurant-prime-cost",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Restaurant Prime Cost: Food + Labour Explained",
+"desc": "What restaurant prime cost is, how to calculate it consistently, how to use planning bands that are not universal benchmarks, and why variance matters.",
+"h1t": "Prime cost: the one number that decides whether a restaurant works",
+"words": 1390,
+"types": [
+"AccountingService",
+"Article",
+"BreadcrumbList"
+],
+"ext": [],
+"byline": true,
+"dated": true,
+"nums": 16,
+"answer": true,
+"first_w": 23,
+"first": "Food plus beverage plus labour, as a percentage of sales. Measured weekly it is a control. Measured monthly it is a post-mortem.",
+"qheads": 1,
+"faq": false,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": ""
+},
+{
+"u": "/ae/intelligence/13-week-cash-flow",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "13-Week Cash Flow Forecast | F&B Performance",
+"desc": "How to build and run a 13-week rolling cash flow forecast for a UAE business — bottom-up construction, weekly updating, stress testing and the levers to pull.",
+"h1t": "The 13-week cash flow forecast, built properly",
+"words": 1248,
+"types": [
+"AccountingService",
+"Article",
+"BreadcrumbList"
+],
+"ext": [],
+"byline": true,
+"dated": true,
+"nums": 4,
+"answer": true,
+"first_w": 27,
+"first": "Profitable businesses do not fail. Illiquid ones do. Thirteen weeks is long enough to see a problem forming and short enough for the detail to stay reliable.",
+"qheads": 1,
+"faq": false,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": ""
+},
+{
+"u": "/ae/intelligence/month-end-close-checklist",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Month-End Close Checklist UAE | F&B Performance",
+"desc": "A practical month-end close checklist for UAE finance teams — the sequence, the reconciliations, the schedules, and how to close by day seven.",
+"h1t": "The month-end close checklist that gets you to day seven",
+"words": 1132,
+"types": [
+"AccountingService",
+"Article",
+"BreadcrumbList"
+],
+"ext": [],
+"byline": true,
+"dated": true,
+"nums": 2,
+"answer": true,
+"first_w": 24,
+"first": "Most UAE SMEs close in three weeks. Almost all of them could close in seven days. The difference is sequence and ownership, not effort.",
+"qheads": 1,
+"faq": false,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": ""
+},
+{
+"u": "/ae/intelligence/restaurant-accounting-uae",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Restaurant Accounting UAE: What Good Finance Produces",
+"desc": "What a properly run restaurant accounting function produces in the UAE — daily reconciliation, weekly prime cost, outlet P&Ls, aggregator treatment and VAT.",
+"h1t": "Restaurant accounting in the UAE: what a good finance function actually produces",
+"words": 898,
+"types": [
+"AccountingService",
+"Article",
+"BreadcrumbList"
+],
+"ext": [],
+"byline": true,
+"dated": true,
+"nums": 1,
+"answer": true,
+"first_w": 16,
+"first": "Most restaurant accounts in the UAE are technically correct and operationally useless. Here is the difference.",
+"qheads": 1,
+"faq": false,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": ""
+},
+{
+"u": "/ae/intelligence/outsourced-vs-inhouse-accounting",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Outsourced vs In-House Accounting UAE | F&B Performance",
+"desc": "When to outsource accounting and when to hire in the UAE — a cost comparison including visa and gratuity, the capability question, and the hybrid model.",
+"h1t": "Outsourced or in-house? A UAE cost and capability comparison",
+"words": 1071,
+"types": [
+"AccountingService",
+"Article",
+"BreadcrumbList"
+],
+"ext": [],
+"byline": true,
+"dated": true,
+"nums": 23,
+"answer": true,
+"first_w": 22,
+"first": "The honest answer depends on transaction volume, capability required and continuity risk — not on which option looks cheaper on a salary line.",
+"qheads": 1,
+"faq": false,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": ""
+},
+{
+"u": "/ae/intelligence/when-do-you-need-a-cfo",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "When Does a Growing Business Need a CFO? | F&B Performance",
+"desc": "How to decide whether your next finance hire should be a bookkeeper, controller, finance manager or CFO — and when a fractional CFO is the better answer.",
+"h1t": "Bookkeeper, controller, finance manager or CFO — which do you actually need?",
+"words": 782,
+"types": [
+"AccountingService",
+"Article",
+"BreadcrumbList"
+],
+"ext": [],
+"byline": true,
+"dated": true,
+"nums": 12,
+"answer": true,
+"first_w": 26,
+"first": "Most businesses get this wrong in one of two directions: hiring senior too early, or leaving the decision until the absence has already cost them something.",
+"qheads": 1,
+"faq": false,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": ""
+},
+{
+"u": "/ae/tools/delivery-payout-calculator",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Talabat Commission Calculator | What You Keep Per Order",
+"desc": "Enter your Talabat, Deliveroo, Keeta or Careem commission and see what you keep per order after fees, discounts and packaging, and your true take rate.",
+"h1t": "Delivery profit calculator: what you keep from an app order",
+"words": 1184,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"WebApplication"
+],
+"ext": [
+"gulfnews.com",
+"khaleejtimes.com",
+"thenationalnews.com"
+],
+"byline": true,
+"dated": true,
+"nums": 15,
+"answer": true,
+"first_w": 60,
+"first": "After commission, payment fees, the discount you fund and packaging, an app order usually leaves far less than the same food sold at the counter; the example be",
+"qheads": 0,
+"faq": false,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/tools/delivery-payout-calculator",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "حاسبة عمولة طلبات للمطاعم | ما يبقى لك من كل طلب",
+"desc": "أدخل عمولة طلبات أو ديليفرو أو كيتا أو كريم واعرف ما يبقى لك من كل طلب بعد الرسوم والخصومات والتغليف، ونسبة الاستقطاع الفعلية.",
+"h1t": "حاسبة ربح التوصيل: ما يبقى لك من طلب التطبيق",
+"words": 1078,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"WebApplication"
+],
+"ext": [
+"gulfnews.com",
+"khaleejtimes.com",
+"thenationalnews.com"
+],
+"byline": true,
+"dated": false,
+"nums": 15,
+"answer": true,
+"first_w": 55,
+"first": "بعد العمولة ورسوم الدفع والخصم الذي تتحمله والتغليف، يترك طلب التطبيق عادة أقل بكثير مما يتركه الطعام نفسه إذا بيع في المطعم؛ في المثال أدناه 25.13 درهم مقابل 5",
+"qheads": 0,
+"faq": false,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/tools/food-cost-calculator",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Food Cost Formula & Calculator | Recipe and Menu Pricing",
+"desc": "Food cost % = ingredient cost ÷ selling price before VAT. Cost a dish, a cup or a catering head, set a target and get the price that hits it.",
+"h1t": "Food cost calculator and menu pricing",
+"words": 865,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"WebApplication"
+],
+"ext": [
+"moet.gov.ae",
+"tax.gov.ae"
+],
+"byline": true,
+"dated": true,
+"nums": 18,
+"answer": false,
+"first_w": 61,
+"first": "Food cost % is ingredient cost divided by the selling price before VAT. We use 28–35% as a working target for food; drinks usually run lower. A menu price of AE",
+"qheads": 2,
+"faq": false,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/tools/food-cost-calculator",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "حاسبة تكلفة الطعام | تكلفة الوصفة وتسعير قائمة الطعام",
+"desc": "نسبة تكلفة الطعام = تكلفة المكونات ÷ سعر البيع قبل الضريبة. احسب تكلفة الطبق أو الكوب أو الفرد في التموين، وحدد هدفك لتحصل على السعر المناسب.",
+"h1t": "حاسبة تكلفة الطعام وتسعير قائمة الطعام",
+"words": 814,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"WebApplication"
+],
+"ext": [
+"moet.gov.ae",
+"tax.gov.ae"
+],
+"byline": true,
+"dated": false,
+"nums": 14,
+"answer": true,
+"first_w": 57,
+"first": "نسبة تكلفة الطعام هي تكلفة المكونات مقسومة على سعر البيع قبل ضريبة القيمة المضافة. نعمل بنطاق 28–35% كهدف عملي للطعام، والمشروبات عادة أقل. سعر 42 درهم في قائمة",
+"qheads": 2,
+"faq": false,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/tools/break-even-calculator",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Break-Even Point Calculator for Restaurants | Covers a Day",
+"desc": "Break-even point = fixed costs ÷ contribution per cover. See covers or orders a day to break even, and test discounts, cloud kitchen rent and closures.",
+"h1t": "Break-even calculator for restaurants",
+"words": 930,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"WebApplication"
+],
+"ext": [],
+"byline": true,
+"dated": true,
+"nums": 32,
+"answer": true,
+"first_w": 59,
+"first": "Break-even is fixed costs divided by what each cover or order leaves after variable costs. Enter rent, salaries and other fixed costs, your average spend and va",
+"qheads": 1,
+"faq": false,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/tools/break-even-calculator",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "حاسبة نقطة التعادل للمطعم | عدد الزبائن يوميًا",
+"desc": "نقطة التعادل = التكاليف الثابتة ÷ ما يتركه كل زبون. اعرف عدد الزبائن أو الطلبات يوميًا، واختبر الخصومات وإيجار المطبخ السحابي والإغلاق الموسمي.",
+"h1t": "حاسبة نقطة التعادل للمطاعم",
+"words": 884,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"WebApplication"
+],
+"ext": [],
+"byline": true,
+"dated": false,
+"nums": 29,
+"answer": true,
+"first_w": 51,
+"first": "نقطة التعادل هي التكاليف الثابتة مقسومة على ما يتركه كل زبون أو طلب بعد التكاليف المتغيرة. أدخل الإيجار والرواتب وبقية التكاليف الثابتة ومتوسط الإنفاق ونسبة الت",
+"qheads": 1,
+"faq": false,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/tools/rent-to-sales-calculator",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Restaurant Rent to Sales Ratio Calculator | UAE",
+"desc": "Rent ÷ sales before VAT. See your restaurant's rent-to-sales ratio, the sales level where rent stops being affordable, and the figures for a renewal talk.",
+"h1t": "Restaurant rent-to-sales calculator",
+"words": 583,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"WebApplication"
+],
+"ext": [],
+"byline": true,
+"dated": true,
+"nums": 15,
+"answer": true,
+"first_w": 53,
+"first": "Divide monthly rent, including service charges, by monthly sales before VAT. Our working rule treats 8–12% as comfortable and above 15% as a warning; it is not ",
+"qheads": 0,
+"faq": false,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/tools/rent-to-sales-calculator",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "حاسبة نسبة الإيجار إلى المبيعات للمطاعم | الإمارات",
+"desc": "الإيجار ÷ المبيعات قبل الضريبة. اعرف نسبة الإيجار إلى المبيعات لمطعمك، ومستوى المبيعات الذي يصبح الإيجار عنده عبئًا، وأرقام التفاوض على التجديد.",
+"h1t": "حاسبة نسبة الإيجار إلى المبيعات للمطاعم",
+"words": 537,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"WebApplication"
+],
+"ext": [],
+"byline": true,
+"dated": false,
+"nums": 13,
+"answer": true,
+"first_w": 53,
+"first": "اقسم الإيجار الشهري، شاملًا رسوم الخدمات، على المبيعات الشهرية قبل ضريبة القيمة المضافة. قاعدتنا العملية تعتبر 8–12% نسبة مريحة وما فوق 15% إنذارًا؛ وهي ليست مع",
+"qheads": 0,
+"faq": false,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/tools/gratuity-calculator",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "UAE Gratuity Calculator 2026 | End of Service Calculator",
+"desc": "Free UAE gratuity calculator 2026 and end of service calculator: 21 days a year for 5 years, then 30. Resigning does not reduce it. Basic salary only.",
+"h1t": "UAE gratuity calculator 2026: end of service pay on basic salary",
+"words": 1490,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"WebApplication"
+],
+"ext": [
+"government.ae",
+"jafza.ae",
+"landing.dmcc.ae",
+"mediaoffice.ae",
+"mohre.gov.ae",
+"u.ae"
+],
+"byline": true,
+"dated": true,
+"nums": 34,
+"answer": true,
+"first_w": 60,
+"first": "This end of service calculator works out UAE gratuity, which is paid on basic salary: 21 days' pay for each of the first five years and 30 days for each year af",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/tools/gratuity-calculator",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "حاسبة مكافأة نهاية الخدمة في الإمارات 2026",
+"desc": "حاسبة مكافأة نهاية الخدمة في الإمارات 2026: 21 يومًا عن كل سنة من أول 5 سنوات و30 يومًا بعدها، على الراتب الأساسي. لا تنقص بالاستقالة.",
+"h1t": "حاسبة مكافأة نهاية الخدمة في الإمارات 2026 وفق القواعد السارية",
+"words": 1432,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"WebApplication"
+],
+"ext": [
+"government.ae",
+"jafza.ae",
+"landing.dmcc.ae",
+"mediaoffice.ae",
+"mohre.gov.ae",
+"u.ae"
+],
+"byline": true,
+"dated": false,
+"nums": 27,
+"answer": true,
+"first_w": 52,
+"first": "تحسب هذه الحاسبة مكافأة نهاية الخدمة في الإمارات، وهي تُحسب على الراتب الأساسي: أجر 21 يومًا عن كل سنة من السنوات الخمس الأولى، و30 يومًا عن كل سنة بعدها، وأجزا",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/tools/staff-turnover-cost-calculator",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Staff Turnover Cost Calculator for Restaurants",
+"desc": "Work out labour cost as a % of sales and what each staff leaver costs: recruitment, visa, medical, training weeks and overtime cover.",
+"h1t": "Staff turnover cost and labour cost % calculator",
+"words": 650,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"WebApplication"
+],
+"ext": [],
+"byline": true,
+"dated": true,
+"nums": 17,
+"answer": false,
+"first_w": 61,
+"first": "A leaver costs you recruitment, a new visa and permit, medical and Emirates ID, paid training weeks and overtime cover. In our example that is AED 8,685 per lea",
+"qheads": 0,
+"faq": false,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/tools/staff-turnover-cost-calculator",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "حاسبة تكلفة دوران الموظفين للمطاعم",
+"desc": "احسب تكلفة العمالة كنسبة من المبيعات وما يكلفه كل موظف مغادر: التوظيف، التأشيرة، الفحص الطبي، أسابيع التدريب وتغطية العمل الإضافي.",
+"h1t": "حاسبة تكلفة دوران الموظفين ونسبة تكلفة العمالة",
+"words": 617,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"WebApplication"
+],
+"ext": [],
+"byline": true,
+"dated": false,
+"nums": 16,
+"answer": true,
+"first_w": 55,
+"first": "الموظف المغادر يكلفك التوظيف، وتأشيرة وتصريح عمل جديدين، والفحص الطبي والهوية الإماراتية، وأسابيع تدريب مدفوعة، وعملًا إضافيًا لتغطية مكانه. في مثالنا يبلغ ذلك ",
+"qheads": 0,
+"faq": false,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/tools/vat-calculator",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "VAT Calculator UAE | Add or Remove 5% VAT in Seconds",
+"desc": "Free VAT calculator for the UAE: add 5% VAT to a net amount or take it out of a VAT-inclusive total. Net, VAT and gross in AED, with the formula shown.",
+"h1t": "VAT calculator UAE: add or remove 5% VAT",
+"words": 579,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"WebApplication"
+],
+"ext": [
+"tax.gov.ae"
+],
+"byline": true,
+"dated": true,
+"nums": 9,
+"answer": true,
+"first_w": 51,
+"first": "The UAE standard VAT rate is 5%. To add VAT, multiply the net amount by 1.05. To take VAT out of a total that already includes it, divide by 1.05: the result is",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/tools/vat-calculator",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "حاسبة ضريبة القيمة المضافة في الإمارات | أضف 5% أو استخرجها",
+"desc": "حاسبة مجانية لضريبة القيمة المضافة في الإمارات: أضف 5% إلى المبلغ الصافي أو استخرجها من مبلغ شامل للضريبة. الصافي والضريبة والإجمالي بالدرهم مع المعادلة.",
+"h1t": "حاسبة ضريبة القيمة المضافة في الإمارات: إضافة 5% أو استخراجها",
+"words": 513,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"WebApplication"
+],
+"ext": [
+"tax.gov.ae"
+],
+"byline": true,
+"dated": false,
+"nums": 6,
+"answer": true,
+"first_w": 38,
+"first": "النسبة الأساسية لضريبة القيمة المضافة (VAT) في الإمارات 5%. لإضافة الضريبة اضرب المبلغ الصافي في 1.05. ولاستخراج الضريبة من مبلغ شامل لها اقسمه على 1.05، فالنات",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/tools/overtime-calculator",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Overtime Calculator UAE | Night and Rest-Day Overtime Pay",
+"desc": "Work out UAE overtime pay on basic salary: at least 25% extra, 50% between 10 pm and 4 am and on your rest day. Maximum 2 hours a day. Labour Law 2021.",
+"h1t": "Overtime calculator UAE: normal, night and rest-day hours",
+"words": 1052,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"WebApplication"
+],
+"ext": [
+"government.ae",
+"mohre.gov.ae",
+"u.ae"
+],
+"byline": true,
+"dated": true,
+"nums": 25,
+"answer": true,
+"first_w": 56,
+"first": "UAE overtime is paid on basic salary. Each overtime hour earns the normal hourly rate plus at least 25%, or at least 50% between 10 pm and 4 am. Work on your re",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/tools/overtime-calculator",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "حاسبة العمل الإضافي في الإمارات | أجر الساعات الإضافية",
+"desc": "احسب أجر العمل الإضافي في الإمارات على الراتب الأساسي: 25% على الأقل، و50% بين 10 مساءً و4 صباحًا وفي يوم الراحة. بحد أقصى ساعتين في اليوم.",
+"h1t": "حاسبة العمل الإضافي في الإمارات: نهارًا وليلًا وفي يوم الراحة",
+"words": 1027,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"WebApplication"
+],
+"ext": [
+"government.ae",
+"mohre.gov.ae",
+"u.ae"
+],
+"byline": true,
+"dated": false,
+"nums": 15,
+"answer": true,
+"first_w": 58,
+"first": "يُحسب العمل الإضافي في الإمارات على الراتب الأساسي. تُدفع كل ساعة إضافية بأجر الساعة العادي مضافًا إليه 25% على الأقل، أو 50% على الأقل بين 10 مساءً و4 صباحًا. ",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/tools/leave-salary-calculator",
+"lang": "en-AE",
+"status": 200,
+"noindex": false,
+"title": "Leave Salary and Annual Leave Calculator UAE (2026)",
+"desc": "Work out UAE annual leave days, leave salary and the payout for unused leave when you leave a job. 30 days a year, 2 a month from 6 months. 2026 rules.",
+"h1t": "Leave salary and annual leave calculator UAE",
+"words": 1063,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"WebApplication"
+],
+"ext": [
+"government.ae",
+"mohre.gov.ae"
+],
+"byline": true,
+"dated": true,
+"nums": 23,
+"answer": true,
+"first_w": 56,
+"first": "After one year of service a UAE employee earns at least 30 days of paid annual leave a year; between six and twelve months, two days a month. While on leave you",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
+"u": "/ae/ar/tools/leave-salary-calculator",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "حاسبة بدل الإجازة والإجازة السنوية في الإمارات 2026",
+"desc": "احسب رصيد إجازتك السنوية وراتب الإجازة وبدل الإجازات غير المستخدمة عند ترك العمل في الإمارات: 30 يومًا في السنة، ويومان شهريًا بعد ستة أشهر.",
+"h1t": "حاسبة بدل الإجازة والإجازة السنوية في الإمارات",
+"words": 996,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"FAQPage",
+"WebApplication"
+],
+"ext": [
+"government.ae",
+"mohre.gov.ae"
+],
+"byline": true,
+"dated": false,
+"nums": 17,
+"answer": true,
+"first_w": 55,
+"first": "يستحق الموظف في الإمارات بعد سنة خدمة 30 يومًا على الأقل من الإجازة السنوية مدفوعة الأجر عن كل سنة، ويومين عن كل شهر إذا كانت خدمته بين ستة أشهر وسنة. وخلال الإ",
+"qheads": 0,
+"faq": true,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+}
+]
+}
