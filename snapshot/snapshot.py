@@ -24,6 +24,7 @@ from urllib.parse import urljoin, urlparse
 import requests
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import quality as Q  # noqa: E402
 from windows import ORDER as WORDER, WIN, wbundle, level_bundle, day_window, klab, zkey, parse as wparse, span_label  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -50,18 +51,7 @@ iso = lambda d: d.isoformat()
 short = lambda d: f"{d.strftime('%b')} {d.day}"
 
 
-def page_name(path):
-    """'/ae/ar/tools/vat-calculator' -> 'Vat calculator, Arabic'."""
-    p = re.sub(r"^/ae(?=/|$)", "", (path or "/").split("?")[0].rstrip("/"))
-    ar = bool(re.match(r"^/ar(/|$)", p))
-    p = re.sub(r"^/ar(?=/|$)", "", p)
-    if p in ("", "/"):
-        name = "Home"
-    else:
-        name = p.strip("/").split("/")[-1].replace("-", " ")
-        name = name[:1].upper() + name[1:]
-        name = re.sub(r"\b(uae|vat|kpi|qsr|fnb|f&b)\b", lambda m: {"fnb": "FnB", "f&b": "F&B"}.get(m.group(1).lower(), m.group(1).upper()), name, flags=re.I)
-    return name + (", Arabic" if ar else "")
+page_name = Q.page_name
 
 
 # ---------------------------------------------------------------- Google access
@@ -707,8 +697,45 @@ def index_status(sess, paths):
     states = {}
     for _, _, cs in res:
         states[cs or "Unknown"] = states.get(cs or "Unknown", 0) + 1
+    miss = {}
+    for _, okk, cs in res:
+        if not okk:
+            miss[cs or "Unknown"] = miss.get(cs or "Unknown", 0) + 1
     return {"checked": len(res), "indexed": sum(1 for x in res if x[1]), "states": states, "rechecked_now": len(todo),
-            "not_indexed": [page_name(p) for p, okk, _ in res if not okk][:8]}
+            "not_states": miss, "not_indexed": [page_name(p) for p, okk, _ in res if not okk][:8]}
+
+
+STATE_WORDS = {"URL is unknown to Google": "unknown to Google", "Discovered - currently not indexed": "found but not crawled yet",
+               "Crawled - currently not indexed": "crawled but not indexed", "Unknown": "status not returned"}
+pl = lambda k, w, s="s": f"{k} {w}{'' if k == 1 else s}"
+
+
+def not_indexed_text(ix):
+    st = ix.get("not_states") or {}
+    return ", ".join(f"{v} {STATE_WORDS.get(k, k[:1].lower() + k[1:])}" for k, v in sorted(st.items(), key=lambda kv: -kv[1]))
+
+
+def ai_sessions(sess):
+    rows = ga(sess, TODAY - dt.timedelta(days=28), TODAY - dt.timedelta(days=1), ["sessionSource"], ["sessions"])
+    src = {}
+    for d, m in rows:
+        if Q.AI_SOURCES.search(d[0]):
+            src[d[0]] = src.get(d[0], 0) + m[0]
+    return {"sessions": sum(src.values()), "sources": src}
+
+
+def events_check(sess):
+    rows = ga(sess, TODAY - dt.timedelta(days=28), TODAY, ["eventName"], ["eventCount"])
+    out = {"counts": {d[0]: m[0] for d, m in rows}, "key": None}
+    try:
+        r = sess.get(f"https://analyticsadmin.googleapis.com/v1beta/properties/{GA_PROPERTY}/keyEvents", timeout=30)
+        if r.status_code == 200:
+            out["key"] = [k.get("eventName") for k in r.json().get("keyEvents", [])]
+        else:
+            out["key_err"] = f"{r.status_code}: {r.text[:160]}"
+    except Exception as e:
+        out["key_err"] = str(e)[:160]
+    return out
 
 
 # ---------------------------------------------------------------- Site crawl
@@ -840,8 +867,9 @@ def crawl():
         if r is not None and r.status_code == 200:
             p = Page()
             p.feed(r.text)
+            o.update(Q.page_doc(r.text))
             o.update(title=p.title.strip(), desc=p.desc, h1=p.h1, canon=urlparse(p.canon).path if p.canon else "",
-                     noindex=p.noindex, og=p.og, imgs=p.imgs, noalt=p.noalt, schema=p.schema, lang=p.lang,
+                     noindex=p.noindex or "noindex" in r.headers.get("X-Robots-Tag", "").lower(), og=p.og, imgs=p.imgs, noalt=p.noalt, schema=p.schema, lang=p.lang,
                      links=sorted({urljoin(u, h).split("#")[0] for h in p.links if urljoin(u, h).startswith(SITE)}),
                      res=[urljoin(u, x) for x in p.res], kb=round(len(r.content) / 1024),
                      viewport=p.viewport, alts=sorted({urlparse(urljoin(u, x)).path for x in p.alts}),
@@ -852,16 +880,27 @@ def crawl():
     with cf.ThreadPoolExecutor(6) as ex:
         for o in ex.map(one, urls):
             pages[o["u"]] = o
-    known = {u.rstrip("/") for u in urls}
-    extra = sorted({l for o in pages.values() for l in o.get("links", []) if l.rstrip("/") not in known})
+    # Linked pages outside the sitemap (fixed 19 Nov 2026): compare paths, not full links, so a link with a query
+    # string to a listed page, or a link to a PDF, is not reported as a page missing from the sitemap. Every
+    # unlisted link is still fetched once for the broken-link check.
+    known = {urlparse(u).path.rstrip("/") or "/" for u in urls}
+
+    def page_path(l):
+        pr = urlparse(l)
+        last = pr.path.rsplit("/", 1)[-1]
+        return None if "." in last and not last.lower().endswith((".html", ".htm")) else (pr.path.rstrip("/") or "/")
+    extra = sorted({l for o in pages.values() for l in o.get("links", []) if page_path(l) not in known or urlparse(l).query})
 
     def chk(u):
         r, _ = fetch(u)
-        return u, ((r.status_code if r is not None else 0), bool(r is not None and r.history))
+        ni = bool(r is not None and r.status_code == 200 and ("noindex" in r.headers.get("X-Robots-Tag", "").lower() or
+                  re.search(r"<meta[^>]+name=[\"']robots[\"'][^>]*noindex", r.text[:30000], re.I)))
+        return u, ((r.status_code if r is not None else 0), bool(r is not None and r.history), ni)
     with cf.ThreadPoolExecutor(6) as ex:
         linkfull = dict(ex.map(chk, extra))
     linkres = {u: v[0] for u, v in linkfull.items()}
-    missing = [u for u, (st, red) in linkfull.items() if st == 200 and not red]
+    missing = sorted({page_path(u) for u, (st, red, ni) in linkfull.items()
+                      if st == 200 and not red and not ni and page_path(u) and page_path(u) not in known})
     ok = [o for o in pages.values() if o["status"] == 200]
     titles, descs = [o["title"] for o in ok], [o["desc"] for o in ok]
     issues = {
@@ -932,6 +971,17 @@ def crawl():
     http, _ = fetch(SITE.replace("https://", "http://") + "/")
     robots, _ = fetch(SITE + "/robots.txt")
     llms, _ = fetch(SITE + "/llms.txt")
+    rtext = robots.text if robots is not None and robots.status_code == 200 else ""
+    import cube as cube_mod
+    cfg = json.loads((DATA / "cube.json").read_text())
+    tg = json.loads((DATA / "targets.json").read_text())
+    try:
+        q = Q.site_quality(ok, SITE, cfg, tg["en"] + tg["ar"], lambda pth: cube_mod.path_allowed(rtext, "Googlebot", pth))
+        (DATA / "pages.json").write_text(json.dumps({"date": iso(TODAY), "pages": Q.page_rows(ok)}, ensure_ascii=False, indent=0))
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        q = {"error": str(e)[:200]}
     home_o = byp.get("/ae") or (ok[0] if ok else {})
     ages = [(TODAY - dt.date.fromisoformat(x)).days for x in lastmods if x]
     slow = sorted(ok, key=lambda o: -o["ms"])[:5]
@@ -946,7 +996,10 @@ def crawl():
         "slowest": [[page_name(o["u"]), o["ms"]] for o in slow],
         "weight": weight, "weight_total": sum(weight.values()), "files": nfiles,
         "speed_pages": speed, "site_types": site_types, "top_shared": top_shared, "kb_median": kbs[len(kbs) // 2] if kbs else None,
-        "missing_from_sitemap": [u.replace(SITE, "") for u in missing],
+        "missing_from_sitemap": missing,
+        "q": q, "noindex": [o["u"] for o in ok if o["noindex"]],
+        "robots_ok": bool(robots is not None and robots.status_code == 200),
+        "robots_sitemap": bool(re.search(r"(?im)^\s*sitemap\s*:", rtext)),
         "lastmod_share": round(sum(1 for x in lastmods if x) / len(lastmods), 3) if lastmods else 0,
         "lastmod_age_median": sorted(ages)[len(ages) // 2] if ages else None,
         "inlinks_ge3": sum(1 for o in ok if inl.get(o["u"].rstrip("/") or "/", 0) >= 3),
@@ -954,7 +1007,7 @@ def crawl():
         "hreflang_pages": len(recip), "hreflang_ok": recip_ok,
         "viewport_share": round(sum(1 for o in ok if o["viewport"]) / len(ok), 3) if ok else 0,
         "https_redirect": bool(http is not None and http.url.startswith("https://")),
-        "robots": robots.text if robots is not None and robots.status_code == 200 else "",
+        "robots": rtext,
         "llms_txt": bool(llms is not None and llms.status_code == 200 and len(llms.text) > 50),
         "sameas_home": home_o.get("sameas", 0), "ld_bad": sum(o.get("ld_bad", 0) for o in ok),
         "n_ok": len(ok),
@@ -1156,7 +1209,7 @@ def cube_card(cs, cube, hist, g):
              "bands": [band(val(d, b["id"]) or 0, tgt(d, b["id"])) for d in hcols],
              "targets": [tgt(d, b["id"]) for d in hcols],
              "subs": [{"name": x_["name"], "weight": x_["weight"], "score": x_["score"], "audit": x_["audit"],
-                       "band": band(x_["score"], b["target"]), "measured": x_["source"] == "Measured daily",
+                       "band": band(x_["score"], b["target"]), "measured": x_["measured"],
                        "evidence": x_["evidence_now"]} for x_ in b["subs"]]} for b in order]
     day_n = (TODAY - LAUNCH).days + 1
     stage_note = f"{cs['stage']} stage, day {day_n}" + (f", to {short(dt.date.fromisoformat(cs['stage_until']))}" if cs["stage_until"] else "")
@@ -1168,7 +1221,8 @@ def cube_card(cs, cube, hist, g):
         hist_vals = [val(d, b["id"]) for d in cols]
         subs = sorted(b["subs"], key=lambda x_: -(max(0, b["target"] - x_["score"]) * x_["weight"]))
         worst = subs[0]
-        measured_n = sum(1 for x_ in b["subs"] if x_["source"] == "Measured daily")
+        measured_n = sum(1 for x_ in b["subs"] if x_["measured"])
+        part_n = sum(1 for x_ in b["subs"] if x_["measured"] and x_["part"] < 1)
         q = [{"intent": "status", "id": "total", "text": "What is the score?",
               "answer": {"type": "stat", "value": f"{b['score']:.1f}", "label": f"{b['name']}, of 10",
                          "sub": f"Target {b['target']:.1f} at the {cs['stage']} stage; audit {b['audit']:.1f}"}},
@@ -1180,7 +1234,9 @@ def cube_card(cs, cube, hist, g):
                          "rows": [[x_["name"], x_["evidence_now"] or "Scored in the Nov 13 audit."] for x_ in subs[:3]], "note": ""}},
              {"intent": "trust", "id": "how", "text": "How is it scored?",
               "answer": {"type": "list", "items": [
-                  f"{measured_n} of {len(b['subs'])} sub-metrics are measured daily; the rest keep the Nov 13 audit score until reviewed.",
+                  f"{measured_n} of {len(b['subs'])} sub-metrics are measured" + (f", {part_n} of them in part" if part_n else "")
+                  + "; " + ("the rest keep the Nov 13 audit score until reviewed." if measured_n < len(b["subs"]) else "none rest on the audit alone.")
+                  + (" A part-measured score blends the rule with the audit, as its source shows." if part_n else ""),
                   "The block score is the weighted mean of its sub-metrics, 0 to 10.",
                   "Measured sub-metrics use a fixed rule (shown under each one), so they can differ from the audit's judgement on the first day."]}}]
         if b["cards"]:
@@ -1211,6 +1267,10 @@ def cube_card(cs, cube, hist, g):
     if lost(gaps[0]) > 0:
         pats.append({"type": "gap", "title": f"Most points lost: {gaps[0]['name']}",
                      "evidence": f"{gaps[0]['score']:.1f} against {gaps[0]['target']:.1f}, worth {lost(gaps[0]):.2f} of the overall score."})
+    if TODAY <= dt.date(2026, 12, 19):
+        pats.append({"type": "caution", "title": "Wider measurement from Nov 19",
+                     "evidence": "Twenty more sub-metrics moved from the Nov 13 audit to fixed daily rules on Nov 19 (40 of 45 now), "
+                                 "so scores before and after that day are not like for like."})
     pats.append({"type": "caution", "title": "New site, warm-up period",
                  "evidence": f"The site went live on {short(LAUNCH)}. Indexation and search presence usually take two to four weeks to settle; off-site blocks build over months."})
     q = [{"intent": "status", "id": "total", "text": "What is the overall score?",
@@ -1231,8 +1291,11 @@ def cube_card(cs, cube, hist, g):
         q.insert(3, {"intent": "source", "id": "targets", "text": "Which target searches show the site?",
                      "answer": {"type": "table", "columns": ["Search", "Impressions, 28 days", "Position"],
                                 "rows": [[r[0], f(r[1]), "-" if r[2] is None else f"{r[2]:.1f}"] for r in g["targets"]["rows"]], "note": "Edit the list in data/targets.json."}})
-    ctx = {"missing_n": len(CRAWL.get("missing_from_sitemap", [])), "unknown_n": (g.get("index") or {}).get("checked", 0) - (g.get("index") or {}).get("indexed", 0),
-           "slowest": ", ".join(x_[0] for x_ in CRAWL.get("slowest", [])[:2]), "noshare_n": len(CRAWL.get("issues", {}).get("No share image", []))}
+    unk = (g.get("index") or {}).get("checked", 0) - (g.get("index") or {}).get("indexed", 0)
+    eo = len(((CRAWL.get("q") or {}).get("parity") or {}).get("en_only") or [])
+    ctx = {"missing_pages": pl(len(CRAWL.get("missing_from_sitemap", [])), "linked page"), "unknown_pages": pl(unk, "page"),
+           "slowest": "; ".join(x_[0] for x_ in CRAWL.get("slowest", [])[:2]), "noshare_pages": pl(len(CRAWL.get("issues", {}).get("No share image", [])), "page"),
+           "en_only_pages": pl(eo, "English page"), "noindex_pages": pl(len(CRAWL.get("noindex", [])), "noindex page")}
     acts = {(b["id"], x_["name"]): (x_.get("action", "").format(**ctx), x_.get("owner", "site")) for b in cs["blocks"] for x_ in b["subs"]}
     for r in rows:
         for x_ in r["subs"]:
@@ -1247,7 +1310,7 @@ def cube_card(cs, cube, hist, g):
     nxt = [{"t": x_["action"].format(**ctx), "why": f"{b['name']}: {x_['name']} at {x_['score']:.1f}, block target {b['target']:.1f}.",
             "gain": round(gain, 2), "owner": x_.get("owner", "site"), "impact": "high" if gain >= 0.1 else "med" if gain >= 0.04 else "low"}
            for gain, b, x_ in gains[:6]]
-    n_meas = sum(1 for b in cs["blocks"] for x_ in b["subs"] if x_["source"] == "Measured daily")
+    n_meas = sum(1 for b in cs["blocks"] for x_ in b["subs"] if x_["measured"])
     n_all = sum(len(b["subs"]) for b in cs["blocks"])
     left = (dt.date.fromisoformat(cs["stage_until"]) - TODAY).days if cs["stage_until"] else None
     kpis = [{"label": "Stage target", "value": f"{cs['target']:.2f}", "note": f"{cs['target'] - tot:.2f} to go" if tot < cs["target"] else "Reached", "tone": "down" if tot < cs["target"] else "up"},
@@ -1323,12 +1386,13 @@ def next_steps(cards, c, g):
     top_row = lambda i, n=0: (by[i]["breakdowns"][n]["rows"][0] if i in by and len(by[i]["breakdowns"]) > n and by[i]["breakdowns"][n]["rows"] else None)
     ix = g.get("index") or {}
     unknown = ix.get("checked", 0) - ix.get("indexed", 0)
+    q = c.get("q") or {}
     rules = {}
     if "leads" in by:
         rules["leads"] = ([step("Send one test Profit Review request after accepting cookies; it should show in Analytics Realtime within minutes.", "No requests recorded this week; confirms the form and the generate_lead event work end to end.", "high", "owner"),
                            step("Mark generate_lead as a key event in Google Analytics.", "Key events power conversion reports and channel comparisons.", "med", "owner")]
                           if tot("leads") == 0 else
-                          [step("Reply to every request within the hour and note the outcome.", f"{tot('leads')} requests this week.", "high", "owner")])
+                          [step("Reply to every request within the hour and note the outcome.", f"{pl(tot('leads'), 'request')} this week.", "high", "owner")])
     if "whatsapp" in by:
         rules["whatsapp"] = [step("Check the header and footer WhatsApp links also send whatsapp_click.", "Only the Ask buttons are confirmed; the rest may go uncounted.", "med", "site")]
         if top_row("whatsapp"):
@@ -1355,7 +1419,8 @@ def next_steps(cards, c, g):
     if "impressions" in by:
         rules["impressions"] = []
         if unknown:
-            rules["impressions"].append(step(f"Request indexing in Search Console for the {unknown} pages Google does not know yet.", "Pages Google has not indexed cannot show in results.", "high", "google"))
+            rules["impressions"].append(step(f"Request indexing in Search Console for the {pl(unknown, 'page')} not in Google yet ({not_indexed_text(ix)}).",
+                                             "Pages Google has not indexed cannot show in results.", "high", "google"))
         rules["impressions"].append(step("Rewrite the title and description of the most shown pages to match the search wording.", "Impressions turn into clicks through the title and description.", "med", "site"))
     if "searchclicks" in by:
         rules["searchclicks"] = [step("Track clicks from searches without the brand name; those are new prospects.", "Brand searches come from people who already know the firm.", "low", "owner")]
@@ -1365,18 +1430,25 @@ def next_steps(cards, c, g):
                             [step("No keyword on page one yet: expected in the first weeks after launch.", "Google is still re-crawling the new site.", "low", "google")])
     if "pages" in by:
         rules["pages"] = []
-        if c.get("missing_from_sitemap"):
-            rules["pages"].append(step(f"Add the {len(c['missing_from_sitemap'])} linked pages missing from the sitemap, or noindex them.", "Pages outside the sitemap are found later, if at all.", "med", "site"))
-        gap = c["lang"]["English"] - c["lang"]["Arabic"]
-        if gap > 0:
-            rules["pages"].append(step(f"Publish Arabic versions of the {gap} English-only pages.", "Arabic search targeting is the weakest cube block.", "med", "site"))
+        ms = c.get("missing_from_sitemap") or []
+        if ms:
+            rules["pages"].append(step(f"Add the {pl(len(ms), 'linked page')} missing from the sitemap, or noindex {'it' if len(ms) == 1 else 'them'}: "
+                                       + "; ".join(page_name(u) for u in ms[:3]) + ".", "Pages outside the sitemap are found later, if at all.", "med", "site"))
+        ni = c.get("noindex") or []
+        if ni:
+            rules["pages"].append(step(f"Take the {pl(len(ni), 'noindex page')} out of the sitemap: " + "; ".join(page_name(u) for u in ni[:4]) + ".",
+                                       "A sitemap should list only pages meant for Google; Search Console reports listed noindex pages as errors.", "low", "site"))
+        eo = (q.get("parity") or {}).get("en_only") or []
+        if eo:
+            rules["pages"].append(step(f"Publish Arabic versions of the {pl(len(eo), 'English-only page')}, starting with "
+                                       + "; ".join(page_name(u) for u in eo[:3]) + ".", "Each has no Arabic page paired through hreflang.", "med", "site"))
     if "broken" in by:
-        rules["broken"] = ([step("Fix: " + ", ".join(u.replace(SITE, "") for u in c["broken"][:3]), "Broken links waste crawl and lose visitors.", "high", "site")] if c["broken"] else
+        rules["broken"] = ([step("Fix: " + "; ".join(u.replace(SITE, "") for u in c["broken"][:3]) + ".", "Broken links waste crawl and lose visitors.", "high", "site")] if c["broken"] else
                            [step("Nothing to fix. Recheck after each release.", "All internal links work.", "low", "site")])
     if "issues" in by:
-        rules["issues"] = [step(f"Add share images to the {len(c['issues'].get('No share image', []))} pages without one.", "Links shared on WhatsApp and LinkedIn show no picture.", "med", "site")] if c["issues"].get("No share image") else []
+        rules["issues"] = [step(f"Add share images to the {pl(len(c['issues'].get('No share image', [])), 'page')} without one.", "Links shared on WhatsApp and LinkedIn show no picture.", "med", "site")] if c["issues"].get("No share image") else []
         if c["issues"].get("Description over 160 characters"):
-            rules["issues"].append(step("Shorten the long descriptions: " + ", ".join(page_name(u) for u in c["issues"]["Description over 160 characters"][:3]) + ".", "Google cuts descriptions at about 160 characters.", "low", "site"))
+            rules["issues"].append(step("Shorten the long descriptions: " + "; ".join(page_name(u) for u in c["issues"]["Description over 160 characters"][:3]) + ".", "Google cuts descriptions at about 160 characters.", "low", "site"))
     if "speed" in by:
         sp = c.get("speed_pages", [])
         slow = [p for p in sp if p["ms"] >= 1000]
@@ -1437,11 +1509,20 @@ def main():
         except Exception as e:
             notes.append(f"Target searches could not be read: {str(e)[:120]}")
         try:
-            g["index"] = index_status(sess, c["urls"])
+            g["index"] = index_status(sess, [u for u in c["urls"] if u not in set(c.get("noindex", []))])
         except Exception as e:
             print(e, file=sys.stderr)
             notes.append("Indexation keeps its audit score: Search Console URL Inspection is not permitted for the service account (needs Full permission).")
-    cs = cube_mod.score(cube, cube_mod.measure(c, g), TODAY)
+    if sess and google["ga"]:
+        for k, fn in (("ai", ai_sessions), ("events", events_check)):
+            try:
+                g[k] = fn(sess)
+            except Exception as e:
+                print(f"{k}: {e}", file=sys.stderr)
+    if "error" in (c.get("q") or {}):
+        notes.append(f"Page checks failed, so 18 cube sub-metrics keep their audit scores: {c['q']['error'][:120]}")
+    sm = json.loads((DATA / "semrush.json").read_text()) if (DATA / "semrush.json").exists() else None
+    cs = cube_mod.score(cube, cube_mod.measure(c, g, sm), TODAY)
     today = {"date": iso(TODAY), "crawl": {k: c[k] for k in ("pages_ok", "broken_n", "issue_pages", "ms_median", "weight_total")},
              "cube": {"overall": cs["overall"], "blocks": {b["id"]: b["score"] for b in cs["blocks"]}}}
     for card_ in google["ga"] + google["sc"]:
@@ -1470,8 +1551,20 @@ def main():
     c.pop("urls", None)
     c.pop("speed_pages", None)
     meta = {"generated": dt.datetime.now(dt.timezone.utc).isoformat(timespec="minutes"),
-            "date": iso(TODAY), "notes": notes, "crawl": c, "index": g.get("index"), "launch": iso(LAUNCH)}
-    (DATA / "cards.json").write_text(json.dumps({"meta": meta, "cards": cards}, ensure_ascii=False))
+            "date": iso(TODAY), "notes": notes, "crawl": c, "index": g.get("index"), "launch": iso(LAUNCH),
+            "ga_checks": {k: g[k] for k in ("ai", "events") if k in g}}
+    out = {"meta": meta, "cards": cards}
+    # Self-check (19 Nov 2026): every card and window must add up; a problem is shown on the board as a note.
+    try:
+        sys.path.insert(0, str(ROOT / "tools"))
+        import check_board
+        probs = check_board.check(json.loads(json.dumps(out)))
+        if probs:
+            notes.append(f"Self-check found {pl(len(probs), 'problem')}: " + "; ".join(probs[:3]) + ".")
+            print("\n".join(probs), file=sys.stderr)
+    except Exception as e:
+        print("Self-check:", e, file=sys.stderr)
+    (DATA / "cards.json").write_text(json.dumps(out, ensure_ascii=False))
     print(f"{len(cards)} cards; notes: {notes}")
 
 

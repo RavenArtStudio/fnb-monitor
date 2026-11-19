@@ -63,9 +63,9 @@
      "name": "Crawl and robots",
      "weight": 20,
      "audit": 8.5,
-     "auto": null,
+     "auto": "crawl",
      "evidence": "",
-     "action": "Review robots.txt and blocked paths after each release.",
+     "action": "Take the {noindex_pages} out of the sitemap and recheck robots.txt after each release.",
      "owner": "site"
     },
     {
@@ -75,7 +75,7 @@
      "audit": 7.5,
      "auto": "sitemap",
      "evidence": "",
-     "action": "List the {missing_n} linked pages missing from sitemap.xml, or noindex them.",
+     "action": "List the {missing_pages} missing from sitemap.xml, or noindex them.",
      "owner": "site"
     },
     {
@@ -105,7 +105,7 @@
      "audit": 1.5,
      "auto": "index",
      "evidence": "",
-     "action": "Request indexing in Search Console for the {unknown_n} pages Google does not know yet.",
+     "action": "Request indexing in Search Console for the {unknown_pages} not in Google yet.",
      "owner": "google"
     },
     {
@@ -174,7 +174,7 @@
      "name": "Query-intent match to target searches",
      "weight": 25,
      "audit": 8.0,
-     "auto": null,
+     "auto": "intent",
      "evidence": "",
      "action": "Give each target search one page and use its wording in the title and H1.",
      "owner": "site"
@@ -196,7 +196,7 @@
      "audit": 6.0,
      "auto": "alt",
      "evidence": "",
-     "action": "Add share images to the {noshare_n} pages without one (tool pages, franchise operators).",
+     "action": "Add share images to the {noshare_pages} without one.",
      "owner": "site"
     }
    ]
@@ -213,7 +213,7 @@
      "name": "Cluster coverage vs UAE F&B owner searches",
      "weight": 30,
      "audit": 7.5,
-     "auto": null,
+     "auto": "cluster",
      "evidence": "",
      "action": "Write pages for target searches that have no matching page yet.",
      "owner": "site"
@@ -223,7 +223,7 @@
      "name": "Depth and accuracy",
      "weight": 20,
      "audit": 7.5,
-     "auto": null,
+     "auto": "depth",
      "evidence": "",
      "action": "Add worked UAE examples and figures to thin sections.",
      "owner": "site"
@@ -243,7 +243,7 @@
      "name": "E-E-A-T signals",
      "weight": 25,
      "audit": 6.0,
-     "auto": null,
+     "auto": "eeat",
      "evidence": "",
      "action": "Add credentials, client proof and named authors on service pages.",
      "owner": "owner"
@@ -253,7 +253,7 @@
      "name": "Unique assets",
      "weight": 10,
      "audit": 9.0,
-     "auto": null,
+     "auto": "assets",
      "evidence": "",
      "action": "Keep calculators current; add one new tool a month.",
      "owner": "site"
@@ -282,7 +282,7 @@
      "name": "Validity and match with visible content",
      "weight": 35,
      "audit": 7.5,
-     "auto": null,
+     "auto": "valid",
      "evidence": "",
      "action": "Check structured data against visible content in Google's Rich Results Test.",
      "owner": "site"
@@ -311,7 +311,7 @@
      "name": "Brand name consistency",
      "weight": 25,
      "audit": 5.5,
-     "auto": null,
+     "auto": "brand",
      "evidence": "",
      "action": "Use one brand name, F&B Performance, on the site, listing and profiles.",
      "owner": "owner"
@@ -321,7 +321,7 @@
      "name": "Address, phone, licence consistency",
      "weight": 25,
      "audit": 3.0,
-     "auto": null,
+     "auto": "nap",
      "evidence": "",
      "action": "Show the same address, phone and trade licence on the site and Google listing.",
      "owner": "owner"
@@ -341,7 +341,7 @@
      "name": "sameAs and social profiles",
      "weight": 15,
      "audit": 5.0,
-     "auto": null,
+     "auto": "social",
      "evidence": "",
      "action": "Link LinkedIn and other profiles to the site and back.",
      "owner": "owner"
@@ -373,7 +373,7 @@
      "name": "Referring domains and backlinks",
      "weight": 50,
      "audit": 0.5,
-     "auto": null,
+     "auto": "refdom",
      "evidence": "",
      "action": "Pitch one data piece (delivery commission take-home, SBR 2029) to Gulf News, Khaleej Times or Hospitality News ME.",
      "owner": "owner"
@@ -412,7 +412,7 @@
      "name": "Answer-first passages",
      "weight": 25,
      "audit": 8.0,
-     "auto": null,
+     "auto": "answer",
      "evidence": "",
      "action": "Open each guide with a two-sentence direct answer.",
      "owner": "site"
@@ -422,7 +422,7 @@
      "name": "Quotable facts with sources and dates",
      "weight": 20,
      "audit": 7.5,
-     "auto": null,
+     "auto": "facts",
      "evidence": "",
      "action": "Put the source and date next to every figure.",
      "owner": "site"
@@ -432,7 +432,7 @@
      "name": "Entity clarity",
      "weight": 15,
      "audit": 7.0,
-     "auto": null,
+     "auto": "clarity",
      "evidence": "",
      "action": "State who, where and for whom in the first lines of key pages.",
      "owner": "site"
@@ -462,7 +462,7 @@
      "name": "Consistency of facts across pages",
      "weight": 15,
      "audit": 8.0,
-     "auto": null,
+     "auto": "consist",
      "evidence": "",
      "action": "Keep prices and service names identical across pages.",
      "owner": "site"
@@ -494,9 +494,9 @@
      "name": "Cited by AI-style answers",
      "weight": 30,
      "audit": 0.5,
-     "auto": null,
+     "auto": "cited",
      "evidence": "",
-     "action": "Publish short, dated answers to the top owner questions.",
+     "action": "Publish short, dated answers to the top owner questions so AI assistants can cite and link them.",
      "owner": "site"
     },
     {
@@ -504,7 +504,7 @@
      "name": "Featured-snippet and PAA-shaped content",
      "weight": 20,
      "audit": 8.0,
-     "auto": null,
+     "auto": "snippet",
      "evidence": "",
      "action": "Answer common questions in short question-and-answer blocks.",
      "owner": "site"
@@ -535,9 +535,9 @@
      "name": "Arabic content parity",
      "weight": 25,
      "audit": 6.5,
-     "auto": null,
+     "auto": "parity",
      "evidence": "",
-     "action": "Translate the English-only guides into Arabic instead of redirecting to English.",
+     "action": "Publish Arabic versions of the {en_only_pages} that have none, then lengthen the shortest Arabic service pages.",
      "owner": "site"
     },
     {
@@ -545,7 +545,7 @@
      "name": "Arabic metadata quality",
      "weight": 20,
      "audit": 7.5,
-     "auto": null,
+     "auto": "armeta",
      "evidence": "",
      "action": "Write native Arabic titles and descriptions, not translations.",
      "owner": "site"
@@ -598,14 +598,149 @@
      "name": "Analytics and conversion events",
      "weight": 40,
      "audit": 8.5,
-     "auto": null,
+     "auto": "events",
      "evidence": "",
-     "action": "Confirm generate_lead is a key event in Google Analytics.",
+     "action": "Mark generate_lead as a key event and send one test request to confirm it is recorded.",
      "owner": "owner"
     }
    ]
   }
  ],
  "bing_verified": false,
- "stage_note": "Stages are 7-day spans from the Nov 15 launch."
+ "stage_note": "Stages are 7-day spans from the Nov 15 launch.",
+ "clusters_note": "Topics an F&B owner in the UAE searches for. A page belongs to a topic when its title or H1 contains one of the words. Three pages per language is full coverage.",
+ "clusters": [
+  {
+   "name": "Restaurant accounting and bookkeeping",
+   "en": [
+    "accounting",
+    "bookkeeping",
+    "accountant",
+    "month-end",
+    "month end"
+   ],
+   "ar": [
+    "محاسب",
+    "مسك الدفاتر",
+    "الدفاتر",
+    "إقفال"
+   ]
+  },
+  {
+   "name": "VAT",
+   "en": [
+    "vat"
+   ],
+   "ar": [
+    "القيمة المضافة"
+   ]
+  },
+  {
+   "name": "Corporate tax",
+   "en": [
+    "corporate tax"
+   ],
+   "ar": [
+    "ضريبة الشركات"
+   ]
+  },
+  {
+   "name": "Food cost and margins",
+   "en": [
+    "food cost",
+    "prime cost",
+    "margin",
+    "menu"
+   ],
+   "ar": [
+    "تكلفة الطعام",
+    "التكلفة الأساسية",
+    "هامش",
+    "الهوامش",
+    "القائمة"
+   ]
+  },
+  {
+   "name": "Delivery platforms",
+   "en": [
+    "delivery",
+    "talabat",
+    "deliveroo",
+    "aggregator"
+   ],
+   "ar": [
+    "التوصيل",
+    "طلبات",
+    "ديليفرو"
+   ]
+  },
+  {
+   "name": "Profit and CFO",
+   "en": [
+    "profit",
+    "cfo",
+    "break-even",
+    "break even",
+    "dashboard"
+   ],
+   "ar": [
+    "الربح",
+    "الأرباح",
+    "المدير المالي",
+    "التعادل",
+    "لوحات"
+   ]
+  },
+  {
+   "name": "Cash flow and budgeting",
+   "en": [
+    "cash",
+    "budget",
+    "forecast",
+    "runway"
+   ],
+   "ar": [
+    "النقد",
+    "النقدي",
+    "الميزانية",
+    "التنبؤ",
+    "الموازنة"
+   ]
+  },
+  {
+   "name": "Staff and payroll",
+   "en": [
+    "payroll",
+    "staff",
+    "gratuity",
+    "overtime",
+    "leave salary",
+    "wps"
+   ],
+   "ar": [
+    "الرواتب",
+    "الموظفين",
+    "مكافأة نهاية الخدمة",
+    "العمل الإضافي",
+    "الإجازة"
+   ]
+  },
+  {
+   "name": "Opening and growing a restaurant",
+   "en": [
+    "opening",
+    "expansion",
+    "feasibility",
+    "franchise",
+    "investor"
+   ],
+   "ar": [
+    "افتتاح",
+    "التوسع",
+    "الجدوى",
+    "الامتياز",
+    "المستثمرين"
+   ]
+  }
+ ]
 }
