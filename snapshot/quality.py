@@ -6,6 +6,7 @@ behind it. Nothing here calls the network.
 """
 import json
 import re
+import zlib
 import statistics
 
 import siteconf
@@ -611,9 +612,14 @@ def site_quality(ok, site, cfg, targets, robots_allowed):
         lq = {"n": len(main_pages), "score": round(sum(par) / len(par), 4) if par else 0, "en_only": en_only,
               "thin": sorted(thin, key=lambda t_: t_[1])[:8], "paired": len(main_pages) - len(en_only)}
         pages_l = [o for o in live if lang(o) == code]
+        back = {}
+        for m in main_pages:
+            t_ = pair_in(m, code)
+            if t_ is not None:
+                back.setdefault(id(t_), m)
         passed, total, fails = 0, 0, {}
         for o in pages_l:
-            p_ = next((m for m in main_pages if pair_in(m, code) is o), None)
+            p_ = back.get(id(o))
             for kind, val, lo, hi, pool in (("title", o.get("title") or "", 20, 70, titles), ("description", o.get("desc") or "", 60, 170, descs)):
                 tests = {f"{kind} not mainly {x['name']}": in_language(val, code), f"{kind} length": lo <= len(val) <= hi,
                          f"{kind} not unique": bool(val) and pool.count(val) == 1,
@@ -694,9 +700,16 @@ def medical_checks(live, lang, site):
     return out
 
 
-def shingles(text, k=5):
+def shingles(text, k=5, keep=8):
+    """Five-word shingles, sampled: only those whose checksum falls in one of `keep` buckets. The same shingle is kept or
+    dropped on every page, so Jaccard similarity is estimated without its cost on long pages (first live run, 20 Nov 2026)."""
     w = re.findall(r"\w+", (text or "").lower())
-    return {" ".join(w[i:i + k]) for i in range(max(0, len(w) - k + 1))}
+    out = set()
+    for i in range(max(0, len(w) - k + 1)):
+        g = " ".join(w[i:i + k])
+        if zlib.crc32(g.encode()) % keep == 0:
+            out.add(g)
+    return out
 
 
 def agency_checks(ok, live, lang, site):
@@ -707,19 +720,25 @@ def agency_checks(ok, live, lang, site):
     proof_re = re.compile(a.get("proof_re", r"^/(portfolio|client-stories|case-studies)/[^/]+$"))
     ind = [o for o in live if ind_re.match(o["u"])]
     sh = {o["u"]: shingles(o.get("_main", "")) for o in ind}
+    seen = {}                                   # shingle -> number of industry pages that use it
+    for v in sh.values():
+        for g in v:
+            seen[g] = seen.get(g, 0) + 1
     dup, uniq = [], []
     us = list(sh)
     for i, u in enumerate(us):
-        best, others = 0.0, set()
-        for j, v in enumerate(us):
-            if i == j or not sh[u] or not sh[v]:
+        best, a_ = 0.0, sh[u]
+        for j in range(len(us)):
+            b_ = sh[us[j]]
+            if i == j or not a_ or not b_:
                 continue
-            inter = len(sh[u] & sh[v])
-            best = max(best, inter / len(sh[u] | sh[v]))
-            others |= sh[v]
+            inter = len(a_ & b_) if len(a_) <= len(b_) else len(b_ & a_)
+            best = max(best, inter / (len(a_) + len(b_) - inter))
+            if best >= 0.6:
+                break
         if best >= 0.6:
             dup.append(u)
-        uniq.append(len(sh[u] - others) / len(sh[u]) if sh[u] else 0)
+        uniq.append(sum(1 for g in a_ if seen[g] == 1) / len(a_) if a_ else 0)
     own = [b.lower() for b in CFG.get("own_brands", [])]
     proof = [o for o in live if proof_re.match(o["u"])]
     external = [o for o in proof if not any(b in ((o.get("title") or "") + " " + o["u"].replace("-", " ")).lower() for b in own)]
