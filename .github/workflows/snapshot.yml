@@ -1,9 +1,14 @@
 name: Daily snapshot
+# Every site in sites/*.json, one after the other. A site that fails is reported and the others still run and commit.
 
 on:
   schedule:
     - cron: "41 */3 * * *"   # every 3 hours: 00:11, 03:11, 06:11 ... 21:11 India
   workflow_dispatch:
+    inputs:
+      site:
+        description: "Site id from sites/, or all"
+        default: "all"
 
 permissions:
   contents: write
@@ -15,21 +20,37 @@ concurrency:
 jobs:
   snapshot:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 55
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - run: pip install -r snapshot/requirements.txt
-      - name: Take snapshot
+      - name: Take snapshots
         env:
           GOOGLE_SA_KEY: ${{ secrets.GOOGLE_SA_KEY }}
-        run: python snapshot/snapshot.py
+          ONLY: ${{ inputs.site || 'all' }}
+        run: |
+          failed=""
+          for f in sites/*.json; do
+            id=$(basename "$f" .json)
+            if [ "$ONLY" != "all" ] && [ "$ONLY" != "$id" ]; then continue; fi
+            echo "::group::$id"
+            SITE_ID=$id timeout 25m python snapshot/snapshot.py || failed="$failed $id"
+            echo "::endgroup::"
+          done
+          echo "FAILED=$failed" >> "$GITHUB_ENV"
       - name: Commit snapshot
         run: |
           git config user.name "fnb-monitor"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data
           git diff --cached --quiet || git commit -m "Snapshot $(date -u +%F)"
+          git pull --rebase
           git push
+      - name: Report failures
+        if: env.FAILED != ''
+        run: |
+          echo "::error::Snapshot failed for:$FAILED"
+          exit 1

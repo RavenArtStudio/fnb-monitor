@@ -1,9 +1,6 @@
 name: Live feed
-
-# Google Analytics Realtime for the board's 30m, 12h and 24h windows (Checkpoint 27).
-# Publishes data/live.json and data/live-log.json on the `live` branch as one overwritten
-# commit, so main and the repo history do not grow. The board reads
-# https://raw.githubusercontent.com/RavenArtStudio/fnb-monitor/live/data/live.json
+# Google Analytics Realtime for every site in sites/*.json, every 15 minutes. Each site's files sit under its data
+# folder on the live branch (data/ for FNB, data/sites/<id>/ for the others), published as one overwritten commit.
 
 on:
   schedule:
@@ -20,7 +17,7 @@ concurrency:
 jobs:
   live:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
         with:
@@ -31,24 +28,28 @@ jobs:
           cache: pip
           cache-dependency-path: snapshot/requirements.txt
       - run: pip install -r snapshot/requirements.txt
-      - name: Restore the live log
-        run: |
-          mkdir -p live
-          if git fetch --depth 1 origin live 2>/dev/null; then
-            git show FETCH_HEAD:data/live-log.json > live/live-log.json || rm -f live/live-log.json
-          fi
       - name: Read Google Analytics Realtime
         env:
           GOOGLE_SA_KEY: ${{ secrets.GOOGLE_SA_KEY }}
-        run: python snapshot/live.py live
+        run: |
+          have=0
+          git fetch --depth 1 origin live 2>/dev/null && have=1
+          for f in sites/*.json; do
+            id=$(basename "$f" .json)
+            dir=$(python -c "import json,sys;print(json.load(open(sys.argv[1])).get('data_dir','data'))" "$f")
+            mkdir -p "out/$dir"
+            if [ "$have" = 1 ]; then
+              git show "FETCH_HEAD:$dir/live-log.json" > "out/$dir/live-log.json" 2>/dev/null || rm -f "out/$dir/live-log.json"
+              git show "FETCH_HEAD:$dir/live.json" > "out/$dir/live.json" 2>/dev/null || rm -f "out/$dir/live.json"
+            fi
+            SITE_ID=$id python snapshot/live.py "out/$dir" || echo "::warning::Live feed failed for $id"
+          done
       - name: Publish to the live branch
         env:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
         run: |
-          cd live
-          mkdir -p data
-          mv live.json live-log.json data/
+          cd out
           git init -q -b live
           git config user.name "fnb-monitor"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

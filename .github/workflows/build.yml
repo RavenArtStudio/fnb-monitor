@@ -1,15 +1,12 @@
 name: Build board
-
-# Rebuilds index.html (GitHub Pages) and "FNB Performance cards.html" (the desktop file) from the
-# board engine, saving the latest data/cards.json and the live feed inside them. Run it by hand
-# after changing tools/ or the board look; data changes reach the board by themselves.
+# One board for every site in sites/*.json, with a site switcher in the top bar.
 
 on:
   workflow_dispatch:
     inputs:
       checkpoint:
         description: "Checkpoint label shown in the top bar"
-        default: "Checkpoint 27"
+        default: "Checkpoint 30"
 
 permissions:
   contents: write
@@ -27,16 +24,21 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Fetch the live feed
+      - name: Fetch the live feeds
         run: |
+          mkdir -p /tmp/live
           if git fetch --depth 1 origin live 2>/dev/null; then
-            git show FETCH_HEAD:data/live.json > /tmp/live.json || rm -f /tmp/live.json
+            for f in sites/*.json; do
+              id=$(basename "$f" .json)
+              dir=$(python -c "import json,sys;print(json.load(open(sys.argv[1])).get('data_dir','data'))" "$f")
+              git show "FETCH_HEAD:$dir/live.json" > "/tmp/live/live-$id.json" 2>/dev/null || rm -f "/tmp/live/live-$id.json"
+            done
           fi
       - name: Build
         env:
           CP: ${{ inputs.checkpoint }}
         run: |
-          python -B tools/build_html.py tools/board-replica.html data/cards.json "FNB Performance cards.html" "$CP" charcoal /tmp/live.json
+          python -B tools/build_html.py tools/board-replica.html "FNB Performance cards.html" "$CP" charcoal /tmp/live
           cp "FNB Performance cards.html" index.html
       - name: Commit
         env:
