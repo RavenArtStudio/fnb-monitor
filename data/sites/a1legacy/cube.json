@@ -1,7 +1,7 @@
 {
  "audit_label": "Baseline",
  "audit_date": "2026-11-20",
- "audit_overall": null,
+ "audit_overall": 4.98,
  "launch": "2026-09-25",
  "stages": [
   {
@@ -318,7 +318,7 @@
      "id": "eeat",
      "name": "Authors, dates and credentials",
      "weight": 30,
-     "audit": null,
+     "audit": 4.4,
      "auto": "eeat",
      "evidence": "",
      "action": "Name the team and its credentials on the About page and on guides.",
@@ -550,7 +550,7 @@
      "id": "brand",
      "name": "Brand name consistency",
      "weight": 25,
-     "audit": null,
+     "audit": 6.7,
      "auto": "brand",
      "evidence": "",
      "action": "Use one brand name on the site, listings and profiles.",
