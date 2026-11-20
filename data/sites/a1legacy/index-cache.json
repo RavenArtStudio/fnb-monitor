@@ -1,0 +1,742 @@
+{
+"/": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/products": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/about": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/blog": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/contact": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/changelog": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/privacy-policy": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/terms-of-service": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/gallery": {
+"indexed": false,
+"state": "URL is unknown to Google",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/client-stories": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/portfolio": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/intelligence-stack": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/solutions": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/deployment-standard": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/trust-centre": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/ai-operations-library": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/gohighlevel-services": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/business-process-automation-services": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/ai-appointment-setter": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/ai-receptionist-australia": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/ai-receptionist-uk": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/products/voice-ai-receptionist": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/products/ai-powered-website": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/products/conversation-ai": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/products/a1legacystudio-crm": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/real-estate": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/home-services": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/financial-services": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/local-services": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/automotive-private-hire-company": {
+"indexed": false,
+"state": "URL is unknown to Google",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/automotive-vehicle-leasing-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/automotive-vehicle-warranty-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/automotive-auto-repair-shop": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/automotive-motorcycle-repair-shop": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/automotive-truck-repair-centre": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/automotive-suspension-specialist": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/automotive-alloy-wheel-shop": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/automotive-auto-body-shop": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/automotive-hand-car-wash": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/automotive-window-tinting-shop": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/automotive-roadside-assistance-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/automotive-used-auto-parts-dealer": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/automotive-tyre-distributor": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/automotive-fleet-management-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/real-estate-property-snagging-inspection-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/real-estate-property-bridging-finance-broker": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/real-estate-property-property-videography-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/real-estate-property-architectural-visualization-studio": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/real-estate-property-property-staging-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/real-estate-property-interior-staging-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/real-estate-property-warehouse-leasing-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/construction-building-home-improvement-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/construction-building-roofing-contractor": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/construction-building-commercial-roofing-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/construction-building-gutter-installation-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/construction-building-window-installation-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/construction-building-door-installation-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/construction-building-conservatory-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/construction-building-deck-builder": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/construction-building-pergola-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/construction-building-concrete-contractor": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/construction-building-masonry-contractor": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/construction-building-basement-waterproofing-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/construction-building-scaffolding-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/construction-building-building-materials-supplier": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/construction-building-concrete-supplier": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/construction-building-ready-mix-concrete-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/construction-building-crane-hire-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/construction-building-plant-hire-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/construction-building-skip-hire-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/construction-building-waste-removal-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/plumbing-hvac-mechanical-drain-unblocking-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/plumbing-hvac-mechanical-septic-tank-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/plumbing-hvac-mechanical-water-heater-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/plumbing-hvac-mechanical-boiler-installation-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/plumbing-hvac-mechanical-hvac-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/plumbing-hvac-mechanical-air-conditioning-contractor": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/plumbing-hvac-mechanical-heat-pump-installer": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/plumbing-hvac-mechanical-refrigeration-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/plumbing-hvac-mechanical-air-quality-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/plumbing-hvac-mechanical-commercial-gas-engineer": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/plumbing-hvac-mechanical-leak-detection-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/plumbing-hvac-mechanical-water-treatment-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/plumbing-hvac-mechanical-sprinkler-system-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/plumbing-hvac-mechanical-fire-sprinkler-contractor": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/electrical-solar-energy-renewable-energy-consultant": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/electrical-solar-energy-energy-efficiency-consultant": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/electrical-solar-energy-lighting-contractor": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/home-services-office-cleaning-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/home-services-deep-cleaning-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/home-services-carpet-cleaning-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/home-services-pressure-washing-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/home-services-exterior-cleaning-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/home-services-gutter-cleaning-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/home-services-chimney-cleaning-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/home-services-chimney-repair-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/home-services-pest-control-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/home-services-wildlife-removal-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/home-services-asbestos-removal-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/home-services-water-damage-restoration-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/home-services-fire-damage-restoration-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/home-services-flood-restoration-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/home-services-residential-movers": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/home-services-commercial-movers": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/home-services-furniture-assembly-service": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/home-services-appliance-repair-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/home-services-refrigerator-repair-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/home-services-furniture-restoration-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/home-services-blind-installation-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/home-services-flooring-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/home-services-drywall-contractor": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/landscaping-outdoor-tree-service": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/landscaping-outdoor-turf-supplier": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/landscaping-outdoor-paving-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/landscaping-outdoor-shed-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/healthcare-medical-neurology-clinic": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/healthcare-medical-mri-centre": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/healthcare-medical-medical-laboratory": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/healthcare-medical-blood-testing-clinic": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/healthcare-medical-chiropractic-clinic": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/dental-pediatric-dentist": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/dental-endodontist": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/dental-dental-tourism-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/aesthetics-beauty-wellness-aesthetic-clinic": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/aesthetics-beauty-wellness-cosmetic-surgery-clinic": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/aesthetics-beauty-wellness-day-spa": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/fitness-sports-boutique-gym": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/fitness-sports-personal-trainer": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/fitness-sports-yoga-studio": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/fitness-sports-dance-studio": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/fitness-sports-swimming-school": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/fitness-sports-country-club": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/legal-services-law-firm": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/legal-services-conveyancing-lawyer": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/legal-services-medical-malpractice-lawyer": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/legal-services-estate-planning-lawyer": {
+"indexed": false,
+"state": "URL is unknown to Google",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/legal-services-probate-lawyer": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/legal-services-business-lawyer": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/legal-services-notary-service": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/accounting-tax-finance-virtual-cfo-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/education-training-ielts-training-centre": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/restaurants-food-food-delivery-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/restaurants-food-restaurant-group": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/hospitality-travel-hotel": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/hospitality-travel-serviced-apartment-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/hospitality-travel-cruise-agency": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+},
+"/industries/hospitality-travel-boat-charter-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-20T19:05+00:00"
+}
+}
