@@ -869,6 +869,11 @@
 "state": "Submitted and indexed",
 "checked": "2026-11-20T19:40+00:00"
 },
+"/treatments/ent/procedures/septoplasty": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
 "/de/treatments/ent/procedures/septoplasty": {
 "indexed": true,
 "state": "Submitted and indexed",
@@ -1458,5 +1463,750 @@
 "indexed": true,
 "state": "Submitted and indexed",
 "checked": "2026-11-20T19:40+00:00"
+},
+"/ar/treatments/ent/procedures/turbinate-reduction": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/treatments/urology/procedures/urethroplasty": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/de/treatments/urology/procedures/urethroplasty": {
+"indexed": false,
+"state": "Excluded by ‘noindex’ tag",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/ar/treatments/urology/procedures/urethroplasty": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/treatments/fertility/procedures/ovulation-induction": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/de/treatments/fertility/procedures/ovulation-induction": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/ar/treatments/fertility/procedures/ovulation-induction": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/treatments/dental/procedures/periodontal-treatment": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/de/treatments/dental/procedures/periodontal-treatment": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/ar/treatments/dental/procedures/periodontal-treatment": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/treatments/eye-care/procedures/retinal-vitrectomy-surgery": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/de/treatments/eye-care/procedures/retinal-vitrectomy-surgery": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/ar/treatments/eye-care/procedures/retinal-vitrectomy-surgery": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/treatments/cosmetic-surgery/procedures/rhinoplasty": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/de/treatments/cosmetic-surgery/procedures/rhinoplasty": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/ar/treatments/cosmetic-surgery/procedures/rhinoplasty": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/treatments/bariatric-surgery/procedures/sadi-s": {
+"indexed": false,
+"state": "Excluded by ‘noindex’ tag",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/de/treatments/bariatric-surgery/procedures/sadi-s": {
+"indexed": false,
+"state": "Excluded by ‘noindex’ tag",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/ar/treatments/bariatric-surgery/procedures/sadi-s": {
+"indexed": false,
+"state": "Excluded by ‘noindex’ tag",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/treatments/hair-restoration/procedures/scar-hair-transplant": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/de/treatments/hair-restoration/procedures/scar-hair-transplant": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/ar/treatments/hair-restoration/procedures/scar-hair-transplant": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/treatments/orthopedics/procedures/total-hip-replacement": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/de/treatments/orthopedics/procedures/total-hip-replacement": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/ar/treatments/orthopedics/procedures/total-hip-replacement": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/treatments/ent/procedures/tympanoplasty": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/de/treatments/ent/procedures/tympanoplasty": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/ar/treatments/ent/procedures/tympanoplasty": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/treatments/general-surgery/procedures/umbilical-hernia-repair": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/de/treatments/general-surgery/procedures/umbilical-hernia-repair": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/ar/treatments/general-surgery/procedures/umbilical-hernia-repair": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/treatments/urology/procedures/urinary-incontinence-surgery": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/de/treatments/urology/procedures/urinary-incontinence-surgery": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/ar/treatments/urology/procedures/urinary-incontinence-surgery": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/treatments/fertility/procedures/preimplantation-genetic-testing": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/de/treatments/fertility/procedures/preimplantation-genetic-testing": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/ar/treatments/fertility/procedures/preimplantation-genetic-testing": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/treatments/dental/procedures/root-canal-treatment": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/de/treatments/dental/procedures/root-canal-treatment": {
+"indexed": false,
+"state": "Excluded by ‘noindex’ tag",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/ar/treatments/dental/procedures/root-canal-treatment": {
+"indexed": false,
+"state": "Excluded by ‘noindex’ tag",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/treatments/bariatric-surgery/procedures/sleeve-gastrectomy": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/de/treatments/bariatric-surgery/procedures/sleeve-gastrectomy": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/ar/treatments/bariatric-surgery/procedures/sleeve-gastrectomy": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/treatments/eye-care/procedures/smile-laser-eye-surgery": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/de/treatments/eye-care/procedures/smile-laser-eye-surgery": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/ar/treatments/eye-care/procedures/smile-laser-eye-surgery": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/treatments/orthopedics/procedures/total-knee-replacement": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/de/treatments/orthopedics/procedures/total-knee-replacement": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/ar/treatments/orthopedics/procedures/total-knee-replacement": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/treatments/cosmetic-surgery/procedures/tummy-tuck-abdominoplasty": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/de/treatments/cosmetic-surgery/procedures/tummy-tuck-abdominoplasty": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/ar/treatments/cosmetic-surgery/procedures/tummy-tuck-abdominoplasty": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/treatments/hair-restoration/procedures/unshaven-fue": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/de/treatments/hair-restoration/procedures/unshaven-fue": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/ar/treatments/hair-restoration/procedures/unshaven-fue": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/treatments/urology/procedures/varicocelectomy": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/de/treatments/urology/procedures/varicocelectomy": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/ar/treatments/urology/procedures/varicocelectomy": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/treatments/general-surgery/procedures/ventral-incisional-hernia-repair": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/de/treatments/general-surgery/procedures/ventral-incisional-hernia-repair": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/ar/treatments/general-surgery/procedures/ventral-incisional-hernia-repair": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/treatments/ent/procedures/vocal-cord-surgery": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/de/treatments/ent/procedures/vocal-cord-surgery": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/ar/treatments/ent/procedures/vocal-cord-surgery": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/guides/aftercare": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/de/guides/aftercare": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/ar/guides/aftercare": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/guides/choosing-a-clinic": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/de/guides/choosing-a-clinic": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/ar/guides/choosing-a-clinic": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/guides/if-something-goes-wrong": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/de/guides/if-something-goes-wrong": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/ar/guides/if-something-goes-wrong": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/guides/informed-consent": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/de/guides/informed-consent": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/ar/guides/informed-consent": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/guides/medical-records": {
+"indexed": false,
+"state": "URL is unknown to Google",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/de/guides/medical-records": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/ar/guides/medical-records": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/guides/questions-before-booking": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/de/guides/questions-before-booking": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/ar/guides/questions-before-booking": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/guides/travel-after-treatment": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/de/guides/travel-after-treatment": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/ar/guides/travel-after-treatment": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/guides/treatment-decision-checklist": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/de/guides/treatment-decision-checklist": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/ar/guides/treatment-decision-checklist": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/blog/dental-bridges-turkey-types-maryland-cantilever-traditional": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/de/blog/dental-bridges-turkey-types-maryland-cantilever-traditional": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/ar/blog/dental-bridges-turkey-types-maryland-cantilever-traditional": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/blog/open-vs-closed-rhinoplasty-turkey-approach-cost-consultation": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/de/blog/open-vs-closed-rhinoplasty-turkey-approach-cost-consultation": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/ar/blog/open-vs-closed-rhinoplasty-turkey-approach-cost-consultation": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/blog/sapphire-fue-vs-standard-fue-turkey-treatment-planning": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/de/blog/sapphire-fue-vs-standard-fue-turkey-treatment-planning": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/ar/blog/sapphire-fue-vs-standard-fue-turkey-treatment-planning": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/blog/dental-crown-vs-filling-after-root-canal-turkey": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/de/blog/dental-crown-vs-filling-after-root-canal-turkey": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/ar/blog/dental-crown-vs-filling-after-root-canal-turkey": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/blog/all-on-4-turkey-prices-written-quote-provisional-final-teeth": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/de/blog/all-on-4-turkey-prices-written-quote-provisional-final-teeth": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/ar/blog/all-on-4-turkey-prices-written-quote-provisional-final-teeth": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/blog/teeth-scaling-vs-deep-cleaning-turkey-gum-health-guide": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/de/blog/teeth-scaling-vs-deep-cleaning-turkey-gum-health-guide": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/ar/blog/teeth-scaling-vs-deep-cleaning-turkey-gum-health-guide": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/blog/male-chest-enlargement-gynecomastia-causes-surgery-options": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/de/blog/male-chest-enlargement-gynecomastia-causes-surgery-options": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/ar/blog/male-chest-enlargement-gynecomastia-causes-surgery-options": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/blog/breast-augmentation-turkey-implants-vs-fat-transfer-cost": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/de/blog/breast-augmentation-turkey-implants-vs-fat-transfer-cost": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/ar/blog/breast-augmentation-turkey-implants-vs-fat-transfer-cost": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/blog/facelift-turkey-cost-planning-quote-checklist": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/de/blog/facelift-turkey-cost-planning-quote-checklist": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/ar/blog/facelift-turkey-cost-planning-quote-checklist": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/blog/choosing-hair-transplant-clinic-istanbul-surgeon-safety-aftercare": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/de/blog/choosing-hair-transplant-clinic-istanbul-surgeon-safety-aftercare": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/ar/blog/choosing-hair-transplant-clinic-istanbul-surgeon-safety-aftercare": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/blog/hair-transplant-turkey-costs-treatment-planning": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/de/blog/hair-transplant-turkey-costs-treatment-planning": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/ar/blog/hair-transplant-turkey-costs-treatment-planning": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/blog/laminate-veneers-turkey-preparation-costs-travel": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/de/blog/laminate-veneers-turkey-preparation-costs-travel": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/ar/blog/laminate-veneers-turkey-preparation-costs-travel": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/blog/hernia-surgery-in-turkey-inguinal-umbilical-repair": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/de/blog/hernia-surgery-in-turkey-inguinal-umbilical-repair": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/ar/blog/hernia-surgery-in-turkey-inguinal-umbilical-repair": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/blog/hemorrhoid-removal-in-turkey-surgery-treatment-options": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/de/blog/hemorrhoid-removal-in-turkey-surgery-treatment-options": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/ar/blog/hemorrhoid-removal-in-turkey-surgery-treatment-options": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/blog/cataract-surgery-abroad-planning-treatment-in-turkey": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/de/blog/cataract-surgery-abroad-planning-treatment-in-turkey": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/ar/blog/cataract-surgery-abroad-planning-treatment-in-turkey": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/blog/gallbladder-removal-in-turkey-laparoscopic-cholecystectomy-guide": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/de/blog/gallbladder-removal-in-turkey-laparoscopic-cholecystectomy-guide": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/ar/blog/gallbladder-removal-in-turkey-laparoscopic-cholecystectomy-guide": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/blog/kidney-stone-removal-in-turkey-ureteroscopy-laser-lithotripsy": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/de/blog/kidney-stone-removal-in-turkey-ureteroscopy-laser-lithotripsy": {
+"indexed": false,
+"state": "URL is unknown to Google",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/ar/blog/kidney-stone-removal-in-turkey-ureteroscopy-laser-lithotripsy": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/blog/penile-implant-surgery-in-turkey-devices-risks-follow-up": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/de/blog/penile-implant-surgery-in-turkey-devices-risks-follow-up": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/ar/blog/penile-implant-surgery-in-turkey-devices-risks-follow-up": {
+"indexed": false,
+"state": "URL is unknown to Google",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/blog/endoscopic-sinus-surgery-in-turkey-is-sinus-surgery-permanent": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/de/blog/endoscopic-sinus-surgery-in-turkey-is-sinus-surgery-permanent": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/ar/blog/endoscopic-sinus-surgery-in-turkey-is-sinus-surgery-permanent": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/blog/sleep-apnea-surgery-in-turkey-selection-options-follow-up": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/de/blog/sleep-apnea-surgery-in-turkey-selection-options-follow-up": {
+"indexed": false,
+"state": "URL is unknown to Google",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/ar/blog/sleep-apnea-surgery-in-turkey-selection-options-follow-up": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
+},
+"/blog/cochlear-implant-surgery-in-turkey-candidacy-to-follow-up": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-20T20:54+00:00"
 }
 }

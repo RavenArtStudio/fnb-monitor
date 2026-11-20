@@ -4688,6 +4688,32 @@
 "site_name": ""
 },
 {
+"u": "/treatments/ent/procedures/septoplasty",
+"lang": "en",
+"status": 200,
+"noindex": false,
+"title": "Septoplasty in Turkey | Turkelite Medcare",
+"desc": "Septoplasty straightens or repositions the nasal septum to improve airflow or address structural obstruction while preserving nasal support.",
+"h1t": "Septoplasty in Turkey",
+"words": 1902,
+"types": [
+"BreadcrumbList"
+],
+"ext": [],
+"byline": true,
+"dated": true,
+"nums": 2,
+"answer": true,
+"first_w": 18,
+"first": "Septoplasty straightens or repositions the nasal septum to improve airflow or address structural obstruction while preserving nasal support.",
+"qheads": 3,
+"faq": false,
+"ga": [
+"G-PT5X37CM6G"
+],
+"site_name": ""
+},
+{
 "u": "/de/treatments/ent/procedures/septoplasty",
 "lang": "de",
 "status": 200,
