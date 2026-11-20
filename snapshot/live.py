@@ -15,7 +15,6 @@ screenPageViews by page title, and the enquiry events are split by country and d
 """
 import datetime as dt
 import json
-import re
 import sys
 from pathlib import Path
 
@@ -25,7 +24,6 @@ from windows import WIN, wbundle, zkey, parse  # noqa: E402
 
 UTC = dt.timezone.utc
 KEEP_H = 49
-EVENTS = ["session_start", "first_visit", "page_view", "generate_lead", "whatsapp_click", "tool_used"]
 
 
 def realtime(sess, dims, metrics, flt=None):
@@ -53,7 +51,7 @@ def inlist(names):
     return {"filter": {"fieldName": "eventName", "inListFilter": {"values": names}}}
 
 
-ENQ = ["generate_lead", "whatsapp_click", "tool_used"]
+ENQ = [e for x in S.ENQ for e in x["events"]]
 
 
 def read_minutes(sess, now):
@@ -170,9 +168,18 @@ def build(log, now, active):
             items = items[:5] + [("Other", sum(v for _, v in items[5:]))]
         return items
 
-    ev = lambda name: (lambda r: r.get("e", {}).get(name, 0))
-    ecty = lambda name: (lambda r: r.get("ec", {}).get(name, {}))
-    edev = lambda name: (lambda r: r.get("ed", {}).get(name, {}))
+    names_ = lambda n: [n] if isinstance(n, str) else n
+    ev = lambda n: (lambda r: sum(r.get("e", {}).get(k, 0) for k in names_(n)))
+    def merged(key, n):
+        def pick(r):
+            out = {}
+            for k in names_(n):
+                for a, v in r.get(key, {}).get(k, {}).items():
+                    out[a] = out.get(a, 0) + v
+            return out
+        return pick
+    ecty = lambda n: merged("ec", n)
+    edev = lambda n: merged("ed", n)
     feed = ("Google Analytics Realtime: events of the last 30 minutes, saved every 15 minutes. "
             "Longer live windows are built from those saved minutes.")
     nohost = "The live feed has no traffic source, entry page or host name, so visits from development hosts count here too."
@@ -196,21 +203,15 @@ def build(log, now, active):
             "views": ("Page views", "views", "page_view", "eventName = page_view, eventCount; screenPageViews by unifiedScreenName",
                       [("By page", agg(cur_b, lambda r: r.get("pp", {})), "Which pages are viewed most?", "Page title")],
                       "Every page load, counted from page_view events in Google Analytics' live feed.", [nohost]),
-            "leads": ("Profit Review requests", "requests", "generate_lead", "eventName = generate_lead, eventCount, country, deviceCategory",
-                      [("Country", agg(cur_b, ecty("generate_lead")), "Which countries were requests sent from?", "Country"),
-                       ("Device", agg(cur_b, edev("generate_lead")), "Which devices were they sent from?", "Device")],
-                      "Count of the generate_lead event the site sends when the Profit Review form is sent successfully.",
-                      ["Requests made by phone, email or WhatsApp are not counted here.", nohost]),
-            "whatsapp": ("WhatsApp clicks", "clicks", "whatsapp_click", "eventName = whatsapp_click, eventCount, country, deviceCategory",
-                         [("Country", agg(cur_b, ecty("whatsapp_click")), "Where do WhatsApp clicks come from?", "Country"),
-                          ("Device", agg(cur_b, edev("whatsapp_click")), "Which devices click WhatsApp?", "Device")],
-                         "Count of the whatsapp_click event the site sends.", ["A click opens WhatsApp; it does not prove a message was sent.", nohost]),
-            "tools": ("Calculator uses", "uses", "tool_used", "eventName = tool_used, eventCount, country, deviceCategory",
-                      [("Country", agg(cur_b, ecty("tool_used")), "Where are calculators used from?", "Country"),
-                       ("Device", agg(cur_b, edev("tool_used")), "Which devices use them?", "Device")],
-                      "Count of the tool_used event the site sends when a calculator is used.",
-                      ["The live feed cannot split events by page, so the calculator name shows only in the 7-day view.", nohost]),
         }
+        for x in S.ENQ:
+            names = x["events"]
+            qs = x.get("live_q") or [f"Which countries are the {x['unit']} from?", "Which devices are they from?"]
+            sel = f"eventName = {names[0]}" if len(names) == 1 else f"eventName in ({', '.join(names)})"
+            defs[x["id"]] = (x["label"], x["unit"], names, f"{sel}, eventCount, country, deviceCategory",
+                             [("Country", agg(cur_b, ecty(names)), qs[0], "Country"), ("Device", agg(cur_b, edev(names)), qs[1], "Device")],
+                             x["how"], x["caveats"][1:] + (["The live feed cannot split events by page, so the calculator name shows only in the 7-day view."]
+                                                           if x.get("kind") == "tool" else []) + [nohost])
         for cid, (label, unit, name, fields, bds, how, cav) in defs.items():
             cur, part = values(cur_b, ev(name))
             prev, _ = values(prev_b, ev(name))

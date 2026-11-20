@@ -1,0 +1,158 @@
+{
+ "id": "turkelite",
+ "name": "Turkelite",
+ "short": "Turkelite",
+ "url": "https://turkelitemedcare.com",
+ "hosts": [
+  "turkelitemedcare.com",
+  "www.turkelitemedcare.com"
+ ],
+ "ga_property": "557909891",
+ "sc_site": "sc-domain:turkelitemedcare.com",
+ "tz_hours": 3,
+ "tz_name": "Istanbul",
+ "launch": "2026-09-30",
+ "home": "/",
+ "about": "/about",
+ "data_dir": "data/sites/turkelite",
+ "inspect_per_run": 150,
+ "languages": [
+  {
+   "code": "en",
+   "name": "English"
+  },
+  {
+   "code": "de",
+   "name": "German"
+  },
+  {
+   "code": "ar",
+   "name": "Arabic"
+  }
+ ],
+ "market": {
+  "label": "target-market",
+  "the": "Germany, the UK and the Gulf",
+  "countries": [
+   "Germany",
+   "Austria",
+   "Switzerland",
+   "United Kingdom",
+   "Netherlands",
+   "Saudi Arabia",
+   "United Arab Emirates",
+   "Kuwait",
+   "Qatar",
+   "Bahrain",
+   "Oman"
+  ]
+ },
+ "cta": "treatment enquiry",
+ "upcase": [
+  "ent",
+  "ivf",
+  "dhi",
+  "fue",
+  "bbl",
+  "lasik",
+  "acl",
+  "holep",
+  "pcnl"
+ ],
+ "places": [
+  "turkey",
+  "istanbul",
+  "antalya",
+  "izmir",
+  "germany"
+ ],
+ "event_note": "seen in the site code, Nov 20",
+ "enquiries": [
+  {
+   "id": "leads",
+   "events": [
+    "generate_lead"
+   ],
+   "label": "Treatment enquiries",
+   "unit": "enquiries",
+   "one": "enquiry",
+   "how": "Count of the generate_lead event, which the site should send when a treatment enquiry is sent.",
+   "caveats": [
+    "The site does not send generate_lead yet ({note}); enquiries reach the inbox but not Analytics.",
+    "Enquiries by phone, email or WhatsApp are not counted here."
+   ],
+   "breakdowns": [
+    [
+     "pagePath",
+     "Page the enquiry was sent from",
+     "Which pages produce enquiries?",
+     "Page"
+    ],
+    [
+     "sessionDefaultChannelGroup",
+     "Channel that brought them",
+     "Which channel brought them?",
+     "Channel"
+    ]
+   ],
+   "reading": "Match each enquiry to its reply so none goes unanswered.",
+   "kind": "lead",
+   "test": "Make the enquiry form send generate_lead to Analytics when it is sent, then send one test enquiry."
+  },
+  {
+   "id": "whatsapp",
+   "events": [
+    "whatsapp_click"
+   ],
+   "label": "WhatsApp clicks",
+   "unit": "clicks",
+   "one": "click",
+   "how": "Count of the whatsapp_click event the site sends.",
+   "caveats": [
+    "The site sends whatsapp_click from its WhatsApp links ({note}).",
+    "A click opens WhatsApp; it does not prove a message was sent."
+   ],
+   "breakdowns": [
+    [
+     "pagePath",
+     "Page the click came from",
+     "Which pages produce WhatsApp clicks?",
+     "Page"
+    ],
+    [
+     "country",
+     "Country",
+     "Where are they from?",
+     "Country"
+    ]
+   ],
+   "kind": "whatsapp",
+   "test": "Tap a WhatsApp button after accepting cookies and check whatsapp_click in Analytics Realtime."
+  }
+ ],
+ "recheck_hours": 6,
+ "authority_steps": [
+  [
+   "Get listed on medical-travel directories such as Treatment Abroad, WhatClinic and Bookimed.",
+   "high",
+   "owner"
+  ],
+  [
+   "Earn one link from a German or Gulf health publication.",
+   "med",
+   "owner"
+  ]
+ ],
+ "checks": [
+  "medical"
+ ],
+ "medical": {
+  "category_re": "^/treatments/[^/]+$",
+  "procedure_re": "^/treatments/[^/]+/procedures/[^/]+$"
+ },
+ "licence_re": "(health tourism (authori[sz]ation|certificate|licen[cs]e)|yetki belgesi|T[ÜU]RSAB|vergi (no|numaras[ıi])|tax (no|number|id))[^0-9\\n]{0,25}[0-9]{3,}",
+ "licence_label": "health-tourism authorisation or tax number",
+ "service_re": "/treatments/[^/]+(/procedures/[^/]+)?$",
+ "depth_pages": "content",
+ "order": 2
+}

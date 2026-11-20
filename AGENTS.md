@@ -1,11 +1,14 @@
 # Working on fnb-monitor
 
-Daily monitoring of fnbperformance.com. Read README.md first.
+Monitoring of fnbperformance.com, turkelitemedcare.com and a1legacylabs.com. Read README.md first.
+
+- Sites (Checkpoint 30): one engine, one board. `sites/<id>.json` holds everything that differs per site: Google property and Search Console site, hosts, home page, languages, market countries, the enquiry events and their card text, and which extra page checks run (`checks`: `medical` for Turkelite, `agency` for A1). `SITE_ID=<id>` picks the site (default `fnb`); `snapshot/siteconf.py` loads it. FNB keeps `data/`; the others use `data/sites/<id>/` (cube.json, targets.json, semrush.json when read, and everything the snapshot writes).
+- A new site's `cube.json` has `"audit_label": "Baseline"` and `"audit": null` on measured sub-metrics: the first snapshot writes its readings in as the baseline (with the date), and unmeasured sub-metrics take their `judged` score. Board text then says baseline instead of audit.
 
 - `snapshot/snapshot.py` builds every card; `snapshot/cube.py` scores the search visibility cube.
 - `data/cube.json` holds blocks, sub-metrics, weights, Nov 13 audit scores and stage targets. A sub-metric with `"auto": null` keeps its audit score; to update one by hand, change its `audit` value and note the date in `evidence`.
 - `data/targets.json` holds the 17 target searches; `data/semrush.json` the Semrush readings (refreshed by hand).
-- `tools/build_html.py tools/board-replica.html data/cards.json "FNB Performance cards.html" "Checkpoint N"` rebuilds the desktop file. After every rebuild, copy it to `index.html` too: GitHub Pages serves `index.html` from main at https://ravenartstudio.github.io/fnb-monitor/. Keep the board look unchanged (Charcoal tokens, regular-weight type, no bold except where the engine already uses it).
+- `tools/build_html.py tools/board-replica.html "FNB Performance cards.html" "Checkpoint N" [charcoal|paper] [folder with live-<id>.json]` rebuilds the desktop file with every site that has a snapshot; the site switcher sits in the top bar (`?site=<id>` picks one; the choice is remembered). After every rebuild, copy it to `index.html` too: GitHub Pages serves `index.html` from main at https://ravenartstudio.github.io/fnb-monitor/. Keep the board look unchanged (Charcoal tokens, regular-weight type, no bold except where the engine already uses it).
 - Two looks in one board (Checkpoint 26): Charcoal and Paper. `tools/theme-paper.css` is scoped under `html.paper` at build time and Bodoni Moda is embedded from `tools/fonts` (SIL Open Font License). A switch in the top bar flips the look and remembers it; `?theme=paper` or `?theme=charcoal` picks one. `paper.html` only redirects to `./?theme=paper`.
 - Never commit keys. Google access comes only from the GOOGLE_SA_KEY Actions secret.
 - Card copy: plain, short, professional; no marketing words.
@@ -14,6 +17,6 @@ Daily monitoring of fnbperformance.com. Read README.md first.
   - Analytics 30m, 12h and 24h come from `snapshot/live.py` (Google Analytics Realtime), run every 15 minutes by `.github/workflows/live.yml`. It keeps its own minute log and publishes `data/live.json` and `data/live-log.json` on the `live` branch as one overwritten commit (never merge that branch into main). Realtime has no sessions, engagement, source, entry page or host name: sessions are session_start events, new visitors first_visit; Engaged sessions has no live view. If the newest live reading is over 45 minutes old the board says the feed is paused.
   - Search Console 12h and 24h use Google's hourly data (`HOUR`, `HOURLY_ALL`, partial for the latest hours). Site checks: 12h and 24h use each run in `data/runs.json` (rolling 40 days); 30d and All use `data/history`. The cube: 30d is a strip of day cells, All one column per week.
   - Times inside card text are markers (`@@2026-11-18T20:15Z@@`, `@@d:...@@` with the date); the board shows them in the viewer's local time.
-  - `tools/build_html.py` takes an optional sixth argument, a `live.json` to save in the file (fetch it from the `live` branch before building the desktop file).
+  - The live branch mirrors each site's data folder (`data/live.json` for FNB, `data/sites/<id>/live.json` for the others); `build.yml` copies them to `/tmp/live/live-<id>.json` for the build.
 
 - `.github/workflows/build.yml` ("Build board", run by hand) rebuilds `index.html` and the desktop file from `data/cards.json` plus the live feed; use it after changing `tools/` instead of committing the large HTML files. `.github/workflows/apply.yml` ("Apply patch") applies a `*.patch.gz` or `*.patch` uploaded to the repo root on github.com, commits and removes it (for sessions that can upload but not push; patches must not touch `.github/workflows`).

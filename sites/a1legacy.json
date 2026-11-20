@@ -1,0 +1,193 @@
+{
+ "id": "a1legacy",
+ "name": "A1 Legacy Labs",
+ "short": "A1 Legacy",
+ "url": "https://a1legacylabs.com",
+ "hosts": [
+  "a1legacylabs.com",
+  "www.a1legacylabs.com"
+ ],
+ "ga_property": "557888460",
+ "sc_site": "sc-domain:a1legacylabs.com",
+ "tz_hours": 0,
+ "tz_name": "London",
+ "launch": "2026-09-25",
+ "home": "/",
+ "about": "/about",
+ "data_dir": "data/sites/a1legacy",
+ "inspect_per_run": 150,
+ "languages": [
+  {
+   "code": "en",
+   "name": "English"
+  }
+ ],
+ "market": {
+  "label": "target-market",
+  "the": "the US, UK, Canada and Australia",
+  "countries": [
+   "United States",
+   "United Kingdom",
+   "Canada",
+   "Australia"
+  ]
+ },
+ "cta": "scoping call",
+ "upcase": [
+  "ai",
+  "crm",
+  "uk",
+  "us",
+  "hvac",
+  "cnc",
+  "seo",
+  "b2b",
+  "os"
+ ],
+ "places": [
+  "australia",
+  "canada",
+  "london"
+ ],
+ "own_brands": [
+  "turkelite",
+  "fnb performance",
+  "a1 intelligence",
+  "a1legacystudio",
+  "action os",
+  "a1 legacy"
+ ],
+ "event_note": "seen in the site code, Nov 20",
+ "enquiries": [
+  {
+   "id": "leads",
+   "events": [
+    "generate_lead"
+   ],
+   "label": "Scoping call requests",
+   "unit": "requests",
+   "one": "request",
+   "how": "Count of the generate_lead event the site sends when the enquiry form is sent.",
+   "caveats": [
+    "The site sends generate_lead when the form is sent ({note}).",
+    "Bookings made by email or phone are not counted here."
+   ],
+   "breakdowns": [
+    [
+     "pagePath",
+     "Page the request was sent from",
+     "Which pages produce requests?",
+     "Page"
+    ],
+    [
+     "sessionDefaultChannelGroup",
+     "Channel that brought them",
+     "Which channel brought them?",
+     "Channel"
+    ]
+   ],
+   "reading": "Reply to each request the same day.",
+   "kind": "lead",
+   "test": "Send one test request after accepting cookies; it should show in Analytics Realtime within minutes."
+  },
+  {
+   "id": "demos",
+   "events": [
+    "voice_widget_open",
+    "chat_widget_open"
+   ],
+   "label": "Demo opens",
+   "unit": "opens",
+   "one": "open",
+   "how": "Count of voice_widget_open and chat_widget_open, sent when a visitor opens the voice or chat demo.",
+   "caveats": [
+    "The site sends both events from its demo widgets ({note}).",
+    "Opening a demo is interest, not a conversation held."
+   ],
+   "breakdowns": [
+    [
+     "eventName",
+     "Which demo",
+     "Voice or chat?",
+     "Demo"
+    ],
+    [
+     "pagePath",
+     "Page it was opened on",
+     "Which pages start demos?",
+     "Page"
+    ]
+   ],
+   "kind": "demo",
+   "test": "Open the voice demo after accepting cookies and check voice_widget_open in Analytics Realtime."
+  },
+  {
+   "id": "ctas",
+   "events": [
+    "cta_click"
+   ],
+   "label": "Button clicks",
+   "unit": "clicks",
+   "one": "click",
+   "how": "Count of the cta_click event the site sends from its main buttons.",
+   "caveats": [
+    "The site sends cta_click from its call-to-action buttons ({note})."
+   ],
+   "breakdowns": [
+    [
+     "pagePath",
+     "Page the click came from",
+     "Which pages produce clicks?",
+     "Page"
+    ]
+   ],
+   "kind": "cta",
+   "test": "Click a main button after accepting cookies and check cta_click in Analytics Realtime."
+  }
+ ],
+ "recheck_hours": 6,
+ "authority_steps": [
+  [
+   "Get listed on Clutch, G2 and the GoHighLevel partner directory.",
+   "high",
+   "owner"
+  ],
+  [
+   "Earn one link from a US or UK small-business publication.",
+   "med",
+   "owner"
+  ]
+ ],
+ "checks": [
+  "agency"
+ ],
+ "agency": {
+  "industry_re": "^/industries/[^/]+$",
+  "product_re": "^/products/[^/]+$",
+  "proof_re": "^/(portfolio|client-stories|case-studies)/[^/]+$",
+  "market_pages": {
+   "United States": [
+    "usa",
+    "us",
+    "united-states",
+    "america"
+   ],
+   "United Kingdom": [
+    "uk",
+    "united-kingdom",
+    "britain"
+   ],
+   "Canada": [
+    "canada"
+   ],
+   "Australia": [
+    "australia"
+   ]
+  }
+ },
+ "licence_re": "(company (no|number|reg(istration)?)|registered in england( and wales)?|companies house|\\bCRN\\b|\\bABN\\b|\\bACN\\b)[^0-9\\n]{0,30}[0-9]{6,}",
+ "licence_label": "company registration number",
+ "service_re": "^/(products|industries)/[^/]+$",
+ "depth_pages": "content",
+ "order": 3
+}

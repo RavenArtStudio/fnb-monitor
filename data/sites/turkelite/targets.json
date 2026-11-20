@@ -1,0 +1,27 @@
+{
+ "note": "Board setting. The 18 searches the site should show for (6 English, 6 German, 6 Arabic). Edit freely; matching is case-insensitive and exact.",
+ "en": [
+  "hair transplant turkey",
+  "dental implants turkey",
+  "gastric sleeve turkey",
+  "rhinoplasty turkey",
+  "medical tourism turkey",
+  "treatment in turkey"
+ ],
+ "de": [
+  "haartransplantation türkei",
+  "zahnimplantate türkei",
+  "magenverkleinerung türkei",
+  "nasen op türkei",
+  "behandlung in der türkei",
+  "schönheits op türkei"
+ ],
+ "ar": [
+  "زراعة الشعر في تركيا",
+  "زراعة الأسنان في تركيا",
+  "تكميم المعدة في تركيا",
+  "عملية تجميل الأنف في تركيا",
+  "السياحة العلاجية في تركيا",
+  "العلاج في تركيا"
+ ]
+}

@@ -5,9 +5,10 @@ crawl and Google data; the rest keep their audit score (Nov 13) until updated
 by hand. Stage targets are counted from the launch date.
 """
 import datetime as dt
-import json
+from siteconf import CFG, LANG_NAME, MAIN_LANG, OTHER_LANGS
+
+AW = "audit"     # "baseline" for sites whose starting scores are their first readings; set by snapshot.py
 import re
-from pathlib import Path
 
 AI_BOTS = ["GPTBot", "ClaudeBot", "PerplexityBot", "Google-Extended", "CCBot"]
 clamp = lambda v: max(0.0, min(10.0, round(v, 1)))
@@ -105,9 +106,11 @@ def measure(c, g, sm=None):
     if c["hreflang_pages"]:
         out["hreflang"] = (clamp(10 * c["hreflang_ok"] / c["hreflang_pages"]),
                            f"{c['hreflang_ok']} of {c['hreflang_pages']} pages have hreflang pairs that point back.")
-    if g.get("targets") is not None:
+    if g.get("targets") is not None and g["targets"]["total"]:
         t = g["targets"]
         out["presence"] = (clamp(10 * t["shown"] / t["total"]), f"{t['shown']} of {t['total']} target searches showed the site in Google in the last 28 days.")
+    if g.get("targets") is not None and g["targets"].get("ar_total"):
+        t = g["targets"]
         out["arquery"] = (clamp(10 * t["ar_shown"] / t["ar_total"]) if t["ar_total"] else 0.0,
                           f"{t['ar_shown']} of {t['ar_total']} Arabic target searches showed the site in Google in the last 28 days.")
     if g.get("index") is not None:
@@ -167,20 +170,26 @@ def r_cluster(c, q, g, sm):
     if not cl:
         return None
     thin = [x for x in cl if x["score"] < 1]
-    desc = [f"{x['name']} ({x['en']} English, {x['ar']} Arabic)" for x in thin[:3]]
+    desc = [f"{x['name']} (" + ", ".join(f"{x.get('counts', x).get(c_, 0)} {LANG_NAME[c_]}" for c_ in LANG_NAME) + ")" for x in thin[:3]]
     return (clamp(10 * sum(x["score"] for x in cl) / len(cl)),
-            f"{len(cl) - len(thin)} of {len(cl)} topics have three or more pages in each language"
+            f"{len(cl) - len(thin)} of {len(cl)} topics have three or more pages" + (" in each language" if OTHER_LANGS else "")
             + (f"; thin: {'; '.join(desc)}." if thin else "."))
 
 
 def r_depth(c, q, g, sm):
     d = q["depth"]
-    if not d["en_n"]:
+    L = d.get("langs") or {"en": {"n": d["en_n"], "med": d["en_med"]}, "ar": {"n": d["ar_n"], "med": d["ar_med"]}}
+    if not L.get(MAIN_LANG, {}).get("n"):
         return None
-    parts = [min(1, d["en_med"] / 1200)] + ([min(1, d["ar_med"] / 1000)] if d["ar_n"] else [0])
-    return (clamp(10 * sum(parts) / 2),
-            f"Guides run a median {d['en_med']:,} words in English ({d['en_n']}) and {d['ar_med']:,} in Arabic ({d['ar_n']}), "
-            f"against 1,200 and 1,000; accuracy keeps the audit score.", 0.6)
+    goal = lambda c_: 1200 if c_ == MAIN_LANG else 1000
+    parts = [min(1, L[c_]["med"] / goal(c_)) if L.get(c_, {}).get("n") else 0 for c_ in LANG_NAME]
+    bits = [f"{L[c_]['med']:,} in {LANG_NAME[c_]} ({L[c_]['n']})" for c_ in LANG_NAME if c_ in L]
+    bits[0] = bits[0].replace(" in ", " words in ", 1)
+    txt = bits[0] if len(bits) == 1 else ", ".join(bits[:-1]) + " and " + bits[-1]
+    gl = [f"{goal(c_):,}" for c_ in LANG_NAME]
+    goals = gl[0] if len(gl) == 1 else ", ".join(gl[:-1]) + " and " + gl[-1]
+    what = "Guides and service pages" if CFG.get("depth_pages") == "content" else "Guides"
+    return (clamp(10 * sum(parts) / len(parts)), f"{what} run a median {txt}, against {goals}; accuracy keeps the {AW} score.", 0.6)
 
 
 def r_eeat(c, q, g, sm):
@@ -198,7 +207,8 @@ def r_eeat(c, q, g, sm):
 def r_assets(c, q, g, sm):
     a = q["assets"]
     k = a["tools_en"] + a["files"]
-    return (clamp(10 * min(1, k / 10)), f"{a['tools_en']} calculators in English ({a['tools_ar']} in Arabic) and {a['files']} downloadable files; ten earn full marks.")
+    return (clamp(10 * min(1, k / 10)), f"{a['tools_en']} calculators in {LANG_NAME[MAIN_LANG]}" + (f" ({a['tools_ar']} in {OTHER_LANGS[0]['name'] if len(OTHER_LANGS) == 1 else 'other languages'})" if OTHER_LANGS else "")
+            + f" and {a['files']} downloadable files; ten earn full marks.")
 
 
 def r_valid(c, q, g, sm):
@@ -217,7 +227,7 @@ def r_brand(c, q, g, sm):
     others = [f"{k} {v}" for k, v in b["forms"][1:3]]
     v = 10 * (0.7 * b["top_share"] + 0.3 * b["site_name"] / max(1, b["n"]))
     return (clamp(v), f"'{b['top']}' is {round(100 * b['top_share'])}% of brand mentions" + (f" (also {', '.join(others)})" if others else "")
-            + f"; site name set on {b['site_name']} of {b['n']} pages. Off-site profiles keep the audit score.", 0.7)
+            + f"; site name set on {b['site_name']} of {b['n']} pages. Off-site profiles keep the {AW} score.", 0.7)
 
 
 def r_nap(c, q, g, sm):
@@ -228,7 +238,7 @@ def r_nap(c, q, g, sm):
     li = min(1, p["licence_pages"] / n * 2)
     return (clamp(10 * (0.4 * ph + 0.4 * ad + 0.2 * li)),
             f"Phone on {p['phone_pages']} of {n} pages ({pl(len(p['phones']), 'number')}); structured-data address on {p.get('addr_any', 0)} pages, "
-            f"with a street or city on {p['addr_pages']}; trade licence number on {p['licence_pages']}. The Google listing keeps the audit score.", 0.75)
+            f"with a street or city on {p['addr_pages']}; {CFG.get('licence_label', 'trade licence number')} on {p['licence_pages']}. The Google listing keeps the {AW} score.", 0.75)
 
 
 def r_social(c, q, g, sm):
@@ -272,9 +282,9 @@ def r_consist(c, q, g, sm):
     k = q["consist"]
     share = (k["checks"] - k["off_n"]) / k["checks"] if k["checks"] else 1.0
     v = 10 * share - (k["phones"] - 1) * 1.0 * (k["phones"] > 1) - (k["emails"] - 1) * 1.0 * (k["emails"] > 1)
-    return (clamp(v), f"{k['checks'] - k['off_n']} of {k['checks']} VAT and corporate tax rates match 5% and 9%"
-            + (f" ({k['off'][0][1]} on {k['off'][0][0]})" if k["off"] else "")
-            + f"; {pl(k['phones'], 'phone number')} and {pl(k['emails'], 'email address')} across the site.")
+    tax = (f"{k['checks'] - k['off_n']} of {k['checks']} VAT and corporate tax rates match 5% and 9%"
+           + (f" ({k['off'][0][1]} on {k['off'][0][0]})" if k["off"] else "") + "; ") if k["checks"] else ""
+    return clamp(v), tax + f"{pl(k['phones'], 'phone number')} and {pl(k['emails'], 'email address')} across the site."
 
 
 def r_cited(c, q, g, sm):
@@ -295,16 +305,16 @@ def r_snippet(c, q, g, sm):
 
 
 def r_parity(c, q, g, sm):
-    p = q["parity"]
-    if not p["n"]:
+    p = q.get("parity")
+    if not p or not p["n"]:
         return None
     return (clamp(10 * p["score"]), f"{p['paired']} of {p['n']} English pages have an Arabic version; {len(p['en_only'])} English only"
             + (f"; shortest Arabic versions: {', '.join(f'{x[1]}%' for x in p['thin'][:3])} of the English length." if p["thin"] else "."))
 
 
 def r_armeta(c, q, g, sm):
-    a = q["armeta"]
-    if not a["n"]:
+    a = q.get("armeta")
+    if not a or not a["n"]:
         return None
     f = a["fails"]
     return (clamp(10 * a["score"]), f"{round(100 * a['score'])}% of title and description checks pass on {a['n']} Arabic pages"
@@ -315,7 +325,7 @@ def r_events(c, q, g, sm):
     ev = g.get("events")
     if ev is None:
         return None
-    exp = ["page_view", "generate_lead", "whatsapp_click", "tool_used"]
+    exp = ["page_view"] + [e for x in CFG.get("enquiries", []) for e in x["events"]]
     seen = [e for e in exp if ev["counts"].get(e, 0) > 0]
     ga = q["ga"]
     ids = sorted(ga["ids"], key=lambda i: -ga["ids"][i])
@@ -327,15 +337,177 @@ def r_events(c, q, g, sm):
     v = 10 * sum(a * b for a, b in parts.values()) / w
     miss = [e for e in exp if e not in seen]
     key_t = ("generate_lead is a key event" if ev.get("key") and "generate_lead" in ev["key"] else
-             "generate_lead is not marked as a key event" if ev.get("key") is not None else "key-event setting not readable, kept from the audit")
+             "generate_lead is not marked as a key event" if ev.get("key") is not None else f"key-event setting not readable, kept from the {AW}")
     return (clamp(v), f"{len(seen)} of {len(exp)} expected events recorded in 28 days" + (f" (none yet: {', '.join(miss)})" if miss else "")
             + f"; tag {', '.join(ids) or 'missing'} on {ga['pages']} of {ga['n']} pages; {key_t}.", round(w, 2))
+
+
+def lang_rules():
+    out = {}
+    for x in OTHER_LANGS:
+        code, name = x["code"], x["name"]
+
+        def parity(c, q, g, sm, code=code, name=name):
+            p = (q.get("lang") or {}).get(code)
+            if not p or not p["n"]:
+                return None
+            an = "an" if name[0] in "AEIOU" else "a"
+            return (clamp(10 * p["score"]), f"{p['paired']} of {p['n']} {LANG_NAME[MAIN_LANG]} pages have {an} {name} version; {len(p['en_only'])} without one"
+                    + (f"; shortest: {', '.join(f'{t[1]}%' for t in p['thin'][:3])} of the {LANG_NAME[MAIN_LANG]} length." if p["thin"] else "."))
+
+        def meta(c, q, g, sm, code=code, name=name):
+            p = ((q.get("lang") or {}).get(code) or {}).get("meta")
+            if not p or not p["n"]:
+                return None
+            f_ = p["fails"]
+            return (clamp(10 * p["score"]), f"{round(100 * p['score'])}% of title and description checks pass on {p['n']} {name} pages"
+                    + (f"; most common gap: {f_[0][0]} ({f_[0][1]})." if f_ else "."))
+
+        def query(c, q, g, sm, code=code, name=name):
+            t = (g.get("targets") or {}).get("langs", {}).get(code)
+            if not t:
+                return None
+            return (clamp(10 * t["shown"] / t["total"]), f"{t['shown']} of {t['total']} {name} target searches showed the site in Google in the last 28 days.")
+        out.update({f"parity_{code}": parity, f"meta_{code}": meta, f"query_{code}": query})
+
+    def query_main(c, q, g, sm):
+        t = (g.get("targets") or {}).get("langs", {}).get(MAIN_LANG)
+        if not t:
+            return None
+        return (clamp(10 * t["shown"] / t["total"]), f"{t['shown']} of {t['total']} {LANG_NAME[MAIN_LANG]} target searches showed the site in Google in the last 28 days.")
+    out[f"query_{MAIN_LANG}"] = query_main
+    return out
+
+
+def share(n, d):
+    return n / d if d else 0
+
+
+def r_medrev(c, q, g, sm):
+    m = q.get("medical")
+    if not m or not (m["cats"] + m["procs"]):
+        return None
+    n = m["cats"] + m["procs"]
+    return clamp(10 * share(m["reviewed"], n)), f"A named medical reviewer on {m['reviewed']} of {n} treatment pages."
+
+
+def r_accredit(c, q, g, sm):
+    m = q.get("medical")
+    if not m or not (m["cats"] + m["procs"]):
+        return None
+    n = m["cats"] + m["procs"]
+    return clamp(10 * min(1, share(m["accredit"], n) * 2)), f"Clinic accreditation or licence named on {m['accredit']} of {n} treatment pages; half earns full marks."
+
+
+def r_medsrc(c, q, g, sm):
+    m = q.get("medical")
+    if not m or not m["content"]:
+        return None
+    return clamp(10 * min(1, share(m["sourced"], m["content"]) / 0.6)), f"{m['sourced']} of {m['content']} treatment, guide and blog pages cite a medical or official source; 60% earns full marks."
+
+
+def r_cost(c, q, g, sm):
+    m = q.get("medical")
+    if not m or not m["procs"]:
+        return None
+    return clamp(10 * share(m["priced"], m["procs"])), f"A price on {m['priced']} of {m['procs']} procedure pages."
+
+
+def r_aftercare(c, q, g, sm):
+    m = q.get("medical")
+    if not m or not m["procs"]:
+        return None
+    v = 0.5 * share(m["aftercare"], m["procs"]) + 0.5 * share(m["risks"], m["procs"])
+    return clamp(10 * v), f"Recovery covered under its own heading on {m['aftercare']} of {m['procs']} procedure pages; risks on {m['risks']}."
+
+
+def r_pathway(c, q, g, sm):
+    m = q.get("medical")
+    if not m or not m["pathways"]:
+        return None
+    thin = [k for k, v in m["pathways"].items() if any(v.get(code, 0) < 5 for code in LANG_NAME)]
+    return (clamp(10 * m["pathway_score"]), f"{len(m['pathways']) - len(thin)} of {len(m['pathways'])} treatment areas have five or more procedures in every language"
+            + (f"; fewer in {', '.join(t.replace('-', ' ') for t in thin[:3])}." if thin else "."))
+
+
+def r_medschema(c, q, g, sm):
+    m = q.get("medical")
+    if not m or not m["procs"]:
+        return None
+    return clamp(10 * share(m["schema"], m["procs"])), f"Medical structured data (MedicalProcedure or MedicalWebPage) on {m['schema']} of {m['procs']} procedure pages."
+
+
+def r_dupes(c, q, g, sm):
+    a = q.get("agency")
+    if not a or not a["industries"]:
+        return None
+    v = 0.6 * (1 - share(a["near_dup"], a["industries"])) + 0.4 * min(1, a["uniq_median"] / 0.5)
+    return (clamp(10 * v), f"{a['near_dup']} of {a['industries']} industry pages are near copies of another; a median {round(100 * a['uniq_median'])}% "
+            f"of each page's wording appears on no other industry page (half earns full marks).")
+
+
+def r_proof(c, q, g, sm):
+    a = q.get("agency")
+    if not a:
+        return None
+    return (clamp(2 * a["proof_external"]), f"{a['proof_external']} client stories from outside clients; {a['proof_own']} of the {a['proof']} portfolio pages show the group's own sites. Five earn full marks.")
+
+
+def r_demo(c, q, g, sm):
+    a = q.get("agency")
+    if not a or not a["products"]:
+        return None
+    return clamp(10 * share(a["demo"], a["products"])), f"A live demo on {a['demo']} of {a['products']} product pages."
+
+
+def r_pricing(c, q, g, sm):
+    a = q.get("agency")
+    if not a:
+        return None
+    v = 10 if a["pricing_page"] else 6 if a["priced"] else 0
+    return float(v), ("A pricing page is published." if a["pricing_page"] else f"Prices on {a['priced']} of {a['products']} product pages; no pricing page." if a["priced"] else "No pricing page and no prices on product pages.")
+
+
+def r_markets(c, q, g, sm):
+    a = q.get("agency")
+    if not a or not a["markets"]:
+        return None
+    have = [k for k, v in a["markets"].items() if v]
+    miss = [k for k, v in a["markets"].items() if not v]
+    return (clamp(10 * share(len(have), len(a["markets"]))), f"{len(have)} of {len(a['markets'])} markets have their own landing page"
+            + (f"; none yet for {', '.join(miss)}." if miss else "."))
+
+
+def r_compare(c, q, g, sm):
+    a = q.get("agency")
+    if not a:
+        return None
+    return clamp(10 * min(1, a["compare"] / 3)), f"{a['compare']} comparison or alternatives pages; three earn full marks."
 
 
 RULES = {"crawl": r_crawl, "intent": r_intent, "cluster": r_cluster, "depth": r_depth, "eeat": r_eeat, "assets": r_assets,
          "valid": r_valid, "brand": r_brand, "nap": r_nap, "social": r_social, "refdom": r_refdom, "answer": r_answer,
          "facts": r_facts, "clarity": r_clarity, "consist": r_consist, "cited": r_cited, "snippet": r_snippet,
-         "parity": r_parity, "armeta": r_armeta, "events": r_events}
+         "parity": r_parity, "armeta": r_armeta, "events": r_events,
+         "medrev": r_medrev, "accredit": r_accredit, "medsrc": r_medsrc, "cost": r_cost, "aftercare": r_aftercare, "pathway": r_pathway,
+         "medschema": r_medschema, "dupes": r_dupes, "proof": r_proof, "demo": r_demo, "pricing": r_pricing, "markets": r_markets,
+         "compare": r_compare, **lang_rules()}
+
+
+def fill_baseline(cube, measured, day):
+    """Subs with no audit score take the first measured reading; unmeasured ones keep their judged score.
+    Returns True when the cube changed and should be saved."""
+    open_ = [s for b in cube["blocks"] for s in b["subs"] if s.get("audit") is None]
+    if not open_:
+        return False
+    for s in open_:
+        m = measured.get(s["auto"]) if s["auto"] else None
+        s["audit"] = round(m[0], 1) if m else s.get("judged", 0.0)
+    if cube.get("audit_overall") is None:
+        cube["audit_overall"] = round(sum(b["weight"] * sum(x["weight"] * x["audit"] for x in b["subs"]) / sum(x["weight"] for x in b["subs"])
+                                          for b in cube["blocks"]) / 100, 2)
+    cube["audit_date"] = cube.get("audit_date") or day.isoformat()
+    return True
 
 
 def stage_of(cube, day):
@@ -347,6 +519,8 @@ def stage_of(cube, day):
 
 def score(cube, measured, day):
     si, stage = stage_of(cube, day)
+    ad = dt.date.fromisoformat(cube["audit_date"])
+    AUDIT_SRC = f"{cube.get('audit_label', 'Audit')}, {ad.strftime('%b')} {ad.day}"
     blocks, overall = [], 0.0
     for b in cube["blocks"]:
         subs = []
@@ -354,7 +528,7 @@ def score(cube, measured, day):
             m = measured.get(s["auto"]) if s["auto"] else None
             part = (m[2] if len(m) > 2 else 1.0) if m else 0.0
             sc = round(part * m[0] + (1 - part) * s["audit"], 2) if m else s["audit"]
-            src = (m[3] if len(m) > 3 else "Measured daily" if part >= 1 else f"Measured daily, {round(100 * (1 - part))}% audit") if m else "Audit, Nov 13"
+            src = (m[3] if len(m) > 3 else "Measured daily" if part >= 1 else f"Measured daily, {round(100 * (1 - part))}% {AW}") if m else AUDIT_SRC
             subs.append({**s, "score": sc, "source": src, "measured": bool(m), "part": part, "rule": m[0] if m else None,
                          "evidence_now": m[1] if m else s.get("evidence", "")})
         val = round(sum(x["weight"] * x["score"] for x in subs) / sum(x["weight"] for x in subs), 2)

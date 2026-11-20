@@ -1,0 +1,147 @@
+{
+ "id": "fnb",
+ "name": "FNB Performance",
+ "short": "FNB",
+ "url": "https://fnbperformance.com",
+ "hosts": [
+  "fnbperformance.com",
+  "www.fnbperformance.com"
+ ],
+ "ga_property": "557948137",
+ "sc_site": "sc-domain:fnbperformance.com",
+ "tz_hours": 4,
+ "tz_name": "Dubai",
+ "launch": "2026-11-15",
+ "home": "/ae",
+ "about": "/ae/about",
+ "data_dir": "data",
+ "languages": [
+  {
+   "code": "en",
+   "name": "English"
+  },
+  {
+   "code": "ar",
+   "name": "Arabic"
+  }
+ ],
+ "market": {
+  "label": "UAE",
+  "the": "the UAE",
+  "countries": [
+   "United Arab Emirates"
+  ]
+ },
+ "cta": "Profit Review",
+ "upcase": [
+  "uae",
+  "vat",
+  "kpi",
+  "qsr",
+  "cfo",
+  "wps"
+ ],
+ "places": [
+  "dubai",
+  "abu dhabi",
+  "sharjah",
+  "talabat",
+  "deliveroo"
+ ],
+ "event_note": "seen in the site code, Nov 16",
+ "enquiries": [
+  {
+   "id": "leads",
+   "events": [
+    "generate_lead"
+   ],
+   "label": "Profit Review requests",
+   "unit": "requests",
+   "one": "request",
+   "how": "Count of the generate_lead event the site sends when the Profit Review form is sent successfully.",
+   "caveats": [
+    "The site sends generate_lead when the form is sent ({note}).",
+    "Requests made by phone, email or WhatsApp are not counted here."
+   ],
+   "breakdowns": [
+    [
+     "pagePath",
+     "Page the request was sent from",
+     "Which page were requests sent from?",
+     "Page"
+    ],
+    [
+     "sessionDefaultChannelGroup",
+     "Channel that brought them",
+     "Which channel brought them?",
+     "Channel"
+    ]
+   ],
+   "reading": "Match each request to its reply so none goes unanswered.",
+   "kind": "lead",
+   "test": "Send one test Profit Review request after accepting cookies; it should show in Analytics Realtime within minutes.",
+   "live_q": [
+    "Which countries were requests sent from?",
+    "Which devices were they sent from?"
+   ]
+  },
+  {
+   "id": "whatsapp",
+   "events": [
+    "whatsapp_click"
+   ],
+   "label": "WhatsApp clicks",
+   "unit": "clicks",
+   "one": "click",
+   "how": "Count of the whatsapp_click event the site sends.",
+   "caveats": [
+    "The site sends whatsapp_click from its Ask buttons ({note}); header and footer links are not yet confirmed.",
+    "A click opens WhatsApp; it does not prove a message was sent."
+   ],
+   "breakdowns": [
+    [
+     "pagePath",
+     "Page the click came from",
+     "Which pages produce WhatsApp clicks?",
+     "Page"
+    ]
+   ],
+   "kind": "whatsapp",
+   "test": "Tap a WhatsApp button after accepting cookies and check whatsapp_click in Analytics Realtime.",
+   "live_q": [
+    "Where do WhatsApp clicks come from?",
+    "Which devices click WhatsApp?"
+   ]
+  },
+  {
+   "id": "tools",
+   "events": [
+    "tool_used"
+   ],
+   "label": "Calculator uses",
+   "unit": "uses",
+   "one": "use",
+   "how": "Count of the tool_used event the site sends when a calculator is used.",
+   "caveats": [
+    "The site sends tool_used with the calculator name ({note})."
+   ],
+   "breakdowns": [
+    [
+     "customEvent:tool",
+     "By calculator",
+     "Which calculators are used most?",
+     "Calculator"
+    ]
+   ],
+   "kind": "tool",
+   "param_fallback": "The tool parameter is not registered as a custom dimension, so calculators are split by page instead.",
+   "test": "Use one calculator after accepting cookies and check tool_used in Analytics Realtime.",
+   "live_q": [
+    "Where are calculators used from?",
+    "Which devices use them?"
+   ]
+  }
+ ],
+ "tax_checks": true,
+ "order": 1
+}

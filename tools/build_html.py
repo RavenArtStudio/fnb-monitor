@@ -1,6 +1,8 @@
 """Builds 'FNB Performance cards.html' from the board engine (replica of public/app.js r3.30).
 
-Usage: python tools/build_html.py <replica.html> <cards.json for the saved copy> <out.html> <checkpoint label> [default theme] [live.json]
+Usage: python tools/build_html.py <replica.html> <out.html> <checkpoint label> [default theme] [folder with live-<site>.json]
+Checkpoint 30: one board for every site in sites/*.json, with a site switcher in the top bar (?site=<id> picks one; the
+choice is remembered). Each site's saved copy comes from <data_dir>/cards.json and is embedded.
 Checkpoint 27: a time window toggle in the top bar (30m 12h 24h 7d 30d All); see AGENTS.md.
 Both looks are in every build (Checkpoint 26): Charcoal, and Paper from tools/theme-paper.css scoped under html.paper,
 with Bodoni Moda embedded. A switch in the top bar flips between them and remembers the choice (localStorage);
@@ -17,8 +19,10 @@ import os
 import re
 import sys
 
-rep, snap, out, cp = sys.argv[1:5]
-theme = sys.argv[5] if len(sys.argv) > 5 else 'charcoal'
+if len(sys.argv) > 2 and sys.argv[2].endswith('.json'):     # the pre-Checkpoint 30 call: <replica> <cards.json> <out> <cp> [theme] [live.json]
+    sys.argv = sys.argv[:2] + sys.argv[3:6] + ([os.path.dirname(sys.argv[6]) or '.'] if len(sys.argv) > 6 else [])
+rep, out, cp = sys.argv[1:4]
+theme = sys.argv[4] if len(sys.argv) > 4 else 'charcoal'
 src = open(rep, encoding='utf-8').read().split('\n')
 css = '\n'.join(src[4:574])
 engine = '\n'.join(src[587:680])
@@ -36,9 +40,24 @@ for a, b in [('>Day by day${', ">${esc(d.main.heading||'Day by day')}${"),
               'aria-label="${esc(unit)} over time, with gaps where there is no reading"')]:
     assert engine.count(a) == 1, a
     engine = engine.replace(a, b)
-saved = json.load(open(snap, encoding='utf-8'))
-live_path = sys.argv[6] if len(sys.argv) > 6 else None
-saved_live = json.load(open(live_path, encoding='utf-8')) if live_path and os.path.exists(live_path) else None
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+live_dir = sys.argv[5] if len(sys.argv) > 5 else None
+RAW = 'https://raw.githubusercontent.com/RavenArtStudio/fnb-monitor'
+SITES, SAVED_ALL, LIVE_ALL = [], {}, {}
+for f in sorted(os.listdir(os.path.join(ROOT, 'sites'))):
+    if not f.endswith('.json'):
+        continue
+    c = json.load(open(os.path.join(ROOT, 'sites', f), encoding='utf-8'))
+    dd = c.get('data_dir', 'data')
+    SITES.append({'id': c['id'], 'name': c['name'], 'host': c['hosts'][0], 'order': c.get('order', 9),
+                  'snap': f"{RAW}/main/{dd}/cards.json", 'live': f"{RAW}/live/{dd}/live.json"})
+    cp_ = os.path.join(ROOT, dd, 'cards.json')
+    SAVED_ALL[c['id']] = json.load(open(cp_, encoding='utf-8')) if os.path.exists(cp_) else {'meta': {}, 'cards': []}
+    lp = os.path.join(live_dir, f"live-{c['id']}.json") if live_dir else None
+    LIVE_ALL[c['id']] = json.load(open(lp, encoding='utf-8')) if lp and os.path.exists(lp) else None
+SITES = [x for x in SITES if SAVED_ALL[x['id']].get('cards')] or SITES[:1]     # a site joins the switcher once it has a snapshot
+SITES.sort(key=lambda x: (x['order'], x['name']))
+saved = SAVED_ALL[SITES[0]['id']]
 
 CSS = r'''
 /* ===== Checkpoint 9 shell ===== */
@@ -226,6 +245,22 @@ button.heat-row:hover{background:var(--surface-2);color:var(--ink)}
 .theme-tg button:hover{color:var(--ink)}
 .theme-tg button i{width:9px;height:9px;border-radius:50%;box-shadow:0 0 0 1px #8a8984 inset}
 .theme-tg button[data-theme="charcoal"] i{background:#27282b}.theme-tg button[data-theme="paper"] i{background:#e8e3d8}
+.site-tg{position:relative;display:inline-flex;margin-right:-2px}
+.site-btn{appearance:none;border:0;background:transparent;color:var(--ink-2);font:inherit;font-size:12.5px;line-height:1;padding:6px 10px 6px 12px;border-radius:999px;cursor:pointer;display:inline-flex;align-items:center;gap:7px;box-shadow:0 0 0 1px var(--line) inset;transition:color .25s var(--ease),background .25s var(--ease)}
+.site-btn:hover,.site-btn[aria-expanded="true"]{color:var(--ink);background:var(--surface-2)}
+.site-btn svg{width:9px;height:6px;fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;transition:transform .3s var(--ease)}
+.site-btn[aria-expanded="true"] svg{transform:rotate(180deg)}
+.site-pop{position:absolute;right:0;top:calc(100% + 8px);min-width:232px;padding:6px;border-radius:14px;background:color-mix(in srgb,var(--surface-2) 92%,transparent);
+ -webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);box-shadow:0 0 0 1px var(--line),0 18px 44px rgba(0,0,0,.26),0 2px 8px rgba(0,0,0,.12);
+ opacity:0;transform:translateY(-6px) scale(.97);transform-origin:top right;pointer-events:none;visibility:hidden;z-index:60;
+ transition:opacity .18s var(--ease),transform .32s var(--spring),visibility 0s linear .32s}
+.site-pop.on{opacity:1;transform:none;pointer-events:auto;visibility:visible;transition:opacity .18s var(--ease),transform .32s var(--spring),visibility 0s}
+.site-pop button{appearance:none;border:0;background:transparent;color:var(--ink);font:inherit;font-size:13px;line-height:1.25;text-align:left;width:100%;display:grid;grid-template-columns:1fr auto;column-gap:14px;row-gap:3px;padding:9px 12px;border-radius:10px;cursor:pointer;transition:background .18s var(--ease)}
+.site-pop button small{grid-column:1;font-size:11.5px;color:var(--ink-4)}
+.site-pop button::after{content:"";grid-column:2;grid-row:1/3;align-self:center;width:12px;height:7px;border-left:1.4px solid var(--ink-2);border-bottom:1.4px solid var(--ink-2);transform:rotate(-45deg) translate(1px,-2px);opacity:0}
+.site-pop button[aria-checked="true"]::after{opacity:1}
+.site-pop button:hover,.site-pop button:focus-visible{background:var(--surface-3);outline:none}
+@media (prefers-reduced-motion:reduce){.site-pop,.site-pop.on{transition:none}}
 .theme-tg button[aria-pressed="true"]{background:var(--surface-2);color:var(--ink)}
 html.paper .theme-tg button[aria-pressed="true"]{background:var(--black);color:var(--onblack)}
 /* time window toggle, Checkpoint 27 */
@@ -324,9 +359,13 @@ html.paper .win-tg button.na[aria-pressed="true"]{background:transparent;color:v
 '''
 
 JS = r'''
-const SNAP_URL='https://raw.githubusercontent.com/RavenArtStudio/fnb-monitor/main/data/cards.json';
-const SAVED=%s;
-const SAVED_LIVE=%s;
+const SITES=%s;
+const SAVED_ALL=%s;
+const LIVE_ALL=%s;
+let SITE=SITES[0].id;
+try{const q=new URLSearchParams(location.search).get('site'),m=localStorage.getItem('fnb-site'),ok=(k)=>SITES.some(x=>x.id===k);SITE=ok(q)?q:ok(m)?m:SITE;}catch(e){}
+const siteOf=(id)=>SITES.find(x=>x.id===id)||SITES[0];
+const FRESH={};
 let CARDS=[],ORDER=[],BY={},META={},cur=null;
 const when=(iso)=>{const d=new Date(iso);return d.toLocaleDateString('en-US',{month:'short',day:'numeric'})+', '+d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});};
 const OWNER={site:'Site',owner:'Owner',google:'Google'};
@@ -452,9 +491,9 @@ function heatmap(id,d){const f=el(id),h=d.heat,one=(v)=>v===null||v===undefined?
  const bnd=all.map((x,i)=>i>0&&st[i]!==st[i-1]);
  const segs=[];all.forEach((x,i)=>{if(i===0||bnd[i])segs.push({name:st[i],k:1,i});else segs[segs.length-1].k++;});
  const stageRow=`<div class="heat-row stage" aria-hidden="true"><span class="lead"></span>${segs.map(g=>`<span class="stg${g.name===curStage?' cur':''}" style="grid-column:span ${g.k}"><span class="sl">${esc(g.name)}</span></span>`).join('')}<span class="tg"></span></div>`;
- const head=`<div class="heat-row head"><span class="lead"><span>Block, weight</span><span class="hc">Audit</span></span>${all.map((x,i)=>`<span class="hc${i>now?' fut':''}">${esc(dense&&i%%7?'':i<=now?h.cols[i+1+off]:shortDate(x))}</span>`).join('')}<span class="tg">Target</span></div>`;
+ const head=`<div class="heat-row head"><span class="lead"><span>Block, weight</span><span class="hc">${esc(h.cols[0]||'Audit')}</span></span>${all.map((x,i)=>`<span class="hc${i>now?' fut':''}">${esc(dense&&i%%7?'':i<=now?h.cols[i+1+off]:shortDate(x))}</span>`).join('')}<span class="tg">Target</span></div>`;
  const rows=h.rows.map(r=>{const tg=(i)=>(r.targets&&r.targets[i]!=null)?r.targets[i]:r.target;
-  const audit=`<span class="cell ${r.cells[0]==null?'none':r.bands[0]}" title="Audit, Nov 13: ${one(r.cells[0])}">${one(r.cells[0])}</span>`;
+  const audit=`<span class="cell ${r.cells[0]==null?'none':r.bands[0]}" title="${esc(d.heat.auditLabel||'Audit, Nov 13')}: ${one(r.cells[0])}">${one(r.cells[0])}</span>`;
   const cells=all.map((x,i)=>{if(i>now)return `<span class="cell slot" title="${STEP===7?'Week of ':''}${esc(shortDate(x))}: next snapshots"></span>`;const j=i+1+off,v=r.cells[j];
    return `<span class="cell ${v===null||v===undefined?'none':r.bands[j]}${i===now?' now':''}" title="${esc(h.spans?h.spans[j]:h.cols[j])}: ${one(v)}${STEP===7?' average':''}, ${esc(st[i])} target ${one(tg(j))}">${dense?'':one(v)}</span>`;}).join('');
   return `<button class="heat-row" data-sheet="${esc(r.id)}" aria-haspopup="dialog"><span class="lead"><span class="nm">${esc(r.name)}<small>${r.weight}%%</small></span>${audit}</span>${cells}<span class="tg">${one(r.target)}</span></button>`;}).join('');
@@ -483,16 +522,17 @@ const KV=(items)=>`<div class="kv">${items.filter(Boolean).map(k=>`<div><span>${
 const BOX=(title,inner,extra='')=>`<section class="box ${extra}"><h4>${title}</h4>${inner}</section>`;
 const HEAD=(kicker,title,pill='')=>`<div class="pp-head"><div class="ph-t"><h2 class="detail-title" id="detailTitle">${esc(title)}</h2>${pill}<span class="ph-k">${esc(kicker)}</span></div>${CLOSE_BTN}</div>`;
 const IDS={'Site health, Pages live':'pages','Site health, Broken links':'broken','Site health, Server response time':'response','Site health, Home page size':'weight','Site health, Page speed':'speed','Site health, Pages with issues':'issues','Authority, Referring domains':'refdomains','Authority, Authority score':'authority','Google Search, Search impressions':'impressions','Google Search, Keywords on page one':'pageone','Enquiries, Profit Review requests':'leads','Enquiries, WhatsApp clicks':'whatsapp','Enquiries, Calculator uses':'tools'};
+const idOf=(c)=>IDS[c]&&BY[IDS[c]]?IDS[c]:(CARDS.find(x=>`${x.group}, ${x.label}`===c)||{}).id;
 function sheetHTML(d,r){const one=(v)=>v===null||v===undefined?'--':Number(v).toFixed(1),now=r.cells.at(-1),gap=r.target-now,ok=gap<=0.05;
  const subs=[...r.subs].map(s=>({...s,gain:r.weight*s.weight*Math.max(0,r.target-s.score)/10000})).sort((a,b)=>b.gain-a.gain);
  const gainAll=subs.reduce((a,s)=>a+s.gain,0),live=subs.filter(s=>s.measured).length;
  const cards=(d.blocks?.[r.id]?.questions||[]).find(q=>q.id==='cards')?.answer?.items||[];
  const acts=subs.filter(s=>s.band!=='good'&&s.action);
  return HEAD(`Search visibility, ${d.heat.stage} stage`,r.name,PILL(ok?'good':'bad',ok?`On target at ${one(now)}`:`${one(gap)} below the ${one(r.target)} target`))+`<div class="pp">
-  ${BOX('Score',KV([{label:'Now',value:one(now)},{label:'Target',value:one(r.target)},{label:'Audit, Nov 13',value:one(r.cells[0])},{label:'Weight',value:r.weight+'%%'},{label:'Points to gain',value:'+'+gainAll.toFixed(2),tone:gainAll>0?'up':''}]))}
+  ${BOX('Score',KV([{label:'Now',value:one(now)},{label:'Target',value:one(r.target)},{label:d.heat.auditLabel||'Audit, Nov 13',value:one(r.cells[0])},{label:'Weight',value:r.weight+'%%'},{label:'Points to gain',value:'+'+gainAll.toFixed(2),tone:gainAll>0?'up':''}]))}
   ${BOX(`Sub-metrics<span>${live} of ${subs.length} measured live</span>`,`<div class="sml">${subs.map(s=>`<div class="smr" title="${esc(s.evidence||'')}"><span class="smn">${esc(s.name)}<em>${s.measured?'live':'audit'}</em></span><span class="sbar"><span class="tr"><span class="fl ${s.band}" style="display:block;width:${Math.max(2,s.score*10)}%%"></span></span><b>${one(s.score)}</b></span><span class="smw">${s.weight}%%</span>${s.evidence?`<span class="sme">${esc(s.evidence)}</span>`:''}</div>`).join('')}</div>`)}
   ${acts.length?BOX('Next actions',`<ol class="acts">${acts.map(s=>`<li><span class="sd ${s.gain>=0.1?'high':s.gain>=0.04?'med':''}"></span><span class="at">${esc(s.action)}</span><span class="ao">${esc(OWNER[s.owner]||'')}${s.gain>=0.005?` <b>+${s.gain.toFixed(2)}</b>`:''}</span></li>`).join('')}</ol>`):''}
-  ${cards.length?`<div class="pbtns">${cards.map((c,i)=>IDS[c]?`<button class="pbtn${i===0?' primary':''}" data-goto="${IDS[c]}">${esc(c.split(', ')[1]||c)} ↗</button>`:'').join('')}</div>`:''}
+  ${cards.length?`<div class="pbtns">${cards.map((c,i)=>idOf(c)?`<button class="pbtn${i===0?' primary':''}" data-goto="${idOf(c)}">${esc(c.split(', ')[1]||c)} ↗</button>`:'').join('')}</div>`:''}
  </div>`;}
 /* ---- All details popup ---- */
 function detailHTML(d){const q=(id)=>(d.questions||[]).find(x=>x.id===id)?.answer;
@@ -541,7 +581,6 @@ function drawCard(animate=true){if(!BY[cur])return;const d=view(BY[cur]);CUR_STE
 const WINS=['30m','12h','24h','7d','30d','all'],SHORT=new Set(['30m','12h','24h']);
 const WLAB={'30m':'30m','12h':'12h','24h':'24h','7d':'7d','30d':'30d','all':'All'};
 const WNAME={'30m':'30 minutes','12h':'12 hours','24h':'24 hours','7d':'7 days','30d':'30 days','all':'since launch'};
-const LIVE_URL='https://raw.githubusercontent.com/RavenArtStudio/fnb-monitor/live/data/live.json';
 let WIN='7d',LIVE=null,SNAP_MODE='saved',CUR_STEP=0;
 try{const q=new URLSearchParams(location.search).get('w'),m=localStorage.getItem('fnb-window');WIN=WINS.includes(q)?q:WINS.includes(m)?m:'7d';}catch(e){}
 function tlab(iso,day){const t=new Date(iso);if(isNaN(t))return iso;const hm=t.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});return day?t.toLocaleDateString('en-US',{month:'short',day:'numeric'})+', '+hm:hm;}
@@ -571,7 +610,7 @@ function markWin(){const d=BY[cur],ws=d?winsOf(d):[],v=d?view(d):null;
  el('wintg').classList.toggle('off',!!d?.fixed);}
 function setWin(k){if(!WINS.includes(k)||k===WIN)return;WIN=k;HS=0;try{localStorage.setItem('fnb-window',k);const u=new URL(location.href);if(u.searchParams.has('w')){u.searchParams.delete('w');history.replaceState(null,'',u.pathname+u.search+u.hash);}}catch(e){}
  drawRail();drawCard();markWin();if(SHORT.has(k)&&liveStale())loadLive();}
-function loadLive(){return fetch(LIVE_URL+'?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():Promise.reject(r.status)).then(j=>{if(!j?.meta)return;
+function loadLive(){const want=SITE;return fetch(siteOf(want).live+'?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():Promise.reject(r.status)).then(j=>{if(!j?.meta||want!==SITE)return;
  if(!LIVE?.meta||j.meta.generated>=LIVE.meta.generated){LIVE=j;mergeLive();snapLine();drawRail();drawCard(false);markWin();}}).catch(()=>{});}
 el('wintg').innerHTML=WINS.map((k,i)=>`<button type="button" data-win="${k}" aria-pressed="${k===WIN}">${WLAB[k]}</button>`).join('');
 el('wintg').addEventListener('click',e=>{const b=e.target.closest('button[data-win]');if(b)setWin(b.dataset.win);});
@@ -619,22 +658,37 @@ function setTheme(t,save){document.documentElement.classList.toggle('paper',t===
  if(save){try{localStorage.setItem('fnb-theme',t);}catch(e){}try{const u=new URL(location.href);if(u.searchParams.has('theme')){u.searchParams.delete('theme');history.replaceState(null,'',u.pathname+u.search+u.hash);}}catch(e){}}}
 document.querySelectorAll('.theme-tg button').forEach(b=>b.addEventListener('click',()=>{if(b.getAttribute('aria-pressed')==='true')return;setTheme(b.dataset.theme,true);drawCard(false);markWin();}));
 setTheme(document.documentElement.classList.contains('paper')?'paper':'charcoal',false);
-LIVE=SAVED_LIVE;
-setData(SAVED,'saved');
-loadLive();
-fetch(SNAP_URL+'?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():Promise.reject(r.status)).then(j=>setData(j,'live')).catch(()=>{});
-''' % (json.dumps(saved, ensure_ascii=False).replace('</', '<\\/'), json.dumps(saved_live, ensure_ascii=False).replace('</', '<\\/'))
+/* ---- sites (Checkpoint 30): one board, a switcher in the top bar ---- */
+function loadSnap(){const want=SITE;fetch(siteOf(want).snap+'?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():Promise.reject(r.status))
+ .then(j=>{FRESH[want]=j;if(want===SITE)setData(j,'live');}).catch(()=>{});}
+function drawSites(){const s=siteOf(SITE);el('sitebtn').firstChild.textContent=s.name;document.title=s.name+' cards';
+ el('sitepop').innerHTML=SITES.map(x=>`<button type="button" role="menuitemradio" data-site="${x.id}" aria-checked="${x.id===SITE}"><span>${esc(x.name)}</span><small>${esc(x.host)}</small></button>`).join('');}
+function popSites(open){const p=el('sitepop'),b=el('sitebtn'),on=open??!p.classList.contains('on');p.classList.toggle('on',on);b.setAttribute('aria-expanded',String(on));
+ if(on)(p.querySelector('[aria-checked="true"]')||p.firstElementChild)?.focus({preventScroll:true});}
+function setSite(id,save){if(!SITES.some(x=>x.id===id))return;SITE=id;
+ if(save){try{localStorage.setItem('fnb-site',id);const u=new URL(location.href);if(u.searchParams.has('site')){u.searchParams.delete('site');history.replaceState(null,'',u.pathname+u.search+u.hash);}}catch(e){}}
+ drawSites();LIVE=LIVE_ALL[id]||null;HS=0;
+ if(FRESH[id])setData(FRESH[id],'live');else setData(SAVED_ALL[id]||{meta:{},cards:[]},'saved');
+ loadLive();loadSnap();}
+el('sitebtn').addEventListener('click',e=>{e.stopPropagation();popSites();});
+el('sitepop').addEventListener('click',e=>{const b=e.target.closest('button[data-site]');if(!b)return;popSites(false);el('sitebtn').focus({preventScroll:true});if(b.dataset.site!==SITE)setSite(b.dataset.site,true);});
+el('sitepop').addEventListener('keydown',e=>{const bs=[...el('sitepop').querySelectorAll('button')],i=bs.indexOf(document.activeElement);
+ if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();bs[(i+(e.key==='ArrowDown'?1:bs.length-1))%%bs.length]?.focus();}});
+document.addEventListener('click',e=>{if(!e.target.closest('.site-tg'))popSites(false);});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&el('sitepop').classList.contains('on')){e.stopImmediatePropagation();popSites(false);el('sitebtn').focus({preventScroll:true});}},true);
+setSite(SITE,false);
+''' % tuple(json.dumps(x, ensure_ascii=False).replace('</', '<\\/') for x in ([{k: v for k, v in x.items() if k != 'order'} for x in SITES], SAVED_ALL, LIVE_ALL))
 
 BODY = '''<body>
 <div id="toast" role="status" aria-live="polite"></div>
 <main class="app">
- <div class="topbar"><span class="snap" id="snap"></span><span class="win-tg" id="wintg" role="group" aria-label="Time window"></span><span class="tb-r"><span class="theme-tg" role="group" aria-label="Board look"><button type="button" data-theme="charcoal" aria-pressed="true"><i></i>Charcoal</button><button type="button" data-theme="paper" aria-pressed="false"><i></i>Paper</button></span><span>FNB Performance, %s</span></span></div>
+ <div class="topbar"><span class="snap" id="snap"></span><span class="win-tg" id="wintg" role="group" aria-label="Time window"></span><span class="tb-r"><span class="theme-tg" role="group" aria-label="Board look"><button type="button" data-theme="charcoal" aria-pressed="true"><i></i>Charcoal</button><button type="button" data-theme="paper" aria-pressed="false"><i></i>Paper</button></span><span class="site-tg"><button type="button" class="site-btn" id="sitebtn" aria-haspopup="menu" aria-expanded="false">%s<svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg></button><div class="site-pop" id="sitepop" role="menu" aria-label="Site"></div></span><span>%s</span></span></div>
  <nav class="rail" id="rail" role="tablist" aria-label="Cards" aria-orientation="vertical"></nav>
  <div><section class="ws" id="ws" role="tabpanel" aria-live="polite"></section><p class="demo-note" id="note"></p></div>
 </main>
 <div class="detail-scrim" id="detailScrim" hidden></div>
 <aside class="detail" id="detailPanel" role="dialog" aria-modal="true" aria-labelledby="detailTitle" hidden><div class="detail-inner" id="detailBody" tabindex="-1"></div></aside>
-''' % cp
+''' % (SITES[0]['name'], cp)
 def scoped(css, cls='paper'):
     """Prefix every rule of a theme sheet with html.<cls> so both looks live in one file."""
     css = re.sub(r'/\*.*?\*/', '', css, flags=re.S)
@@ -662,6 +716,6 @@ THEME_CSS = scoped(open(os.path.join(here, 'theme-paper.css'), encoding='utf-8')
 HEAD_JS = ("<script>try{var t=new URLSearchParams(location.search).get('theme')||localStorage.getItem('fnb-theme')||'%s';"
            "if(t==='paper')document.documentElement.classList.add('paper');}catch(e){}</script>\n") % ('paper' if theme == 'paper' else 'charcoal')
 html = ('<!doctype html>\n<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">\n'
-        '<title>FNB Performance cards</title>\n' + HEAD_JS + '<style>\n' + css + CSS + THEME_CSS + '</style></head>\n' + BODY + '<script>\n' + engine + JS + '</script></body></html>\n')
+        f"<title>{SITES[0]['name']} cards</title>\n" + HEAD_JS + '<style>\n' + css + CSS + THEME_CSS + '</style></head>\n' + BODY + '<script>\n' + engine + JS + '</script></body></html>\n')
 open(out, 'w', encoding='utf-8').write(html)
 print(len(html), len(saved.get('cards', [])))

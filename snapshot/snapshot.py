@@ -24,27 +24,35 @@ from urllib.parse import urljoin, urlparse
 import requests
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import siteconf  # noqa: E402
+from siteconf import CFG, SID, LANG_NAME, MAIN_LANG, OTHER_LANGS  # noqa: E402
 import quality as Q  # noqa: E402
 from windows import ORDER as WORDER, WIN, wbundle, level_bundle, day_window, klab, zkey, parse as wparse, span_label  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
-DATA = ROOT / "data"
+# Site settings come from sites/<SITE_ID>.json (Checkpoint 30); FNB Performance keeps data/ itself.
+DATA = siteconf.DATA
 HIST = DATA / "history"
-SITE = "https://fnbperformance.com"
-GA_PROPERTY = "557948137"          # F&B Performance UAE - GA4 (stream G-ZESHDWC1FD)
-SC_SITE = "sc-domain:fnbperformance.com"
-HOSTS = ["fnbperformance.com", "www.fnbperformance.com"]
-K = "fnb-performance"
+HIST.mkdir(parents=True, exist_ok=True)
+SITE = CFG["url"]
+GA_PROPERTY = CFG["ga_property"]
+SC_SITE = CFG["sc_site"]
+HOSTS = CFG["hosts"]
+HOME = CFG.get("home", "/")
+MARKET = CFG["market"]
+CTA = CFG.get("cta", "enquiry")
+ENQ = CFG["enquiries"]
+K = "fnb-performance"              # internal series key the board reads for every site
 UA = "fnb-monitor/1.0 (+https://github.com/RavenArtStudio/fnb-monitor)"
 
-TODAY = dt.datetime.now(dt.timezone(dt.timedelta(hours=4))).date()   # Dubai
+TODAY = dt.datetime.now(dt.timezone(dt.timedelta(hours=CFG.get("tz_hours", 4)))).date()   # the site's own time zone
 GA = "Google Analytics"
 SC = "Google Search Console"
 CR = "Site crawl"
 SM = "Semrush"
 CONSENT = ("Google Analytics loads only after a visitor accepts cookies, so visitors "
            "who decline or ignore the banner are not counted.")
-EVENT_NOTE = "seen in the site code, Nov 16"
+EVENT_NOTE = CFG.get("event_note", "seen in the site code")
 
 f = lambda n: f"{n:,}" if isinstance(n, int) else (f"{n:,.1f}" if isinstance(n, float) else str(n))
 iso = lambda d: d.isoformat()
@@ -106,7 +114,7 @@ def sc(sess, start, end, dims, limit=1000, state="all"):
 
 
 # ---------------------------------------------------------------- card builders
-LAUNCH = dt.date(2026, 11, 15)
+LAUNCH = dt.date.fromisoformat(CFG["launch"])
 CRAWL = {}
 
 
@@ -279,48 +287,36 @@ def ga_cards(sess):
     cards = []
     fx = lambda caveats: caveats + [CONSENT]
 
-    # Enquiries: the site's own funnel events
+    # Enquiries: the site's own funnel events, as listed in sites/<id>.json
+    names = sorted({e for q in ENQ for e in q["events"]})
     ev = ga(sess, start, end, ["date", "eventName"], ["eventCount"],
-            {"filter": {"fieldName": "eventName", "inListFilter": {"values": ["generate_lead", "whatsapp_click", "tool_used"]}}})
-    def ev_series(name, days):
-        return series([(d, m) for d, m in ev if d[1] == name], days)
-    def ev_break(name, dims):
+            {"filter": {"fieldName": "eventName", "inListFilter": {"values": names}}})
+    def ev_series(evn, days):
+        return [sum(v) for v in zip(*[series([(d, m) for d, m in ev if d[1] == n], days) for n in evn])]
+    def ev_break(evn, dims):
         try:
             return ga(sess, w0, end, dims, ["eventCount"],
-                      {"filter": {"fieldName": "eventName", "stringFilter": {"value": name}}}, order="eventCount")
+                      {"filter": {"fieldName": "eventName", "inListFilter": {"values": evn}}}, order="eventCount")
         except RuntimeError as e:
             print(e, file=sys.stderr)
             return []
-
-    leads_c, leads_p = ev_series("generate_lead", cur_days), ev_series("generate_lead", prev_days)
-    cards.append(card("leads", "Profit Review requests", "requests", "Enquiries", GA,
-        "eventName = generate_lead, eventCount, pagePath, sessionDefaultChannelGroup", cur_days, leads_c, leads_p,
-        [("Page the request was sent from", top(ev_break("generate_lead", ["pagePath"]), label=lambda d: page_name(d[0])), "Which page were requests sent from?", "Page"),
-         ("Channel that brought them", top(ev_break("generate_lead", ["sessionDefaultChannelGroup"])), "Which channel brought them?", "Channel")],
-        (f"{sum(leads_c)} requests this week", "Match each request to its reply so none goes unanswered."),
-        "Count of the generate_lead event the site sends when the Profit Review form is sent successfully.",
-        fx([f"The site sends generate_lead when the form is sent ({EVENT_NOTE}).", "Requests made by phone, email or WhatsApp are not counted here."]),
-        short_label="Profit Review requests"))
-
-    wa_c, wa_p = ev_series("whatsapp_click", cur_days), ev_series("whatsapp_click", prev_days)
-    cards.append(card("whatsapp", "WhatsApp clicks", "clicks", "Enquiries", GA,
-        "eventName = whatsapp_click, eventCount, pagePath", cur_days, wa_c, wa_p,
-        [("Page the click came from", top(ev_break("whatsapp_click", ["pagePath"]), label=lambda d: page_name(d[0])), "Which pages produce WhatsApp clicks?", "Page")],
-        None, "Count of the whatsapp_click event the site sends.",
-        fx([f"The site sends whatsapp_click from its Ask buttons ({EVENT_NOTE}); header and footer links are not yet confirmed.",
-            "A click opens WhatsApp; it does not prove a message was sent."])))
-
-    tool_rows = ev_break("tool_used", ["customEvent:tool"])
-    tool_dim = "customEvent:tool"
-    if not tool_rows or all(d[0] in ("(not set)", "") for d, _ in tool_rows):
-        tool_rows, tool_dim = ev_break("tool_used", ["pagePath"]), "pagePath"
-    tu_c, tu_p = ev_series("tool_used", cur_days), ev_series("tool_used", prev_days)
-    cards.append(card("tools", "Calculator uses", "uses", "Enquiries", GA,
-        f"eventName = tool_used, eventCount, {tool_dim}", cur_days, tu_c, tu_p,
-        [("By calculator", top(tool_rows, 8, label=lambda d: (d[0].replace('-', ' ').capitalize() if tool_dim != 'pagePath' else page_name(d[0]))), "Which calculators are used most?", "Calculator")],
-        None, "Count of the tool_used event the site sends when a calculator is used.",
-        fx([f"The site sends tool_used with the calculator name ({EVENT_NOTE})."]
-           + (["The tool parameter is not registered as a custom dimension, so calculators are split by page instead."] if tool_dim == "pagePath" else []))))
+    dims_used = {}
+    for q in ENQ:
+        bks, fields, extra = [], [f"eventName = {' or '.join(q['events'])}", "eventCount"], []
+        for dim, ttl, ques, colname in q["breakdowns"]:
+            rows, dname = ev_break(q["events"], [dim]), dim
+            if dim.startswith("customEvent:") and (not rows or all(d[0] in ("(not set)", "") for d, _ in rows)):
+                rows, dname = ev_break(q["events"], ["pagePath"]), "pagePath"
+                if q.get("param_fallback"):
+                    extra.append(q["param_fallback"])
+            dims_used[(q["id"], dim)] = dname
+            bks.append((ttl, top(rows, 8 if q.get("kind") == "tool" else 6, label=enq_label(dname)), ques, colname))
+            fields.append(dname)
+        cur, prev = ev_series(q["events"], cur_days), ev_series(q["events"], prev_days)
+        nxt = (f"{sum(cur)} {q['unit']} this week", q["reading"]) if q.get("reading") else None
+        cav = [c.replace("{note}", EVENT_NOTE) for c in q.get("caveats", [])] + extra
+        cards.append(card(q["id"], q["label"], q["unit"], "Enquiries", GA, ", ".join(fields), cur_days, cur, prev, bks, nxt,
+                          q["how"], fx(cav), short_label=q["label"]))
 
     # Website
     daily = ga(sess, start, end, ["date"], ["sessions", "engagedSessions", "newUsers", "screenPageViews"])
@@ -330,14 +326,14 @@ def ga_cards(sess):
     lp = ga(sess, w0, end, ["landingPage"], ["sessions"], order="sessions", limit=50)
     dev = ga(sess, w0, end, ["deviceCategory"], ["sessions"], order="sessions")
     s_c, s_p = col(0, cur_days), col(0, prev_days)
-    uae = sum(int(m[0]) for d, m in cty if d[0] == "United Arab Emirates")
+    mk = sum(int(m[0]) for d, m in cty if d[0] in MARKET["countries"])
     cards.append(card("sessions", "Website sessions", "sessions", "Website", GA,
         "date, sessions, sessionDefaultChannelGroup, country, landingPage, deviceCategory", cur_days, s_c, s_p,
         [("Where visitors come from", top(ch), "Where do visitors come from?", "Channel"),
          ("Country", top(cty), "Which countries are they in?", "Country"),
          ("Entry page", top(lp, label=lambda d: page_name(d[0])), "Which pages do visits start on?", "Entry page"),
          ("Device", top(dev), "What are they browsing on?", "Device")],
-        (f"{uae} of {sum(s_c)} sessions from the UAE", "The UAE share is the one that matters; the rest is partly the team."),
+        (f"{mk} of {sum(s_c)} sessions from {MARKET['the']}", f"The {MARKET['label']} share is the one that matters; the rest is partly the team."),
         "Sessions on the live site hostnames. The previous period is the 7 days immediately before.",
         fx(["Visits from development hosts are excluded.", "Visits by the team count until internal traffic is filtered in Google Analytics."])))
 
@@ -366,10 +362,20 @@ def ga_cards(sess):
         [("By page", top(pv, 8, label=lambda d: page_name(d[0])), "Which pages are viewed most?", "Page")],
         None, "Every page load on the live site, repeats included.", fx([])))
     try:
-        ga_windows(sess, cards, end, tool_dim)
+        ga_windows(sess, cards, end, dims_used)
     except Exception as e:
         print("GA windows:", e, file=sys.stderr)
     return cards
+
+
+def enq_label(dname):
+    if dname in ("pagePath", "landingPage"):
+        return lambda d: page_name(d[0])
+    if dname.startswith("customEvent:"):
+        return lambda d: d[0].replace("-", " ").capitalize()
+    if dname == "eventName":
+        return lambda d: d[0].replace("_widget_open", " demo").replace("_", " ").capitalize()
+    return lambda d: d[0] or "Not set"
 
 
 def attach(c, wkey, bundle):
@@ -379,11 +385,11 @@ def attach(c, wkey, bundle):
     c["wins"] = [k for k in WORDER if k in wins]
 
 
-def ga_windows(sess, cards, end, tool_dim):
+def ga_windows(sess, cards, end, dims_used):
     """30 days and since launch for the Analytics cards, from the processed daily reports."""
     by = {c["id"]: c for c in cards}
     span0 = min(end - dt.timedelta(days=59), LAUNCH)
-    names = ["generate_lead", "whatsapp_click", "tool_used"]
+    names = sorted({e for q in ENQ for e in q["events"]})
     ev = ga(sess, span0, end, ["date", "eventName"], ["eventCount"],
             {"filter": {"fieldName": "eventName", "inListFilter": {"values": names}}})
     daily = ga(sess, span0, end, ["date"], ["sessions", "engagedSessions", "newUsers", "screenPageViews"])
@@ -402,27 +408,22 @@ def ga_windows(sess, cards, end, tool_dim):
         keys = [iso(d) for d in cur_days]
         old_prev = bool(prev_days) and prev_days[-1] < LAUNCH
         old_part = cur_days[0] < LAUNCH
-        evs = lambda name, days: series([(d, m) for d, m in ev if d[1] == name], days) if days else None
+        evs = lambda evn, days: [sum(v) for v in zip(*[series([(d, m) for d, m in ev if d[1] == n], days) for n in evn])] if days else None
         col = lambda i, days: series(daily, days, val=lambda m: m[i]) if days else None
-        evb = lambda name, dims: safe(w0, end, dims, ["eventCount"], {"filter": {"fieldName": "eventName", "stringFilter": {"value": name}}}, order="eventCount")
+        evb = lambda evn, dims: safe(w0, end, dims, ["eventCount"], {"filter": {"fieldName": "eventName", "inListFilter": {"values": evn}}}, order="eventCount")
         common = dict(keys=keys, old_prev=old_prev, old_part=old_part, launch=LAUNCH, sub_source=GA)
         span_note = "since the launch" if wkey == "all" else "over 30 days"
-        defs = {
-            "leads": dict(label="Profit Review requests", unit="requests", fields="eventName = generate_lead, eventCount, pagePath, sessionDefaultChannelGroup",
-                          cur=evs("generate_lead", cur_days), prev=evs("generate_lead", prev_days),
-                          breakdowns=[("Page the request was sent from", top(evb("generate_lead", ["pagePath"]), label=lambda d: page_name(d[0])), "Which page were requests sent from?", "Page"),
-                                      ("Channel that brought them", top(evb("generate_lead", ["sessionDefaultChannelGroup"])), "Which channel brought them?", "Channel")],
-                          how="Count of the generate_lead event the site sends when the Profit Review form is sent successfully.",
-                          caveats=fx(["Requests made by phone, email or WhatsApp are not counted here."])),
-            "whatsapp": dict(label="WhatsApp clicks", unit="clicks", fields="eventName = whatsapp_click, eventCount, pagePath",
-                             cur=evs("whatsapp_click", cur_days), prev=evs("whatsapp_click", prev_days),
-                             breakdowns=[("Page the click came from", top(evb("whatsapp_click", ["pagePath"]), label=lambda d: page_name(d[0])), "Which pages produce WhatsApp clicks?", "Page")],
-                             how="Count of the whatsapp_click event the site sends.",
-                             caveats=fx(["A click opens WhatsApp; it does not prove a message was sent."])),
-            "tools": dict(label="Calculator uses", unit="uses", fields=f"eventName = tool_used, eventCount, {tool_dim}",
-                          cur=evs("tool_used", cur_days), prev=evs("tool_used", prev_days),
-                          breakdowns=[("By calculator", top(evb("tool_used", [tool_dim]), 8, label=lambda d: (d[0].replace('-', ' ').capitalize() if tool_dim != 'pagePath' else page_name(d[0]))), "Which calculators are used most?", "Calculator")],
-                          how="Count of the tool_used event the site sends when a calculator is used.", caveats=fx([])),
+        defs = {}
+        for q in ENQ:
+            bks, used = [], []
+            for dim, ttl, ques, colname in q["breakdowns"]:
+                dname = dims_used.get((q["id"], dim), dim)
+                used.append(dname)
+                bks.append((ttl, top(evb(q["events"], [dname]), 8 if q.get("kind") == "tool" else 6, label=enq_label(dname)), ques, colname))
+            defs[q["id"]] = dict(label=q["label"], unit=q["unit"], fields=", ".join([f"eventName = {' or '.join(q['events'])}", "eventCount"] + used),
+                                 cur=evs(q["events"], cur_days), prev=evs(q["events"], prev_days), breakdowns=bks, how=q["how"],
+                                 caveats=fx([c.replace("{note}", EVENT_NOTE) for c in q.get("caveats", [])[1:]]))
+        defs.update({
             "sessions": dict(label="Website sessions", unit="sessions", fields="date, sessions, sessionDefaultChannelGroup, country, landingPage, deviceCategory",
                              cur=col(0, cur_days), prev=col(0, prev_days),
                              breakdowns=[("Where visitors come from", top(safe(w0, end, ["sessionDefaultChannelGroup"], ["sessions"], order="sessions")), "Where do visitors come from?", "Channel"),
@@ -445,7 +446,7 @@ def ga_windows(sess, cards, end, tool_dim):
                           cur=col(3, cur_days), prev=col(3, prev_days),
                           breakdowns=[("By page", top(safe(w0, end, ["pagePath"], ["screenPageViews"], order="screenPageViews", limit=50), 8, label=lambda d: page_name(d[0])), "Which pages are viewed most?", "Page")],
                           how="Every page load on the live site, repeats included.", caveats=fx([])),
-        }
+        })
         for cid, d in defs.items():
             if cid in by:
                 attach(by[cid], wkey, wbundle(wkey, source=GA, **common, **d))
@@ -662,9 +663,13 @@ def target_presence(sess):
     def hit(q):
         r = seen.get(q.strip().lower())
         return (q, int(r["impressions"]), round(r["position"], 1)) if r else (q, 0, None)
-    en, ar = [hit(q) for q in t["en"]], [hit(q) for q in t["ar"]]
-    return {"total": len(en) + len(ar), "shown": sum(1 for x in en + ar if x[1]), "ar_total": len(ar),
-            "ar_shown": sum(1 for x in ar if x[1]), "rows": en + ar}
+    by_lang = {code: [hit(q) for q in t.get(code, [])] for code in LANG_NAME}
+    rows = [x for code in LANG_NAME for x in by_lang[code]]
+    out = {"total": len(rows), "shown": sum(1 for x in rows if x[1]), "rows": rows,
+           "langs": {code: {"total": len(v), "shown": sum(1 for x in v if x[1])} for code, v in by_lang.items() if v}}
+    ar = by_lang.get("ar", [])
+    out.update(ar_total=len(ar), ar_shown=sum(1 for x in ar if x[1]))     # FNB's Arabic sub-metric reads these
+    return out
 
 
 def index_status(sess, paths):
@@ -707,8 +712,13 @@ def index_status(sess, paths):
         if not e:
             return True
         age = (now - dt.datetime.fromisoformat(e["checked"])).total_seconds() / 3600
-        return age >= (24 if e["indexed"] else 0)
+        return age >= (24 if e["indexed"] else CFG.get("recheck_hours", 0))
     todo = [p for p in paths if due(p)]
+    # Larger sites (Checkpoint 30): a set number of inspections per run, never-checked pages first, then the oldest
+    # readings, so the 2,000-a-day URL Inspection limit is never reached and every page is covered within a day or two.
+    cap = CFG.get("inspect_per_run")
+    if cap and len(todo) > cap:
+        todo = sorted(todo, key=lambda p: (p in cache, cache.get(p, {}).get("checked", "")))[:cap]
     if todo:
         try:
             ask(todo[0])                # fail fast if not permitted
@@ -732,6 +742,7 @@ def index_status(sess, paths):
         if not okk:
             miss[cs or "Unknown"] = miss.get(cs or "Unknown", 0) + 1
     return {"checked": len(res), "indexed": sum(1 for x in res if x[1]), "states": states, "rechecked_now": len(todo) - len(failed),
+            "of": len(paths),
             "failed_now": len(failed),
             "not_states": miss, "not_indexed": [page_name(p) for p, okk, _ in res if not okk][:8]}
 
@@ -986,7 +997,7 @@ def crawl():
                 uses[u] = uses.get(u, 0) + 1
     big = max(uses, key=lambda u: asize[u] * uses[u], default=None)
     top_shared = [urlparse(big).path.rsplit("/", 1)[-1], kind_of(big), round(asize[big]), uses[big]] if big else None
-    home = next((p for p in speed if p["path"].rstrip("/") == "/ae"), speed[0] if speed else None)
+    home = next((p for p in speed if (p["path"].rstrip("/") or "/") == (HOME.rstrip("/") or "/")), speed[0] if speed else None)
     weight = {k: v for k, v in home["types"]} if home else {}
     nfiles = home["n"] if home else 1
     site_types = sorted(([k, round(v / len(speed))] for k, v in site_t.items() if round(v / len(speed)) > 0), key=lambda x: -x[1]) if speed else []
@@ -1011,19 +1022,19 @@ def crawl():
     ikr, _ = fetch(f"{SITE}/{ikey}.txt") if ikey else (None, None)
     tg = json.loads((DATA / "targets.json").read_text())
     try:
-        q = Q.site_quality(ok, SITE, cfg, tg["en"] + tg["ar"], lambda pth: cube_mod.path_allowed(rtext, "Googlebot", pth))
+        q = Q.site_quality(ok, SITE, cfg, [x for code in LANG_NAME for x in tg.get(code, [])], lambda pth: cube_mod.path_allowed(rtext, "Googlebot", pth))
         (DATA / "pages.json").write_text(json.dumps({"date": iso(TODAY), "pages": Q.page_rows(ok)}, ensure_ascii=False, indent=0))
     except Exception as e:
         import traceback
         traceback.print_exc()
         q = {"error": str(e)[:200]}
-    home_o = byp.get("/ae") or (ok[0] if ok else {})
+    home_o = byp.get(HOME.rstrip("/") or "/") or (ok[0] if ok else {})
     ages = [(TODAY - dt.date.fromisoformat(x)).days for x in lastmods if x]
     slow = sorted(ok, key=lambda o: -o["ms"])[:5]
     return {
         "date": iso(TODAY),
         "pages": len(pages), "pages_ok": len(ok),
-        "lang": {"English": sum(1 for o in ok if o["lang"].startswith("en")), "Arabic": sum(1 for o in ok if o["lang"].startswith("ar"))},
+        "lang": {LANG_NAME[code]: sum(1 for o in ok if siteconf.lang_of(o["lang"]) == code) for code in LANG_NAME},
         "redirects": sum(1 for o in pages.values() if o["redir"]), "errors": len(pages) - len(ok),
         "extra_links": len(extra), "broken": [u for u, s in linkres.items() if s != 200] + [o["u"] for o in pages.values() if o["status"] != 200],
         "issues": {k: v for k, v in issues.items()}, "issue_pages": len({u for v in issues.values() for u in v}),
@@ -1083,7 +1094,7 @@ def crawl_cards(c, hist):
                 None, "Every address in the sitemap is requested once; a page counts as live when it answers with status 200.",
                 ["Pages not in the sitemap are only found if another page links to them."] + once,
                 pats=[{"type": "movement", "title": f"{c['pages_ok']} of {c['pages']} sitemap pages load",
-                       "evidence": f"{c['lang']['English']} English, {c['lang']['Arabic']} Arabic; {c['errors']} errors."}]),
+                       "evidence": ", ".join(f"{v} {k}" for k, v in c['lang'].items()) + f"; {c['errors']} errors."}]),
         reading("broken", "Broken links", "Broken links", "links", "Site health", CR, "every internal link on every page, HTTP status",
                 dates, v("broken_n"), sub,
                 [("Addresses checked", [("Sitemap pages", c["pages"]), ("Other linked pages", c["extra_links"])], "How many addresses were checked?", "Group", "Addresses"),
@@ -1152,7 +1163,7 @@ def speed_card(c, hist, dates, v, sub, once):
     """Page speed: median response time, with every page listed slowest first and its size by file type."""
     sp, st = c["speed_pages"], c["site_types"]
     stot = sum(x[1] for x in st) or 1
-    home = next((p for p in sp if p["path"].rstrip("/") == "/ae"), None)
+    home = next((p for p in sp if (p["path"].rstrip("/") or "/") == (HOME.rstrip("/") or "/")), None)
     over = [p for p in sp if p["ms"] >= 1000]
     w = [(d, x) for d, x in zip(dates, v("weight_total")) if x is not None]
     wd = w[-1][1] - w[-2][1] if len(w) > 1 else None
@@ -1165,7 +1176,7 @@ def speed_card(c, hist, dates, v, sub, once):
                      ("Slowest pages, ms", [(p["name"], p["ms"]) for p in sp[:6]], "Which pages are slowest?", "Page", "ms")],
                     None, "Median time to download the page code across the sitemap pages, in milliseconds. "
                           "Page size is the page code plus every file on the site it references directly.",
-                    ["Measured from a GitHub server in the United States; visitors in the UAE will see different times.",
+                    [f"Measured from a GitHub server in the United States; visitors in {MARKET['the']} will see different times.",
                      "Response time is the page code only; images, scripts, styles and fonts load after it.",
                      "Uncompressed sizes; the transfer over the network is smaller. A file shared by many pages counts on each page.",
                      "Google Analytics, which loads after cookies are accepted, is not included."] + once, lower_better=True)
@@ -1200,12 +1211,12 @@ def semrush_cards():
                 "backlinks_historical: domains_num; backlinks_refdomains", dates, [r["domains"] for r in m], sub,
                 [("Highest authority score among them", [tuple(x) for x in s["top_domains"]], "Which linking sites carry most authority?", "Domain", "Authority score"),
                  ("Backlinks by type", [("Follow", s["follow"]), ("Nofollow", s["nofollow"])], "How many links pass authority?", "Type", "Backlinks")],
-                s.get("next_domains"), f"Websites with at least one link to fnbperformance.com, counted by Semrush each month. {s['backlinks']} backlinks in total.",
+                s.get("next_domains"), f"Websites with at least one link to {HOSTS[0]}, counted by Semrush each month. {s['backlinks']} backlinks in total.",
                 ["Refreshed by hand during working sessions, not daily.", "Semrush finds links by its own crawl, so new links appear with a delay."],
                 heading="Month by month", pats=s.get("patterns_domains")),
         reading("authority", "Authority score", "Authority score, of 100", "points", "Authority", SM,
                 "backlinks_overview: authority_score", dates, [r["score"] for r in m], sub,
-                [("What Semrush sees", [("Referring domains", m[-1]["domains"]), ("Backlinks", s["backlinks"]), ("Keywords ranking in the UAE", s["uae_keywords"])], "What is the score built on?", "Measure", "Count")],
+                [("What Semrush sees", [("Referring domains", m[-1]["domains"]), ("Backlinks", s["backlinks"]), (f"Keywords ranking in {s.get('market_label', 'the UAE')}", s.get("market_keywords", s.get("uae_keywords", 0)))], "What is the score built on?", "Measure", "Count")],
                 s.get("next_score"), "Semrush Authority Score for the domain, 0 to 100, from link quality, search traffic and spam signals.",
                 ["A third-party estimate, not a Google number.", "Refreshed by hand during working sessions, not daily."],
                 heading="Month by month", pats=s.get("patterns_score")),
@@ -1215,7 +1226,7 @@ def semrush_cards():
 # ---------------------------------------------------------------- Cube card
 CARD_NAMES = {"pages": "Site health, Pages live", "broken": "Site health, Broken links", "speed": "Site health, Page speed", "issues": "Site health, Pages with issues", "refdomains": "Authority, Referring domains",
               "authority": "Authority, Authority score", "impressions": "Google Search, Search impressions", "pageone": "Google Search, Keywords on page one",
-              "leads": "Enquiries, Profit Review requests", "whatsapp": "Enquiries, WhatsApp clicks", "tools": "Enquiries, Calculator uses"}
+              **{q["id"]: f"Enquiries, {q['label']}" for q in ENQ}}
 
 
 def band(score, target):
@@ -1224,11 +1235,14 @@ def band(score, target):
 
 def cube_card(cs, cube, hist, g):
     audit_day = cube["audit_date"]
+    AL = cube.get("audit_label", "Audit")                       # "Audit" for FNB, "Baseline" for sites without a manual audit
+    AD = f"{short(dt.date.fromisoformat(audit_day))} {AL.lower()}"
+    AW = AL.lower()
     all_days = [d for d in sorted(hist) if hist[d].get("cube")][-63:]   # heatmap: rolling history, 7 days in view
     days = all_days[-7:]
     cols = [audit_day] + days                                            # charts and popups: audit plus the last 7
     hcols = [audit_day] + all_days
-    colname = ["Audit"] + [short(dt.date.fromisoformat(d)) for d in all_days]
+    colname = [AL] + [short(dt.date.fromisoformat(d)) for d in all_days]
     import cube as cube_mod
     group = {b["id"]: b["group"] for b in cube["blocks"]}
     def tgt(d, bid):   # target of the stage that day was in
@@ -1261,20 +1275,21 @@ def cube_card(cs, cube, hist, g):
         part_n = sum(1 for x_ in b["subs"] if x_["measured"] and x_["part"] < 1)
         q = [{"intent": "status", "id": "total", "text": "What is the score?",
               "answer": {"type": "stat", "value": f"{b['score']:.1f}", "label": f"{b['name']}, of 10",
-                         "sub": f"Target {b['target']:.1f} at the {cs['stage']} stage; audit {b['audit']:.1f}"}},
+                         "sub": f"Target {b['target']:.1f} at the {cs['stage']} stage; {AW} {b['audit']:.1f}"}},
              {"intent": "source", "id": "subs", "text": "What is it made of?",
               "answer": {"type": "table", "columns": ["Sub-metric", "Weight", "Score", "Source"],
                          "rows": [[x_["name"], f"{x_['weight']}%", f"{x_['score']:.1f}", x_["source"]] for x_ in b["subs"]], "note": ""}},
              {"intent": "next", "id": "next", "text": "What should we work on first?",
               "answer": {"type": "table", "columns": ["Sub-metric", "Why"],
-                         "rows": [[x_["name"], x_["evidence_now"] or "Scored in the Nov 13 audit."] for x_ in subs[:3]], "note": ""}},
+                         "rows": [[x_["name"], x_["evidence_now"] or f"Scored in the {AD}."] for x_ in subs[:3]], "note": ""}},
              {"intent": "trust", "id": "how", "text": "How is it scored?",
               "answer": {"type": "list", "items": [
                   f"{measured_n} of {len(b['subs'])} sub-metrics are measured" + (f", {part_n} of them in part" if part_n else "")
-                  + "; " + ("the rest keep the Nov 13 audit score until reviewed." if measured_n < len(b["subs"]) else "none rest on the audit alone.")
-                  + (" A part-measured score blends the rule with the audit, as its source shows." if part_n else ""),
+                  + "; " + (f"the rest keep the {AD} score until reviewed." if measured_n < len(b["subs"]) else f"none rest on the {AW} alone.")
+                  + (f" A part-measured score blends the rule with the {AW}, as its source shows." if part_n else ""),
                   "The block score is the weighted mean of its sub-metrics, 0 to 10.",
-                  "Measured sub-metrics use a fixed rule (shown under each one), so they can differ from the audit's judgement on the first day."]}}]
+                  "Measured sub-metrics use a fixed rule (shown under each one), so they can differ from the audit's judgement on the first day."
+                  if AW == "audit" else "The baseline is the first day's measured readings; sub-metrics that cannot be measured carry a judged score."]}}]
         if b["cards"]:
             q.append({"intent": "source", "id": "cards", "text": "Which cards show the detail?",
                       "answer": {"type": "list", "items": [CARD_NAMES.get(c_, c_) for c_ in b["cards"]]}})
@@ -1290,8 +1305,8 @@ def cube_card(cs, cube, hist, g):
                 "breakdowns": [{"id": "subs", "title": "Sub-metrics, score of 10",
                                 "rows": [{"label": x_["name"], "value": round(x_["score"], 1)} for x_ in b["subs"]]}],
                 "patterns": [{"type": "gap", "title": f"Weakest: {worst['name']} at {worst['score']:.1f}",
-                              "evidence": worst["evidence_now"] or "Scored in the Nov 13 audit."}]
-                            + [{"type": "caution", "title": "Partly measured", "evidence": f"{len(b['subs']) - measured_n} of {len(b['subs'])} sub-metrics still carry the audit score."}] * (measured_n < len(b["subs"])),
+                              "evidence": worst["evidence_now"] or f"Scored in the {AD}."}]
+                            + [{"type": "caution", "title": "Partly measured", "evidence": f"{len(b['subs']) - measured_n} of {len(b['subs'])} sub-metrics still carry the {AW} score."}] * (measured_n < len(b["subs"])),
                 "questions": q,
                 "raw": {"columns": ["Sub-metric", "Weight", "Score", "Source", "Evidence"],
                         "rows": [[x_["name"], x_["weight"], x_["score"], x_["source"], x_["evidence_now"]] for x_ in b["subs"]]},
@@ -1299,11 +1314,11 @@ def cube_card(cs, cube, hist, g):
 
     gaps = sorted(cs["blocks"], key=lambda b: -lost(b))
     pats = [{"type": "movement", "title": f"{on} of {len(cs['blocks'])} blocks on target for the {cs['stage']} stage",
-             "evidence": f"Overall {tot:.2f} against a stage target of {cs['target']:.2f}; the Nov 13 audit scored {aud:.2f}."}]
+             "evidence": f"Overall {tot:.2f} against a stage target of {cs['target']:.2f}; the {AD} scored {aud:.2f}."}]
     if lost(gaps[0]) > 0:
         pats.append({"type": "gap", "title": f"Most points lost: {gaps[0]['name']}",
                      "evidence": f"{gaps[0]['score']:.1f} against {gaps[0]['target']:.1f}, worth {lost(gaps[0]):.2f} of the overall score."})
-    if TODAY <= dt.date(2026, 12, 19):
+    if SID == "fnb" and TODAY <= dt.date(2026, 12, 19):
         pats.append({"type": "caution", "title": "Wider measurement from Nov 19",
                      "evidence": "Twenty more sub-metrics moved from the Nov 13 audit to fixed daily rules on Nov 19 (40 of 45 now), "
                                  "so scores before and after that day are not like for like."})
@@ -1311,7 +1326,7 @@ def cube_card(cs, cube, hist, g):
                  "evidence": f"The site went live on {short(LAUNCH)}. Indexation and search presence usually take two to four weeks to settle; off-site blocks build over months."})
     q = [{"intent": "status", "id": "total", "text": "What is the overall score?",
           "answer": {"type": "stat", "value": f"{tot:.2f}", "label": "Search visibility, of 10",
-                     "sub": f"Stage target {cs['target']:.2f}; audit {aud:.2f}"}},
+                     "sub": f"Stage target {cs['target']:.2f}; {AW} {aud:.2f}"}},
          {"intent": "status", "id": "blocks", "text": "How does each block stand?",
           "answer": {"type": "table", "columns": ["Block", "Weight", "Score", "Target"],
                      "rows": [[b["name"], f"{b['weight']}%", f"{b['score']:.1f}", f"{b['target']:.1f}"] for b in order], "note": ""}},
@@ -1322,16 +1337,18 @@ def cube_card(cs, cube, hist, g):
           "answer": {"type": "table", "columns": ["Stage", "Until", "On-site", "Content", "Entity and local", "Off-site, AI answers"],
                      "rows": [[st["name"], short(dt.date.fromisoformat(st["until"])) if st["until"] else "After",
                                *[f"{cube['target_groups'][k][i]:.1f}" for k in ("onsite", "content", "entity", "offsite")]]
-                              for i, st in enumerate(cube["stages"])], "note": "Stages are 7-day spans from the launch on Nov 15."}}]
+                              for i, st in enumerate(cube["stages"])], "note": f"Stages are 7-day spans from the launch on {short(LAUNCH)}."}}]
     if g.get("targets"):
         q.insert(3, {"intent": "source", "id": "targets", "text": "Which target searches show the site?",
                      "answer": {"type": "table", "columns": ["Search", "Impressions, 28 days", "Position"],
-                                "rows": [[r[0], f(r[1]), "-" if r[2] is None else f"{r[2]:.1f}"] for r in g["targets"]["rows"]], "note": "Edit the list in data/targets.json."}})
+                                "rows": [[r[0], f(r[1]), "-" if r[2] is None else f"{r[2]:.1f}"] for r in g["targets"]["rows"]], "note": f"Edit the list in {(DATA / 'targets.json').relative_to(ROOT)}."}})
     unk = (g.get("index") or {}).get("checked", 0) - (g.get("index") or {}).get("indexed", 0)
     eo = len(((CRAWL.get("q") or {}).get("parity") or {}).get("en_only") or [])
     ctx = {"missing_pages": pl(len(CRAWL.get("missing_from_sitemap", [])), "linked page"), "unknown_pages": pl(unk, "page"),
            "slowest": "; ".join(x_[0] for x_ in CRAWL.get("slowest", [])[:2]), "noshare_pages": pl(len(CRAWL.get("issues", {}).get("No share image", [])), "page"),
-           "en_only_pages": pl(eo, "English page"), "noindex_pages": pl(len(CRAWL.get("noindex", [])), "noindex page")}
+           "en_only_pages": pl(eo, "English page"), "noindex_pages": pl(len(CRAWL.get("noindex", [])), "noindex page"),
+           **{f"en_only_pages_{x['code']}": pl(len((((CRAWL.get("q") or {}).get("lang") or {}).get(x["code"]) or {}).get("en_only") or []), f"{LANG_NAME[MAIN_LANG]} page")
+              for x in OTHER_LANGS}}
     acts = {(b["id"], x_["name"]): (x_.get("action", "").format(**ctx), x_.get("owner", "site")) for b in cs["blocks"] for x_ in b["subs"]}
     for r in rows:
         for x_ in r["subs"]:
@@ -1358,10 +1375,11 @@ def cube_card(cs, cube, hist, g):
             "level": True, "sub": stage_note, "available": True, "brand": K,
             "period": len(cols), "periodLabel": stage_note, "label": "Search visibility", "unit": "points", "through": cols[-1],
             "stats": {"total": round(tot, 2), "previousTotal": aud, "change": None,
-                      "deltaText": ("Level with" if x == 0 else f"{'+' if x > 0 else '−'}{abs(x):.2f} on") + " the Nov 13 audit",
+                      "deltaText": ("Level with" if x == 0 else f"{'+' if x > 0 else '−'}{abs(x):.2f} on") + f" the {AD}",
                       "deltaTone": "up" if x > 0 else "down" if x < 0 else "",
                       "railText": "level" if x == 0 else f"{'+' if x > 0 else '−'}{abs(x):.1f}", "railTone": "up" if x > 0 else "down" if x < 0 else ""},
-            "heat": {"cols": colname, "dates": hcols, "stages": cube["stages"], "rows": rows, "stage": cs["stage"], "target": cs["target"]},
+            "heat": {"cols": colname, "dates": hcols, "stages": cube["stages"], "rows": rows, "stage": cs["stage"], "target": cs["target"],
+                     "auditLabel": f"{AL}, {short(dt.date.fromisoformat(audit_day))}"},
             "blocks": {b["id"]: block_obj(b) for b in cs["blocks"]},
             "health": [{"site": "FNB Performance", "statusLabel": "Live", "through": cols[-1], "via": "Cube"}],
             "main": {"dates": cols, "heading": "Overall score by snapshot", "previousLabel": "the stage target",
@@ -1374,7 +1392,7 @@ def cube_card(cs, cube, hist, g):
             "patterns": pats, "questions": q,
             "raw": {"columns": ["Block", "Weight", "Score", "Target", "Audit"],
                     "rows": [[b["name"], b["weight"], b["score"], b["target"], b["audit"]] for b in order]},
-            "howCalculated": "Ten blocks with fixed weights, each the weighted mean of its sub-metrics, 0 to 10. The overall score is the weighted sum. Targets follow the stage counted from the Nov 15 launch; in the heatmap each day is coloured against the target of its own stage."}
+            "howCalculated": f"Ten blocks with fixed weights, each the weighted mean of its sub-metrics, 0 to 10. The overall score is the weighted sum. Targets follow the stage counted from the {short(LAUNCH)} launch; in the heatmap each day is coloured against the target of its own stage."}
 
 
 def cube_windows(cc):
@@ -1425,36 +1443,42 @@ def next_steps(cards, c, g):
     unknown = ix.get("checked", 0) - ix.get("indexed", 0)
     q = c.get("q") or {}
     rules = {}
-    if "leads" in by:
-        rules["leads"] = ([step("Send one test Profit Review request after accepting cookies; it should show in Analytics Realtime within minutes.", "No requests recorded this week.", "high", "owner"),
-                           step("Mark generate_lead as a key event in Google Analytics.", "", "med", "owner")]
-                          if tot("leads") == 0 else
-                          [step("Reply to every request within the hour and note the outcome.", f"{pl(tot('leads'), 'request')} this week.", "high", "owner")])
-    if "whatsapp" in by:
-        rules["whatsapp"] = ([step("Tap a WhatsApp button after accepting cookies and check whatsapp_click in Analytics Realtime.",
-                                   "No WhatsApp clicks this week.", "med", "owner")]
-                             if not tot("whatsapp") else [])
-        if top_row("whatsapp"):
-            rules["whatsapp"].append(step(f"Keep a WhatsApp button beside the content on {top_row('whatsapp')['label']}.", f"{top_row('whatsapp')['value']} of {pl(tot('whatsapp'), 'click')} came from it.", "low", "site"))
-    if "tools" in by:
-        rules["tools"] = ([step("Use one calculator after accepting cookies and check tool_used in Analytics Realtime.", "No calculator use recorded this week.", "high", "owner"),
-                           step("Register the tool parameter as a custom dimension in Analytics.", "", "med", "owner")]
-                          if not tot("tools") else
-                          [step(f"Feature {top_row('tools')['label'] if top_row('tools') else 'the most used calculator'} on the home page.", f"{top_row('tools')['value']} of {pl(tot('tools'), 'use')}." if top_row("tools") else "", "med", "site")])
+    for qd in ENQ:                       # enquiry cards, from sites/<id>.json
+        cid, n_ = qd["id"], tot(qd["id"])
+        if cid not in by:
+            continue
+        if not n_:
+            rules[cid] = [step(qd["test"], f"No {qd['unit']} recorded this week.", "high" if qd.get("kind") in ("lead", "tool") else "med", "owner")]
+            if qd.get("kind") == "lead":
+                rules[cid].append(step("Mark generate_lead as a key event in Google Analytics.", "", "med", "owner"))
+            if qd.get("kind") == "tool":
+                rules[cid].append(step("Register the tool parameter as a custom dimension in Analytics.", "", "med", "owner"))
+        elif qd.get("kind") == "lead":
+            rules[cid] = [step("Reply to every request within the hour and note the outcome.", f"{pl(n_, qd['one'])} this week.", "high", "owner")]
+        elif qd.get("kind") == "tool":
+            rules[cid] = [step(f"Feature {top_row(cid)['label'] if top_row(cid) else 'the most used calculator'} on the home page.",
+                               f"{top_row(cid)['value']} of {pl(n_, qd['one'])}." if top_row(cid) else "", "med", "site")]
+        else:
+            rules[cid] = []
+        if qd.get("kind") == "whatsapp" and top_row(cid):
+            rules[cid].append(step(f"Keep a WhatsApp button beside the content on {top_row(cid)['label']}.", f"{top_row(cid)['value']} of {pl(n_, 'click')} came from it.", "low", "site"))
+        if qd.get("kind") in ("demo", "cta") and n_ and top_row(cid, len(qd["breakdowns"]) - 1):
+            r0 = top_row(cid, len(qd["breakdowns"]) - 1)
+            rules[cid].append(step(f"Repeat what works on {r0['label']} on similar pages.", f"{r0['value']} of {pl(n_, qd['one'])} came from it.", "low", "site"))
     if "sessions" in by:
         cty = {r["label"]: r["value"] for r in by["sessions"]["breakdowns"][1]["rows"]} if len(by["sessions"]["breakdowns"]) > 1 else {}
-        uae, s_ = cty.get("United Arab Emirates", 0), tot("sessions") or 1
-        rules["sessions"] = [step("Exclude team traffic: add the team's IP addresses as internal traffic in Analytics.", f"{uae} of {s_} sessions came from the UAE.", "high", "owner")]
+        mk, s_ = sum(cty.get(x, 0) for x in MARKET["countries"]), tot("sessions") or 1
+        rules["sessions"] = [step("Exclude team traffic: add the team's IP addresses as internal traffic in Analytics.", f"{mk} of {s_} sessions came from {MARKET['the']}.", "high", "owner")]
         ch = top_row("sessions")
         if ch:
-            rules["sessions"].append(step(f"Make sure the {ch['label']} landing pages carry the Profit Review button.", f"{ch['value']} of {s_} sessions.", "med", "site"))
+            rules["sessions"].append(step(f"Make sure the {ch['label']} landing pages carry the {CTA} button.", f"{ch['value']} of {s_} sessions.", "med", "site"))
     if "engaged" in by:
         e, s_ = tot("engaged") or 0, tot("sessions") or 1
         rules["engaged"] = [step("Tighten the first screen of entry pages: one line on who it is for, one figure, one button.", f"{round(100 * e / s_)}% of sessions engaged this week.", "med", "site")]
     if "newvisitors" in by:
-        rules["newvisitors"] = [step("Watch UAE new visitors as the core number once team traffic is filtered.", "", "low", "owner")]
+        rules["newvisitors"] = [step(f"Watch {MARKET['label']} new visitors as the core number once team traffic is filtered.", "", "low", "owner")]
     if "views" in by and top_row("views"):
-        rules["views"] = [step(f"Give {top_row('views')['label']} a direct path to the Profit Review form.", f"Most viewed page: {top_row('views')['value']} of {pl(tot('views'), 'view')}.", "med", "site")]
+        rules["views"] = [step(f"Give {top_row('views')['label']} a direct path to the {CTA} form.", f"Most viewed page: {top_row('views')['value']} of {pl(tot('views'), 'view')}.", "med", "site")]
     if "impressions" in by:
         rules["impressions"] = []
         if unknown:
@@ -1477,10 +1501,12 @@ def next_steps(cards, c, g):
         if ni:
             rules["pages"].append(step(f"Take the {pl(len(ni), 'noindex page')} out of the sitemap: " + "; ".join(page_name(u) for u in ni[:4]) + ".",
                                        "", "low", "site"))
-        eo = (q.get("parity") or {}).get("en_only") or []
-        if eo:
-            rules["pages"].append(step(f"Publish Arabic versions of the {pl(len(eo), 'English-only page')}, starting with "
-                                       + "; ".join(page_name(u) for u in eo[:3]) + ".", "", "med", "site"))
+        for code, lq in (q.get("lang") or {}).items():
+            eo = lq.get("en_only") or []
+            if eo:
+                rules["pages"].append(step(f"Publish {LANG_NAME[code]} versions of the "
+                                           + (pl(len(eo), f"{LANG_NAME[MAIN_LANG]}-only page") if len(OTHER_LANGS) == 1 else f"{pl(len(eo), 'page')} that have none") + ", starting with "
+                                           + "; ".join(page_name(u) for u in eo[:3]) + ".", "", "med", "site"))
     if "broken" in by:
         rules["broken"] = ([step("Fix: " + "; ".join(u.replace(SITE, "") for u in c["broken"][:3]) + ".", "", "high", "site")] if c["broken"] else
                            [step("Nothing to fix. Recheck after each release.", "", "low", "site")])
@@ -1512,8 +1538,9 @@ def next_steps(cards, c, g):
             rules["speed"] = [step("No action while the median stays under 500 ms.", "", "low", "site")]
     for k in ("refdomains", "authority"):
         if k in by:
-            rules[k] = [step("Earn one link from a recognised UAE publication or industry body.", "", "high", "owner"),
-                        step("Get listed on Zoho, Xero and QuickBooks advisor directories.", "", "med", "owner")]
+            rules[k] = [step(t_, "", imp, own) for t_, imp, own in CFG.get("authority_steps", [
+                ["Earn one link from a recognised UAE publication or industry body.", "high", "owner"],
+                ["Get listed on Zoho, Xero and QuickBooks advisor directories.", "med", "owner"]])]
     for x in cards:
         if x["id"] in rules and "next" not in x:
             x["next"] = rules[x["id"]][:4]
@@ -1541,6 +1568,7 @@ def main():
     CRAWL = c
     import cube as cube_mod
     cube = json.loads((DATA / "cube.json").read_text())
+    AW = cube_mod.AW = cube.get("audit_label", "Audit").lower()
     g = {"sc_ok": bool(google["sc"]), "bing": cube.get("bing_verified", False)}
     if sess and google["sc"]:
         try:
@@ -1552,8 +1580,8 @@ def main():
         except Exception as e:
             print(e, file=sys.stderr)
             msg = str(e)
-            notes.append("Indexation keeps its audit score: Search Console URL Inspection is not permitted for the service account (needs Full permission)."
-                         if " 401" in msg or " 403" in msg else f"Indexation keeps its audit score: URL Inspection could not be read this run ({msg[:80]}).")
+            notes.append(f"Indexation keeps its {AW} score: Search Console URL Inspection is not permitted for the service account (needs Full permission)."
+                         if " 401" in msg or " 403" in msg else f"Indexation keeps its {AW} score: URL Inspection could not be read this run ({msg[:80]}).")
     if sess and google["ga"]:
         for k, fn in (("ai", ai_sessions), ("events", events_check)):
             try:
@@ -1561,9 +1589,12 @@ def main():
             except Exception as e:
                 print(f"{k}: {e}", file=sys.stderr)
     if "error" in (c.get("q") or {}):
-        notes.append(f"Page checks failed, so 18 cube sub-metrics keep their audit scores: {c['q']['error'][:120]}")
+        notes.append(f"Page checks failed, so the page-based cube sub-metrics keep their {AW} scores: {c['q']['error'][:120]}")
     sm = json.loads((DATA / "semrush.json").read_text()) if (DATA / "semrush.json").exists() else None
-    cs = cube_mod.score(cube, cube_mod.measure(c, g, sm), TODAY)
+    measured = cube_mod.measure(c, g, sm)
+    if cube_mod.fill_baseline(cube, measured, TODAY):      # a new site: the first run's readings become its baseline
+        (DATA / "cube.json").write_text(json.dumps(cube, ensure_ascii=False, indent=1))
+    cs = cube_mod.score(cube, measured, TODAY)
     today = {"date": iso(TODAY), "crawl": {k: c[k] for k in ("pages_ok", "broken_n", "issue_pages", "ms_median", "weight_total")},
              "cube": {"overall": cs["overall"], "blocks": {b["id"]: b["score"] for b in cs["blocks"]}}}
     for card_ in google["ga"] + google["sc"]:

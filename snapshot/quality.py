@@ -7,6 +7,9 @@ behind it. Nothing here calls the network.
 import json
 import re
 import statistics
+
+import siteconf
+from siteconf import CFG, MAIN_LANG, OTHER_LANGS, LANG_NAME
 from html.parser import HTMLParser
 from urllib.parse import urljoin, urlparse
 
@@ -19,7 +22,8 @@ SUMMARY_CLASS = re.compile(r"(^|[\s_-])(summary|tldr|tl-dr|takeaways?|key-points
 SOCIAL = {"linkedin.com": "LinkedIn", "instagram.com": "Instagram", "facebook.com": "Facebook", "x.com": "X",
           "twitter.com": "X", "youtube.com": "YouTube", "tiktok.com": "TikTok", "threads.net": "Threads", "pinterest.com": "Pinterest"}
 FILE_EXT = ("pdf", "xlsx", "xls", "csv", "docx", "doc", "zip", "pptx")
-ORG_TYPES = {"Organization", "LocalBusiness", "ProfessionalService", "AccountingService", "FinancialService", "Corporation"}
+ORG_TYPES = {"Organization", "LocalBusiness", "ProfessionalService", "AccountingService", "FinancialService", "Corporation",
+             "MedicalBusiness", "MedicalOrganization", "MedicalClinic", "Hospital", "TravelAgency"}
 ART_TYPES = {"Article", "BlogPosting", "NewsArticle", "TechArticle", "Report"}
 AR_DIGITS = str.maketrans("٠١٢٣٤٥٦٧٨٩٫٬", "0123456789.,")
 
@@ -188,22 +192,32 @@ def page_doc(html):
     nodes, bad = ld_nodes(d.ld)
     return {"_body": body, "_main": main, "_nodes": nodes, "h1t": d.h1[0] if d.h1 else "", "heads": d.heads[:40],
             "paras": d.paras[:12], "links_all": d.links, "site_name": d.site_name, "summary": d.summary,
-            "words": words(main), "ga": sorted(set(re.findall(r"\bG-[A-Z0-9]{6,12}\b", html))), "ld_bad": bad}
+            "words": words(main), "ga": sorted(set(re.findall(r"\bG-[A-Z0-9]{6,12}\b", html))), "ld_bad": bad,
+            "demo": bool(re.search(r"ai-agents\.js|voice[-_ ]?widget|chat[-_ ]?widget|data-demo", html, re.I))}
 
 
 def page_name(path):
-    """'/ae/ar/tools/vat-calculator' -> 'Vat calculator, Arabic'."""
-    p = re.sub(r"^/ae(?=/|$)", "", (path or "/").split("?")[0].rstrip("/"))
-    ar = bool(re.match(r"^/ar(/|$)", p))
-    p = re.sub(r"^/ar(?=/|$)", "", p)
+    """'/ae/ar/tools/vat-calculator' -> 'Vat calculator, Arabic'; language segments come from the site config."""
+    p = (path or "/").split("?")[0].rstrip("/")
+    home = (CFG.get("home") or "/").rstrip("/")
+    if home and home != "/":
+        p = re.sub("^" + re.escape(home) + "(?=/|$)", "", p)
+    lang = None
+    for x in OTHER_LANGS:
+        if re.match(rf"^/{x['code']}(/|$)", p):
+            lang, p = x["name"], re.sub(rf"^/{x['code']}(?=/|$)", "", p)
+            break
     if p in ("", "/"):
         name = "Home"
     else:
         name = p.strip("/").split("/")[-1].replace("-", " ")
         name = name[:1].upper() + name[1:]
-        name = re.sub(r"\b(uae|vat|kpi|qsr|fnb|f&b|cfo|wps)\b", lambda m: {"fnb": "FnB", "f&b": "F&B"}.get(m.group(1).lower(), m.group(1).upper()), name, flags=re.I)
-        name = re.sub(r"\b(dubai|abu dhabi|sharjah|talabat|deliveroo)\b", lambda m: m.group(1).title(), name, flags=re.I)
-    return name + (", Arabic" if ar else "")
+        up = "|".join(re.escape(w) for w in CFG.get("upcase", []) + ["fnb", "f&b"])
+        name = re.sub(rf"\b({up})\b", lambda m: {"fnb": "FnB", "f&b": "F&B"}.get(m.group(1).lower(), m.group(1).upper()), name, flags=re.I)
+        pl_ = "|".join(re.escape(w) for w in CFG.get("places", []))
+        if pl_:
+            name = re.sub(rf"\b({pl_})\b", lambda m: m.group(1).title(), name, flags=re.I)
+    return name + (f", {lang}" if lang else "")
 
 
 # ---------------------------------------------------------------- text rules
@@ -213,7 +227,8 @@ DATED = re.compile(r"\b(updated|last updated|published|reviewed)\b|تحديث|آ
 NUMBER = re.compile(r"(?:AED|Dh|USD|US\$|\$|درهم)\s?\d[\d,.]*|\d[\d,.]*\s?(?:%|AED|dirhams?|درهم|days|months|years|hours|يوم|أيام|شهر|أشهر|سنة|سنوات)|\b\d{1,3}(?:,\d{3})+\b", re.I)
 QWORD = re.compile(r"[?؟]\s*$")
 CRED = re.compile(r"\b(CMA|CIA|ACCA|CPA|ACA|FCA|CFA|CA|Chartered|Certified)\b|\b\d{1,2}\+?\s+years\b|\d{1,2}\+?\s+(عاماً|عامًا|عاما|سنة|سنوات)", re.I)
-LICENCE = re.compile(r"(trade\s+licen[cs]e|licen[cs]e\s+(no|number|#)|رخصة\s+تجارية|رقم\s+الرخصة)[^0-9\n]{0,25}[0-9٠-٩]{3,}", re.I)
+LICENCE = re.compile(CFG.get("licence_re") or r"(trade\s+licen[cs]e|licen[cs]e\s+(no|number|#)|رخصة\s+تجارية|رقم\s+الرخصة)[^0-9\n]{0,25}[0-9٠-٩]{3,}", re.I)
+TAX_CHECKS = CFG.get("tax_checks", False)
 OTHER_GCC = re.compile(r"saudi|ksa|oman|bahrain|qatar|kuwait|egypt|السعودية|عمان|عُمان|البحرين|قطر|الكويت|مصر", re.I)
 MNE = re.compile(r"multinational|\bmne|pillar|dmtt|top-up|global minimum|متعددة الجنسيات|الحد الأدنى العالمي", re.I)
 VAT_PCT = re.compile(r"(\bVAT\b|ضريبة القيمة المضافة|القيمة المضافة)(?P<gap>[^%٪\d٠-٩.\n]{0,40}?)(?P<num>[\d٠-٩]{1,3}(?:[.٫][\d٠-٩]+)?)\s?[%٪]", re.I)
@@ -313,6 +328,8 @@ def pct_hits(rx, text):
 # ---------------------------------------------------------------- structured-data rules
 REQ = {"Organization": ["name", "url"], "LocalBusiness": ["name", "address"], "ProfessionalService": ["name", "address"],
        "AccountingService": ["name", "address"], "FinancialService": ["name", "address"], "WebSite": ["name", "url"],
+       "MedicalBusiness": ["name", "address"], "MedicalClinic": ["name", "address"], "MedicalOrganization": ["name", "url"],
+       "MedicalProcedure": ["name"], "MedicalWebPage": ["name|headline|url"],
        "WebPage": ["name|headline|url"], "AboutPage": ["name|url"], "ContactPage": ["name|url"], "CollectionPage": ["name|url"],
        "FAQPage": ["mainEntity"], "BreadcrumbList": ["itemListElement"], "WebApplication": ["name", "applicationCategory"],
        "SoftwareApplication": ["name", "applicationCategory"], "Service": ["name", "provider"], "Person": ["name"],
@@ -362,12 +379,12 @@ def site_quality(ok, site, cfg, targets, robots_allowed):
     """ok: crawled 200 pages (dicts from the crawl, with page_doc() keys). Returns aggregates and per-page flags."""
     byp = {o["u"].rstrip("/") or "/": o for o in ok}
     live = [o for o in ok if not o.get("noindex")]
-    lang = lambda o: "ar" if (o.get("lang") or "").startswith("ar") else "en"
+    lang = lambda o: siteconf.lang_of(o.get("lang"))
     for o in ok:
         o["_flat"] = flat(o.get("_body", ""))
         o["types"] = sorted({t for n in o.get("_nodes", []) for t in types(n)})
     arts = [o for o in live if set(o["types"]) & ART_TYPES]
-    svc = [o for o in live if re.search(r"/services/[^/]+$", o["u"])]
+    svc = [o for o in live if re.search(CFG.get("service_re", r"/services/[^/]+$"), o["u"])]
     tools = [o for o in live if {"WebApplication", "SoftwareApplication"} & set(o["types"])]
     content = {o["u"]: o for o in arts + svc + tools}.values()
     q = {}
@@ -428,19 +445,22 @@ def site_quality(ok, site, cfg, targets, robots_allowed):
         def match(o, kws):
             s = flat((o.get("title") or "") + " " + (o.get("h1t") or ""))
             return any(flat(k) in s for k in kws)
-        en = sum(1 for o in live if lang(o) == "en" and match(o, c["en"]))
-        ar = sum(1 for o in live if lang(o) == "ar" and match(o, c["ar"]))
-        cl.append({"name": c["name"], "en": en, "ar": ar, "score": round(min(1, en / 3) * 0.6 + min(1, ar / 3) * 0.4, 3)})
+        cnt = {code: sum(1 for o in live if lang(o) == code and match(o, c.get(code, []))) for code in LANG_NAME}
+        others = [code for code in LANG_NAME if code != MAIN_LANG]
+        sc_ = min(1, cnt[MAIN_LANG] / 3) * (0.6 if others else 1) + sum(min(1, cnt[k] / 3) * 0.4 / len(others) for k in others)
+        cl.append({"name": c["name"], **cnt, "counts": cnt, "score": round(sc_, 3)})
     q["clusters"] = cl
 
-    # depth: median words of the guides, by language.
+    # depth: median words of the guides (or, where the site sells from its service pages, of guides and service pages), by language.
     med = lambda xs: statistics.median(xs) if xs else 0
-    q["depth"] = {"en_n": sum(1 for o in arts if lang(o) == "en"), "ar_n": sum(1 for o in arts if lang(o) == "ar"),
-                  "en_med": round(med([o["words"] for o in arts if lang(o) == "en"])),
-                  "ar_med": round(med([o["words"] for o in arts if lang(o) == "ar"]))}
+    deep = list({o["u"]: o for o in arts + svc}.values()) if CFG.get("depth_pages") == "content" else arts
+    q["depth"] = {"langs": {code: {"n": sum(1 for o in deep if lang(o) == code), "med": round(med([o["words"] for o in deep if lang(o) == code]))}
+                            for code in LANG_NAME}}
+    q["depth"].update(en_n=q["depth"]["langs"][MAIN_LANG]["n"], en_med=q["depth"]["langs"][MAIN_LANG]["med"],
+                      ar_n=q["depth"]["langs"].get("ar", {}).get("n", 0), ar_med=q["depth"]["langs"].get("ar", {}).get("med", 0))
 
     # eeat: bylines (guides and service pages), dated guides, guides citing sources, credentials on About.
-    about = byp.get("/ae/about") or next((o for o in ok if o["u"].rstrip("/").endswith("/about") and lang(o) == "en"), None)
+    about = byp.get((CFG.get("about") or "/about").rstrip("/")) or next((o for o in ok if o["u"].rstrip("/").endswith("/about") and lang(o) == MAIN_LANG), None)
     creds = sorted({m.group(0).strip() for m in CRED.finditer(about.get("_main", ""))}) if about else []
     q["eeat"] = {"arts": len(arts), "svc": len(svc), "by_art": sum(1 for o in arts if o["byline"]),
                  "by_svc": sum(1 for o in svc if o["byline"]), "dated": sum(1 for o in arts if o["dated"] and o["dated_ld"]),
@@ -451,7 +471,7 @@ def site_quality(ok, site, cfg, targets, robots_allowed):
     files = sorted({urlparse(urljoin(site + o["u"], h)).path for o in ok for h, _ in o.get("links_all", [])
                     if urlparse(urljoin(site + o["u"], h)).path.lower().rsplit(".", 1)[-1] in FILE_EXT
                     and host(urljoin(site + o["u"], h)) == host(site)})
-    q["assets"] = {"tools_en": sum(1 for o in tools if lang(o) == "en"), "tools_ar": sum(1 for o in tools if lang(o) == "ar"),
+    q["assets"] = {"tools_en": sum(1 for o in tools if lang(o) == MAIN_LANG), "tools_ar": sum(1 for o in tools if lang(o) != MAIN_LANG),
                    "files": len(files)}
 
     # valid: required properties per type, headline match, FAQ questions on the page.
@@ -515,7 +535,7 @@ def site_quality(ok, site, cfg, targets, robots_allowed):
                 "addr_pages": sum(1 for o in ok if o["has_addr"]), "addr_any": sum(1 for o in ok if o.get("any_addr")), "addr_forms": len(addrs), "licence_pages": lic, "emails": emails}
 
     # social: profiles linked from the home page (sameAs and links).
-    home = byp.get("/ae") or (ok[0] if ok else {})
+    home = byp.get((CFG.get("home") or "/").rstrip("/") or "/") or (ok[0] if ok else {})
     nets = set()
     for n in walk_key(home.get("_nodes", []), "sameAs"):
         for u in (n if isinstance(n, list) else [n] if isinstance(n, str) else []):
@@ -547,7 +567,7 @@ def site_quality(ok, site, cfg, targets, robots_allowed):
 
     # consist: VAT and corporate tax rates, one phone, one email.
     checks, off = 0, []
-    for o in live:
+    for o in (live if TAX_CHECKS else []):
         txt = o.get("_body", "")
         for v, ctx in pct_hits(VAT_PCT, txt):
             if OTHER_GCC.search(ctx):
@@ -563,42 +583,62 @@ def site_quality(ok, site, cfg, targets, robots_allowed):
                 off.append([o["u"], f"Corporate tax {v:g}%", norm_ws(ctx)[:120]])
     q["consist"] = {"checks": checks, "off": off[:8], "off_n": len(off), "phones": len(phones), "emails": len(emails)}
 
-    # parity and armeta: Arabic versions of the English pages.
-    en_pages = [o for o in live if lang(o) == "en"]
-    par, en_only, thin = [], [], []
-    for o in en_pages:
-        p = pair(o)
-        if p is None:
-            par.append(0.0)
-            en_only.append(o["u"])
-            continue
-        r = p["words"] / o["words"] if o["words"] else 1.0
-        par.append(min(1.0, r / 0.85))
-        if r < 0.6:
-            thin.append([o["u"], round(100 * r)])
-    q["parity"] = {"n": len(en_pages), "score": round(sum(par) / len(par), 4) if par else 0, "en_only": en_only,
-                   "thin": sorted(thin, key=lambda x: x[1])[:8], "paired": len(en_pages) - len(en_only)}
-    ar_pages = [o for o in live if lang(o) == "ar"]
+    # parity and metadata: each other-language version of the main-language pages (hreflang pairs).
+    main_pages = [o for o in live if lang(o) == MAIN_LANG]
     titles = [o.get("title") for o in ok]
     descs = [o.get("desc") for o in ok]
-    passed, total, fails = 0, 0, {}
-    for o in ar_pages:
-        p = pair(o)
-        for kind, val, lo, hi, pool in (("title", o.get("title") or "", 20, 70, titles), ("description", o.get("desc") or "", 60, 170, descs)):
-            tests = {f"{kind} not mainly Arabic": ar_share(val) >= 0.5, f"{kind} length": lo <= len(val) <= hi,
-                     f"{kind} not unique": bool(val) and pool.count(val) == 1,
-                     f"{kind} same as English": not (p is not None and val and val == (p.get("title") if kind == "title" else p.get("desc")))}
-            for k, okk in tests.items():
-                total += 1
-                passed += okk
-                if not okk:
-                    fails.setdefault(k, []).append(o["u"])
-    q["armeta"] = {"n": len(ar_pages), "score": round(passed / total, 4) if total else 0,
-                   "fails": sorted(([k, len(v), v[:3]] for k, v in fails.items()), key=lambda x: -x[1])[:6]}
+
+    def pair_in(o, code):
+        for a_ in o.get("alts", []):
+            p_ = byp.get(a_.rstrip("/") or "/")
+            if p_ is not None and p_ is not o and lang(p_) == code:
+                return p_
+        return None
+    q["lang"] = {}
+    for x in OTHER_LANGS:
+        code = x["code"]
+        par, en_only, thin = [], [], []
+        for o in main_pages:
+            p_ = pair_in(o, code)
+            if p_ is None:
+                par.append(0.0)
+                en_only.append(o["u"])
+                continue
+            r = p_["words"] / o["words"] if o["words"] else 1.0
+            par.append(min(1.0, r / 0.85))
+            if r < 0.6:
+                thin.append([o["u"], round(100 * r)])
+        lq = {"n": len(main_pages), "score": round(sum(par) / len(par), 4) if par else 0, "en_only": en_only,
+              "thin": sorted(thin, key=lambda t_: t_[1])[:8], "paired": len(main_pages) - len(en_only)}
+        pages_l = [o for o in live if lang(o) == code]
+        passed, total, fails = 0, 0, {}
+        for o in pages_l:
+            p_ = next((m for m in main_pages if pair_in(m, code) is o), None)
+            for kind, val, lo, hi, pool in (("title", o.get("title") or "", 20, 70, titles), ("description", o.get("desc") or "", 60, 170, descs)):
+                tests = {f"{kind} not mainly {x['name']}": in_language(val, code), f"{kind} length": lo <= len(val) <= hi,
+                         f"{kind} not unique": bool(val) and pool.count(val) == 1,
+                         f"{kind} same as {LANG_NAME[MAIN_LANG]}": not (p_ is not None and val and val == (p_.get("title") if kind == "title" else p_.get("desc")))}
+                for k_, okk in tests.items():
+                    total += 1
+                    passed += okk
+                    if not okk:
+                        fails.setdefault(k_, []).append(o["u"])
+        lq["meta"] = {"n": len(pages_l), "score": round(passed / total, 4) if total else 0,
+                      "fails": sorted(([k_, len(v), v[:3]] for k_, v in fails.items()), key=lambda t_: -t_[1])[:6]}
+        q["lang"][code] = lq
+    if "ar" in q["lang"]:                 # FNB's Arabic sub-metrics read these names
+        q["parity"] = {k_: v for k_, v in q["lang"]["ar"].items() if k_ != "meta"}
+        q["armeta"] = q["lang"]["ar"]["meta"]
 
     # crawl: robots, sitemap in robots, and every listed page indexable.
     q["indexable"] = {"n": len(ok), "noindex": [o["u"] for o in ok if o.get("noindex")],
                       "blocked": [o["u"] for o in ok if not robots_allowed(o["u"])]}
+
+    # Checks that belong to one kind of business (Checkpoint 30), switched on in sites/<id>.json.
+    if "medical" in CFG.get("checks", []):
+        q["medical"] = medical_checks(live, lang, site)
+    if "agency" in CFG.get("checks", []):
+        q["agency"] = agency_checks(ok, live, lang, site)
 
     # ga: the analytics tag on every page.
     ids = {}
@@ -607,6 +647,108 @@ def site_quality(ok, site, cfg, targets, robots_allowed):
             ids[i] = ids.get(i, 0) + 1
     q["ga"] = {"ids": ids, "pages": sum(1 for o in ok if o.get("ga")), "n": len(ok)}
     return q
+
+
+MED_REVIEW = re.compile(r"medically reviewed|medical review(er)?|reviewed by (dr|prof)|clinical(ly)? reviewed|medizinisch geprüft|ärztlich geprüft|"
+                        r"geprüft von (dr|prof)|مراجعة طبية|راجعه (د|الدكتور)", re.I)
+ACCREDIT = re.compile(r"\bJCI\b|joint commission|ISO 9001|ISO 15189|ministry of health|sağlık bakanlığı|USHA[ŞS]|health tourism (authori[sz]ation|certificate|licen[cs]e)|"
+                      r"TEMOS|accredit|akkreditiert|zertifiziert|معتمد|اعتماد|وزارة الصحة", re.I)
+MED_SOURCE = re.compile(r"(^|\.)(nhs\.uk|who\.int|nih\.gov|cdc\.gov|mayoclinic\.org|clevelandclinic\.org|bmj\.com|thelancet\.com|nejm\.org|"
+                        r"aaos\.org|ada\.org|plasticsurgery\.org|ishrs\.org|asmbs\.org|eshre\.eu|aao\.org|entnet\.org|auanet\.org|uroweb\.org|"
+                        r"saglik\.gov\.tr|cochrane\.org|europepmc\.org)$|\.gov(\.[a-z]{2})?$|\.edu$|\.ac\.uk$", re.I)
+PRICE = re.compile(r"(€|EUR|£|GBP|\$|USD|AED|SAR)\s?\d[\d.,]{1,}|\d[\d.,]{2,}\s?(€|EUR|£|GBP|USD|AED|SAR)", re.I)
+AFTER = re.compile(r"recovery|aftercare|after (the )?(surgery|treatment|procedure)|healing|nachsorge|erholung|heilung|التعافي|ما بعد|الرعاية بعد", re.I)
+RISKS = re.compile(r"risk|complication|side effect|risiken|komplikation|nebenwirkung|مخاطر|مضاعفات|الآثار الجانبية", re.I)
+
+
+def medical_checks(live, lang, site):
+    """Treatment pages of a medical-travel site: who reviewed them, what backs them, and whether a patient can plan from them."""
+    m = CFG.get("medical", {})
+    cat_re, proc_re = re.compile(m.get("category_re", r"^/treatments/[^/]+$")), re.compile(m.get("procedure_re", r"^/treatments/[^/]+/procedures/[^/]+$"))
+    strip = lambda u: re.sub(r"^/(" + "|".join(x["code"] for x in OTHER_LANGS) + r")(?=/)", "", u) if OTHER_LANGS else u
+    mains = [o for o in live if lang(o) == MAIN_LANG]
+    cats = [o for o in mains if cat_re.match(o["u"])]
+    procs = [o for o in mains if proc_re.match(o["u"])]
+    treat = cats + procs
+    content = treat + [o for o in mains if re.match(r"^/(guides|blog)/", o["u"])]
+    has_src = lambda o: any(MED_SOURCE.search(h) for h in o.get("ext", []))
+    out = {"cats": len(cats), "procs": len(procs),
+           "reviewed": sum(1 for o in treat if MED_REVIEW.search(o.get("_main", "")) or "reviewedBy" in json.dumps(o.get("_nodes", []))),
+           "accredit": sum(1 for o in treat if ACCREDIT.search(o.get("_main", ""))),
+           "sourced": sum(1 for o in content if has_src(o)), "content": len(content),
+           "priced": sum(1 for o in procs if PRICE.search(o.get("_main", ""))),
+           "aftercare": sum(1 for o in procs if any(AFTER.search(h) for h in o.get("heads", []))),
+           "risks": sum(1 for o in procs if any(RISKS.search(h) for h in o.get("heads", []))),
+           "schema": sum(1 for o in procs if {"MedicalProcedure", "MedicalWebPage", "MedicalCondition", "MedicalTherapy"} & set(o.get("types", [])))}
+    per = {}
+    for o in live:
+        u = strip(o["u"])
+        if proc_re.match(u):
+            c_ = u.split("/")[2]
+            per.setdefault(c_, {}).setdefault(lang(o), 0)
+            per[c_][lang(o)] += 1
+    out["pathways"] = {c_: v for c_, v in sorted(per.items())}
+    langs = list(LANG_NAME)
+    out["pathway_score"] = round(sum(min(1, v.get(code, 0) / 5) for v in per.values() for code in langs) / (len(per) * len(langs)), 4) if per else 0
+    out["no_review"] = [o["u"] for o in treat if not (MED_REVIEW.search(o.get("_main", "")))][:3]
+    return out
+
+
+def shingles(text, k=5):
+    w = re.findall(r"\w+", (text or "").lower())
+    return {" ".join(w[i:i + k]) for i in range(max(0, len(w) - k + 1))}
+
+
+def agency_checks(ok, live, lang, site):
+    """A service business selling to other businesses: industry pages that say something different, proof, demos, prices, markets."""
+    a = CFG.get("agency", {})
+    ind_re = re.compile(a.get("industry_re", r"^/industries/[^/]+$"))
+    prod_re = re.compile(a.get("product_re", r"^/products/[^/]+$"))
+    proof_re = re.compile(a.get("proof_re", r"^/(portfolio|client-stories|case-studies)/[^/]+$"))
+    ind = [o for o in live if ind_re.match(o["u"])]
+    sh = {o["u"]: shingles(o.get("_main", "")) for o in ind}
+    dup, uniq = [], []
+    us = list(sh)
+    for i, u in enumerate(us):
+        best, others = 0.0, set()
+        for j, v in enumerate(us):
+            if i == j or not sh[u] or not sh[v]:
+                continue
+            inter = len(sh[u] & sh[v])
+            best = max(best, inter / len(sh[u] | sh[v]))
+            others |= sh[v]
+        if best >= 0.6:
+            dup.append(u)
+        uniq.append(len(sh[u] - others) / len(sh[u]) if sh[u] else 0)
+    own = [b.lower() for b in CFG.get("own_brands", [])]
+    proof = [o for o in live if proof_re.match(o["u"])]
+    external = [o for o in proof if not any(b in ((o.get("title") or "") + " " + o["u"].replace("-", " ")).lower() for b in own)]
+    prods = [o for o in live if prod_re.match(o["u"])]
+    pricing_page = any(re.search(r"pric", o["u"]) for o in live)
+    priced = sum(1 for o in prods if PRICE.search(o.get("_main", "")))
+    mk = a.get("market_pages", {})
+    has_market = {c_: any(any(re.search(rf"(^|[-/]){re.escape(t)}([-/]|$)", o["u"]) for t in toks) for o in live) for c_, toks in mk.items()}
+    compare = [o for o in live if re.search(r"(^|[-/])(vs|versus|alternatives?|compare|comparison)([-/]|$)", o["u"])]
+    return {"industries": len(ind), "near_dup": len(dup), "uniq_median": round(statistics.median(uniq), 3) if uniq else 0,
+            "dup_sample": dup[:3], "proof": len(proof), "proof_external": len(external), "proof_own": len(proof) - len(external),
+            "products": len(prods), "demo": sum(1 for o in prods if o.get("demo")), "pricing_page": pricing_page, "priced": priced,
+            "markets": has_market, "compare": len(compare)}
+
+
+DE_WORDS = {"und", "der", "die", "das", "für", "mit", "in", "ihre", "sie", "wie", "was", "zu", "von", "bei", "nach", "türkei", "behandlung",
+            "kosten", "klinik", "ein", "eine", "ist", "im", "auf", "oder", "ihr", "wir", "zahn", "haar", "operation", "ablauf"}
+
+
+def in_language(text, code):
+    """Is this title or description written in that language? Arabic by script; German by its common words or letters."""
+    if not text:
+        return False
+    if code == "ar":
+        return ar_share(text) >= 0.5
+    if code == "de":
+        toks = set(re.findall(r"\w+", text.lower()))
+        return bool(toks & DE_WORDS) or bool(re.search(r"[äöüß]", text.lower()))
+    return True
 
 
 def page_rows(ok):
