@@ -156,5 +156,7 @@
  "depth_pages": "content",
  "order": 2,
  "link_checks_per_run": 250,
- "inspect_budget_s": 240
+ "inspect_budget_s": 240,
+ "brand_re": "\\bTurk\\s?elite(?:\\s+Med\\s?care)?\\b",
+ "cred_re": "\\b(MD|M\\.D\\.|PhD|Prof\\.?|Dr\\.|surgeon|specialist|board[- ]certified|consultant|nurse|JCI)\\b|\\b\\d{1,2}\\+?\\s+years\\b|\\b\\d{1,2}\\+?\\s+Jahre\\b|\\d{1,2}\\+?\\s+(عاماً|عامًا|عاما|سنة|سنوات)"
 }

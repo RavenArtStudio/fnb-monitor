@@ -227,7 +227,7 @@ DATED = re.compile(r"\b(updated|last updated|published|reviewed)\b|تحديث|آ
                    r"\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\.? \d{1,2},? 20\d\d\b|\b\d{1,2} (jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]* 20\d\d\b|\b20\d\d-\d\d-\d\d\b", re.I)
 NUMBER = re.compile(r"(?:AED|Dh|USD|US\$|\$|درهم)\s?\d[\d,.]*|\d[\d,.]*\s?(?:%|AED|dirhams?|درهم|days|months|years|hours|يوم|أيام|شهر|أشهر|سنة|سنوات)|\b\d{1,3}(?:,\d{3})+\b", re.I)
 QWORD = re.compile(r"[?؟]\s*$")
-CRED = re.compile(r"\b(CMA|CIA|ACCA|CPA|ACA|FCA|CFA|CA|Chartered|Certified)\b|\b\d{1,2}\+?\s+years\b|\d{1,2}\+?\s+(عاماً|عامًا|عاما|سنة|سنوات)", re.I)
+CRED = re.compile(CFG.get("cred_re") or r"\b(CMA|CIA|ACCA|CPA|ACA|FCA|CFA|CA|Chartered|Certified)\b|\b\d{1,2}\+?\s+years\b|\d{1,2}\+?\s+(عاماً|عامًا|عاما|سنة|سنوات)", re.I)
 LICENCE = re.compile(CFG.get("licence_re") or r"(trade\s+licen[cs]e|licen[cs]e\s+(no|number|#)|رخصة\s+تجارية|رقم\s+الرخصة)[^0-9\n]{0,25}[0-9٠-٩]{3,}", re.I)
 TAX_CHECKS = CFG.get("tax_checks", False)
 OTHER_GCC = re.compile(r"saudi|ksa|oman|bahrain|qatar|kuwait|egypt|السعودية|عمان|عُمان|البحرين|قطر|الكويت|مصر", re.I)
@@ -235,7 +235,7 @@ MNE = re.compile(r"multinational|\bmne|pillar|dmtt|top-up|global minimum|متع�
 VAT_PCT = re.compile(r"(\bVAT\b|ضريبة القيمة المضافة|القيمة المضافة)(?P<gap>[^%٪\d٠-٩.\n]{0,40}?)(?P<num>[\d٠-٩]{1,3}(?:[.٫][\d٠-٩]+)?)\s?[%٪]", re.I)
 CT_PCT = re.compile(r"(\bcorporate\s+(?:income\s+)?tax\b|ضريبة الشركات|ضريبة دخل الشركات)(?P<gap>[^%٪\d٠-٩.\n]{0,40}?)(?P<num>[\d٠-٩]{1,3}(?:[.٫][\d٠-٩]+)?)\s?[%٪]", re.I)
 OTHER_TAX = re.compile(r"corporate|income tax|excise|withholding|customs|ضريبة الشركات|الانتقائية|الجمارك|القيمة المضافة|\bVAT\b", re.I)
-BRAND = re.compile(r"\bF\s*(?:&|and|n)\s*B\s+Performance\b", re.I)
+BRAND = re.compile(CFG.get("brand_re") or r"\bF\s*(?:&|and|n)\s*B\s+Performance\b", re.I)
 NOT_SOURCE = re.compile(r"maps\.|/maps|goo\.gl|g\.page|wa\.me|whatsapp|calendly", re.I)
 AI_SOURCES = re.compile(r"chatgpt|openai|perplexity|gemini|bard\.google|copilot|claude|anthropic|you\.com|phind|deepseek|meta\.ai|grok|mistral|poe\.com", re.I)
 
