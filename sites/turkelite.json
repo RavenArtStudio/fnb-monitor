@@ -154,5 +154,6 @@
  "licence_label": "health-tourism authorisation or tax number",
  "service_re": "/treatments/[^/]+(/procedures/[^/]+)?$",
  "depth_pages": "content",
- "order": 2
+ "order": 2,
+ "link_checks_per_run": 250
 }

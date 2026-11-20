@@ -940,8 +940,20 @@ def crawl():
         ni = bool(r is not None and r.status_code == 200 and ("noindex" in r.headers.get("X-Robots-Tag", "").lower() or
                   re.search(r"<meta[^>]+name=[\"']robots[\"'][^>]*noindex", r.text[:30000], re.I)))
         return u, ((r.status_code if r is not None else 0), bool(r is not None and r.history), ni)
+    # Larger sites (Checkpoint 30c): a set number of unlisted links per run, never-checked ones first, then the oldest;
+    # the rest keep their last reading from data/<site>/link-cache.json, so every link is covered over a few runs.
+    cap = CFG.get("link_checks_per_run")
+    lc_p = DATA / "link-cache.json"
+    lcache = json.loads(lc_p.read_text()) if cap and lc_p.exists() else {}
+    todo = extra if not cap or len(extra) <= cap else sorted(extra, key=lambda u: (u in lcache, lcache.get(u, ["", 0, 0, 0])[0]))[:cap]
     with cf.ThreadPoolExecutor(6) as ex:
-        linkfull = dict(ex.map(chk, extra))
+        fresh = dict(ex.map(chk, todo))
+    linkfull = {u: tuple(lcache[u][1:]) for u in extra if u in lcache and u not in fresh}
+    linkfull.update(fresh)
+    if cap:
+        stamp = dt.datetime.now(dt.timezone.utc).isoformat(timespec="minutes")
+        lcache.update({u: [stamp, *v] for u, v in fresh.items()})
+        lc_p.write_text(json.dumps({u: lcache[u] for u in extra if u in lcache}, ensure_ascii=False))
     linkres = {u: v[0] for u, v in linkfull.items()}
     missing = sorted({page_path(u) for u, (st, red, ni) in linkfull.items()
                       if st == 200 and not red and not ni and page_path(u) and page_path(u) not in known})
@@ -1036,7 +1048,7 @@ def crawl():
         "pages": len(pages), "pages_ok": len(ok),
         "lang": {LANG_NAME[code]: sum(1 for o in ok if siteconf.lang_of(o["lang"]) == code) for code in LANG_NAME},
         "redirects": sum(1 for o in pages.values() if o["redir"]), "errors": len(pages) - len(ok),
-        "extra_links": len(extra), "broken": [u for u, s in linkres.items() if s != 200] + [o["u"] for o in pages.values() if o["status"] != 200],
+        "extra_links": len(extra), "links_unchecked": len(extra) - len(linkfull), "broken": [u for u, s in linkres.items() if s != 200] + [o["u"] for o in pages.values() if o["status"] != 200],
         "issues": {k: v for k, v in issues.items()}, "issue_pages": len({u for v in issues.values() for u in v}),
         "ms_median": ms[len(ms) // 2] if ms else None, "ms_max": ms[-1] if ms else None,
         "slowest": [[page_name(o["u"]), o["ms"]] for o in slow],
@@ -1588,6 +1600,8 @@ def main():
                 g[k] = fn(sess)
             except Exception as e:
                 print(f"{k}: {e}", file=sys.stderr)
+    if c.get("links_unchecked"):
+        notes.append(f"{c['links_unchecked']} linked pages outside the sitemap are not checked yet; the next runs check them.")
     if "error" in (c.get("q") or {}):
         notes.append(f"Page checks failed, so the page-based cube sub-metrics keep their {AW} scores: {c['q']['error'][:120]}")
     sm = json.loads((DATA / "semrush.json").read_text()) if (DATA / "semrush.json").exists() else None
