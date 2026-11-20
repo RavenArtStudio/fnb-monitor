@@ -37,7 +37,7 @@ jobs:
             id=$(basename "$f" .json)
             if [ "$ONLY" != "all" ] && [ "$ONLY" != "$id" ]; then continue; fi
             echo "::group::$id"
-            SITE_ID=$id timeout 25m python snapshot/snapshot.py || failed="$failed $id"
+            SITE_ID=$id timeout 25m python -u snapshot/snapshot.py || failed="$failed $id"
             echo "::endgroup::"
           done
           echo "FAILED=$failed" >> "$GITHUB_ENV"
