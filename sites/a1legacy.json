@@ -190,5 +190,6 @@
  "service_re": "^/(products|industries)/[^/]+$",
  "depth_pages": "content",
  "order": 3,
- "link_checks_per_run": 250
+ "link_checks_per_run": 250,
+ "inspect_budget_s": 240
 }

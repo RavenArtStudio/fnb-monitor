@@ -155,5 +155,6 @@
  "service_re": "/treatments/[^/]+(/procedures/[^/]+)?$",
  "depth_pages": "content",
  "order": 2,
- "link_checks_per_run": 250
+ "link_checks_per_run": 250,
+ "inspect_budget_s": 240
 }

@@ -674,12 +674,20 @@ def target_presence(sess):
 
 def index_status(sess, paths):
     url = "https://searchconsole.googleapis.com/v1/urlInspection/index:inspect"
+    # Time budget (Checkpoint 30d): on a newly added Search Console site each inspection can hang for a minute, which kept
+    # the first A1 run in URL Inspection for over 15 minutes. Pages not reached in time are inspected on the next runs.
+    budget = CFG.get("inspect_budget_s")
+    deadline = time.monotonic() + budget if budget else None
+    tries, wait_s = (2, 25) if budget else (3, 60)
+
     def ask(p):
         # Retries (19 Nov 2026): one read timeout used to drop the whole indexation reading for the run.
         err = None
-        for attempt in range(3):
+        for attempt in range(tries):
+            if deadline and time.monotonic() > deadline:
+                break
             try:
-                r = sess.post(url, json={"inspectionUrl": SITE + p, "siteUrl": SC_SITE}, timeout=60)
+                r = sess.post(url, json={"inspectionUrl": SITE + p, "siteUrl": SC_SITE}, timeout=wait_s)
             except Exception as e:
                 err = "Search Console did not answer in time" if "Timeout" in type(e).__name__ else type(e).__name__
                 time.sleep(3)
@@ -696,6 +704,8 @@ def index_status(sess, paths):
     failed = []
 
     def one(p):
+        if deadline and time.monotonic() > deadline:
+            return p, None, None
         try:
             return ask(p)
         except RuntimeError as e:
@@ -721,9 +731,9 @@ def index_status(sess, paths):
         todo = sorted(todo, key=lambda p: (p in cache, cache.get(p, {}).get("checked", "")))[:cap]
     if todo:
         try:
-            ask(todo[0])                # fail fast if not permitted
+            ask(todo[0])                # fail fast if not permitted, or (with a budget) if Google is not answering
         except RuntimeError as e:
-            if " 401" in str(e) or " 403" in str(e):
+            if " 401" in str(e) or " 403" in str(e) or (budget and "in time" in str(e)):
                 raise
         with cf.ThreadPoolExecutor(4) as ex:
             for p, okk, cs in ex.map(one, todo):
