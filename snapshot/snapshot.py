@@ -1403,7 +1403,7 @@ def cube_card(cs, cube, hist, g):
             "stats": {"total": round(tot, 2), "previousTotal": aud, "change": None,
                       "deltaText": ("Level with" if x == 0 else f"{'+' if x > 0 else '−'}{abs(x):.2f} on") + f" the {AD}",
                       "deltaTone": "up" if x > 0 else "down" if x < 0 else "",
-                      "railText": "level" if x == 0 else f"{'+' if x > 0 else '−'}{abs(x):.1f}", "railTone": "up" if x > 0 else "down" if x < 0 else ""},
+                      "railText": "level" if x == 0 else f"{'+' if x > 0 else '−'}{abs(x):.2f}", "railTone": "up" if x > 0 else "down" if x < 0 else ""},
             "heat": {"cols": colname, "dates": [dt_of(d) for d in hcols], "stages": cube["stages"], "rows": rows, "stage": cs["stage"], "target": cs["target"],
                      "auditLabel": f"{AL}, {short(dt.date.fromisoformat(audit_day))}"},
             "blocks": {b["id"]: block_obj(b) for b in cs["blocks"]},
