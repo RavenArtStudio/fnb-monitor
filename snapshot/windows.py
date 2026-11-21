@@ -9,6 +9,8 @@ Times inside card text are written as markers the board turns into the viewer's 
   @@d:2026-11-18T20:15Z@@  -> Nov 19, 01:45
 """
 import datetime as dt
+from siteconf import CFG as _SITE_CFG  # noqa: E402
+SITE_NAME = _SITE_CFG["name"]
 
 ORDER = ["30m", "12h", "24h", "7d", "30d", "all"]
 WIN = {
@@ -150,12 +152,12 @@ def wbundle(wkey, *, label, unit, source, fields, keys, cur, prev, breakdowns, h
         main["earlyFrom"] = early_from
     out = {"win": wkey, "sub": f"{sub_source or source}, {span}", "period": len(keys), "periodLabel": span,
            "through": keys[-1] if keys else None, "stats": stats,
-           "health": [{"site": "FNB Performance", "statusLabel": "Live", "through": keys[-1] if keys else None, "via": source}],
+           "health": [{"site": SITE_NAME, "statusLabel": "Live", "through": keys[-1] if keys else None, "via": source}],
            "main": main,
            "breakdowns": [{"id": f"b{n}", "title": b[0], "rows": [{"label": r[0], "value": r[1]} for r in b[1]]} for n, b in enumerate(breakdowns)],
            "patterns": pats, "questions": q,
            "raw": {"columns": [W["Bucket"] if "T" in (keys[0] if keys else "") else "Date", "Site", label] + (["Previous period"] if prev is not None else []),
-                   "rows": [[k, "FNB Performance", v] + ([p] if prev is not None else []) for k, v, p in zip(keys, cur, prev or [None] * len(keys))]},
+                   "rows": [[k, SITE_NAME, v] + ([p] if prev is not None else []) for k, v, p in zip(keys, cur, prev or [None] * len(keys))]},
            "howCalculated": how}
     if extra:
         out.update(extra)
@@ -195,13 +197,13 @@ def level_bundle(wkey, *, label, unit, source, fields, keys, vals, prev_vals, br
         main["earlyFrom"] = early_from
     return {"win": wkey, "level": True, "sub": f"{sub_source or source}, {span}", "period": len(keys), "periodLabel": span,
             "through": keys[-1] if keys else None, "stats": stats,
-            "health": [{"site": "FNB Performance", "statusLabel": "Live", "through": keys[-1] if keys else None, "via": source}],
+            "health": [{"site": SITE_NAME, "statusLabel": "Live", "through": keys[-1] if keys else None, "via": source}],
             "main": main,
             "breakdowns": [{"id": f"b{n}", "title": b[0], "rows": [{"label": r[0], "value": r[1]} for r in b[1]]} for n, b in enumerate(breakdowns)],
             "patterns": [{"type": "movement", "title": f"{label} {'up' if x > 0 else 'down' if x < 0 else 'level'}{'' if x == 0 else ' ' + f(abs(x))} on {when}",
                           "evidence": f"{f(tot)} {unit} now against {f(first)} at the start of the window."}] if have else [],
             "questions": q,
-            "raw": {"columns": [W["Bucket"], "Site", label], "rows": [[k, "FNB Performance", v] for k, v in zip(keys, vals)]},
+            "raw": {"columns": [W["Bucket"], "Site", label], "rows": [[k, SITE_NAME, v] for k, v in zip(keys, vals)]},
             "howCalculated": how}
 
 

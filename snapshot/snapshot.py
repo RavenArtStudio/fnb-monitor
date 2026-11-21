@@ -26,6 +26,7 @@ import requests
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import siteconf  # noqa: E402
 from siteconf import CFG, SID, LANG_NAME, MAIN_LANG, OTHER_LANGS  # noqa: E402
+SITE_NAME = CFG["name"]
 import quality as Q  # noqa: E402
 from windows import ORDER as WORDER, WIN, wbundle, level_bundle, day_window, klab, zkey, parse as wparse, span_label  # noqa: E402
 
@@ -200,14 +201,14 @@ def card(id, label, unit, group, source, fields, cur_days, cur, prev, breakdowns
             "sub": sub or f"{source}, {short(cur_days[0])} to {short(cur_days[-1])}",
             "available": True, "brand": K, "period": len(cur), "periodLabel": f"{short(cur_days[0])} to {short(cur_days[-1])}", "label": label, "unit": unit, "through": days[-1],
             "stats": stats,
-            "health": [{"site": "FNB Performance", "statusLabel": "Live", "through": days[-1], "via": source}],
+            "health": [{"site": SITE_NAME, "statusLabel": "Live", "through": days[-1], "via": source}],
             "main": {"dates": days, "series": {K: [{"date": d, "value": v} for d, v in zip(days, cur)]},
                      "previous": [{"date": d, "value": v} for d, v in zip(days, prev)],
                      "tipLabel": ("Old site, a week earlier" if level else "Old site, same days") if old else ("A week earlier" if level else f"Previous {len(cur)} days")},
             "breakdowns": [{"id": f"b{n}", "title": b[0], "rows": [{"label": r[0], "value": r[1]} for r in b[1]]} for n, b in enumerate(breakdowns)],
             "patterns": pats, "questions": q,
             "raw": {"columns": ["Date", "Site", label, "Previous period"],
-                    "rows": [[d, "FNB Performance", v, p] for d, v, p in zip(days, cur, prev)]},
+                    "rows": [[d, SITE_NAME, v, p] for d, v, p in zip(days, cur, prev)]},
             "howCalculated": how}
 
 
@@ -244,11 +245,11 @@ def reading(id, label, short_label, unit, group, source, fields, dates, vals, su
             "available": True, "brand": K, "period": len(dates), "periodLabel": "monthly readings" if heading == "Month by month" else "daily readings", "label": label, "unit": unit, "through": have[-1][0],
             "stats": {"total": tot, "previousTotal": prior[1] if prior else None, "change": None,
                       "deltaText": delta, "deltaTone": tone, "railText": rail, "railTone": tone},
-            "health": [{"site": "FNB Performance", "statusLabel": "Live", "through": have[-1][0], "via": source}],
+            "health": [{"site": SITE_NAME, "statusLabel": "Live", "through": have[-1][0], "via": source}],
             "main": {"dates": dates, "heading": heading, "series": {K: [{"date": d, "value": v} for d, v in zip(dates, vals)]}},
             "breakdowns": [{"id": f"b{n}", "title": b[0], "rows": [{"label": r[0], "value": r[1]} for r in b[1]]} for n, b in enumerate(breakdowns)],
             "patterns": pats or [], "questions": q,
-            "raw": {"columns": ["Date", "Site", label], "rows": [[d, "FNB Performance", v] for d, v in zip(dates, vals)]},
+            "raw": {"columns": ["Date", "Site", label], "rows": [[d, SITE_NAME, v] for d, v in zip(dates, vals)]},
             "howCalculated": how}
 
 
@@ -1262,15 +1263,18 @@ def cube_card(cs, cube, hist, g):
     AW = AL.lower()
     all_days = [d for d in sorted(hist) if hist[d].get("cube")][-63:]   # heatmap: rolling history, 7 days in view
     days = all_days[-7:]
-    cols = [audit_day] + days                                            # charts and popups: audit plus the last 7
-    hcols = [audit_day] + all_days
+    # The audit (or baseline) column is keyed "audit", not by its date: a new site's baseline day is also its first
+    # history day, and both columns used to show the baseline (Checkpoint 30f).
+    cols = (["audit"] if audit_day not in days else []) + days          # charts and popups: audit plus the last 7
+    hcols = ["audit"] + all_days
+    dt_of = lambda d: audit_day if d == "audit" else d
     colname = [AL] + [short(dt.date.fromisoformat(d)) for d in all_days]
     import cube as cube_mod
     group = {b["id"]: b["group"] for b in cube["blocks"]}
     def tgt(d, bid):   # target of the stage that day was in
-        return cube["target_groups"][group[bid]][cube_mod.stage_of(cube, dt.date.fromisoformat(d))[0]]
+        return cube["target_groups"][group[bid]][cube_mod.stage_of(cube, dt.date.fromisoformat(dt_of(d)))[0]]
     def val(d, bid=None):
-        if d == audit_day:
+        if d == "audit":
             return cube["audit_overall"] if bid is None else next(b["audit"] for b in cs["blocks"] if b["id"] == bid)
         h = hist[d]["cube"]
         return h["overall"] if bid is None else h["blocks"].get(bid)
@@ -1316,14 +1320,14 @@ def cube_card(cs, cube, hist, g):
             q.append({"intent": "source", "id": "cards", "text": "Which cards show the detail?",
                       "answer": {"type": "list", "items": [CARD_NAMES.get(c_, c_) for c_ in b["cards"]]}})
         return {"id": "block-" + b["id"], "available": True, "brand": K, "period": len(cols),
-                "periodLabel": stage_note, "label": b["name"], "unit": "points", "through": cols[-1],
+                "periodLabel": stage_note, "label": b["name"], "unit": "points", "through": dt_of(cols[-1]),
                 "stats": {"total": round(b["score"], 1), "previousTotal": b["audit"], "change": None,
                           "deltaText": f"Target {b['target']:.1f}, " + ("on target" if band(b["score"], b["target"]) == "good" else f"{b['target'] - b['score']:.1f} below"),
                           "deltaTone": "up" if band(b["score"], b["target"]) == "good" else "down"},
-                "health": [{"site": "FNB Performance", "statusLabel": "Live", "through": cols[-1], "via": "Cube"}],
-                "main": {"dates": cols, "heading": "Score by snapshot", "previousLabel": "the stage target",
-                         "series": {K: [{"date": d, "value": v} for d, v in zip(cols, hist_vals)]},
-                         "previous": [{"date": d, "value": b["target"]} for d in cols], "tipLabel": "Stage target"},
+                "health": [{"site": SITE_NAME, "statusLabel": "Live", "through": dt_of(cols[-1]), "via": "Cube"}],
+                "main": {"dates": [dt_of(d) for d in cols], "heading": "Score by snapshot", "previousLabel": "the stage target",
+                         "series": {K: [{"date": dt_of(d), "value": v} for d, v in zip(cols, hist_vals)]},
+                         "previous": [{"date": dt_of(d), "value": b["target"]} for d in cols], "tipLabel": "Stage target"},
                 "breakdowns": [{"id": "subs", "title": "Sub-metrics, score of 10",
                                 "rows": [{"label": x_["name"], "value": round(x_["score"], 1)} for x_ in b["subs"]]}],
                 "patterns": [{"type": "gap", "title": f"Weakest: {worst['name']} at {worst['score']:.1f}",
@@ -1395,18 +1399,18 @@ def cube_card(cs, cube, hist, g):
             {"label": "Stage ends", "value": short(dt.date.fromisoformat(cs["stage_until"])) if left is not None else "-", "note": f"{left} days left" if left is not None else ""}]
     return {"id": "cube", "group": "Overview", "kind": "heatmap", "next": nxt, "kpis": kpis, "status": "live", "source": "Cube", "short": "Search visibility",
             "level": True, "sub": stage_note, "available": True, "brand": K,
-            "period": len(cols), "periodLabel": stage_note, "label": "Search visibility", "unit": "points", "through": cols[-1],
+            "period": len(cols), "periodLabel": stage_note, "label": "Search visibility", "unit": "points", "through": dt_of(cols[-1]),
             "stats": {"total": round(tot, 2), "previousTotal": aud, "change": None,
                       "deltaText": ("Level with" if x == 0 else f"{'+' if x > 0 else '−'}{abs(x):.2f} on") + f" the {AD}",
                       "deltaTone": "up" if x > 0 else "down" if x < 0 else "",
                       "railText": "level" if x == 0 else f"{'+' if x > 0 else '−'}{abs(x):.1f}", "railTone": "up" if x > 0 else "down" if x < 0 else ""},
-            "heat": {"cols": colname, "dates": hcols, "stages": cube["stages"], "rows": rows, "stage": cs["stage"], "target": cs["target"],
+            "heat": {"cols": colname, "dates": [dt_of(d) for d in hcols], "stages": cube["stages"], "rows": rows, "stage": cs["stage"], "target": cs["target"],
                      "auditLabel": f"{AL}, {short(dt.date.fromisoformat(audit_day))}"},
             "blocks": {b["id"]: block_obj(b) for b in cs["blocks"]},
-            "health": [{"site": "FNB Performance", "statusLabel": "Live", "through": cols[-1], "via": "Cube"}],
-            "main": {"dates": cols, "heading": "Overall score by snapshot", "previousLabel": "the stage target",
-                     "series": {K: [{"date": d, "value": val(d)} for d in cols]},
-                     "previous": [{"date": d, "value": cs["target"]} for d in cols], "tipLabel": "Stage target"},
+            "health": [{"site": SITE_NAME, "statusLabel": "Live", "through": dt_of(cols[-1]), "via": "Cube"}],
+            "main": {"dates": [dt_of(d) for d in cols], "heading": "Overall score by snapshot", "previousLabel": "the stage target",
+                     "series": {K: [{"date": dt_of(d), "value": val(d)} for d in cols]},
+                     "previous": [{"date": dt_of(d), "value": cs["target"]} for d in cols], "tipLabel": "Stage target"},
             "breakdowns": [{"id": "gain", "title": "Points to gain, by block", "rows": [{"label": b["name"], "value": round(lost(b), 2)} for b in gaps if lost(b) > 0]}]
                           + ([{"id": "index", "title": "Pages in Google's index", "rows": [{"label": {"Submitted and indexed": "Indexed"}.get(k, k.replace("‘", "").replace("’", "")), "value": v} for k, v in sorted(g["index"]["states"].items(), key=lambda kv: -kv[1])]}] if g.get("index") else [])
                           + ([{"id": "targets", "title": f"Target searches showing, {g['targets']['shown']} of {g['targets']['total']}", "rows": [{"label": r[0], "value": r[1]} for r in sorted(g["targets"]["rows"], key=lambda r: -r[1])[:5]]}] if g.get("targets") else [])
