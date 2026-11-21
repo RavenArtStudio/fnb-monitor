@@ -451,8 +451,8 @@
 },
 "/treatments/general-surgery/procedures/anal-fistula-surgery": {
 "indexed": false,
-"state": "Discovered - currently not indexed",
-"checked": "2026-11-21T11:48+00:00"
+"state": "URL is unknown to Google",
+"checked": "2026-11-21T20:18+00:00"
 },
 "/de/treatments/general-surgery/procedures/anal-fistula-surgery": {
 "indexed": true,
@@ -462,22 +462,22 @@
 "/ar/treatments/general-surgery/procedures/anal-fistula-surgery": {
 "indexed": false,
 "state": "Discovered - currently not indexed",
-"checked": "2026-11-21T11:48+00:00"
+"checked": "2026-11-21T20:18+00:00"
 },
 "/treatments/cosmetic-surgery/procedures/body-lift": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-21T11:48+00:00"
+"checked": "2026-11-21T20:18+00:00"
 },
 "/de/treatments/cosmetic-surgery/procedures/body-lift": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-21T11:48+00:00"
+"checked": "2026-11-21T20:18+00:00"
 },
 "/ar/treatments/cosmetic-surgery/procedures/body-lift": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-21T11:48+00:00"
+"checked": "2026-11-21T20:18+00:00"
 },
 "/treatments/orthopedics/procedures/carpal-tunnel-release": {
 "indexed": true,
@@ -547,12 +547,12 @@
 "/de/treatments/bariatric-surgery/procedures/duodenal-switch": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-21T11:48+00:00"
+"checked": "2026-11-21T20:18+00:00"
 },
 "/ar/treatments/bariatric-surgery/procedures/duodenal-switch": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-21T11:48+00:00"
+"checked": "2026-11-21T20:18+00:00"
 },
 "/treatments/fertility/procedures/embryo-transfer": {
 "indexed": true,
@@ -592,12 +592,12 @@
 "/de/treatments/dental/procedures/bone-grafting-and-sinus-lift": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-21T11:48+00:00"
+"checked": "2026-11-21T20:18+00:00"
 },
 "/ar/treatments/dental/procedures/bone-grafting-and-sinus-lift": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-21T11:48+00:00"
+"checked": "2026-11-21T20:18+00:00"
 },
 "/treatments/cosmetic-surgery/procedures/breast-augmentation": {
 "indexed": true,
@@ -637,7 +637,7 @@
 "/de/treatments/bariatric-surgery/procedures/endoscopic-sleeve-gastroplasty": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-21T11:48+00:00"
+"checked": "2026-11-21T20:18+00:00"
 },
 "/ar/treatments/bariatric-surgery/procedures/endoscopic-sleeve-gastroplasty": {
 "indexed": true,
@@ -726,8 +726,8 @@
 },
 "/de/treatments/urology/procedures/penile-implant-surgery": {
 "indexed": false,
-"state": "Discovered - currently not indexed",
-"checked": "2026-11-21T11:48+00:00"
+"state": "URL is unknown to Google",
+"checked": "2026-11-21T20:18+00:00"
 },
 "/ar/treatments/urology/procedures/penile-implant-surgery": {
 "indexed": true,
@@ -762,7 +762,7 @@
 "/ar/treatments/dental/procedures/dental-bridges": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-21T11:48+00:00"
+"checked": "2026-11-21T20:18+00:00"
 },
 "/treatments/hair-restoration/procedures/female-hair-transplant": {
 "indexed": true,
@@ -897,7 +897,7 @@
 "/ar/treatments/cosmetic-surgery/procedures/breast-reduction": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-21T11:48+00:00"
+"checked": "2026-11-21T20:18+00:00"
 },
 "/treatments/dental/procedures/dental-crowns": {
 "indexed": true,
@@ -922,7 +922,7 @@
 "/de/treatments/fertility/procedures/frozen-embryo-transfer": {
 "indexed": false,
 "state": "Discovered - currently not indexed",
-"checked": "2026-11-21T11:48+00:00"
+"checked": "2026-11-21T20:18+00:00"
 },
 "/ar/treatments/fertility/procedures/frozen-embryo-transfer": {
 "indexed": true,
@@ -952,12 +952,12 @@
 "/de/treatments/bariatric-surgery/procedures/gastric-band-removal-conversion": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-21T11:48+00:00"
+"checked": "2026-11-21T20:18+00:00"
 },
 "/ar/treatments/bariatric-surgery/procedures/gastric-band-removal-conversion": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-21T11:48+00:00"
+"checked": "2026-11-21T20:18+00:00"
 },
 "/treatments/general-surgery/procedures/hiatal-hernia-repair": {
 "indexed": true,
@@ -967,7 +967,7 @@
 "/de/treatments/general-surgery/procedures/hiatal-hernia-repair": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-21T11:48+00:00"
+"checked": "2026-11-21T20:18+00:00"
 },
 "/ar/treatments/general-surgery/procedures/hiatal-hernia-repair": {
 "indexed": true,
@@ -1132,12 +1132,12 @@
 "/de/treatments/bariatric-surgery/procedures/one-anastomosis-gastric-bypass": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-21T11:48+00:00"
+"checked": "2026-11-21T20:18+00:00"
 },
 "/ar/treatments/bariatric-surgery/procedures/one-anastomosis-gastric-bypass": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-21T11:48+00:00"
+"checked": "2026-11-21T20:18+00:00"
 },
 "/treatments/orthopedics/procedures/shoulder-arthroscopy": {
 "indexed": true,
@@ -1202,17 +1202,17 @@
 "/treatments/cosmetic-surgery/procedures/gynecomastia-surgery": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-21T11:48+00:00"
+"checked": "2026-11-21T20:18+00:00"
 },
 "/de/treatments/cosmetic-surgery/procedures/gynecomastia-surgery": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-21T11:48+00:00"
+"checked": "2026-11-21T20:18+00:00"
 },
 "/ar/treatments/cosmetic-surgery/procedures/gynecomastia-surgery": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-21T11:48+00:00"
+"checked": "2026-11-21T20:18+00:00"
 },
 "/treatments/hair-restoration/procedures/hair-transplant-repair-correction": {
 "indexed": true,
@@ -1277,7 +1277,7 @@
 "/treatments/bariatric-surgery/procedures/revisional-bariatric-surgery": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-21T11:48+00:00"
+"checked": "2026-11-21T20:18+00:00"
 },
 "/de/treatments/bariatric-surgery/procedures/revisional-bariatric-surgery": {
 "indexed": true,
@@ -1287,7 +1287,7 @@
 "/ar/treatments/bariatric-surgery/procedures/revisional-bariatric-surgery": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-21T11:48+00:00"
+"checked": "2026-11-21T20:18+00:00"
 },
 "/treatments/orthopedics/procedures/spinal-decompression": {
 "indexed": true,
@@ -1367,17 +1367,17 @@
 "/treatments/dental/procedures/orthodontics-and-aligners": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-21T11:48+00:00"
+"checked": "2026-11-21T20:18+00:00"
 },
 "/de/treatments/dental/procedures/orthodontics-and-aligners": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-21T11:48+00:00"
+"checked": "2026-11-21T20:18+00:00"
 },
 "/ar/treatments/dental/procedures/orthodontics-and-aligners": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-21T11:48+00:00"
+"checked": "2026-11-21T20:18+00:00"
 },
 "/treatments/general-surgery/procedures/pilonidal-sinus-surgery": {
 "indexed": true,
@@ -1402,7 +1402,7 @@
 "/de/treatments/eye-care/procedures/refractive-lens-exchange": {
 "indexed": false,
 "state": "Discovered - currently not indexed",
-"checked": "2026-11-21T11:48+00:00"
+"checked": "2026-11-21T20:18+00:00"
 },
 "/ar/treatments/eye-care/procedures/refractive-lens-exchange": {
 "indexed": true,
@@ -1442,7 +1442,7 @@
 "/treatments/orthopedics/procedures/spinal-fusion": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-21T11:48+00:00"
+"checked": "2026-11-21T20:18+00:00"
 },
 "/de/treatments/orthopedics/procedures/spinal-fusion": {
 "indexed": true,
@@ -1471,13 +1471,13 @@
 },
 "/treatments/urology/procedures/urethroplasty": {
 "indexed": false,
-"state": "URL is unknown to Google",
-"checked": "2026-11-21T11:48+00:00"
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-21T20:18+00:00"
 },
 "/de/treatments/urology/procedures/urethroplasty": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-21T11:48+00:00"
+"checked": "2026-11-21T20:18+00:00"
 },
 "/ar/treatments/urology/procedures/urethroplasty": {
 "indexed": true,
@@ -1547,7 +1547,7 @@
 "/treatments/bariatric-surgery/procedures/sadi-s": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-21T11:48+00:00"
+"checked": "2026-11-21T20:18+00:00"
 },
 "/de/treatments/bariatric-surgery/procedures/sadi-s": {
 "indexed": false,
@@ -3092,7 +3092,7 @@
 "/blog/how-long-does-ivf-take-in-turkey-cycle-travel-guide": {
 "indexed": false,
 "state": "Discovered - currently not indexed",
-"checked": "2026-11-21T11:48+00:00"
+"checked": "2026-11-21T20:18+00:00"
 },
 "/de/blog/how-long-does-ivf-take-in-turkey-cycle-travel-guide": {
 "indexed": true,
@@ -3122,7 +3122,7 @@
 "/blog/is-it-worth-going-to-turkey-for-dental-implants": {
 "indexed": false,
 "state": "Discovered - currently not indexed",
-"checked": "2026-11-21T11:48+00:00"
+"checked": "2026-11-21T20:18+00:00"
 },
 "/de/blog/is-it-worth-going-to-turkey-for-dental-implants": {
 "indexed": true,
@@ -3141,8 +3141,8 @@
 },
 "/de/blog/lipoedema-surgery-in-turkey-evidence-selection-aftercare": {
 "indexed": false,
-"state": "URL is unknown to Google",
-"checked": "2026-11-21T11:48+00:00"
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-21T20:18+00:00"
 },
 "/ar/blog/lipoedema-surgery-in-turkey-evidence-selection-aftercare": {
 "indexed": true,
@@ -3227,7 +3227,7 @@
 "/blog/how-to-find-a-reputable-plastic-surgeon-in-turkey": {
 "indexed": false,
 "state": "Discovered - currently not indexed",
-"checked": "2026-11-21T11:48+00:00"
+"checked": "2026-11-21T20:18+00:00"
 },
 "/de/blog/how-to-find-a-reputable-plastic-surgeon-in-turkey": {
 "indexed": true,
@@ -3272,7 +3272,7 @@
 "/blog/will-the-nhs-fix-turkey-teeth-uk-aftercare-guide": {
 "indexed": false,
 "state": "Discovered - currently not indexed",
-"checked": "2026-11-21T11:48+00:00"
+"checked": "2026-11-21T20:18+00:00"
 },
 "/de/blog/will-the-nhs-fix-turkey-teeth-uk-aftercare-guide": {
 "indexed": true,
@@ -3347,7 +3347,7 @@
 "/blog/travel-insurance-for-cosmetic-surgery-in-turkey-guide": {
 "indexed": false,
 "state": "Discovered - currently not indexed",
-"checked": "2026-11-21T11:48+00:00"
+"checked": "2026-11-21T20:18+00:00"
 },
 "/de/blog/travel-insurance-for-cosmetic-surgery-in-turkey-guide": {
 "indexed": true,
@@ -3461,8 +3461,8 @@
 },
 "/ar/blog/how-many-trips-for-dental-implants-in-turkey-trip-guide": {
 "indexed": false,
-"state": "URL is unknown to Google",
-"checked": "2026-11-21T11:48+00:00"
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-21T20:18+00:00"
 },
 "/blog/sleeping-after-hair-transplant-a-safer-first-2-weeks": {
 "indexed": true,
