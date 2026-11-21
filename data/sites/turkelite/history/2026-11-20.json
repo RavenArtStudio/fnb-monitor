@@ -8,17 +8,17 @@
   "weight_total": 1263
  },
  "cube": {
-  "overall": 6.37,
+  "overall": 6.03,
   "blocks": {
    "medtrust": 4.21,
    "treat": 9.3,
-   "geo": 6.48,
+   "geo": 5.57,
    "tech": 9.78,
    "onpage": 9.1,
    "lang": 7.94,
    "entity": 1.7,
    "offsite": 0.75,
-   "schema": 6.76,
+   "schema": 3.43,
    "measure": 5.28
   }
  },
