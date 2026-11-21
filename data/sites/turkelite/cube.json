@@ -801,7 +801,7 @@
      "audit": 0.4,
      "auto": "schema",
      "evidence": "",
-     "action": "Add structured data to pages without it.",
+     "action": "Restore the @context key that the Blade templates strip from every page's JSON-LD (write it as @@context).",
      "owner": "site"
     },
     {
