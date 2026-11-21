@@ -1,5 +1,5 @@
 {
-"date": "2026-11-20",
+"date": "2026-11-21",
 "pages": [
 {
 "u": "/",
@@ -5981,7 +5981,7 @@
 "title": "CRM Automation: Workflows, Leads and Booking Guide — A1 Legacy Labs",
 "desc": "Explore CRM automation for sales pipelines, lead follow-up, appointment reminders and tasks. Build reliable CRM workflows. Talk to A1 Legacy.",
 "h1t": "CRM Automation for Lead Follow-Up and Service Teams",
-"words": 3032,
+"words": 4145,
 "types": [
 "Article",
 "BreadcrumbList",
@@ -5990,6 +5990,7 @@
 "WebSite"
 ],
 "ext": [
+"help.gohighlevel.com",
 "ico.org.uk"
 ],
 "byline": false,
@@ -6174,7 +6175,7 @@
 "title": "n8n Automation Agency: Workflow and AI Services Guide — A1 Legacy Labs",
 "desc": "Explore n8n automation agency services, AI agents, CRM integrations and self-hosting. Compare automation platforms and plan safer workflows. Talk to A1.",
 "h1t": "n8n Automation Agency: Building Reliable Business Workflows",
-"words": 3442,
+"words": 4611,
 "types": [
 "Article",
 "BreadcrumbList",
@@ -6185,6 +6186,7 @@
 "ext": [
 "docs.n8n.io",
 "make.com",
+"marketplace.gohighlevel.com",
 "zapier.com"
 ],
 "byline": false,
