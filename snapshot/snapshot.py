@@ -115,6 +115,17 @@ def sc(sess, start, end, dims, limit=1000, state="all"):
     return r.json().get("rows", [])
 
 
+def first_seen(sess):
+    """First day with Search impressions (Search Console keeps 16 months) and with Analytics sessions,
+    to check the configured launch date (22 Nov 2026)."""
+    rows = sc(sess, TODAY - dt.timedelta(days=480), TODAY, ["date"], limit=1000)
+    s_days = sorted(r["keys"][0] for r in rows if r.get("impressions", 0) > 0)
+    rows = ga(sess, dt.date(2015, 8, 14), TODAY, ["date"], ["sessions"], limit=10000)
+    g_days = sorted(d[0] for d, m in rows if m[0] > 0)
+    return {"search": s_days[0] if s_days else None,
+            "analytics": f"{g_days[0][:4]}-{g_days[0][4:6]}-{g_days[0][6:]}" if g_days else None}
+
+
 # ---------------------------------------------------------------- card builders
 LAUNCH = dt.date.fromisoformat(CFG["launch"])
 CRAWL = {}
@@ -1619,6 +1630,11 @@ def main():
                 g[k] = fn(sess)
             except Exception as e:
                 print(f"{k}: {e}", file=sys.stderr)
+    if sess:
+        try:
+            g["first_seen"] = first_seen(sess)
+        except Exception as e:
+            print(f"first_seen: {e}", file=sys.stderr)
     if c.get("links_unchecked"):
         notes.append(f"{c['links_unchecked']} linked pages outside the sitemap are not checked yet; the next runs check them.")
     if "error" in (c.get("q") or {}):
@@ -1656,7 +1672,7 @@ def main():
     c.pop("urls", None)
     c.pop("speed_pages", None)
     meta = {"generated": dt.datetime.now(dt.timezone.utc).isoformat(timespec="minutes"),
-            "date": iso(TODAY), "notes": notes, "crawl": c, "index": g.get("index"), "launch": iso(LAUNCH),
+            "date": iso(TODAY), "notes": notes, "crawl": c, "index": g.get("index"), "launch": iso(LAUNCH), "first_seen": g.get("first_seen"),
             "ga_checks": {k: g[k] for k in ("ai", "events") if k in g}}
     out = {"meta": meta, "cards": cards}
     # Self-check (19 Nov 2026): every card and window must add up; a problem is shown on the board as a note.
