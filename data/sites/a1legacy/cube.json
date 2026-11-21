@@ -1,7 +1,7 @@
 {
  "audit_label": "Baseline",
  "audit_date": "2026-11-20",
- "audit_overall": null,
+ "audit_overall": 5.0,
  "launch": "2026-09-25",
  "stages": [
   {
@@ -550,7 +550,7 @@
      "id": "brand",
      "name": "Brand name consistency",
      "weight": 25,
-     "audit": null,
+     "audit": 7.5,
      "auto": "brand",
      "evidence": "",
      "action": "Use one brand name on the site, listings and profiles.",

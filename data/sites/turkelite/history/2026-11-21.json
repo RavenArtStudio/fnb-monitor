@@ -4,16 +4,16 @@
   "pages_ok": 696,
   "broken_n": 0,
   "issue_pages": 9,
-  "ms_median": 283,
+  "ms_median": 363,
   "weight_total": 1263
  },
  "cube": {
-  "overall": 6.37,
+  "overall": 6.36,
   "blocks": {
    "medtrust": 4.21,
    "treat": 9.3,
    "geo": 6.48,
-   "tech": 9.76,
+   "tech": 9.73,
    "onpage": 9.1,
    "lang": 7.94,
    "entity": 1.7,
@@ -28,7 +28,7 @@
  "engaged": 1,
  "newvisitors": 2,
  "views": 3,
- "impressions": 4430,
- "searchclicks": 15,
- "pageone": 15
+ "impressions": 4619,
+ "searchclicks": 16,
+ "pageone": 16
 }
