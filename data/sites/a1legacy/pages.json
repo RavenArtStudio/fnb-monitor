@@ -656,7 +656,6 @@
 "words": 1217,
 "types": [
 "BreadcrumbList",
-"FAQPage",
 "ImageObject",
 "Organization",
 "Service",
@@ -671,7 +670,7 @@
 "first_w": 14,
 "first": "AI voice receptionist for inbound business calls, enquiry capture, appointment requests and CRM handoff.",
 "qheads": 6,
-"faq": true,
+"faq": false,
 "ga": [
 "G-BMQDQ58E56"
 ],
@@ -688,7 +687,6 @@
 "words": 786,
 "types": [
 "BreadcrumbList",
-"FAQPage",
 "ImageObject",
 "Organization",
 "Service",
@@ -703,7 +701,7 @@
 "first_w": 14,
 "first": "AI-powered business websites designed for useful enquiries, customer journeys and connected CRM workflows.",
 "qheads": 5,
-"faq": true,
+"faq": false,
 "ga": [
 "G-BMQDQ58E56"
 ],
@@ -720,7 +718,6 @@
 "words": 814,
 "types": [
 "BreadcrumbList",
-"FAQPage",
 "ImageObject",
 "Organization",
 "Service",
@@ -735,7 +732,7 @@
 "first_w": 12,
 "first": "Conversation AI for customer chat, approved messaging, lead qualification and human handoff.",
 "qheads": 5,
-"faq": true,
+"faq": false,
 "ga": [
 "G-BMQDQ58E56"
 ],
@@ -752,7 +749,6 @@
 "words": 902,
 "types": [
 "BreadcrumbList",
-"FAQPage",
 "ImageObject",
 "Organization",
 "Service",
@@ -767,7 +763,7 @@
 "first_w": 13,
 "first": "Connected CRM and workflow automation for enquiries, sales pipelines, appointments and follow-up.",
 "qheads": 5,
-"faq": true,
+"faq": false,
 "ga": [
 "G-BMQDQ58E56"
 ],
