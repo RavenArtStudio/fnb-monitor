@@ -54,6 +54,7 @@ SM = "Semrush"
 CONSENT = ("Google Analytics loads only after a visitor accepts cookies, so visitors "
            "who decline or ignore the banner are not counted.")
 EVENT_NOTE = CFG.get("event_note", "seen in the site code")
+GA_CAV = [CFG["ga_caveat"]] if CFG.get("ga_caveat") else []  # e.g. Analytics loads only after cookie consent
 
 f = lambda n: f"{n:,}" if isinstance(n, int) else (f"{n:,.1f}" if isinstance(n, float) else str(n))
 iso = lambda d: d.isoformat()
@@ -336,7 +337,7 @@ def ga_cards(sess):
          ("Device", top(dev), "What are they browsing on?", "Device")],
         (f"{mk} of {sum(s_c)} sessions from {MARKET['the']}", f"The {MARKET['label']} share is the one that matters; the rest is partly the team."),
         "Sessions on the live site hostnames. The previous period is the 7 days immediately before.",
-        fx(["Visits from development hosts are excluded.", "Visits by the team count until internal traffic is filtered in Google Analytics."])))
+        fx(GA_CAV + ["Visits from development hosts are excluded.", "Visits by the team count until internal traffic is filtered in Google Analytics."])))
 
     eng = ga(sess, w0, end, ["landingPage"], ["engagedSessions"], order="engagedSessions", limit=50)
     e_c, e_p = col(1, cur_days), col(1, prev_days)
@@ -344,7 +345,7 @@ def ga_cards(sess):
         "date, engagedSessions, landingPage", cur_days, e_c, e_p,
         [("Entry page of engaged sessions", top(eng, label=lambda d: page_name(d[0])), "Which entry pages hold attention?", "Entry page")],
         (f"{sum(e_c)} of {sum(s_c)} sessions stayed to read", "Compare the entry pages that hold visitors with the ones that lose them."),
-        "Sessions that lasted over 10 seconds, viewed two or more pages, or fired a key event.", fx([])))
+        "Sessions that lasted over 10 seconds, viewed two or more pages, or fired a key event.", fx(GA_CAV)))
 
     nvr = ga(sess, w0, end, ["newVsReturning"], ["activeUsers"], order="activeUsers")
     ncty = ga(sess, w0, end, ["country"], ["newUsers"], order="newUsers")
@@ -354,14 +355,14 @@ def ga_cards(sess):
         [("New against returning", top(nvr, label=lambda d: d[0].capitalize() if d[0] else "Unknown"), "How many are new?", "Visitor"),
          ("Country of new visitors", top(ncty), "Where are new visitors from?", "Country")],
         None, "People with no earlier visit to the site.",
-        fx(["Team members count as new on each new device until internal traffic is filtered."])))
+        fx(GA_CAV + ["Team members count as new on each new device until internal traffic is filtered."])))
 
     pv = ga(sess, w0, end, ["pagePath"], ["screenPageViews"], order="screenPageViews", limit=50)
     v_c, v_p = col(3, cur_days), col(3, prev_days)
     cards.append(card("views", "Page views", "views", "Website", GA,
         "date, screenPageViews, pagePath", cur_days, v_c, v_p,
         [("By page", top(pv, 8, label=lambda d: page_name(d[0])), "Which pages are viewed most?", "Page")],
-        None, "Every page load on the live site, repeats included.", fx([])))
+        None, "Every page load on the live site, repeats included.", fx(GA_CAV)))
     try:
         ga_windows(sess, cards, end, dims_used)
     except Exception as e:
@@ -432,21 +433,21 @@ def ga_windows(sess, cards, end, dims_used):
                                          ("Entry page", top(safe(w0, end, ["landingPage"], ["sessions"], order="sessions", limit=50), label=lambda d: page_name(d[0])), "Which pages do visits start on?", "Entry page"),
                                          ("Device", top(safe(w0, end, ["deviceCategory"], ["sessions"], order="sessions")), "What are they browsing on?", "Device")],
                              how=f"Sessions on the live site hostnames, {span_note}.",
-                             caveats=fx(["Visits by the team count until internal traffic is filtered in Google Analytics."])),
+                             caveats=fx(GA_CAV + ["Visits by the team count until internal traffic is filtered in Google Analytics."])),
             "engaged": dict(label="Engaged sessions", unit="sessions", fields="date, engagedSessions, landingPage",
                             cur=col(1, cur_days), prev=col(1, prev_days),
                             breakdowns=[("Entry page of engaged sessions", top(safe(w0, end, ["landingPage"], ["engagedSessions"], order="engagedSessions", limit=50), label=lambda d: page_name(d[0])), "Which entry pages hold attention?", "Entry page")],
-                            how="Sessions that lasted over 10 seconds, viewed two or more pages, or fired a key event.", caveats=fx([])),
+                            how="Sessions that lasted over 10 seconds, viewed two or more pages, or fired a key event.", caveats=fx(GA_CAV)),
             "newvisitors": dict(label="New visitors", unit="visitors", fields="date, newUsers, newVsReturning, country",
                                 cur=col(2, cur_days), prev=col(2, prev_days),
                                 breakdowns=[("New against returning", top(safe(w0, end, ["newVsReturning"], ["activeUsers"], order="activeUsers"), label=lambda d: d[0].capitalize() if d[0] else "Unknown"), "How many are new?", "Visitor"),
                                             ("Country of new visitors", top(safe(w0, end, ["country"], ["newUsers"], order="newUsers")), "Where are new visitors from?", "Country")],
                                 how="People with no earlier visit to the site.",
-                                caveats=fx(["Team members count as new on each new device until internal traffic is filtered."])),
+                                caveats=fx(GA_CAV + ["Team members count as new on each new device until internal traffic is filtered."])),
             "views": dict(label="Page views", unit="views", fields="date, screenPageViews, pagePath",
                           cur=col(3, cur_days), prev=col(3, prev_days),
                           breakdowns=[("By page", top(safe(w0, end, ["pagePath"], ["screenPageViews"], order="screenPageViews", limit=50), 8, label=lambda d: page_name(d[0])), "Which pages are viewed most?", "Page")],
-                          how="Every page load on the live site, repeats included.", caveats=fx([])),
+                          how="Every page load on the live site, repeats included.", caveats=fx(GA_CAV)),
         })
         for cid, d in defs.items():
             if cid in by:
@@ -865,11 +866,15 @@ def _sameas(blocks):
 
 
 def _json_ok(x):
+    """A JSON-LD block counts only when it parses and every top-level object names its @context;
+    without @context search engines do not read it as schema.org (Turkelite, 22 Nov 2026: a Blade
+    template turned "@context" into PHP source text)."""
     try:
-        json.loads(x)
-        return True
+        j = json.loads(x)
     except Exception:
         return False
+    items = j if isinstance(j, list) else [j]
+    return bool(items) and all(isinstance(it, dict) and "schema.org" in str(it.get("@context", "")) for it in items)
 
 
 # Pacing (18 Nov 2026): every request to the site goes through one shared limiter, so the crawl never sends more
@@ -924,7 +929,7 @@ def crawl():
             p.feed(r.text)
             o.update(Q.page_doc(r.text))
             o.update(title=p.title.strip(), desc=p.desc, h1=p.h1, canon=urlparse(p.canon).path if p.canon else "",
-                     noindex=p.noindex or "noindex" in r.headers.get("X-Robots-Tag", "").lower(), og=p.og, imgs=p.imgs, noalt=p.noalt, schema=p.schema, lang=p.lang,
+                     noindex=p.noindex or "noindex" in r.headers.get("X-Robots-Tag", "").lower(), og=p.og, imgs=p.imgs, noalt=p.noalt, schema=sum(1 for x in p.ld if _json_ok(x)), lang=p.lang,
                      links=sorted({urljoin(u, h).split("#")[0] for h in p.links if urljoin(u, h).startswith(SITE)}),
                      res=[urljoin(u, x) for x in p.res], kb=round(len(r.content) / 1024),
                      viewport=p.viewport, alts=sorted({urlparse(urljoin(u, x)).path for x in p.alts}),

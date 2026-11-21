@@ -66,7 +66,7 @@
   "izmir",
   "germany"
  ],
- "event_note": "seen in the site code, Nov 20",
+ "event_note": "seen in the site code, Nov 22",
  "enquiries": [
   {
    "id": "leads",
@@ -76,9 +76,9 @@
    "label": "Treatment enquiries",
    "unit": "enquiries",
    "one": "enquiry",
-   "how": "Count of the generate_lead event, which the site should send when a treatment enquiry is sent.",
+   "how": "Count of the generate_lead event, which the site sends once the enquiry form confirms a treatment enquiry.",
    "caveats": [
-    "The site does not send generate_lead yet ({note}); enquiries reach the inbox but not Analytics.",
+    "Sent only for visitors who allow optional cookies ({note}); other enquiries reach the inbox but not Analytics.",
     "Enquiries by phone, email or WhatsApp are not counted here."
    ],
    "breakdowns": [
@@ -97,7 +97,7 @@
    ],
    "reading": "Match each enquiry to its reply so none goes unanswered.",
    "kind": "lead",
-   "test": "Make the enquiry form send generate_lead to Analytics when it is sent, then send one test enquiry."
+   "test": "Accept optional cookies, send one test enquiry, and check generate_lead in Analytics Realtime."
   },
   {
    "id": "whatsapp",
@@ -109,7 +109,7 @@
    "one": "click",
    "how": "Count of the whatsapp_click event the site sends.",
    "caveats": [
-    "The site sends whatsapp_click from its WhatsApp links ({note}).",
+    "Sent only for visitors who allow optional cookies ({note}).",
     "A click opens WhatsApp; it does not prove a message was sent."
    ],
    "breakdowns": [
@@ -158,5 +158,6 @@
  "link_checks_per_run": 250,
  "inspect_budget_s": 240,
  "brand_re": "\\bTurk\\s?elite(?:\\s+Med\\s?care)?\\b",
- "cred_re": "\\b(MD|M\\.D\\.|PhD|Prof\\.?|Dr\\.|surgeon|specialist|board[- ]certified|consultant|nurse|JCI)\\b|\\b\\d{1,2}\\+?\\s+years\\b|\\b\\d{1,2}\\+?\\s+Jahre\\b|\\d{1,2}\\+?\\s+(عاماً|عامًا|عاما|سنة|سنوات)"
+ "cred_re": "\\b(MD|M\\.D\\.|PhD|Prof\\.?|Dr\\.|surgeon|specialist|board[- ]certified|consultant|nurse|JCI)\\b|\\b\\d{1,2}\\+?\\s+years\\b|\\b\\d{1,2}\\+?\\s+Jahre\\b|\\d{1,2}\\+?\\s+(عاماً|عامًا|عاما|سنة|سنوات)",
+ "ga_caveat": "Counted only for visitors who allow optional cookies in the site's banner; Search clicks show the fuller picture."
 }

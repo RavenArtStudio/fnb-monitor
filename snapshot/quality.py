@@ -142,6 +142,9 @@ def ld_nodes(blocks):
             bad += 1
             continue
         items = x if isinstance(x, list) else [x]
+        if not items or not all(isinstance(it, dict) and "schema.org" in str(it.get("@context", "")) for it in items):
+            bad += 1
+            continue
         for it in items:
             if isinstance(it, dict) and isinstance(it.get("@graph"), list):
                 out += [n for n in it["@graph"] if isinstance(n, dict)]

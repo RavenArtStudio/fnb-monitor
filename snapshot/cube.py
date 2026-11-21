@@ -85,7 +85,7 @@ def measure(c, g, sm=None):
     out["h1"] = (clamp(10 * share("h1")), f"{pas['h1']} of {n} pages have exactly one H1.")
     out["links"] = (clamp(10 * c["inlinks_ge3"] / n), f"{c['inlinks_ge3']} of {n} pages have three or more internal links pointing to them.")
     out["alt"] = (clamp(10 * share("alt")), f"{pas['alt']} of {n} pages have alt text on every image and a share image.")
-    out["schema"] = (clamp(10 * share("schema")), f"{pas['schema']} of {n} pages carry structured data; {c['ld_bad']} blocks fail to parse.")
+    out["schema"] = (clamp(10 * share("schema")), f"{pas['schema']} of {n} pages carry structured data; {c['ld_bad']} blocks fail to parse or lack @context.")
     sa = c["sameas_home"]
     out["sameas"] = (9.0 if sa >= 4 else 7.0 if sa >= 2 else 5.0 if sa == 1 else 2.0, f"Home page lists {pl(sa, 'sameAs profile link')}.")
     age = c["lastmod_age_median"]
