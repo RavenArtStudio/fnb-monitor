@@ -11,7 +11,7 @@
  "sc_site": "sc-domain:turkelitemedcare.com",
  "tz_hours": 3,
  "tz_name": "Istanbul",
- "launch": "2026-09-30",
+ "launch": "2026-09-09",
  "home": "/",
  "about": "/about",
  "data_dir": "data/sites/turkelite",

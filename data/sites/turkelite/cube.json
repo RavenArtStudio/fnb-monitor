@@ -6,15 +6,15 @@
  "stages": [
   {
    "name": "Launch",
-   "until": "2026-10-06"
+   "until": "2026-09-15"
   },
   {
    "name": "Establish",
-   "until": "2026-10-13"
+   "until": "2026-09-22"
   },
   {
    "name": "Grow",
-   "until": "2026-10-20"
+   "until": "2026-09-29"
   },
   {
    "name": "Mature",
