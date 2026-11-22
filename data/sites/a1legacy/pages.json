@@ -5648,6 +5648,35 @@
 "site_name": "A1 Legacy Labs"
 },
 {
+"u": "/portfolio/turkelite-medcare-patient-coordination",
+"lang": "en",
+"status": 200,
+"noindex": false,
+"title": "Turkelite Medcare Patient Coordination Case Study | A1 Legacy Labs",
+"desc": "Documented Turkelite Medcare GHL patient coordination build, covering enquiry, consultation, quote, travel and aftercare workflows with human clinical oversight",
+"h1t": "Turkelite Medcare Patient Coordination System",
+"words": 338,
+"types": [
+"ImageObject",
+"Organization",
+"WebPage",
+"WebSite"
+],
+"ext": [],
+"byline": false,
+"dated": true,
+"nums": 0,
+"answer": true,
+"first_w": 51,
+"first": "Turkelite Medcare coordinates international medical travel. A1 Legacy structured the patient journey in GoHighLevel from enquiry and consultation through quote,",
+"qheads": 1,
+"faq": false,
+"ga": [
+"G-BMQDQ58E56"
+],
+"site_name": "A1 Legacy Labs"
+},
+{
 "u": "/portfolio/action-os-ai-operating-layer",
 "lang": "en",
 "status": 200,
