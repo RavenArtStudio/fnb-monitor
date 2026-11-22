@@ -1,7 +1,7 @@
 {
  "audit_label": "Baseline",
  "audit_date": "2026-11-20",
- "audit_overall": 5.0,
+ "audit_overall": 4.97,
  "launch": "2026-09-25",
  "stages": [
   {
@@ -362,7 +362,7 @@
      "id": "sitemap",
      "name": "Sitemap completeness, lastmod, hreflang",
      "weight": 15,
-     "audit": 6.9,
+     "audit": 5.0,
      "auto": "sitemap",
      "evidence": "",
      "action": "List the {missing_pages} missing from sitemap.xml, or noindex them.",
