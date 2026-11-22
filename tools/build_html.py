@@ -49,7 +49,7 @@ for f in sorted(os.listdir(os.path.join(ROOT, 'sites'))):
         continue
     c = json.load(open(os.path.join(ROOT, 'sites', f), encoding='utf-8'))
     dd = c.get('data_dir', 'data')
-    SITES.append({'id': c['id'], 'name': c['name'], 'host': c['hosts'][0], 'order': c.get('order', 9),
+    SITES.append({'id': c['id'], 'name': c['name'], 'host': c['hosts'][0], 'order': c.get('order', 9), 'launch': c.get('launch'),
                   'snap': f"{RAW}/main/{dd}/cards.json", 'live': f"{RAW}/live/{dd}/live.json"})
     cp_ = os.path.join(ROOT, dd, 'cards.json')
     SAVED_ALL[c['id']] = json.load(open(cp_, encoding='utf-8')) if os.path.exists(cp_) else {'meta': {}, 'cards': []}
@@ -125,8 +125,8 @@ body *{font-weight:400!important}
 .r1.tight>section:first-child{padding:16px 18px 14px}.r1.tight .ph{margin-bottom:8px}
 .r2{display:grid;grid-template-columns:1fr;gap:14px;align-items:stretch}
 .r2.has3{grid-template-columns:minmax(0,2fr) minmax(0,1fr)}
-.bdp .hbar{grid-template-columns:minmax(80px,46%) 1fr 3.2em;font-size:12.5px}
-.bdp .hbar span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bdp .hbar{grid-template-columns:minmax(80px,54%) 1fr 3.2em;font-size:12.5px}
+.bdp .hbar span{overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-height:1.3;overflow-wrap:anywhere}
 .bdp .hbars{gap:10px}
 .r2 .np{max-height:none;overflow:visible}
 .r2 .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:4px 22px}
@@ -158,8 +158,8 @@ body *{font-weight:400!important}
 .so-i.caution::before{background:var(--warn)}.so-i.gap::before{background:var(--u2)}.so-i.concentration::before{background:var(--u1)}.so-i.peak::before{background:var(--good)}
 .so-i span{display:block;color:var(--ink-2);font-size:13px}
 .bds{display:grid;grid-template-columns:repeat(var(--b),minmax(0,1fr));gap:16px}
-.bds .hbar{grid-template-columns:minmax(90px,44%) 1fr 3.4em;font-size:12.5px}
-.bds .hbar span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bds .hbar{grid-template-columns:minmax(90px,54%) 1fr 3.4em;font-size:12.5px}
+.bds .hbar span{overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-height:1.3;overflow-wrap:anywhere}
 .bds .hbars{gap:11px}
 .empty-note{font-size:12.5px;color:var(--ink-4)}
 .link-quiet.all{font-size:12.5px}
@@ -424,8 +424,7 @@ function bdsHTML(d){const b=(d.breakdowns||[]).filter(x=>x.rows&&x.rows.length).
   return `<section class="panel"><h3 class="ph">${esc(x.title)}</h3><div class="hbars">${rows.map(r=>`<div class="hbar"><span title="${esc(r.label)}">${esc(r.label)}</span><div class="track"><div class="fill" data-w="${Math.max(1.5,100*r.value/max).toFixed(1)}"></div></div><strong>${fmt(r.value)}</strong></div>`).join('')}</div></section>`;}).join('')}</div>`;}
 
 /* ---- launch marker: one thin line where the new site went live ---- */
-const LAUNCH='2026-11-15';
-function launchMark(id,d,kind){const frame=el(id),svg=frame?.querySelector('svg');if(!svg)return;const dates=d.main.dates,i=dates.indexOf(LAUNCH);if(i<0||!d.main.previous)return;
+function launchMark(id,d,kind){const frame=el(id),svg=frame?.querySelector('svg');if(!svg)return;const dates=d.main.dates,i=dates.indexOf(siteOf(SITE).launch);if(i<0||!d.main.previous)return;
  const vb=svg.viewBox.baseVal,W=vb.width,H=vb.height,L=44,R=12,T=kind==='cols'?18:14,B=30,n=dates.length;
  const x=kind==='cols'?L+(W-L-R)/n*i:L+(n===1?0.5:i/(n-1))*(W-L-R);
  const g=document.createElementNS('http://www.w3.org/2000/svg','g');g.setAttribute('class','launch');
@@ -442,7 +441,6 @@ function earlyMark(id,d,kind){const e=d.main.earlyFrom;if(!e)return;const frame=
  svg.insertBefore(g,svg.firstChild);}
 
 /* ---- page speed: pages slowest first; a page opens its size by file type ---- */
-const SITE_URL='https://fnbperformance.com';
 const msTone=(ms)=>ms>=1000?'bad':ms>=500?'warn':'';
 function pagesPanel(d){const P=d.pages||[],mx=Math.max(1,...P.map(p=>p.ms));
  return `<section class="panel pgp"><h3 class="ph">Pages, slowest first<span>${P.length} pages</span></h3><div class="pgl"><div>
@@ -453,7 +451,7 @@ function pageSheet(d,p){const tot=Math.max(1,p.kb),top=p.types[0],pct=(v)=>Math.
   ${BOX('Reading',KV([{label:'Response',value:fmt(p.ms)+' ms'},{label:'Page size',value:fmt(p.kb)+' KB'},{label:'Files',value:fmt(p.n)}]))}
   ${BOX('By file type<span>KB, share of the page</span>',`<div class="ftl">${p.types.map((t,i)=>`<div class="ftr${i===0?' top':''}"><span>${esc(t[0])}</span><span class="tr"><span class="fl" style="width:${Math.max(2,100*t[1]/top[1]).toFixed(1)}%%"></span></span><b>${fmt(t[1])}</b><em>${pct(t[1])}</em></div>`).join('')}</div>`)}
   ${p.files?.length?BOX('Largest files',p.files.map(f=>`<div class="lr"><span title="${esc(f[0])}">${esc(f[0])}<small>${esc(f[1])}</small></span><b>${fmt(f[2])} KB</b></div>`).join('')):''}
-  <div class="pbtns"><a class="pbtn primary" href="${esc(SITE_URL+p.path)}" target="_blank" rel="noopener">Open page ↗</a><button class="pbtn" data-detail-close>Close</button></div>
+  <div class="pbtns"><a class="pbtn primary" href="${esc('https://'+siteOf(SITE).host+p.path)}" target="_blank" rel="noopener">Open page ↗</a><button class="pbtn" data-detail-close>Close</button></div>
  </div>`;}
 function openPage(path,opener){const d=BY[cur],p=(d?.pages||[]).find(x=>x.path===path);if(!p)return;detailOpener=opener;const panel=el('detailPanel'),scrim=el('detailScrim'),body=el('detailBody');
  state.detail={metric:'page',data:{raw:null}};panel.classList.add('sheet','pg');body.innerHTML=pageSheet(d,p);
@@ -667,7 +665,7 @@ function popSites(open){const p=el('sitepop'),b=el('sitebtn'),on=open??!p.classL
  if(on)(p.querySelector('[aria-checked="true"]')||p.firstElementChild)?.focus({preventScroll:true});}
 function setSite(id,save){if(!SITES.some(x=>x.id===id))return;SITE=id;
  if(save){try{localStorage.setItem('fnb-site',id);const u=new URL(location.href);if(u.searchParams.has('site')){u.searchParams.delete('site');history.replaceState(null,'',u.pathname+u.search+u.hash);}}catch(e){}}
- drawSites();LIVE=LIVE_ALL[id]||null;HS=0;
+ drawSites();LIVE=LIVE_ALL[id]||null;HS=0;state.data.units=[{key:'fnb-performance',name:siteOf(SITE).name}];
  if(FRESH[id])setData(FRESH[id],'live');else setData(SAVED_ALL[id]||{meta:{},cards:[]},'saved');
  loadLive();loadSnap();}
 el('sitebtn').addEventListener('click',e=>{e.stopPropagation();popSites();});
