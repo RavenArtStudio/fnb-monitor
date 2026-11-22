@@ -4,7 +4,7 @@
   "pages_ok": 233,
   "broken_n": 2,
   "issue_pages": 0,
-  "ms_median": 255,
+  "ms_median": 351,
   "weight_total": 2128
  },
  "cube": {
@@ -14,7 +14,7 @@
    "product": 3.34,
    "industry": 6.49,
    "proof": 1.47,
-   "tech": 8.19,
+   "tech": 8.15,
    "onpage": 6.07,
    "offsite": 0.8,
    "entity": 3.67,
