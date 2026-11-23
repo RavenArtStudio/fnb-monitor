@@ -75,7 +75,8 @@ def google_session():
     creds = service_account.Credentials.from_service_account_info(
         json.loads(raw),
         scopes=["https://www.googleapis.com/auth/analytics.readonly",
-                "https://www.googleapis.com/auth/webmasters.readonly"])
+                "https://www.googleapis.com/auth/webmasters.readonly",
+                "openid"])   # openid: PageSpeed Insights on the project's own quota (24 Nov 2026)
     return AuthorizedSession(creds)
 
 
@@ -932,7 +933,7 @@ def control_ms(n=5):
 PSI_KEY = os.environ.get("PSI_KEY", "")
 
 
-def psi_readings():
+def psi_readings(sess=None):
     """Google PageSpeed Insights (mobile), measured from Google's servers, once a day per site, kept in psi.json.
     Hostinger's CDN can slow the testing machine down (23 Nov 2026: 27.7 s for a page that answered in 0.4 s in a
     browser), so the page speed score prefers Google's own reading. Works without a key at low volume; a PSI_KEY
@@ -945,9 +946,12 @@ def psi_readings():
     pages, err = {}, None
     for path in CFG.get("psi_pages") or [HOME]:
         try:
-            r = requests.get("https://www.googleapis.com/pagespeedonline/v5/runPagespeed", timeout=150,
-                             params={"url": SITE + path, "strategy": "mobile", "category": "performance",
-                                     **({"key": PSI_KEY} if PSI_KEY else {})})
+            # With a key, or else as the monitor's service account (its project's quota); keyless shares a
+            # quota with everyone and was used up on 24 Nov 2026.
+            getter = sess.get if sess is not None and not PSI_KEY else requests.get
+            r = getter("https://www.googleapis.com/pagespeedonline/v5/runPagespeed", timeout=150,
+                       params={"url": SITE + path, "strategy": "mobile", "category": "performance",
+                               **({"key": PSI_KEY} if PSI_KEY else {})})
             j = r.json()
             if r.status_code != 200:
                 err = ((j.get("error") or {}).get("message") or f"HTTP {r.status_code}")[:200]
@@ -1715,7 +1719,7 @@ def main():
                      f"slower than usual, while its own network was quick; the host's network can slow such machines down. "
                      f"Page speed is scored on Google PageSpeed or the usual {ref:,} ms.")
     try:
-        ps = psi_readings()
+        ps = psi_readings(sess)
     except Exception as e:
         ps = {"error": str(e)[:200]}
     fresh = ps.get("pages") and ps.get("at") and dt.datetime.now(dt.timezone.utc) - dt.datetime.fromisoformat(ps["at"]) < dt.timedelta(days=3)
