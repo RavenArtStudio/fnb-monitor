@@ -1648,6 +1648,19 @@ def main():
         return
     c["control_ms"] = [ctl0, ctl1]
     c["broken_n"] = len(c["broken"])
+    # The score uses the median of this run and the two days before, so one slow moment on the host does not
+    # swing it; the Page speed card still shows this run's reading (23 Nov 2026: A1 read 7,018 ms once, after 276).
+    prev = []
+    for f in sorted(HIST.glob("*.json")):
+        if f.stem < iso(TODAY):
+            try:
+                v = json.loads(f.read_text()).get("crawl", {}).get("ms_median")
+            except Exception:
+                v = None
+            if v:
+                prev.append(v)
+    pts = prev[-2:] + ([c["ms_median"]] if c.get("ms_median") else [])
+    c["ms_steady"] = round(sorted(pts)[len(pts) // 2] if len(pts) % 2 else sum(sorted(pts)[len(pts) // 2 - 1:len(pts) // 2 + 1]) / 2) if pts else None
     CRAWL = c
     import cube as cube_mod
     cube = json.loads((DATA / "cube.json").read_text())

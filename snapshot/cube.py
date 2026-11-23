@@ -77,7 +77,10 @@ def measure(c, g, sm=None):
                      f"{c['pages_ok']} of {c['pages']} pages load; {pl(len(c['broken']), 'broken link')}.")
     out["canon"] = (clamp(10 * share("canon")), f"{pas['canon']} of {n} pages have a matching canonical.")
     if c["ms_median"]:
-        out["speed"] = (clamp(10 - (c["ms_median"] - 300) / 150), f"Median page fetch {c['ms_median']} ms from a US server.")
+        st = c.get("ms_steady") or c["ms_median"]
+        out["speed"] = (clamp(10 - (st - 300) / 150),
+                        f"Median page fetch {c['ms_median']} ms from a US server." if st == c["ms_median"] else
+                        f"Median page fetch {st} ms over this run and the two days before, from a US server; {c['ms_median']} ms in this run.")
     out["mobile"] = (clamp(10 * c["viewport_share"] if c["https_redirect"] else 5 * c["viewport_share"]),
                      f"{round(100 * c['viewport_share'])}% of pages set a mobile viewport; HTTP {'redirects' if c['https_redirect'] else 'does not redirect'} to HTTPS.")
     out["titles"] = (clamp(10 * share("titles")), f"{pas['titles']} of {n} titles are present, unique and 25 to 65 characters.")
