@@ -193,5 +193,9 @@
  "link_checks_per_run": 250,
  "inspect_budget_s": 240,
  "brand_re": "(?<![@/.\\w-])A1\\s*Legacy\\s*Labs?\\b(?!\\.\\w)",
- "cred_re": "\\b(certified|certification|accredited|partner|award|GoHighLevel admin|HighLevel|Google Partner|Meta Partner)\\b|\\b\\d{1,2}\\+?\\s+years\\b"
+ "cred_re": "\\b(certified|certification|accredited|partner|award|GoHighLevel admin|HighLevel|Google Partner|Meta Partner)\\b|\\b\\d{1,2}\\+?\\s+years\\b",
+ "psi_pages": [
+  "/",
+  "/industries/automotive-window-tinting-shop"
+ ]
 }

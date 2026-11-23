@@ -159,5 +159,9 @@
  "inspect_budget_s": 240,
  "brand_re": "\\bTurk\\s?elite(?:\\s+Med\\s?care)?\\b",
  "cred_re": "\\b(MD|M\\.D\\.|PhD|Prof\\.?|Dr\\.|surgeon|specialist|board[- ]certified|consultant|nurse|JCI)\\b|\\b\\d{1,2}\\+?\\s+years\\b|\\b\\d{1,2}\\+?\\s+Jahre\\b|\\d{1,2}\\+?\\s+(عاماً|عامًا|عاما|سنة|سنوات)",
- "ga_caveat": "Counted only for visitors who allow optional cookies in the site's banner; Search clicks show the fuller picture."
+ "ga_caveat": "Counted only for visitors who allow optional cookies in the site's banner; Search clicks show the fuller picture.",
+ "psi_pages": [
+  "/",
+  "/treatments/hair-restoration"
+ ]
 }

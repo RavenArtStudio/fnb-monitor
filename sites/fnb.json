@@ -143,5 +143,9 @@
   }
  ],
  "tax_checks": true,
- "order": 1
+ "order": 1,
+ "psi_pages": [
+  "/ae",
+  "/ae/tools/vat-calculator"
+ ]
 }
