@@ -612,7 +612,7 @@
 "/industries/dental-endodontist": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/industries/dental-dental-tourism-company": {
 "indexed": true,
@@ -622,32 +622,32 @@
 "/industries/aesthetics-beauty-wellness-aesthetic-clinic": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/industries/aesthetics-beauty-wellness-cosmetic-surgery-clinic": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/industries/aesthetics-beauty-wellness-day-spa": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/industries/fitness-sports-boutique-gym": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/industries/fitness-sports-personal-trainer": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/industries/fitness-sports-yoga-studio": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/industries/fitness-sports-dance-studio": {
 "indexed": true,
@@ -657,47 +657,47 @@
 "/industries/fitness-sports-swimming-school": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/industries/fitness-sports-country-club": {
 "indexed": false,
 "state": "Discovered - currently not indexed",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/industries/legal-services-law-firm": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/industries/legal-services-conveyancing-lawyer": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/industries/legal-services-medical-malpractice-lawyer": {
 "indexed": false,
 "state": "Discovered - currently not indexed",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/industries/legal-services-estate-planning-lawyer": {
 "indexed": false,
-"state": "URL is unknown to Google",
-"checked": "2026-11-22T12:00+00:00"
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-23T02:00+00:00"
 },
 "/industries/legal-services-probate-lawyer": {
 "indexed": false,
-"state": "URL is unknown to Google",
-"checked": "2026-11-22T12:00+00:00"
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-23T02:00+00:00"
 },
 "/industries/legal-services-business-lawyer": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/industries/legal-services-notary-service": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/industries/accounting-tax-finance-virtual-cfo-company": {
 "indexed": true,
@@ -707,67 +707,67 @@
 "/industries/education-training-ielts-training-centre": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/industries/restaurants-food-food-delivery-company": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/industries/restaurants-food-restaurant-group": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/industries/hospitality-travel-hotel": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/industries/hospitality-travel-serviced-apartment-company": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/industries/hospitality-travel-cruise-agency": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/industries/hospitality-travel-boat-charter-company": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/industries/retail-hardware-store": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/industries/e-commerce-etsy-seller": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/industries/e-commerce-print-on-demand-business": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/industries/technology-saas-edtech-company": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/industries/business-professional-services-operations-consultancy": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/industries/business-professional-services-franchise-consultancy": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/industries/manufacturing-food-manufacturer": {
 "indexed": true,
@@ -777,47 +777,47 @@
 "/industries/manufacturing-cosmetics-manufacturer": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/industries/manufacturing-metal-fabrication-company": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/industries/logistics-transportation-cold-storage-company": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/industries/security-fire-safety-locksmith-company": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/industries/security-fire-safety-fire-extinguisher-service": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/industries/pet-animal-mobile-pet-groomer": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/industries/pet-animal-dog-boarding-kennel": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/industries/family-support-service": {
 "indexed": false,
-"state": "Discovered - currently not indexed",
-"checked": "2026-11-22T12:00+00:00"
+"state": "URL is unknown to Google",
+"checked": "2026-11-23T02:00+00:00"
 },
 "/industries/live-in-care-company": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/industries/mobility-equipment-company": {
 "indexed": true,
@@ -832,37 +832,37 @@
 "/industries/interior-design-company": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/industries/urban-planning-consultancy": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/industries/agriculture-and-rural-irrigation-company": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/industries/cnc-machine-shop": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/industries/answering-service": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/industries/music-production-company": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/industries/mastermind-business": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/industries/insurance-insurance-brokerage": {
 "indexed": true,
@@ -872,17 +872,17 @@
 "/industries/repatriation-service": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/industries/education-franchise": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/industries/category/legal-services": {
 "indexed": false,
 "state": "Discovered - currently not indexed",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/industries/category/accounting-tax-finance": {
 "indexed": true,
@@ -942,7 +942,7 @@
 "/portfolio/turkelite-medcare-patient-coordination": {
 "indexed": false,
 "state": "URL is unknown to Google",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/portfolio/action-os-ai-operating-layer": {
 "indexed": true,
@@ -951,48 +951,48 @@
 },
 "/portfolio/a1legacystudio-crm-automation-foundation": {
 "indexed": false,
-"state": "URL is unknown to Google",
-"checked": "2026-11-22T12:00+00:00"
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-23T02:00+00:00"
 },
 "/portfolio/fnb-performance-gcc-digital-intake": {
 "indexed": false,
-"state": "Discovered - currently not indexed",
-"checked": "2026-11-22T12:00+00:00"
+"state": "URL is unknown to Google",
+"checked": "2026-11-23T02:00+00:00"
 },
 "/portfolio/a1-intelligence-b2b-seo-dashboard": {
 "indexed": false,
 "state": "URL is unknown to Google",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/gallery/connected-customer-journey": {
 "indexed": false,
-"state": "Discovered - currently not indexed",
-"checked": "2026-11-22T12:00+00:00"
+"state": "URL is unknown to Google",
+"checked": "2026-11-23T02:00+00:00"
 },
 "/gallery/voice-ai-receptionist-visual": {
 "indexed": false,
 "state": "URL is unknown to Google",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/gallery/ai-powered-website-visual": {
 "indexed": false,
 "state": "Discovered - currently not indexed",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/gallery/conversation-ai-visual": {
 "indexed": false,
-"state": "Discovered - currently not indexed",
-"checked": "2026-11-22T12:00+00:00"
+"state": "URL is unknown to Google",
+"checked": "2026-11-23T02:00+00:00"
 },
 "/gallery/a1legacystudio-crm-visual": {
 "indexed": false,
-"state": "URL is unknown to Google",
-"checked": "2026-11-22T12:00+00:00"
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-23T02:00+00:00"
 },
 "/blog/all-in-one-crm-small-business": {
 "indexed": false,
-"state": "URL is unknown to Google",
-"checked": "2026-11-22T12:00+00:00"
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-23T02:00+00:00"
 },
 "/blog/crm-automation-workflows-lead-follow-up": {
 "indexed": true,
@@ -1001,28 +1001,28 @@
 },
 "/blog/ai-crm-small-business-guide": {
 "indexed": false,
-"state": "URL is unknown to Google",
-"checked": "2026-11-22T12:00+00:00"
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-23T02:00+00:00"
 },
 "/blog/lead-management-system-service-business": {
 "indexed": false,
-"state": "URL is unknown to Google",
-"checked": "2026-11-22T12:00+00:00"
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-23T02:00+00:00"
 },
 "/blog/crm-migration-small-business-guide": {
 "indexed": false,
-"state": "Discovered - currently not indexed",
-"checked": "2026-11-22T12:00+00:00"
+"state": "URL is unknown to Google",
+"checked": "2026-11-23T02:00+00:00"
 },
 "/blog/crm-integration-services-guide": {
 "indexed": false,
 "state": "Discovered - currently not indexed",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/blog/custom-api-integration": {
 "indexed": false,
-"state": "URL is unknown to Google",
-"checked": "2026-11-22T12:00+00:00"
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-23T02:00+00:00"
 },
 "/blog/n8n-automation-agency-guide": {
 "indexed": true,
@@ -1037,7 +1037,7 @@
 "/blog/cost-of-missed-calls": {
 "indexed": false,
 "state": "Discovered - currently not indexed",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/blog/ai-receptionist": {
 "indexed": true,
@@ -1047,12 +1047,12 @@
 "/blog/ai-receptionist-cost-uk": {
 "indexed": false,
 "state": "Discovered - currently not indexed",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/blog/custom-ai-receptionist": {
 "indexed": false,
-"state": "Discovered - currently not indexed",
-"checked": "2026-11-22T12:00+00:00"
+"state": "URL is unknown to Google",
+"checked": "2026-11-23T02:00+00:00"
 },
 "/blog/ai-voice-agent-for-business": {
 "indexed": true,
@@ -1061,33 +1061,33 @@
 },
 "/blog/ai-sms-agent": {
 "indexed": false,
-"state": "Discovered - currently not indexed",
-"checked": "2026-11-22T12:00+00:00"
+"state": "URL is unknown to Google",
+"checked": "2026-11-23T02:00+00:00"
 },
 "/blog/sms-automation-for-business": {
 "indexed": false,
 "state": "Discovered - currently not indexed",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/blog/sms-marketing-rules-uk": {
 "indexed": false,
 "state": "Discovered - currently not indexed",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/blog/ai-email-assistant": {
 "indexed": false,
-"state": "URL is unknown to Google",
-"checked": "2026-11-22T12:00+00:00"
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-23T02:00+00:00"
 },
 "/blog/ai-email-automation": {
 "indexed": false,
 "state": "Discovered - currently not indexed",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/blog/ai-email-agent-for-leads": {
 "indexed": false,
 "state": "Discovered - currently not indexed",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/blog/ai-chatbot-for-website": {
 "indexed": true,
@@ -1096,28 +1096,28 @@
 },
 "/blog/whatsapp-ai-chatbot-for-business": {
 "indexed": false,
-"state": "URL is unknown to Google",
-"checked": "2026-11-22T12:00+00:00"
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-23T02:00+00:00"
 },
 "/blog/ai-powered-website": {
 "indexed": false,
 "state": "Discovered - currently not indexed",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/blog/speed-to-lead": {
 "indexed": false,
-"state": "URL is unknown to Google",
-"checked": "2026-11-22T12:00+00:00"
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-23T02:00+00:00"
 },
 "/blog/human-in-the-loop-ai": {
 "indexed": false,
 "state": "Discovered - currently not indexed",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/blog/how-to-implement-ai-in-business": {
 "indexed": false,
-"state": "Discovered - currently not indexed",
-"checked": "2026-11-22T12:00+00:00"
+"state": "URL is unknown to Google",
+"checked": "2026-11-23T02:00+00:00"
 },
 "/blog/ai-receptionist-for-tradesmen": {
 "indexed": true,
@@ -1127,17 +1127,17 @@
 "/blog/ai-receptionist-for-dental-practice": {
 "indexed": false,
 "state": "Discovered - currently not indexed",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/blog/ai-receptionist-for-aesthetic-clinics": {
 "indexed": false,
-"state": "Discovered - currently not indexed",
-"checked": "2026-11-22T12:00+00:00"
+"state": "URL is unknown to Google",
+"checked": "2026-11-23T02:00+00:00"
 },
 "/blog/ai-for-estate-agents": {
 "indexed": false,
 "state": "Discovered - currently not indexed",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/blog/ai-client-intake-for-law-firms": {
 "indexed": true,
@@ -1147,21 +1147,21 @@
 "/blog/ai-automation-for-accountants": {
 "indexed": false,
 "state": "Discovered - currently not indexed",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/blog/ai-for-car-dealerships": {
 "indexed": false,
 "state": "Discovered - currently not indexed",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/blog/ai-for-recruitment-agencies": {
 "indexed": false,
 "state": "Discovered - currently not indexed",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 },
 "/blog/ai-for-hospitality": {
 "indexed": false,
 "state": "Discovered - currently not indexed",
-"checked": "2026-11-22T12:00+00:00"
+"checked": "2026-11-23T02:00+00:00"
 }
 }
