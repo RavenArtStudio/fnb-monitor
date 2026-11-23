@@ -1001,14 +1001,16 @@ def crawl():
     cap = CFG.get("link_checks_per_run")
     lc_p = DATA / "link-cache.json"
     lcache = json.loads(lc_p.read_text()) if cap and lc_p.exists() else {}
-    todo = extra if not cap or len(extra) <= cap else sorted(extra, key=lambda u: (u in lcache, lcache.get(u, ["", 0, 0, 0])[0]))[:cap]
+    todo = extra if not cap or len(extra) <= cap else sorted(extra, key=lambda u: (u in lcache and lcache[u][1] != 0, lcache.get(u, ["", 0, 0, 0])[0]))[:cap]
     with cf.ThreadPoolExecutor(6) as ex:
         fresh = dict(ex.map(chk, todo))
     linkfull = {u: tuple(lcache[u][1:]) for u in extra if u in lcache and u not in fresh}
     linkfull.update(fresh)
     if cap:
         stamp = dt.datetime.now(dt.timezone.utc).isoformat(timespec="minutes")
-        lcache.update({u: [stamp, *v] for u, v in fresh.items()})
+        # A link that did not answer at all is not kept, so the next run checks it again first (23 Nov 2026).
+        lcache.update({u: [stamp, *v] for u, v in fresh.items() if v[0] != 0})
+        lcache = {u: v for u, v in lcache.items() if v[1] != 0}
         lc_p.write_text(json.dumps({u: lcache[u] for u in extra if u in lcache}, ensure_ascii=False))
     linkres = {u: v[0] for u, v in linkfull.items()}
     missing = sorted({page_path(u) for u, (st, red, ni) in linkfull.items()
