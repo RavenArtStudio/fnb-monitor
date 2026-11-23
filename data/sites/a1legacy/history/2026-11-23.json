@@ -2,19 +2,19 @@
  "date": "2026-11-23",
  "crawl": {
   "pages_ok": 233,
-  "broken_n": 5,
+  "broken_n": 2,
   "issue_pages": 0,
-  "ms_median": 389,
+  "ms_median": 7018,
   "weight_total": 2128
  },
  "cube": {
-  "overall": 4.94,
+  "overall": 4.86,
   "blocks": {
    "geo": 6.62,
    "product": 3.34,
    "industry": 6.49,
    "proof": 1.47,
-   "tech": 7.92,
+   "tech": 7.18,
    "onpage": 6.07,
    "offsite": 0.8,
    "entity": 3.67,
