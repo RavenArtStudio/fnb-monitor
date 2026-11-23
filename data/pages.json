@@ -948,6 +948,34 @@
 "site_name": "F&B Performance"
 },
 {
+"u": "/ae/ar/tools/cash-runway-calculator",
+"lang": "ar-AE",
+"status": 200,
+"noindex": false,
+"title": "حاسبة كفاية النقد للمطاعم | كم أسبوعًا يكفي نقدك",
+"desc": "كم أسبوعًا يكفي نقدك؟ أدخل النقد والتكاليف الثابتة والمبيعات ومهل السداد لترى مدة الكفاية وفجوة رأس المال العامل ومهلة الائتمان الآمنة.",
+"h1t": "حاسبة كفاية النقد للمطاعم",
+"words": 686,
+"types": [
+"AccountingService",
+"BreadcrumbList",
+"WebApplication"
+],
+"ext": [],
+"byline": true,
+"dated": false,
+"nums": 20,
+"answer": true,
+"first_w": 48,
+"first": "اقسم النقد المتاح للإنفاق على ما تخسره كل أسبوع بعد المبيعات المتوقعة. أدخل رصيد البنك، والتكاليف الثابتة الشهرية، والمبيعات المتوقعة، ونسبة التكلفة المتغيرة، و",
+"qheads": 2,
+"faq": false,
+"ga": [
+"G-FVL4P68R6M"
+],
+"site_name": "F&B Performance"
+},
+{
 "u": "/ae/tools/books-reliability-score",
 "lang": "en-AE",
 "status": 200,

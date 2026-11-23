@@ -1,24 +1,24 @@
 {
  "date": "2026-11-23",
  "crawl": {
-  "pages_ok": 126,
-  "broken_n": 2,
-  "issue_pages": 21,
-  "ms_median": 3230,
+  "pages_ok": 127,
+  "broken_n": 0,
+  "issue_pages": 22,
+  "ms_median": 412,
   "weight_total": 644
  },
  "cube": {
-  "overall": 7.23,
+  "overall": 7.37,
   "blocks": {
-   "tech": 8.73,
-   "onpage": 9.73,
+   "tech": 9.82,
+   "onpage": 9.72,
    "content": 9.37,
    "schema": 9.25,
    "entity": 4.29,
    "offsite": 0.45,
    "geo": 8.94,
-   "aio": 2.86,
-   "arabic": 6.47,
+   "aio": 2.88,
+   "arabic": 6.53,
    "measure": 7.63
   }
  },

@@ -619,6 +619,11 @@
 "state": "Submitted and indexed",
 "checked": "2026-11-22T20:01+00:00"
 },
+"/industries/aesthetics-beauty-wellness-aesthetic-clinic": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-23T18:00+00:00"
+},
 "/industries/aesthetics-beauty-wellness-cosmetic-surgery-clinic": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
@@ -653,6 +658,11 @@
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-23T13:39+00:00"
+},
+"/industries/fitness-sports-country-club": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-23T18:00+00:00"
 },
 "/industries/legal-services-law-firm": {
 "indexed": false,
@@ -1098,6 +1108,11 @@
 "indexed": false,
 "state": "Discovered - currently not indexed",
 "checked": "2026-11-23T13:39+00:00"
+},
+"/blog/human-in-the-loop-ai": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-23T18:00+00:00"
 },
 "/blog/how-to-implement-ai-in-business": {
 "indexed": false,

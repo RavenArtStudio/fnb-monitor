@@ -1,21 +1,21 @@
 {
  "date": "2026-11-23",
  "crawl": {
-  "pages_ok": 691,
-  "broken_n": 5,
-  "issue_pages": 661,
-  "ms_median": 2341,
+  "pages_ok": 696,
+  "broken_n": 0,
+  "issue_pages": 666,
+  "ms_median": 396,
   "weight_total": 1263
  },
  "cube": {
-  "overall": 5.89,
+  "overall": 6.02,
   "blocks": {
    "medtrust": 4.21,
    "treat": 9.3,
    "geo": 5.57,
-   "tech": 8.38,
-   "onpage": 9.12,
-   "lang": 7.91,
+   "tech": 9.71,
+   "onpage": 9.1,
+   "lang": 7.94,
    "entity": 1.7,
    "offsite": 0.75,
    "schema": 3.44,
