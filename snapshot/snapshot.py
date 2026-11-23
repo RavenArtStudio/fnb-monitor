@@ -892,7 +892,8 @@ def _json_ok(x):
 # than about 3 requests a second however many threads run. Unpaced, six threads sent 20-25 a second and pushed the
 # hosting account over its limit of 20 new database connections a second (17 Nov 21:19 and 18 Nov 03:07 UTC).
 # The wait is taken before the timer starts, so the response times on the cards are unchanged.
-PACE_S = max(0.0, float(os.environ.get("CRAWL_PACE_S", "0.35")))
+PACE_S = max(0.0, float(os.environ.get("CRAWL_PACE_S", "0.45")))   # 0.35 until 24 Nov 2026
+CRAWL_THREADS = 4   # 6 until 24 Nov 2026: Hostinger's CDN slowed the testing machine down on busy runs
 _pace_lock = threading.Lock()
 _next_at = [0.0]
 
@@ -926,6 +927,45 @@ def control_ms(n=5):
             out.append(10000)
     out.sort()
     return out[len(out) // 2]
+
+
+PSI_KEY = os.environ.get("PSI_KEY", "")
+
+
+def psi_readings():
+    """Google PageSpeed Insights (mobile), measured from Google's servers, once a day per site, kept in psi.json.
+    Hostinger's CDN can slow the testing machine down (23 Nov 2026: 27.7 s for a page that answered in 0.4 s in a
+    browser), so the page speed score prefers Google's own reading. Works without a key at low volume; a PSI_KEY
+    secret raises the quota. A failed day keeps the last good reading."""
+    p = DATA / "psi.json"
+    old = json.loads(p.read_text()) if p.exists() else {}
+    now = dt.datetime.now(dt.timezone.utc)
+    if old.get("pages") and old.get("at") and now - dt.datetime.fromisoformat(old["at"]) < dt.timedelta(hours=20):
+        return old
+    pages, err = {}, None
+    for path in CFG.get("psi_pages") or [HOME]:
+        try:
+            r = requests.get("https://www.googleapis.com/pagespeedonline/v5/runPagespeed", timeout=150,
+                             params={"url": SITE + path, "strategy": "mobile", "category": "performance",
+                                     **({"key": PSI_KEY} if PSI_KEY else {})})
+            j = r.json()
+            if r.status_code != 200:
+                err = ((j.get("error") or {}).get("message") or f"HTTP {r.status_code}")[:200]
+                continue
+            lr, au = j["lighthouseResult"], j["lighthouseResult"]["audits"]
+            pages[path] = {"score": round(100 * (lr["categories"]["performance"]["score"] or 0)),
+                           "lcp": round(au["largest-contentful-paint"]["numericValue"]),
+                           "ttfb": round(au["server-response-time"]["numericValue"]),
+                           "field": (j.get("loadingExperience") or {}).get("overall_category")}
+        except Exception as e:
+            err = str(e)[:200]
+    if err:
+        print(f"PageSpeed Insights: {err}", file=sys.stderr)
+    if pages:
+        out = {"at": now.isoformat(timespec="minutes"), "pages": pages, "error": err}
+        p.write_text(json.dumps(out, ensure_ascii=False))
+        return out
+    return {**old, "error": err}
 
 
 def fetch(url):
@@ -973,7 +1013,7 @@ def crawl():
                      ld_bad=sum(1 for x in p.ld if not _json_ok(x)))
         return o
 
-    with cf.ThreadPoolExecutor(6) as ex:
+    with cf.ThreadPoolExecutor(CRAWL_THREADS) as ex:
         for o in ex.map(one, urls):
             pages[o["u"]] = o
     # Pages that did not answer at all get one more try, one at a time, before they count as not loading.
@@ -1002,7 +1042,7 @@ def crawl():
     lc_p = DATA / "link-cache.json"
     lcache = json.loads(lc_p.read_text()) if cap and lc_p.exists() else {}
     todo = extra if not cap or len(extra) <= cap else sorted(extra, key=lambda u: (u in lcache and lcache[u][1] != 0, lcache.get(u, ["", 0, 0, 0])[0]))[:cap]
-    with cf.ThreadPoolExecutor(6) as ex:
+    with cf.ThreadPoolExecutor(CRAWL_THREADS) as ex:
         fresh = dict(ex.map(chk, todo))
     linkfull = {u: tuple(lcache[u][1:]) for u in extra if u in lcache and u not in fresh}
     linkfull.update(fresh)
@@ -1038,7 +1078,7 @@ def crawl():
     def get_asset(u):
         r, _ = fetch(u)
         return u, (len(r.content) / 1024 if r is not None and r.status_code == 200 else None)
-    with cf.ThreadPoolExecutor(6) as ex:
+    with cf.ThreadPoolExecutor(CRAWL_THREADS) as ex:
         asize = dict(ex.map(get_asset, assets))
 
     def weigh(o):
@@ -1246,7 +1286,7 @@ def speed_card(c, hist, dates, v, sub, once):
                      ("Slowest pages, ms", [(p["name"], p["ms"]) for p in sp[:6]], "Which pages are slowest?", "Page", "ms")],
                     None, "Median time to download the page code across the sitemap pages, in milliseconds. "
                           "Page size is the page code plus every file on the site it references directly.",
-                    [f"Measured from a GitHub server in the United States; visitors in {MARKET['the']} will see different times.",
+                    [f"Measured from a GitHub server in the United States; visitors in {MARKET['the']} will see different times, and the host's network sometimes slows such servers down.",
                      "Response time is the page code only; images, scripts, styles and fonts load after it.",
                      "Uncompressed sizes; the transfer over the network is smaller. A file shared by many pages counts on each page.",
                      "Google Analytics, which loads after cookies are accepted, is not included."] + once, lower_better=True)
@@ -1592,7 +1632,9 @@ def next_steps(cards, c, g):
         slow = [p for p in sp if p["ms"] >= 1000]
         heavy = max(sp, key=lambda p: p["kb"], default=None)
         rules["speed"] = []
-        if c["ms_median"] and c["ms_median"] >= 500:
+        if c.get("slow_route"):
+            slow = []
+        elif c["ms_median"] and c["ms_median"] >= 500:
             rules["speed"].append(step("Bring the median under 500 ms: check server caching of the page code.", "", "high", "site"))
         if slow:
             rules["speed"].append(step("Check the slowest pages first: " + "; ".join(p["name"] for p in slow[:3]) + ".",
@@ -1661,6 +1703,23 @@ def main():
                 prev.append(v)
     pts = prev[-2:] + ([c["ms_median"]] if c.get("ms_median") else [])
     c["ms_steady"] = round(sorted(pts)[len(pts) // 2] if len(pts) % 2 else sum(sorted(pts)[len(pts) // 2 - 1:len(pts) // 2 + 1]) / 2) if pts else None
+    # A reading many times slower than the usual one, while this machine's own network is quick, is the host's network
+    # slowing the testing machine (24 Nov 2026), not the site: it shows on the card but is not scored.
+    p7 = sorted(prev[-7:])
+    ref = (p7[len(p7) // 2] if len(p7) % 2 else round((p7[len(p7) // 2 - 1] + p7[len(p7) // 2]) / 2)) if len(p7) >= 2 else None
+    c["ms_ref"] = ref
+    c["slow_route"] = bool(ref and c.get("ms_median") and c["ms_median"] > max(4 * ref, ref + 1500))
+    if c["slow_route"]:
+        c["ms_steady"] = ref
+        notes.append(f"Pages answered in a median {c['ms_median']:,} ms from the testing machine, about {round(c['ms_median'] / ref)} times "
+                     f"slower than usual, while its own network was quick; the host's network can slow such machines down. "
+                     f"Page speed is scored on Google PageSpeed or the usual {ref:,} ms.")
+    try:
+        ps = psi_readings()
+    except Exception as e:
+        ps = {"error": str(e)[:200]}
+    fresh = ps.get("pages") and ps.get("at") and dt.datetime.now(dt.timezone.utc) - dt.datetime.fromisoformat(ps["at"]) < dt.timedelta(days=3)
+    c["psi"] = ps if fresh else {"error": ps.get("error")}
     CRAWL = c
     import cube as cube_mod
     cube = json.loads((DATA / "cube.json").read_text())

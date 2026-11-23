@@ -76,7 +76,13 @@ def measure(c, g, sm=None):
     out["status"] = (clamp(10 * c["pages_ok"] / max(1, c["pages"]) - 0.5 * len(c["broken"])),
                      f"{c['pages_ok']} of {c['pages']} pages load; {pl(len(c['broken']), 'broken link')}.")
     out["canon"] = (clamp(10 * share("canon")), f"{pas['canon']} of {n} pages have a matching canonical.")
-    if c["ms_median"]:
+    pv = list(((c.get("psi") or {}).get("pages") or {}).values())
+    if pv:
+        sc = sum(v["score"] for v in pv) / len(pv)
+        lcp = sum(v["lcp"] for v in pv) / len(pv)
+        out["speed"] = (clamp(sc / 10), f"Google PageSpeed, mobile: performance {sc:.0f} of 100 on {pl(len(pv), 'page')}, "
+                                         f"main content shown at {lcp / 1000:.1f} s. Read {c['psi']['at'][:10]}.")
+    elif c["ms_median"]:
         st = c.get("ms_steady") or c["ms_median"]
         out["speed"] = (clamp(10 - (st - 300) / 150),
                         f"Median page fetch {c['ms_median']} ms from a US server." if st == c["ms_median"] else

@@ -20,7 +20,7 @@ concurrency:
 jobs:
   snapshot:
     runs-on: ubuntu-latest
-    timeout-minutes: 55
+    timeout-minutes: 100
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -30,6 +30,7 @@ jobs:
       - name: Take snapshots
         env:
           GOOGLE_SA_KEY: ${{ secrets.GOOGLE_SA_KEY }}
+          PSI_KEY: ${{ secrets.PSI_KEY }}
           ONLY: ${{ inputs.site || 'all' }}
         run: |
           failed=""
@@ -38,7 +39,7 @@ jobs:
             if [ "$ONLY" != "all" ] && [ "$ONLY" != "$id" ]; then continue; fi
             echo "::group::$id"
             # A site still running after 4 minutes prints where it is, every 4 minutes (Python's faulthandler).
-            SITE_ID=$id timeout 25m python -u -c "import faulthandler,runpy,sys; faulthandler.dump_traceback_later(240, repeat=True); sys.path.insert(0, 'snapshot'); sys.argv = ['snapshot/snapshot.py']; runpy.run_path('snapshot/snapshot.py', run_name='__main__')" || failed="$failed $id"
+            SITE_ID=$id timeout 30m python -u -c "import faulthandler,runpy,sys; faulthandler.dump_traceback_later(240, repeat=True); sys.path.insert(0, 'snapshot'); sys.argv = ['snapshot/snapshot.py']; runpy.run_path('snapshot/snapshot.py', run_name='__main__')" || failed="$failed $id"
             echo "::endgroup::"
           done
           echo "FAILED=$failed" >> "$GITHUB_ENV"
