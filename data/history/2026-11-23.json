@@ -4,13 +4,13 @@
   "pages_ok": 127,
   "broken_n": 0,
   "issue_pages": 22,
-  "ms_median": 477,
+  "ms_median": 290,
   "weight_total": 644
  },
  "cube": {
-  "overall": 7.36,
+  "overall": 7.37,
   "blocks": {
-   "tech": 9.78,
+   "tech": 9.89,
    "onpage": 9.72,
    "content": 9.37,
    "schema": 9.25,
@@ -29,7 +29,7 @@
  "engaged": 27,
  "newvisitors": 4,
  "views": 106,
- "impressions": 231,
+ "impressions": 256,
  "searchclicks": 1,
  "pageone": 0
 }
