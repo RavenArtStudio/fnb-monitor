@@ -906,6 +906,28 @@ def _pace():
         time.sleep(wait)
 
 
+CONTROL_URL = os.environ.get("CONTROL_URL", "https://www.gstatic.com/generate_204")   # empty turns the check off (local tests)
+CONTROL_LIMIT_MS = 400
+
+
+def control_ms(n=5):
+    """Median time for a tiny Google response from this machine. It tells a slow runner network from slow sites:
+    on 23 Nov 2026 one run saw every page of all three sites take 2 to 6 s and a few time out, which scored as
+    broken pages and zero page speed (23 Nov 2026)."""
+    if not CONTROL_URL:
+        return 0
+    out = []
+    for _ in range(n):
+        t = time.perf_counter()
+        try:
+            requests.get(CONTROL_URL, timeout=10)
+            out.append(round((time.perf_counter() - t) * 1000))
+        except requests.RequestException:
+            out.append(10000)
+    out.sort()
+    return out[len(out) // 2]
+
+
 def fetch(url):
     for attempt in range(2):
         _pace()
@@ -913,6 +935,9 @@ def fetch(url):
         try:
             r = requests.get(url, headers={"User-Agent": UA}, timeout=30, allow_redirects=True)
         except requests.RequestException:
+            if attempt == 0:
+                time.sleep(3)   # a dropped or timed-out request gets one more try before it counts (23 Nov 2026)
+                continue
             return None, round((time.perf_counter() - t) * 1000)
         ms = round((time.perf_counter() - t) * 1000)
         if r.status_code in (429, 503) and attempt == 0:
@@ -951,6 +976,10 @@ def crawl():
     with cf.ThreadPoolExecutor(6) as ex:
         for o in ex.map(one, urls):
             pages[o["u"]] = o
+    # Pages that did not answer at all get one more try, one at a time, before they count as not loading.
+    for u in [u for u in urls if pages.get(urlparse(u).path or "/", {}).get("status") == 0][:50]:
+        o = one(u)
+        pages[o["u"]] = o
     # Linked pages outside the sitemap (fixed 19 Nov 2026): compare paths, not full links, so a link with a query
     # string to a listed page, or a link to a PDF, is not reported as a page missing from the sitemap. Every
     # unlisted link is still fetched once for the broken-link check.
@@ -1592,6 +1621,10 @@ def next_steps(cards, c, g):
 def main():
     HIST.mkdir(parents=True, exist_ok=True)
     notes, cards = [], []
+    ctl0 = control_ms()
+    if ctl0 > CONTROL_LIMIT_MS:
+        print(f"Skipped: this machine's network is slow (control {ctl0} ms); the last snapshot stays.", file=sys.stderr)
+        return
     sess = google_session()
     google = {"ga": [], "sc": []}
     if sess:
@@ -1606,6 +1639,12 @@ def main():
 
     global CRAWL
     c = crawl()
+    ctl1 = control_ms()
+    if ctl1 > CONTROL_LIMIT_MS:
+        print(f"Skipped: this machine's network turned slow during the crawl (control {ctl0} then {ctl1} ms); "
+              "the last snapshot stays.", file=sys.stderr)
+        return
+    c["control_ms"] = [ctl0, ctl1]
     c["broken_n"] = len(c["broken"])
     CRAWL = c
     import cube as cube_mod
@@ -1672,7 +1711,7 @@ def main():
     c.pop("urls", None)
     c.pop("speed_pages", None)
     meta = {"generated": dt.datetime.now(dt.timezone.utc).isoformat(timespec="minutes"),
-            "date": iso(TODAY), "notes": notes, "crawl": c, "index": g.get("index"), "launch": iso(LAUNCH), "first_seen": g.get("first_seen"),
+            "date": iso(TODAY), "notes": notes, "crawl": c, "index": g.get("index"), "launch": iso(LAUNCH), "first_seen": g.get("first_seen"), "control_ms": c.get("control_ms"),
             "ga_checks": {k: g[k] for k in ("ai", "events") if k in g}}
     out = {"meta": meta, "cards": cards}
     # Self-check (19 Nov 2026): every card and window must add up; a problem is shown on the board as a note.
