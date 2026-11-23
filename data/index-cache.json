@@ -122,22 +122,22 @@
 "/ae/privacy": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-23T13:45+00:00"
+"checked": "2026-11-23T17:35+00:00"
 },
 "/ae/ar/privacy": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-23T13:45+00:00"
+"checked": "2026-11-23T17:35+00:00"
 },
 "/ae/terms": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-23T13:45+00:00"
+"checked": "2026-11-23T17:35+00:00"
 },
 "/ae/ar/terms": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-23T13:45+00:00"
+"checked": "2026-11-23T17:35+00:00"
 },
 "/ae/legal/cookies": {
 "indexed": true,
@@ -160,11 +160,6 @@
 "checked": "2026-11-23T13:45+00:00"
 },
 "/ae/tools/cash-runway-calculator": {
-"indexed": true,
-"state": "Submitted and indexed",
-"checked": "2026-11-23T13:45+00:00"
-},
-"/ae/ar/tools/cash-runway-calculator": {
 "indexed": true,
 "state": "Submitted and indexed",
 "checked": "2026-11-23T13:45+00:00"
@@ -282,7 +277,7 @@
 "/ae/ar/services/payroll-wps": {
 "indexed": false,
 "state": "Discovered - currently not indexed",
-"checked": "2026-11-23T13:45+00:00"
+"checked": "2026-11-23T17:35+00:00"
 },
 "/ae/industries/fnb-hospitality": {
 "indexed": true,
@@ -322,17 +317,17 @@
 "/ae/ar/vat": {
 "indexed": false,
 "state": "Discovered - currently not indexed",
-"checked": "2026-11-23T13:45+00:00"
+"checked": "2026-11-23T17:35+00:00"
 },
 "/ae/vat/registration": {
 "indexed": false,
-"state": "Discovered - currently not indexed",
-"checked": "2026-11-23T13:45+00:00"
+"state": "URL is unknown to Google",
+"checked": "2026-11-23T17:35+00:00"
 },
 "/ae/ar/vat/registration": {
 "indexed": false,
-"state": "Discovered - currently not indexed",
-"checked": "2026-11-23T13:45+00:00"
+"state": "URL is unknown to Google",
+"checked": "2026-11-23T17:35+00:00"
 },
 "/ae/vat/restaurants": {
 "indexed": true,
@@ -341,8 +336,8 @@
 },
 "/ae/ar/vat/restaurants": {
 "indexed": false,
-"state": "URL is unknown to Google",
-"checked": "2026-11-23T13:45+00:00"
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-23T17:35+00:00"
 },
 "/ae/guides/opening-a-restaurant-in-dubai": {
 "indexed": true,

@@ -106,13 +106,13 @@
 },
 "/contact": {
 "indexed": false,
-"state": "URL is unknown to Google",
-"checked": "2026-11-23T05:22+00:00"
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-23T17:49+00:00"
 },
 "/de/contact": {
 "indexed": false,
 "state": "Discovered - currently not indexed",
-"checked": "2026-11-23T05:22+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/ar/contact": {
 "indexed": true,
@@ -312,7 +312,7 @@
 "/ar/treatments/ent/procedures/adenoidectomy": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-23T05:22+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/treatments/bariatric-surgery/procedures/adjustable-gastric-band": {
 "indexed": true,
@@ -322,12 +322,12 @@
 "/de/treatments/bariatric-surgery/procedures/adjustable-gastric-band": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-23T05:22+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/ar/treatments/bariatric-surgery/procedures/adjustable-gastric-band": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-23T05:22+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/treatments/dental/procedures/all-on-4": {
 "indexed": true,
@@ -347,24 +347,19 @@
 "/treatments/general-surgery/procedures/anal-fissure-surgery": {
 "indexed": false,
 "state": "Discovered - currently not indexed",
-"checked": "2026-11-23T05:22+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/de/treatments/general-surgery/procedures/anal-fissure-surgery": {
 "indexed": false,
 "state": "Discovered - currently not indexed",
-"checked": "2026-11-23T05:22+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/ar/treatments/general-surgery/procedures/anal-fissure-surgery": {
 "indexed": false,
 "state": "Discovered - currently not indexed",
-"checked": "2026-11-23T05:22+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/treatments/hair-restoration/procedures/beard-transplant": {
-"indexed": true,
-"state": "Submitted and indexed",
-"checked": "2026-11-22T20:14+00:00"
-},
-"/de/treatments/hair-restoration/procedures/beard-transplant": {
 "indexed": true,
 "state": "Submitted and indexed",
 "checked": "2026-11-22T20:14+00:00"
@@ -372,7 +367,7 @@
 "/ar/treatments/hair-restoration/procedures/beard-transplant": {
 "indexed": false,
 "state": "Discovered - currently not indexed",
-"checked": "2026-11-23T05:22+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/treatments/cosmetic-surgery/procedures/blepharoplasty": {
 "indexed": true,
@@ -437,22 +432,22 @@
 "/treatments/dental/procedures/all-on-6": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-23T05:22+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/de/treatments/dental/procedures/all-on-6": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-23T05:22+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/ar/treatments/dental/procedures/all-on-6": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-23T05:22+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/treatments/general-surgery/procedures/anal-fistula-surgery": {
 "indexed": false,
 "state": "Discovered - currently not indexed",
-"checked": "2026-11-23T05:22+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/de/treatments/general-surgery/procedures/anal-fistula-surgery": {
 "indexed": true,
@@ -462,22 +457,22 @@
 "/ar/treatments/general-surgery/procedures/anal-fistula-surgery": {
 "indexed": false,
 "state": "Discovered - currently not indexed",
-"checked": "2026-11-23T05:22+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/treatments/cosmetic-surgery/procedures/body-lift": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-23T05:22+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/de/treatments/cosmetic-surgery/procedures/body-lift": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-23T05:22+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/ar/treatments/cosmetic-surgery/procedures/body-lift": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-23T05:22+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/treatments/orthopedics/procedures/carpal-tunnel-release": {
 "indexed": true,
@@ -547,12 +542,12 @@
 "/de/treatments/bariatric-surgery/procedures/duodenal-switch": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-23T05:22+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/ar/treatments/bariatric-surgery/procedures/duodenal-switch": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-23T05:22+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/treatments/fertility/procedures/embryo-transfer": {
 "indexed": true,
@@ -592,12 +587,12 @@
 "/de/treatments/dental/procedures/bone-grafting-and-sinus-lift": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-23T05:22+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/ar/treatments/dental/procedures/bone-grafting-and-sinus-lift": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-23T05:22+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/treatments/cosmetic-surgery/procedures/breast-augmentation": {
 "indexed": true,
@@ -619,11 +614,6 @@
 "state": "Submitted and indexed",
 "checked": "2026-11-22T20:14+00:00"
 },
-"/de/treatments/eye-care/procedures/corneal-transplant": {
-"indexed": true,
-"state": "Submitted and indexed",
-"checked": "2026-11-22T20:14+00:00"
-},
 "/ar/treatments/eye-care/procedures/corneal-transplant": {
 "indexed": true,
 "state": "Submitted and indexed",
@@ -637,7 +627,7 @@
 "/de/treatments/bariatric-surgery/procedures/endoscopic-sleeve-gastroplasty": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-23T05:22+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/ar/treatments/bariatric-surgery/procedures/endoscopic-sleeve-gastroplasty": {
 "indexed": true,
@@ -727,7 +717,7 @@
 "/de/treatments/urology/procedures/penile-implant-surgery": {
 "indexed": false,
 "state": "Discovered - currently not indexed",
-"checked": "2026-11-23T05:22+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/ar/treatments/urology/procedures/penile-implant-surgery": {
 "indexed": true,
@@ -762,7 +752,7 @@
 "/ar/treatments/dental/procedures/dental-bridges": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-23T05:22+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/treatments/hair-restoration/procedures/female-hair-transplant": {
 "indexed": true,
@@ -897,7 +887,7 @@
 "/ar/treatments/cosmetic-surgery/procedures/breast-reduction": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-23T05:22+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/treatments/dental/procedures/dental-crowns": {
 "indexed": true,
@@ -921,8 +911,8 @@
 },
 "/de/treatments/fertility/procedures/frozen-embryo-transfer": {
 "indexed": false,
-"state": "URL is unknown to Google",
-"checked": "2026-11-23T05:22+00:00"
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-23T17:49+00:00"
 },
 "/ar/treatments/fertility/procedures/frozen-embryo-transfer": {
 "indexed": true,
@@ -952,12 +942,12 @@
 "/de/treatments/bariatric-surgery/procedures/gastric-band-removal-conversion": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-23T05:22+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/ar/treatments/bariatric-surgery/procedures/gastric-band-removal-conversion": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-23T05:22+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/treatments/general-surgery/procedures/hiatal-hernia-repair": {
 "indexed": true,
@@ -967,7 +957,7 @@
 "/de/treatments/general-surgery/procedures/hiatal-hernia-repair": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-23T05:22+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/ar/treatments/general-surgery/procedures/hiatal-hernia-repair": {
 "indexed": true,
@@ -1132,12 +1122,12 @@
 "/de/treatments/bariatric-surgery/procedures/one-anastomosis-gastric-bypass": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-23T05:22+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/ar/treatments/bariatric-surgery/procedures/one-anastomosis-gastric-bypass": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-23T05:22+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/treatments/orthopedics/procedures/shoulder-arthroscopy": {
 "indexed": true,
@@ -1277,7 +1267,7 @@
 "/treatments/bariatric-surgery/procedures/revisional-bariatric-surgery": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-23T02:12+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/de/treatments/bariatric-surgery/procedures/revisional-bariatric-surgery": {
 "indexed": true,
@@ -1287,7 +1277,7 @@
 "/ar/treatments/bariatric-surgery/procedures/revisional-bariatric-surgery": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-23T02:12+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/treatments/orthopedics/procedures/spinal-decompression": {
 "indexed": true,
@@ -1367,17 +1357,17 @@
 "/treatments/dental/procedures/orthodontics-and-aligners": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-23T02:12+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/de/treatments/dental/procedures/orthodontics-and-aligners": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-23T02:12+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/ar/treatments/dental/procedures/orthodontics-and-aligners": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-23T02:12+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/treatments/general-surgery/procedures/pilonidal-sinus-surgery": {
 "indexed": true,
@@ -1402,7 +1392,7 @@
 "/de/treatments/eye-care/procedures/refractive-lens-exchange": {
 "indexed": false,
 "state": "URL is unknown to Google",
-"checked": "2026-11-23T02:12+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/ar/treatments/eye-care/procedures/refractive-lens-exchange": {
 "indexed": true,
@@ -1442,7 +1432,7 @@
 "/treatments/orthopedics/procedures/spinal-fusion": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-23T02:12+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/de/treatments/orthopedics/procedures/spinal-fusion": {
 "indexed": true,
@@ -1471,13 +1461,13 @@
 },
 "/treatments/urology/procedures/urethroplasty": {
 "indexed": false,
-"state": "URL is unknown to Google",
-"checked": "2026-11-23T02:12+00:00"
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-23T17:49+00:00"
 },
 "/de/treatments/urology/procedures/urethroplasty": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-23T02:12+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/ar/treatments/urology/procedures/urethroplasty": {
 "indexed": true,
@@ -1547,7 +1537,7 @@
 "/treatments/bariatric-surgery/procedures/sadi-s": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-23T02:12+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/de/treatments/bariatric-surgery/procedures/sadi-s": {
 "indexed": false,
@@ -2504,11 +2494,6 @@
 "state": "Submitted and indexed",
 "checked": "2026-11-23T13:56+00:00"
 },
-"/blog/flying-after-knee-replacement-travel-home-safely": {
-"indexed": true,
-"state": "Submitted and indexed",
-"checked": "2026-11-23T13:56+00:00"
-},
 "/de/blog/flying-after-knee-replacement-travel-home-safely": {
 "indexed": true,
 "state": "Submitted and indexed",
@@ -2537,7 +2522,7 @@
 "/blog/flying-after-laser-eye-surgery-lasik-smile": {
 "indexed": false,
 "state": "Discovered - currently not indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/de/blog/flying-after-laser-eye-surgery-lasik-smile": {
 "indexed": true,
@@ -2551,8 +2536,8 @@
 },
 "/blog/mommy-makeover-recovery-combined-procedure-timeline": {
 "indexed": false,
-"state": "Discovered - currently not indexed",
-"checked": "2026-11-22T12:13+00:00"
+"state": "URL is unknown to Google",
+"checked": "2026-11-23T17:49+00:00"
 },
 "/de/blog/mommy-makeover-recovery-combined-procedure-timeline": {
 "indexed": true,
@@ -2581,8 +2566,8 @@
 },
 "/blog/gynecomastia-surgery-recovery-time-compression-vest": {
 "indexed": false,
-"state": "Discovered - currently not indexed",
-"checked": "2026-11-22T12:13+00:00"
+"state": "URL is unknown to Google",
+"checked": "2026-11-23T17:49+00:00"
 },
 "/de/blog/gynecomastia-surgery-recovery-time-compression-vest": {
 "indexed": true,
@@ -2696,8 +2681,8 @@
 },
 "/ar/blog/skin-removal-after-weight-loss-in-turkey-body-lift-guide": {
 "indexed": false,
-"state": "Discovered - currently not indexed",
-"checked": "2026-11-22T12:13+00:00"
+"state": "URL is unknown to Google",
+"checked": "2026-11-23T17:49+00:00"
 },
 "/blog/gastric-balloon-vs-gastric-sleeve-how-they-differ": {
 "indexed": true,
@@ -2882,7 +2867,7 @@
 "/blog/zirconia-vs-emax-crowns-which-material-fits-which-tooth": {
 "indexed": false,
 "state": "URL is unknown to Google",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/de/blog/zirconia-vs-emax-crowns-which-material-fits-which-tooth": {
 "indexed": true,
@@ -2914,11 +2899,6 @@
 "state": "Submitted and indexed",
 "checked": "2026-11-23T13:56+00:00"
 },
-"/de/blog/turkey-teeth-vs-composite-bonding-whats-the-difference": {
-"indexed": true,
-"state": "Submitted and indexed",
-"checked": "2026-11-23T13:56+00:00"
-},
 "/ar/blog/turkey-teeth-vs-composite-bonding-whats-the-difference": {
 "indexed": true,
 "state": "Submitted and indexed",
@@ -2926,8 +2906,8 @@
 },
 "/blog/can-you-get-turkey-teeth-if-you-have-missing-teeth": {
 "indexed": false,
-"state": "Discovered - currently not indexed",
-"checked": "2026-11-22T12:13+00:00"
+"state": "URL is unknown to Google",
+"checked": "2026-11-23T17:49+00:00"
 },
 "/de/blog/can-you-get-turkey-teeth-if-you-have-missing-teeth": {
 "indexed": true,
@@ -2962,521 +2942,516 @@
 "/de/blog/beard-transplant-recovery-day-by-day-healing-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/ar/blog/beard-transplant-recovery-day-by-day-healing-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/blog/does-a-hair-transplant-hurt-pain-recovery-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/de/blog/does-a-hair-transplant-hurt-pain-recovery-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/ar/blog/does-a-hair-transplant-hurt-pain-recovery-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/blog/hair-transplant-age-limit-is-there-a-best-age": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/de/blog/hair-transplant-age-limit-is-there-a-best-age": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/ar/blog/hair-transplant-age-limit-is-there-a-best-age": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/blog/can-women-get-a-hair-transplant-candidacy-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/de/blog/can-women-get-a-hair-transplant-candidacy-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/ar/blog/can-women-get-a-hair-transplant-candidacy-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/blog/hair-transplant-month-by-month-growth-timeline": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/de/blog/hair-transplant-month-by-month-growth-timeline": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/ar/blog/hair-transplant-month-by-month-growth-timeline": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/blog/hair-transplant-recovery-day-by-day": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/de/blog/hair-transplant-recovery-day-by-day": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/ar/blog/hair-transplant-recovery-day-by-day": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/blog/fue-vs-dhi-what-actually-differs-in-hair-transplant": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/de/blog/fue-vs-dhi-what-actually-differs-in-hair-transplant": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/ar/blog/fue-vs-dhi-what-actually-differs-in-hair-transplant": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/blog/how-many-grafts-do-i-need-hair-transplant-planning-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/de/blog/how-many-grafts-do-i-need-hair-transplant-planning-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/ar/blog/how-many-grafts-do-i-need-hair-transplant-planning-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/blog/is-it-worth-going-to-turkey-for-a-hair-transplant": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/de/blog/is-it-worth-going-to-turkey-for-a-hair-transplant": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/ar/blog/is-it-worth-going-to-turkey-for-a-hair-transplant": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/blog/how-long-does-ivf-take-in-turkey-cycle-travel-guide": {
 "indexed": false,
 "state": "Discovered - currently not indexed",
-"checked": "2026-11-23T02:12+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/de/blog/how-long-does-ivf-take-in-turkey-cycle-travel-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/ar/blog/how-long-does-ivf-take-in-turkey-cycle-travel-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/blog/septorhinoplasty-in-turkey-function-recovery-nhs-wait": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
-},
-"/de/blog/septorhinoplasty-in-turkey-function-recovery-nhs-wait": {
-"indexed": true,
-"state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/ar/blog/septorhinoplasty-in-turkey-function-recovery-nhs-wait": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/blog/is-it-worth-going-to-turkey-for-dental-implants": {
 "indexed": false,
 "state": "Discovered - currently not indexed",
-"checked": "2026-11-23T02:12+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/de/blog/is-it-worth-going-to-turkey-for-dental-implants": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/ar/blog/is-it-worth-going-to-turkey-for-dental-implants": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/blog/lipoedema-surgery-in-turkey-evidence-selection-aftercare": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/de/blog/lipoedema-surgery-in-turkey-evidence-selection-aftercare": {
 "indexed": false,
 "state": "Discovered - currently not indexed",
-"checked": "2026-11-23T02:12+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/ar/blog/lipoedema-surgery-in-turkey-evidence-selection-aftercare": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/blog/hair-transplant-shock-loss-timeline-donor-area-shedding": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/de/blog/hair-transplant-shock-loss-timeline-donor-area-shedding": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/ar/blog/hair-transplant-shock-loss-timeline-donor-area-shedding": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/blog/turkey-teeth-pain-after-treatment-what-is-normal": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/de/blog/turkey-teeth-pain-after-treatment-what-is-normal": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/ar/blog/turkey-teeth-pain-after-treatment-what-is-normal": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/blog/is-ivf-legal-in-turkey-rules-for-international-patients": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/de/blog/is-ivf-legal-in-turkey-rules-for-international-patients": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/ar/blog/is-ivf-legal-in-turkey-rules-for-international-patients": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/blog/gastric-sleeve-turkey-aftercare-home-follow-up-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/de/blog/gastric-sleeve-turkey-aftercare-home-follow-up-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/ar/blog/gastric-sleeve-turkey-aftercare-home-follow-up-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/blog/travel-insurance-for-dental-treatment-in-turkey": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/de/blog/travel-insurance-for-dental-treatment-in-turkey": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/ar/blog/travel-insurance-for-dental-treatment-in-turkey": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/blog/how-to-find-a-reputable-plastic-surgeon-in-turkey": {
 "indexed": false,
-"state": "Discovered - currently not indexed",
-"checked": "2026-11-23T02:12+00:00"
+"state": "URL is unknown to Google",
+"checked": "2026-11-23T17:49+00:00"
 },
 "/de/blog/how-to-find-a-reputable-plastic-surgeon-in-turkey": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/ar/blog/how-to-find-a-reputable-plastic-surgeon-in-turkey": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/blog/flying-after-breast-augmentation-turkey-travel-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/de/blog/flying-after-breast-augmentation-turkey-travel-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/ar/blog/flying-after-breast-augmentation-turkey-travel-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/blog/questions-to-ask-before-hair-transplant-clinic-checklist": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/de/blog/questions-to-ask-before-hair-transplant-clinic-checklist": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/ar/blog/questions-to-ask-before-hair-transplant-clinic-checklist": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/blog/will-the-nhs-fix-turkey-teeth-uk-aftercare-guide": {
 "indexed": false,
 "state": "Discovered - currently not indexed",
-"checked": "2026-11-23T02:12+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/de/blog/will-the-nhs-fix-turkey-teeth-uk-aftercare-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/ar/blog/will-the-nhs-fix-turkey-teeth-uk-aftercare-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/blog/tummy-tuck-after-gastric-sleeve-timing-candidacy-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/de/blog/tummy-tuck-after-gastric-sleeve-timing-candidacy-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/ar/blog/tummy-tuck-after-gastric-sleeve-timing-candidacy-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/blog/flying-after-rhinoplasty-turkey-travel-planning-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/de/blog/flying-after-rhinoplasty-turkey-travel-planning-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/ar/blog/flying-after-rhinoplasty-turkey-travel-planning-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/blog/can-you-get-turkey-teeth-with-gum-disease-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/de/blog/can-you-get-turkey-teeth-with-gum-disease-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/ar/blog/can-you-get-turkey-teeth-with-gum-disease-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/blog/can-you-fly-after-embryo-transfer-ivf-travel-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/de/blog/can-you-fly-after-embryo-transfer-ivf-travel-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/ar/blog/can-you-fly-after-embryo-transfer-ivf-travel-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/blog/travel-insurance-for-cosmetic-surgery-in-turkey-guide": {
 "indexed": false,
 "state": "Discovered - currently not indexed",
-"checked": "2026-11-23T02:12+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/de/blog/travel-insurance-for-cosmetic-surgery-in-turkey-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/ar/blog/travel-insurance-for-cosmetic-surgery-in-turkey-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/blog/things-to-avoid-after-hair-transplant-recovery-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/de/blog/things-to-avoid-after-hair-transplant-recovery-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/ar/blog/things-to-avoid-after-hair-transplant-recovery-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/blog/how-long-do-turkey-teeth-last-crowns-veneers-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/de/blog/how-long-do-turkey-teeth-last-crowns-veneers-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/ar/blog/how-long-do-turkey-teeth-last-crowns-veneers-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/blog/flying-after-tummy-tuck-turkey-travel-planning-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/de/blog/flying-after-tummy-tuck-turkey-travel-planning-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/ar/blog/flying-after-tummy-tuck-turkey-travel-planning-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/blog/how-long-to-stay-in-turkey-for-hair-transplant-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/de/blog/how-long-to-stay-in-turkey-for-hair-transplant-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/ar/blog/how-long-to-stay-in-turkey-for-hair-transplant-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/blog/flying-after-gastric-sleeve-turkey-travel-planning-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/de/blog/flying-after-gastric-sleeve-turkey-travel-planning-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/ar/blog/flying-after-gastric-sleeve-turkey-travel-planning-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/blog/are-turkey-teeth-veneers-or-crowns-a-patient-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/de/blog/are-turkey-teeth-veneers-or-crowns-a-patient-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/ar/blog/are-turkey-teeth-veneers-or-crowns-a-patient-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/blog/how-many-trips-for-dental-implants-in-turkey-trip-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/de/blog/how-many-trips-for-dental-implants-in-turkey-trip-guide": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/ar/blog/how-many-trips-for-dental-implants-in-turkey-trip-guide": {
 "indexed": false,
-"state": "URL is unknown to Google",
-"checked": "2026-11-23T02:12+00:00"
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-23T17:49+00:00"
 },
 "/blog/sleeping-after-hair-transplant-a-safer-first-2-weeks": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/de/blog/sleeping-after-hair-transplant-a-safer-first-2-weeks": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 },
 "/ar/blog/sleeping-after-hair-transplant-a-safer-first-2-weeks": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-22T12:13+00:00"
+"checked": "2026-11-23T17:49+00:00"
 }
 }

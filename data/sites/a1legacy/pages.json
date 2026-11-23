@@ -3721,36 +3721,6 @@
 "site_name": "A1 Legacy Labs"
 },
 {
-"u": "/industries/aesthetics-beauty-wellness-aesthetic-clinic",
-"lang": "en",
-"status": 200,
-"noindex": false,
-"title": "Aesthetic Clinic Industry AI Solutions — A1 Legacy Labs",
-"desc": "How aesthetic clinics use AI to answer treatment enquiries, book consultations, send reminders and pass medical questions to the clinical team.",
-"h1t": "AI for Aesthetic Clinic",
-"words": 210,
-"types": [
-"BreadcrumbList",
-"ImageObject",
-"Organization",
-"WebPage",
-"WebSite"
-],
-"ext": [],
-"byline": false,
-"dated": false,
-"nums": 0,
-"answer": false,
-"first_w": 9,
-"first": "Guide for your industry: AI Receptionist for Aesthetic Clinics",
-"qheads": 0,
-"faq": false,
-"ga": [
-"G-BMQDQ58E56"
-],
-"site_name": "A1 Legacy Labs"
-},
-{
 "u": "/industries/aesthetics-beauty-wellness-cosmetic-surgery-clinic",
 "lang": "en",
 "status": 200,
@@ -3939,36 +3909,6 @@
 "desc": "How swimming schools use AI to answer lesson and age-group questions, place children in classes, manage waiting lists and send reminders.",
 "h1t": "AI for Swimming School",
 "words": 194,
-"types": [
-"BreadcrumbList",
-"ImageObject",
-"Organization",
-"WebPage",
-"WebSite"
-],
-"ext": [],
-"byline": false,
-"dated": false,
-"nums": 0,
-"answer": true,
-"first_w": 20,
-"first": "A1 Legacy can be designed around your approved CRM, calendar, messaging and operational systems rather than forcing a full replacement.",
-"qheads": 0,
-"faq": false,
-"ga": [
-"G-BMQDQ58E56"
-],
-"site_name": "A1 Legacy Labs"
-},
-{
-"u": "/industries/fitness-sports-country-club",
-"lang": "en",
-"status": 200,
-"noindex": false,
-"title": "Country Club Industry AI Solutions — A1 Legacy Labs",
-"desc": "Automate country club enquiries, qualification, CRM updates and follow-up with structured AI workflows.",
-"h1t": "AI for Country Club",
-"words": 202,
 "types": [
 "BreadcrumbList",
 "ImageObject",
@@ -6682,36 +6622,6 @@
 "first_w": 19,
 "first": "Explore speed to lead, faster responses, sensible benchmarks and automated follow-up workflows without relying on misleading conversion promises.",
 "qheads": 7,
-"faq": false,
-"ga": [
-"G-BMQDQ58E56"
-],
-"site_name": "A1 Legacy Labs"
-},
-{
-"u": "/blog/human-in-the-loop-ai",
-"lang": "en",
-"status": 200,
-"noindex": false,
-"title": "Human in the Loop AI: Practical Governance for Teams — A1 Legacy Labs",
-"desc": "Learn where human in the loop AI approvals, escalation rules and oversight belong in operational automation and data protection planning.",
-"h1t": "Human in the Loop AI: Practical Governance for Business Teams",
-"words": 2519,
-"types": [
-"Article",
-"BreadcrumbList",
-"ImageObject",
-"Organization",
-"WebSite"
-],
-"ext": [],
-"byline": false,
-"dated": true,
-"nums": 0,
-"answer": true,
-"first_w": 20,
-"first": "Learn where human in the loop AI approvals, escalation rules and oversight belong in operational automation and data protection planning.",
-"qheads": 6,
 "faq": false,
 "ga": [
 "G-BMQDQ58E56"
