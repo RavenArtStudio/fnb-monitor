@@ -1803,6 +1803,11 @@ def main():
     except Exception as e:
         print("Self-check:", e, file=sys.stderr)
     (DATA / "cards.json").write_text(json.dumps(out, ensure_ascii=False))
+    try:   # a 1 KB headline file for Babar's workspace home card (Checkpoint 31)
+        import summary
+        summary.write(DATA, out)
+    except Exception as e:
+        print("Summary:", e, file=sys.stderr)
     print(f"{len(cards)} cards; notes: {notes}")
 
 
