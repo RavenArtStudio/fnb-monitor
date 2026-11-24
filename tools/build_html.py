@@ -652,10 +652,14 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!el('detailPanel').
  if(e.key==='ArrowDown'||e.key==='ArrowRight'){e.preventDefault();pick(ORDER[(i+1)%%ORDER.length],true);}
  if(e.key==='ArrowUp'||e.key==='ArrowLeft'){e.preventDefault();pick(ORDER[(i-1+ORDER.length)%%ORDER.length],true);}});
 let rz;window.addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(()=>drawCard(false),150);});
-function setTheme(t,save){document.documentElement.classList.toggle('paper',t==='paper');document.querySelectorAll('.theme-tg button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.theme===t)));
+function setTheme(t,save){document.documentElement.classList.toggle('paper',t==='paper');if(save)document.documentElement.removeAttribute('data-skin');document.querySelectorAll('.theme-tg button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.theme===t)));
  if(save){try{localStorage.setItem('fnb-theme',t);}catch(e){}try{const u=new URL(location.href);if(u.searchParams.has('theme')){u.searchParams.delete('theme');history.replaceState(null,'',u.pathname+u.search+u.hash);}}catch(e){}}}
 document.querySelectorAll('.theme-tg button').forEach(b=>b.addEventListener('click',()=>{if(b.getAttribute('aria-pressed')==='true')return;setTheme(b.dataset.theme,true);drawCard(false);markWin();}));
 setTheme(document.documentElement.classList.contains('paper')?'paper':'charcoal',false);
+/* Workspace skin sync: only the embedding page may change the skin, and only to a known one. */
+window.addEventListener('message',e=>{if(e.source!==window.parent||!e.data||e.data.type!=='skin')return;const k=e.data.skin;
+ if(!['paper','dynamics','stone','graphite','charcoal','slate'].includes(k))return;const d=document.documentElement;
+ d.setAttribute('data-skin',k);d.classList.toggle('paper',['paper','dynamics','stone','graphite'].includes(k));drawCard(false);markWin();});
 /* ---- sites (Checkpoint 30): one board, a switcher in the top bar ---- */
 function loadSnap(){const want=SITE;fetch(siteOf(want).snap+'?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():Promise.reject(r.status))
  .then(j=>{FRESH[want]=j;if(want===SITE)setData(j,'live');}).catch(()=>{});}
@@ -711,9 +715,23 @@ def scoped(css, cls='paper'):
 here = os.path.dirname(os.path.abspath(__file__))
 font = base64.b64encode(open(os.path.join(here, 'fonts', 'bodoni-moda-latin-400-normal.woff2'), 'rb').read()).decode()
 THEME_CSS = scoped(open(os.path.join(here, 'theme-paper.css'), encoding='utf-8').read()).replace('__BODONI__', font)
-HEAD_JS = ("<script>try{var t=new URLSearchParams(location.search).get('theme')||localStorage.getItem('fnb-theme')||'%s';"
-           "if(t==='paper')document.documentElement.classList.add('paper');}catch(e){}</script>\n") % ('paper' if theme == 'paper' else 'charcoal')
+# Six workspace skins (Pipeline P1.2): Babar's workspace passes ?skin= and posts {type:'skin'} when it changes.
+# Charcoal and Slate sit on the Charcoal layout; Paper, Dynamics, Stone and Graphite on the Paper layout.
+SKIN_CSS = """
+html[data-skin=slate]{--canvas:#2b3139;--side:#272d34;--surface:#353c46;--surface-2:#3d4550;--surface-3:#465059;--line:#465059;--line-soft:#3c444d}
+html.paper[data-skin=dynamics],html.paper[data-skin=stone],html.paper[data-skin=graphite]{--display:var(--sans)}
+html.paper[data-skin=dynamics] body::before,html.paper[data-skin=dynamics] body::after,html.paper[data-skin=stone] body::before,html.paper[data-skin=stone] body::after,html.paper[data-skin=graphite] body::before,html.paper[data-skin=graphite] body::after{display:none}
+html.paper[data-skin=dynamics]{--canvas:#f5f5f5;--side:#fafafa;--surface:#fff;--surface-2:#f0f0f0;--surface-3:#e6e6e6;--line:#d1d1d1;--line-soft:#e3e3e3;--ink:#242424;--ink-2:#424242;--ink-3:#616161;--ink-4:#8a8a8a;--A1:#0f6cbd;--FNB:#0f6cbd;--u0:#0f6cbd;--good:#107c10;--warn:#8a5700;--bad:#a4262c;--olive:#0f6cbd;--onolive:#fff;--onolive-2:#dbe9f7;--onolive-3:#b4d1ee;--line-olive:#ffffff2e;--black:#242424;--rust:#a4262c}
+html.paper[data-skin=stone]{--canvas:#dce5ec;--side:#edf2f6;--surface:#fff;--surface-2:#eef3f6;--surface-3:#dfe8ee;--line:#b8c8d5;--line-soft:#d3dee6;--ink:#192f40;--ink-2:#2f4a5d;--ink-3:#4d6273;--ink-4:#7d90a0;--A1:#096b63;--FNB:#096b63;--u0:#096b63;--good:#246b43;--warn:#a9661f;--bad:#b24a3d;--olive:#173e50;--onolive:#fff;--onolive-2:#cfdde7;--onolive-3:#a9bfcd;--line-olive:#ffffff2e;--black:#173e50;--rust:#b24a3d}
+html.paper[data-skin=graphite]{--canvas:#dfe1e3;--side:#eceef0;--surface:#fff;--surface-2:#f3f4f5;--surface-3:#e6e8ea;--line:#c5c8cc;--line-soft:#d9dbde;--ink:#25272a;--ink-2:#45494e;--ink-3:#60656b;--ink-4:#8c9197;--A1:#34383d;--FNB:#34383d;--u0:#34383d;--good:#2f6b45;--warn:#8b5a1c;--bad:#a3443b;--olive:#34383d;--onolive:#f5f5f5;--onolive-2:#d0d2d5;--onolive-3:#a9adb2;--line-olive:#ffffff21;--black:#25272a;--rust:#a3443b}
+html[data-embedded] .theme-tg{display:none}
+"""
+SKINS_LIGHT = ['paper', 'dynamics', 'stone', 'graphite']
+HEAD_JS = ("<script>try{var q=new URLSearchParams(location.search),k=q.get('skin'),t=q.get('theme')||localStorage.getItem('fnb-theme')||'%s',d=document.documentElement;"
+           "if(window.parent!==window&&k)d.setAttribute('data-embedded','');"
+           "if(['paper','dynamics','stone','graphite','charcoal','slate'].indexOf(k)>=0){d.setAttribute('data-skin',k);t=['paper','dynamics','stone','graphite'].indexOf(k)>=0?'paper':'charcoal';}"
+           "if(t==='paper')d.classList.add('paper');}catch(e){}</script>\n") % ('paper' if theme == 'paper' else 'charcoal')
 html = ('<!doctype html>\n<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">\n'
-        f"<title>{SITES[0]['name']} cards</title>\n" + HEAD_JS + '<style>\n' + css + CSS + THEME_CSS + '</style></head>\n' + BODY + '<script>\n' + engine + JS + '</script></body></html>\n')
+        f"<title>{SITES[0]['name']} cards</title>\n" + HEAD_JS + '<style>\n' + css + CSS + THEME_CSS + SKIN_CSS + '</style></head>\n' + BODY + '<script>\n' + engine + JS + '</script></body></html>\n')
 open(out, 'w', encoding='utf-8').write(html)
 print(len(html), len(saved.get('cards', [])))
