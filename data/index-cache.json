@@ -122,22 +122,22 @@
 "/ae/privacy": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-24T14:24+00:00"
+"checked": "2026-11-25T00:16+00:00"
 },
 "/ae/ar/privacy": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-24T14:24+00:00"
+"checked": "2026-11-25T00:16+00:00"
 },
 "/ae/terms": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-24T14:24+00:00"
+"checked": "2026-11-25T00:16+00:00"
 },
 "/ae/ar/terms": {
 "indexed": false,
 "state": "Excluded by ‘noindex’ tag",
-"checked": "2026-11-24T14:24+00:00"
+"checked": "2026-11-25T00:16+00:00"
 },
 "/ae/legal/cookies": {
 "indexed": true,
@@ -167,7 +167,7 @@
 "/ae/ar/tools/cash-runway-calculator": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-23T18:02+00:00"
+"checked": "2026-11-25T00:16+00:00"
 },
 "/ae/tools/books-reliability-score": {
 "indexed": true,
@@ -281,8 +281,8 @@
 },
 "/ae/ar/services/payroll-wps": {
 "indexed": false,
-"state": "URL is unknown to Google",
-"checked": "2026-11-24T14:24+00:00"
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-25T00:16+00:00"
 },
 "/ae/industries/fnb-hospitality": {
 "indexed": true,
@@ -322,17 +322,17 @@
 "/ae/ar/vat": {
 "indexed": false,
 "state": "Discovered - currently not indexed",
-"checked": "2026-11-24T14:24+00:00"
+"checked": "2026-11-25T00:16+00:00"
 },
 "/ae/vat/registration": {
 "indexed": false,
 "state": "Discovered - currently not indexed",
-"checked": "2026-11-24T14:24+00:00"
+"checked": "2026-11-25T00:16+00:00"
 },
 "/ae/ar/vat/registration": {
 "indexed": false,
 "state": "Discovered - currently not indexed",
-"checked": "2026-11-24T14:24+00:00"
+"checked": "2026-11-25T00:16+00:00"
 },
 "/ae/vat/restaurants": {
 "indexed": true,
@@ -342,7 +342,7 @@
 "/ae/ar/vat/restaurants": {
 "indexed": false,
 "state": "Discovered - currently not indexed",
-"checked": "2026-11-24T14:24+00:00"
+"checked": "2026-11-25T00:16+00:00"
 },
 "/ae/guides/opening-a-restaurant-in-dubai": {
 "indexed": true,
@@ -552,7 +552,7 @@
 "/ae/ar/tools/delivery-payout-calculator": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-23T21:05+00:00"
+"checked": "2026-11-25T00:16+00:00"
 },
 "/ae/tools/food-cost-calculator": {
 "indexed": true,
@@ -572,12 +572,12 @@
 "/ae/ar/tools/break-even-calculator": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-23T21:05+00:00"
+"checked": "2026-11-25T00:16+00:00"
 },
 "/ae/tools/rent-to-sales-calculator": {
 "indexed": true,
 "state": "Submitted and indexed",
-"checked": "2026-11-23T21:05+00:00"
+"checked": "2026-11-25T00:16+00:00"
 },
 "/ae/ar/tools/rent-to-sales-calculator": {
 "indexed": true,

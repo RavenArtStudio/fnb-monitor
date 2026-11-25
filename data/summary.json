@@ -2,13 +2,13 @@
  "site": "fnb",
  "name": "FNB Performance",
  "host": "fnbperformance.com",
- "generated": "2026-11-24T14:28+00:00",
+ "generated": "2026-11-25T00:17+00:00",
  "score": {
-  "value": 7.36,
-  "delta": "+1.53",
+  "value": 7.35,
+  "delta": "+1.52",
   "tone": "up",
-  "deltaText": "+1.53 on the Nov 13 audit",
-  "stage": "Establish stage, day 10, to Nov 28",
+  "deltaText": "+1.52 on the Nov 13 audit",
+  "stage": "Establish stage, day 11, to Nov 28",
   "target": "7.55",
   "trend": [
    5.83,
@@ -20,7 +20,8 @@
    7.39,
    7.37,
    7.37,
-   7.36
+   7.36,
+   7.35
   ],
   "trendLabels": [
    "Audit",
@@ -32,7 +33,8 @@
    "Nov 21",
    "Nov 22",
    "Nov 23",
-   "Nov 24"
+   "Nov 24",
+   "Nov 25"
   ]
  },
  "metrics": [
@@ -43,25 +45,25 @@
    "change": null,
    "railText": "new",
    "tone": "up",
-   "period": "Nov 17 to Nov 23"
+   "period": "Nov 18 to Nov 24"
   },
   {
    "id": "sessions",
    "label": "Website sessions",
-   "total": 36,
-   "change": -27,
+   "total": 34,
+   "change": -35,
    "railText": null,
    "tone": null,
-   "period": "Nov 17 to Nov 23"
+   "period": "Nov 18 to Nov 24"
   },
   {
    "id": "impressions",
    "label": "Search impressions",
-   "total": 318,
-   "change": 2020,
+   "total": 356,
+   "change": 1128,
    "railText": null,
    "tone": null,
-   "period": "Nov 17 to Nov 23"
+   "period": "Nov 18 to Nov 24"
   }
  ]
 }
