@@ -4,7 +4,7 @@
   "pages_ok": 127,
   "broken_n": 0,
   "issue_pages": 22,
-  "ms_median": 453,
+  "ms_median": 328,
   "weight_total": 644
  },
  "cube": {
@@ -29,7 +29,7 @@
  "engaged": 19,
  "newvisitors": 3,
  "views": 77,
- "impressions": 364,
+ "impressions": 377,
  "searchclicks": 2,
- "pageone": 0
+ "pageone": 1
 }
