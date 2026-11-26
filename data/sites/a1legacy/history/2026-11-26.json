@@ -1,0 +1,35 @@
+{
+ "date": "2026-11-26",
+ "crawl": {
+  "pages_ok": 233,
+  "broken_n": 2,
+  "issue_pages": 0,
+  "ms_median": 350,
+  "weight_total": 2128
+ },
+ "cube": {
+  "overall": 4.96,
+  "blocks": {
+   "geo": 6.62,
+   "product": 3.34,
+   "industry": 6.49,
+   "proof": 1.47,
+   "tech": 8.11,
+   "onpage": 6.07,
+   "offsite": 0.8,
+   "entity": 3.67,
+   "schema": 8.64,
+   "markets": 6.07
+  }
+ },
+ "leads": 0,
+ "demos": 0,
+ "ctas": 0,
+ "sessions": 17,
+ "engaged": 11,
+ "newvisitors": 1,
+ "views": 42,
+ "impressions": 10,
+ "searchclicks": 0,
+ "pageone": 0
+}
