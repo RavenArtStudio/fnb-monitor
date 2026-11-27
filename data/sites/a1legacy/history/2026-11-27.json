@@ -4,18 +4,18 @@
   "pages_ok": 1317,
   "broken_n": 0,
   "issue_pages": 45,
-  "ms_median": 355,
+  "ms_median": 288,
   "weight_total": 2130
  },
  "cube": {
-  "overall": 5.84,
+  "overall": 5.85,
   "blocks": {
    "geo": 7.2,
    "product": 4.51,
    "industry": 9.46,
    "proof": 1.44,
-   "tech": 9.32,
-   "onpage": 7.33,
+   "tech": 9.37,
+   "onpage": 7.35,
    "offsite": 0.8,
    "entity": 3.64,
    "schema": 8.75,
@@ -29,7 +29,7 @@
  "engaged": 10,
  "newvisitors": 2,
  "views": 42,
- "impressions": 12,
+ "impressions": 13,
  "searchclicks": 0,
  "pageone": 0
 }

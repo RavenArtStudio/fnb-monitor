@@ -999,10 +999,60 @@
 "state": "Submitted and indexed",
 "checked": "2026-11-27T02:06+00:00"
 },
+"/industries/construction-building-house-builder": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/construction-building-custom-home-builder": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/construction-building-luxury-home-builder": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/construction-building-renovation-contractor": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/construction-building-remodeling-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T13:14+00:00"
+},
 "/industries/construction-building-home-improvement-company": {
 "indexed": true,
 "state": "Submitted and indexed",
 "checked": "2026-11-26T03:50+00:00"
+},
+"/industries/construction-building-kitchen-remodeling-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/construction-building-bathroom-remodeling-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/construction-building-basement-remodeling-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/construction-building-loft-conversion-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/construction-building-extension-builder": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
 },
 "/industries/construction-building-roofing-contractor": {
 "indexed": true,
@@ -1014,10 +1064,25 @@
 "state": "Submitted and indexed",
 "checked": "2026-11-26T03:50+00:00"
 },
+"/industries/construction-building-roof-repair-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
 "/industries/construction-building-gutter-installation-company": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-26T17:21+00:00"
+},
+"/industries/construction-building-siding-contractor": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/construction-building-cladding-contractor": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T13:14+00:00"
 },
 "/industries/construction-building-window-installation-company": {
 "indexed": false,
@@ -1029,6 +1094,11 @@
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-26T17:21+00:00"
 },
+"/industries/construction-building-garage-door-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
 "/industries/construction-building-conservatory-company": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
@@ -1039,10 +1109,20 @@
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-26T17:21+00:00"
 },
+"/industries/construction-building-patio-builder": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T13:14+00:00"
+},
 "/industries/construction-building-pergola-company": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-26T17:21+00:00"
+},
+"/industries/construction-building-fencing-contractor": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
 },
 "/industries/construction-building-concrete-contractor": {
 "indexed": true,
@@ -1054,6 +1134,16 @@
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-26T17:21+00:00"
 },
+"/industries/construction-building-bricklaying-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/construction-building-foundation-repair-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
 "/industries/construction-building-basement-waterproofing-company": {
 "indexed": true,
 "state": "Submitted and indexed",
@@ -1064,10 +1154,80 @@
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-26T17:21+00:00"
 },
+"/industries/construction-building-demolition-contractor": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/construction-building-excavation-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/construction-building-groundworks-contractor": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/construction-building-earthmoving-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/construction-building-civil-engineering-contractor": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/construction-building-structural-engineering-firm": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/construction-building-geotechnical-engineering-firm": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/construction-building-quantity-surveying-firm": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/construction-building-construction-consultancy": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/construction-building-building-consultancy": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/construction-building-project-management-consultancy": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/construction-building-construction-project-management-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T13:14+00:00"
+},
 "/industries/construction-building-building-materials-supplier": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-26T17:21+00:00"
+},
+"/industries/construction-building-timber-supplier": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/construction-building-steel-supplier": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
 },
 "/industries/construction-building-concrete-supplier": {
 "indexed": true,
@@ -1079,6 +1239,11 @@
 "state": "Submitted and indexed",
 "checked": "2026-11-26T03:50+00:00"
 },
+"/industries/construction-building-construction-equipment-rental": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
 "/industries/construction-building-crane-hire-company": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
@@ -1088,6 +1253,16 @@
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-26T17:21+00:00"
+},
+"/industries/construction-building-tool-rental-company": {
+"indexed": false,
+"state": "Crawled - currently not indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/construction-building-portable-toilet-rental-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
 },
 "/industries/construction-building-skip-hire-company": {
 "indexed": false,
@@ -1099,10 +1274,35 @@
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-26T17:21+00:00"
 },
+"/industries/plumbing-hvac-mechanical-plumbing-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/plumbing-hvac-mechanical-emergency-plumber": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/plumbing-hvac-mechanical-commercial-plumbing-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/plumbing-hvac-mechanical-drain-cleaning-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
 "/industries/plumbing-hvac-mechanical-drain-unblocking-company": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-26T17:21+00:00"
+},
+"/industries/plumbing-hvac-mechanical-sewer-repair-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
 },
 "/industries/plumbing-hvac-mechanical-septic-tank-company": {
 "indexed": false,
@@ -1119,30 +1319,90 @@
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-26T17:21+00:00"
 },
+"/industries/plumbing-hvac-mechanical-boiler-repair-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/plumbing-hvac-mechanical-boiler-servicing-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
 "/industries/plumbing-hvac-mechanical-hvac-company": {
 "indexed": true,
 "state": "Submitted and indexed",
 "checked": "2026-11-26T03:50+00:00"
+},
+"/industries/plumbing-hvac-mechanical-heating-contractor": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
 },
 "/industries/plumbing-hvac-mechanical-air-conditioning-contractor": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-26T17:21+00:00"
 },
+"/industries/plumbing-hvac-mechanical-ac-repair-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/plumbing-hvac-mechanical-ac-installation-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/plumbing-hvac-mechanical-furnace-repair-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/plumbing-hvac-mechanical-furnace-installation-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T13:14+00:00"
+},
 "/industries/plumbing-hvac-mechanical-heat-pump-installer": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-26T17:21+00:00"
+},
+"/industries/plumbing-hvac-mechanical-heat-pump-repair-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
 },
 "/industries/plumbing-hvac-mechanical-refrigeration-company": {
 "indexed": true,
 "state": "Submitted and indexed",
 "checked": "2026-11-26T03:50+00:00"
 },
+"/industries/plumbing-hvac-mechanical-commercial-refrigeration-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/plumbing-hvac-mechanical-ventilation-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/plumbing-hvac-mechanical-duct-cleaning-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
 "/industries/plumbing-hvac-mechanical-air-quality-company": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-26T17:21+00:00"
+},
+"/industries/plumbing-hvac-mechanical-gas-engineer": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
 },
 "/industries/plumbing-hvac-mechanical-commercial-gas-engineer": {
 "indexed": false,
@@ -1159,6 +1419,16 @@
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-26T17:21+00:00"
 },
+"/industries/plumbing-hvac-mechanical-water-filtration-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/plumbing-hvac-mechanical-irrigation-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T13:14+00:00"
+},
 "/industries/plumbing-hvac-mechanical-sprinkler-system-company": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
@@ -1168,6 +1438,66 @@
 "indexed": true,
 "state": "Submitted and indexed",
 "checked": "2026-11-26T03:50+00:00"
+},
+"/industries/electrical-solar-energy-electrician": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/electrical-solar-energy-electrical-contractor": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/electrical-solar-energy-commercial-electrical-contractor": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/electrical-solar-energy-emergency-electrician": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/electrical-solar-energy-electrical-inspection-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/electrical-solar-energy-ev-charger-installer": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/electrical-solar-energy-solar-panel-installer": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/electrical-solar-energy-solar-energy-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/electrical-solar-energy-commercial-solar-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/electrical-solar-energy-solar-maintenance-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/electrical-solar-energy-solar-cleaning-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/electrical-solar-energy-battery-storage-installer": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-27T13:14+00:00"
 },
 "/industries/electrical-solar-energy-renewable-energy-consultant": {
 "indexed": true,
@@ -1179,10 +1509,90 @@
 "state": "Submitted and indexed",
 "checked": "2026-11-26T03:50+00:00"
 },
+"/industries/electrical-solar-energy-energy-audit-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/electrical-solar-energy-generator-installation-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/electrical-solar-energy-generator-repair-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/electrical-solar-energy-ups-system-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
 "/industries/electrical-solar-energy-lighting-contractor": {
 "indexed": true,
 "state": "Submitted and indexed",
 "checked": "2026-11-26T03:50+00:00"
+},
+"/industries/electrical-solar-energy-smart-home-installer": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/electrical-solar-energy-home-automation-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/electrical-solar-energy-cctv-installer": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/electrical-solar-energy-alarm-system-installer": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/electrical-solar-energy-access-control-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/electrical-solar-energy-security-system-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/electrical-solar-energy-intercom-installer": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/electrical-solar-energy-data-cabling-company": {
+"indexed": false,
+"state": "URL is unknown to Google",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/electrical-solar-energy-telecom-cabling-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/home-services-cleaning-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/home-services-residential-cleaning-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/home-services-commercial-cleaning-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
 },
 "/industries/home-services-office-cleaning-company": {
 "indexed": true,
@@ -1199,10 +1609,30 @@
 "state": "Submitted and indexed",
 "checked": "2026-11-26T03:50+00:00"
 },
+"/industries/home-services-upholstery-cleaning-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/home-services-mattress-cleaning-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/home-services-window-cleaning-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
 "/industries/home-services-pressure-washing-company": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-26T17:21+00:00"
+},
+"/industries/home-services-power-washing-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T13:14+00:00"
 },
 "/industries/home-services-exterior-cleaning-company": {
 "indexed": true,
@@ -1213,6 +1643,11 @@
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-26T17:21+00:00"
+},
+"/industries/home-services-roof-cleaning-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
 },
 "/industries/home-services-chimney-cleaning-company": {
 "indexed": false,
@@ -1229,10 +1664,30 @@
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-26T17:21+00:00"
 },
+"/industries/home-services-termite-control-company": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/home-services-bed-bug-treatment-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/home-services-rodent-control-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
 "/industries/home-services-wildlife-removal-company": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-26T17:21+00:00"
+},
+"/industries/home-services-mold-remediation-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
 },
 "/industries/home-services-asbestos-removal-company": {
 "indexed": false,
@@ -1254,6 +1709,26 @@
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-26T17:21+00:00"
 },
+"/industries/home-services-disaster-restoration-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/home-services-junk-removal-company": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/home-services-house-clearance-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/home-services-moving-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
 "/industries/home-services-residential-movers": {
 "indexed": true,
 "state": "Submitted and indexed",
@@ -1264,20 +1739,75 @@
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-26T17:21+00:00"
 },
+"/industries/home-services-international-moving-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/home-services-packing-service": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/home-services-storage-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
 "/industries/home-services-furniture-assembly-service": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-26T17:21+00:00"
+},
+"/industries/home-services-handyman-service": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/home-services-locksmith": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/home-services-emergency-locksmith": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
 },
 "/industries/home-services-appliance-repair-company": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-26T17:21+00:00"
 },
+"/industries/home-services-washing-machine-repair-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T13:14+00:00"
+},
 "/industries/home-services-refrigerator-repair-company": {
 "indexed": true,
 "state": "Submitted and indexed",
 "checked": "2026-11-26T03:50+00:00"
+},
+"/industries/home-services-oven-repair-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/home-services-dishwasher-repair-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/home-services-tv-repair-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/home-services-furniture-repair-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
 },
 "/industries/home-services-furniture-restoration-company": {
 "indexed": false,
@@ -1289,35 +1819,245 @@
 "state": "Submitted and indexed",
 "checked": "2026-11-26T03:50+00:00"
 },
+"/industries/home-services-curtain-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T13:14+00:00"
+},
 "/industries/home-services-flooring-company": {
 "indexed": true,
 "state": "Submitted and indexed",
 "checked": "2026-11-26T03:50+00:00"
+},
+"/industries/home-services-carpet-installer": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/home-services-tile-installer": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/home-services-hardwood-flooring-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/home-services-epoxy-flooring-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/home-services-painting-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/home-services-residential-painter": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/home-services-commercial-painter": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/home-services-wallpaper-installer": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/home-services-plastering-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
 },
 "/industries/home-services-drywall-contractor": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-26T17:21+00:00"
 },
+"/industries/home-services-insulation-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/landscaping-outdoor-landscaping-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/landscaping-outdoor-landscape-designer": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/landscaping-outdoor-garden-maintenance-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/landscaping-outdoor-lawn-care-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/landscaping-outdoor-lawn-treatment-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
 "/industries/landscaping-outdoor-tree-service": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-26T17:21+00:00"
+},
+"/industries/landscaping-outdoor-tree-removal-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/landscaping-outdoor-arborist": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/landscaping-outdoor-hedge-trimming-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/landscaping-outdoor-irrigation-contractor": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/landscaping-outdoor-artificial-grass-installer": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
 },
 "/industries/landscaping-outdoor-turf-supplier": {
 "indexed": true,
 "state": "Submitted and indexed",
 "checked": "2026-11-26T03:50+00:00"
 },
+"/industries/landscaping-outdoor-garden-design-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/landscaping-outdoor-patio-contractor": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/landscaping-outdoor-driveway-contractor": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
 "/industries/landscaping-outdoor-paving-company": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-26T17:21+00:00"
 },
+"/industries/landscaping-outdoor-asphalt-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/landscaping-outdoor-pool-builder": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/landscaping-outdoor-swimming-pool-maintenance-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/landscaping-outdoor-pool-cleaning-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/landscaping-outdoor-hot-tub-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/landscaping-outdoor-spa-installation-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/landscaping-outdoor-outdoor-kitchen-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/landscaping-outdoor-garden-room-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T13:14+00:00"
+},
 "/industries/landscaping-outdoor-shed-company": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-26T17:21+00:00"
+},
+"/industries/landscaping-outdoor-fence-company": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/landscaping-outdoor-gate-installation-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/healthcare-medical-general-practice-clinic": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/healthcare-medical-family-medicine-clinic": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/healthcare-medical-private-doctor-clinic": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/healthcare-medical-walk-in-clinic": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/healthcare-medical-urgent-care-centre": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/healthcare-medical-medical-centre": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/healthcare-medical-specialist-medical-clinic": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T13:14+00:00"
+},
+"/industries/healthcare-medical-internal-medicine-clinic": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T13:14+00:00"
 },
 "/industries/healthcare-medical-neurology-clinic": {
 "indexed": false,
