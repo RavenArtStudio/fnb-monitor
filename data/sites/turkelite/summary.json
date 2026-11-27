@@ -2,16 +2,17 @@
  "site": "turkelite",
  "name": "Turkelite",
  "host": "turkelitemedcare.com",
- "generated": "2026-11-26T17:40+00:00",
+ "generated": "2026-11-27T02:29+00:00",
  "score": {
   "value": 6.03,
   "delta": "+0.01",
   "tone": "up",
   "deltaText": "+0.01 on the Nov 20 baseline",
-  "stage": "Mature stage, day 79",
+  "stage": "Mature stage, day 80",
   "target": "8.88",
   "trend": [
    6.02,
+   6.03,
    6.03,
    6.03,
    6.03,
@@ -28,7 +29,8 @@
    "Nov 23",
    "Nov 24",
    "Nov 25",
-   "Nov 26"
+   "Nov 26",
+   "Nov 27"
   ]
  },
  "metrics": [
@@ -39,25 +41,25 @@
    "change": null,
    "railText": null,
    "tone": null,
-   "period": "Nov 19 to Nov 25"
+   "period": "Nov 20 to Nov 26"
   },
   {
    "id": "sessions",
    "label": "Website sessions",
-   "total": 13,
-   "change": 1200,
+   "total": 14,
+   "change": 1300,
    "railText": null,
    "tone": null,
-   "period": "Nov 19 to Nov 25"
+   "period": "Nov 20 to Nov 26"
   },
   {
    "id": "impressions",
    "label": "Search impressions",
-   "total": 3990,
-   "change": -7,
+   "total": 3780,
+   "change": -16,
    "railText": null,
    "tone": null,
-   "period": "Nov 19 to Nov 25"
+   "period": "Nov 20 to Nov 26"
   }
  ]
 }

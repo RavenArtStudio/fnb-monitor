@@ -2,13 +2,13 @@
  "site": "a1legacy",
  "name": "A1 Legacy Labs",
  "host": "a1legacylabs.com",
- "generated": "2026-11-26T17:25+00:00",
+ "generated": "2026-11-27T02:10+00:00",
  "score": {
-  "value": 4.96,
-  "delta": "−0.01",
-  "tone": "down",
-  "deltaText": "−0.01 on the Nov 20 baseline",
-  "stage": "Mature stage, day 63",
+  "value": 5.84,
+  "delta": "+0.87",
+  "tone": "up",
+  "deltaText": "+0.87 on the Nov 20 baseline",
+  "stage": "Mature stage, day 64",
   "target": "8.80",
   "trend": [
    4.97,
@@ -18,7 +18,8 @@
    4.96,
    4.96,
    4.96,
-   4.96
+   4.96,
+   5.84
   ],
   "trendLabels": [
    "Baseline",
@@ -28,7 +29,8 @@
    "Nov 23",
    "Nov 24",
    "Nov 25",
-   "Nov 26"
+   "Nov 26",
+   "Nov 27"
   ]
  },
  "metrics": [
@@ -39,25 +41,25 @@
    "change": -100,
    "railText": null,
    "tone": null,
-   "period": "Nov 19 to Nov 25"
+   "period": "Nov 20 to Nov 26"
   },
   {
    "id": "sessions",
    "label": "Website sessions",
    "total": 17,
-   "change": 21,
+   "change": 42,
    "railText": null,
    "tone": null,
-   "period": "Nov 19 to Nov 25"
+   "period": "Nov 20 to Nov 26"
   },
   {
    "id": "impressions",
    "label": "Search impressions",
-   "total": 10,
-   "change": -57,
+   "total": 12,
+   "change": -43,
    "railText": null,
    "tone": null,
-   "period": "Nov 19 to Nov 25"
+   "period": "Nov 20 to Nov 26"
   }
  ]
 }

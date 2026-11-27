@@ -109,6 +109,11 @@
 "state": "Submitted and indexed",
 "checked": "2026-11-26T03:50+00:00"
 },
+"/n8n-automation-services": {
+"indexed": false,
+"state": "URL is unknown to Google",
+"checked": "2026-11-27T02:06+00:00"
+},
 "/products/voice-ai-receptionist": {
 "indexed": true,
 "state": "Submitted and indexed",
@@ -129,35 +134,220 @@
 "state": "Submitted and indexed",
 "checked": "2026-11-26T03:50+00:00"
 },
+"/industries/insurance": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
 "/industries/real-estate": {
 "indexed": true,
 "state": "Submitted and indexed",
 "checked": "2026-11-26T03:50+00:00"
+},
+"/industries/automotive": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-27T02:06+00:00"
 },
 "/industries/home-services": {
 "indexed": true,
 "state": "Submitted and indexed",
 "checked": "2026-11-26T03:50+00:00"
 },
+"/industries/professional-services": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/healthcare": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
 "/industries/financial-services": {
 "indexed": true,
 "state": "Submitted and indexed",
 "checked": "2026-11-26T03:50+00:00"
+},
+"/industries/recruitment": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-27T02:06+00:00"
 },
 "/industries/local-services": {
 "indexed": true,
 "state": "Submitted and indexed",
 "checked": "2026-11-26T03:50+00:00"
 },
+"/industries/automotive-new-car-dealership": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-used-car-dealership": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-luxury-car-dealership": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-exotic-car-dealership": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-electric-vehicle-dealership": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-commercial-vehicle-dealership": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-van-dealership": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-truck-dealership": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-motorcycle-dealership": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-scooter-dealership": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-atv-dealership": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-rv-dealership": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-caravan-dealership": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-boat-dealership": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-vehicle-importer": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-vehicle-exporter": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-auto-auction-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-car-buying-service": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-vehicle-brokerage": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-fleet-vehicle-supplier": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-car-rental-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-van-rental-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-truck-rental-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-luxury-car-rental": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-exotic-car-rental": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-chauffeur-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-limousine-service": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-taxi-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
 "/industries/automotive-private-hire-company": {
 "indexed": false,
 "state": "URL is unknown to Google",
 "checked": "2026-11-26T17:21+00:00"
 },
+"/industries/automotive-airport-transfer-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-corporate-transport-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
 "/industries/automotive-vehicle-leasing-company": {
 "indexed": true,
 "state": "Submitted and indexed",
 "checked": "2026-11-26T03:50+00:00"
+},
+"/industries/automotive-fleet-leasing-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-car-finance-broker": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
 },
 "/industries/automotive-vehicle-warranty-company": {
 "indexed": false,
@@ -169,6 +359,11 @@
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-26T17:21+00:00"
 },
+"/industries/automotive-car-service-centre": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
 "/industries/automotive-motorcycle-repair-shop": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
@@ -179,65 +374,560 @@
 "state": "Submitted and indexed",
 "checked": "2026-11-26T03:50+00:00"
 },
+"/industries/automotive-diesel-repair-shop": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-transmission-repair-shop": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-engine-repair-specialist": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-auto-electrical-shop": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-hybrid-vehicle-repair-shop": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-ev-repair-centre": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-brake-repair-shop": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-exhaust-repair-shop": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T02:06+00:00"
+},
 "/industries/automotive-suspension-specialist": {
 "indexed": true,
 "state": "Submitted and indexed",
 "checked": "2026-11-26T03:50+00:00"
+},
+"/industries/automotive-wheel-alignment-centre": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-tyre-shop": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-mobile-tyre-service": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
 },
 "/industries/automotive-alloy-wheel-shop": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-26T17:21+00:00"
 },
+"/industries/automotive-alloy-wheel-repair-centre": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-wheel-refurbishment-shop": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
 "/industries/automotive-auto-body-shop": {
 "indexed": true,
 "state": "Submitted and indexed",
 "checked": "2026-11-26T03:50+00:00"
+},
+"/industries/automotive-collision-repair-centre": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-dent-repair-service": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-paintless-dent-repair": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-auto-paint-shop": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-scratch-repair-business": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-windscreen-repair-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-windscreen-replacement-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-car-detailing-studio": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-mobile-car-detailing": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-car-wash": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-automatic-car-wash": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
 },
 "/industries/automotive-hand-car-wash": {
 "indexed": true,
 "state": "Submitted and indexed",
 "checked": "2026-11-26T03:50+00:00"
 },
+"/industries/automotive-mobile-car-wash": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-ceramic-coating-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-paint-protection-film-installer": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
 "/industries/automotive-window-tinting-shop": {
 "indexed": true,
 "state": "Submitted and indexed",
 "checked": "2026-11-26T03:50+00:00"
+},
+"/industries/automotive-vehicle-wrapping-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-car-customisation-shop": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-performance-tuning-shop": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-ecu-remapping-business": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-car-audio-installer": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-car-security-installer": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-dashcam-installer": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-gps-tracker-installer": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-vehicle-recovery-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-breakdown-recovery-service": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
 },
 "/industries/automotive-roadside-assistance-company": {
 "indexed": true,
 "state": "Submitted and indexed",
 "checked": "2026-11-26T03:50+00:00"
 },
+"/industries/automotive-towing-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-vehicle-inspection-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-mot-centre": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-roadworthiness-testing-centre": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-vehicle-registration-service": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-car-parts-store": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-auto-parts-wholesaler": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
 "/industries/automotive-used-auto-parts-dealer": {
 "indexed": true,
 "state": "Submitted and indexed",
 "checked": "2026-11-26T03:50+00:00"
+},
+"/industries/automotive-car-accessories-store": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-motorcycle-parts-store": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
 },
 "/industries/automotive-tyre-distributor": {
 "indexed": true,
 "state": "Submitted and indexed",
 "checked": "2026-11-26T03:50+00:00"
 },
+"/industries/automotive-battery-shop": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/automotive-auto-glass-supplier": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
 "/industries/automotive-fleet-management-company": {
 "indexed": true,
 "state": "Submitted and indexed",
 "checked": "2026-11-26T03:50+00:00"
+},
+"/industries/automotive-commercial-fleet-maintenance-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/real-estate-property-residential-real-estate-agency": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/real-estate-property-commercial-real-estate-agency": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/real-estate-property-luxury-real-estate-agency": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/real-estate-property-property-brokerage": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/real-estate-property-independent-realtor": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/real-estate-property-real-estate-team": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/real-estate-property-property-developer": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/real-estate-property-residential-property-developer": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/real-estate-property-commercial-property-developer": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/real-estate-property-luxury-property-developer": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/real-estate-property-off-plan-property-agency": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/real-estate-property-property-investment-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/real-estate-property-real-estate-investment-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/real-estate-property-property-sourcing-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/real-estate-property-property-acquisition-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/real-estate-property-buy-to-let-investment-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/real-estate-property-property-management-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/real-estate-property-block-management-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/real-estate-property-estate-management-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/real-estate-property-hoa-management-company": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/real-estate-property-community-management-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/real-estate-property-vacation-rental-management-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/real-estate-property-airbnb-management-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/real-estate-property-serviced-apartment-operator": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/real-estate-property-short-term-rental-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/real-estate-property-student-accommodation-provider": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/real-estate-property-co-living-operator": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/real-estate-property-build-to-rent-operator": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/real-estate-property-apartment-leasing-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/real-estate-property-letting-agency": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/real-estate-property-rental-agency": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/real-estate-property-tenant-placement-service": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/real-estate-property-relocation-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/real-estate-property-corporate-housing-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/real-estate-property-real-estate-auction-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/real-estate-property-property-valuation-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/real-estate-property-chartered-surveyor": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/real-estate-property-building-surveyor": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/real-estate-property-home-inspection-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/real-estate-property-property-inspection-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
 },
 "/industries/real-estate-property-snagging-inspection-company": {
 "indexed": true,
 "state": "Submitted and indexed",
 "checked": "2026-11-26T03:50+00:00"
 },
+"/industries/real-estate-property-mortgage-broker": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/real-estate-property-commercial-mortgage-broker": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
 "/industries/real-estate-property-bridging-finance-broker": {
 "indexed": true,
 "state": "Submitted and indexed",
 "checked": "2026-11-26T03:50+00:00"
 },
+"/industries/real-estate-property-property-finance-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/real-estate-property-title-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/real-estate-property-conveyancing-firm": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/real-estate-property-escrow-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/real-estate-property-real-estate-photography-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
 "/industries/real-estate-property-property-videography-company": {
 "indexed": true,
 "state": "Submitted and indexed",
 "checked": "2026-11-26T03:50+00:00"
+},
+"/industries/real-estate-property-virtual-tour-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/real-estate-property-real-estate-marketing-agency": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/real-estate-property-real-estate-lead-generation-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
 },
 "/industries/real-estate-property-architectural-visualization-studio": {
 "indexed": true,
@@ -254,10 +944,60 @@
 "state": "Submitted and indexed",
 "checked": "2026-11-26T03:50+00:00"
 },
+"/industries/real-estate-property-land-brokerage": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/real-estate-property-agricultural-land-broker": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/real-estate-property-industrial-property-broker": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
 "/industries/real-estate-property-warehouse-leasing-company": {
 "indexed": true,
 "state": "Submitted and indexed",
 "checked": "2026-11-26T03:50+00:00"
+},
+"/industries/real-estate-property-self-storage-facility": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/real-estate-property-coworking-space": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/real-estate-property-business-centre-operator": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/construction-building-general-contractor": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/construction-building-residential-contractor": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/construction-building-commercial-contractor": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
+},
+"/industries/construction-building-construction-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T02:06+00:00"
 },
 "/industries/construction-building-home-improvement-company": {
 "indexed": true,
@@ -603,21 +1343,6 @@
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-26T17:21+00:00"
-},
-"/industries/dental-pediatric-dentist": {
-"indexed": true,
-"state": "Submitted and indexed",
-"checked": "2026-11-26T03:50+00:00"
-},
-"/industries/dental-endodontist": {
-"indexed": false,
-"state": "Duplicate, Google chose different canonical than user",
-"checked": "2026-11-26T17:21+00:00"
-},
-"/industries/dental-dental-tourism-company": {
-"indexed": true,
-"state": "Submitted and indexed",
-"checked": "2026-11-26T03:50+00:00"
 },
 "/industries/aesthetics-beauty-wellness-aesthetic-clinic": {
 "indexed": false,

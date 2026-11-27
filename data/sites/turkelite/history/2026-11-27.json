@@ -1,0 +1,34 @@
+{
+ "date": "2026-11-27",
+ "crawl": {
+  "pages_ok": 696,
+  "broken_n": 0,
+  "issue_pages": 666,
+  "ms_median": 361,
+  "weight_total": 1263
+ },
+ "cube": {
+  "overall": 6.03,
+  "blocks": {
+   "medtrust": 4.21,
+   "treat": 9.3,
+   "geo": 5.57,
+   "tech": 9.79,
+   "onpage": 9.1,
+   "lang": 7.94,
+   "entity": 1.7,
+   "offsite": 0.75,
+   "schema": 3.44,
+   "measure": 5.28
+  }
+ },
+ "leads": 0,
+ "whatsapp": 0,
+ "sessions": 14,
+ "engaged": 10,
+ "newvisitors": 13,
+ "views": 17,
+ "impressions": 3780,
+ "searchclicks": 18,
+ "pageone": 18
+}
