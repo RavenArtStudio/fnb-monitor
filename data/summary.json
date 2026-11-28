@@ -2,7 +2,7 @@
  "site": "fnb",
  "name": "FNB Performance",
  "host": "fnbperformance.com",
- "generated": "2026-11-28T00:04+00:00",
+ "generated": "2026-11-28T08:44+00:00",
  "score": {
   "value": 7.38,
   "delta": "+1.55",
@@ -65,8 +65,8 @@
   {
    "id": "impressions",
    "label": "Search impressions",
-   "total": 373,
-   "change": 127,
+   "total": 390,
+   "change": 138,
    "railText": null,
    "tone": null,
    "period": "Nov 21 to Nov 27"

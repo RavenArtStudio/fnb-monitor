@@ -2909,10 +2909,575 @@
 "state": "Submitted and indexed",
 "checked": "2026-11-27T23:56+00:00"
 },
+"/industries/accounting-tax-finance-family-office": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/accounting-tax-finance-mortgage-broker": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/accounting-tax-finance-loan-broker": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/accounting-tax-finance-commercial-finance-broker": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/accounting-tax-finance-business-finance-broker": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/accounting-tax-finance-equipment-finance-company": {
+"indexed": false,
+"state": "URL is unknown to Google",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/accounting-tax-finance-invoice-finance-company": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/accounting-tax-finance-factoring-company": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/accounting-tax-finance-debt-consolidation-company": {
+"indexed": false,
+"state": "URL is unknown to Google",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/accounting-tax-finance-credit-repair-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/accounting-tax-finance-credit-counseling-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/accounting-tax-finance-life-insurance-agency": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/accounting-tax-finance-health-insurance-agency": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/accounting-tax-finance-auto-insurance-agency": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/accounting-tax-finance-home-insurance-agency": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/accounting-tax-finance-commercial-insurance-brokerage": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/accounting-tax-finance-employee-benefits-consultancy": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/accounting-tax-finance-claims-management-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/accounting-tax-finance-payment-processing-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/accounting-tax-finance-merchant-services-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/recruitment-hr-recruitment-agency": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/recruitment-hr-staffing-agency": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/recruitment-hr-executive-search-firm": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/recruitment-hr-headhunting-agency": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/recruitment-hr-temporary-staffing-agency": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/recruitment-hr-healthcare-recruitment-agency": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/recruitment-hr-nursing-recruitment-agency": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/recruitment-hr-it-recruitment-agency": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/recruitment-hr-construction-recruitment-agency": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/recruitment-hr-finance-recruitment-agency": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/recruitment-hr-legal-recruitment-agency": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/recruitment-hr-sales-recruitment-agency": {
+"indexed": false,
+"state": "URL is unknown to Google",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/recruitment-hr-hospitality-recruitment-agency": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/recruitment-hr-education-recruitment-agency": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/recruitment-hr-international-recruitment-agency": {
+"indexed": false,
+"state": "URL is unknown to Google",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/recruitment-hr-remote-staffing-company": {
+"indexed": false,
+"state": "URL is unknown to Google",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/recruitment-hr-virtual-assistant-agency": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/recruitment-hr-outsourcing-company": {
+"indexed": false,
+"state": "URL is unknown to Google",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/recruitment-hr-bpo-company": {
+"indexed": false,
+"state": "URL is unknown to Google",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/recruitment-hr-call-centre": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/recruitment-hr-hr-consultancy": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/recruitment-hr-payroll-service": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/recruitment-hr-employer-of-record-company": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/recruitment-hr-peo-company": {
+"indexed": false,
+"state": "URL is unknown to Google",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/recruitment-hr-background-check-company": {
+"indexed": false,
+"state": "URL is unknown to Google",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/recruitment-hr-employee-screening-company": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/recruitment-hr-training-development-company": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/education-training-private-school": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/education-training-nursery": {
+"indexed": false,
+"state": "URL is unknown to Google",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/education-training-preschool": {
+"indexed": false,
+"state": "URL is unknown to Google",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/education-training-daycare-centre": {
+"indexed": false,
+"state": "URL is unknown to Google",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/education-training-montessori-school": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/education-training-international-school": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/education-training-college": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/education-training-university": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/education-training-training-institute": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/education-training-vocational-training-centre": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/education-training-trade-school": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/education-training-language-school": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/education-training-english-language-school": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/education-training-driving-school": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/education-training-flight-school": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/education-training-coding-bootcamp": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/education-training-it-training-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/education-training-ai-training-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/education-training-business-training-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/education-training-corporate-training-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/education-training-sales-training-company": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/education-training-leadership-training-company": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/education-training-tutoring-centre": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/education-training-private-tutor": {
+"indexed": false,
+"state": "URL is unknown to Google",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/education-training-online-tutoring-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/education-training-exam-preparation-centre": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/education-training-sat-prep-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
 "/industries/education-training-ielts-training-centre": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-26T17:21+00:00"
+},
+"/industries/education-training-study-abroad-consultancy": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/education-training-education-consultant": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/education-training-university-admissions-consultant": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/education-training-student-recruitment-agency": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/education-training-career-coaching-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/education-training-online-course-business": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/education-training-coaching-program": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/education-training-membership-education-business": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/restaurants-food-restaurant": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/restaurants-food-fine-dining-restaurant": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/restaurants-food-casual-dining-restaurant": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/restaurants-food-fast-food-restaurant": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/restaurants-food-quick-service-restaurant": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/restaurants-food-cafe": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/restaurants-food-coffee-shop": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/restaurants-food-bakery": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/restaurants-food-patisserie": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/restaurants-food-dessert-shop": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/restaurants-food-ice-cream-shop": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/restaurants-food-pizza-restaurant": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/restaurants-food-burger-restaurant": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/restaurants-food-steakhouse": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/restaurants-food-seafood-restaurant": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/restaurants-food-sushi-restaurant": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/restaurants-food-indian-restaurant": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/restaurants-food-pakistani-restaurant": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/restaurants-food-turkish-restaurant": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/restaurants-food-chinese-restaurant": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/restaurants-food-italian-restaurant": {
+"indexed": false,
+"state": "URL is unknown to Google",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/restaurants-food-mexican-restaurant": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/restaurants-food-vegan-restaurant": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/restaurants-food-vegetarian-restaurant": {
+"indexed": false,
+"state": "URL is unknown to Google",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/restaurants-food-food-truck": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/restaurants-food-catering-company": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/restaurants-food-wedding-catering-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/restaurants-food-corporate-catering-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/restaurants-food-meal-prep-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/restaurants-food-cloud-kitchen": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/restaurants-food-ghost-kitchen": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-28T08:34+00:00"
 },
 "/industries/restaurants-food-food-delivery-company": {
 "indexed": false,
@@ -2924,25 +3489,210 @@
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-26T17:21+00:00"
 },
+"/industries/restaurants-food-franchise-restaurant-operator": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
 "/industries/hospitality-travel-hotel": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-26T17:21+00:00"
+},
+"/industries/hospitality-travel-luxury-hotel": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/hospitality-travel-boutique-hotel": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/hospitality-travel-resort": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/hospitality-travel-motel": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/hospitality-travel-guest-house": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/hospitality-travel-bed-breakfast": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/hospitality-travel-hostel": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/hospitality-travel-holiday-park": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
 },
 "/industries/hospitality-travel-serviced-apartment-company": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-26T17:21+00:00"
 },
+"/industries/hospitality-travel-vacation-rental-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/hospitality-travel-travel-agency": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/hospitality-travel-luxury-travel-agency": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/hospitality-travel-corporate-travel-agency": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/hospitality-travel-business-travel-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/hospitality-travel-tour-operator": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/hospitality-travel-tour-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/hospitality-travel-adventure-travel-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/hospitality-travel-safari-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
 "/industries/hospitality-travel-cruise-agency": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-26T17:21+00:00"
 },
+"/industries/hospitality-travel-airline-ticketing-agency": {
+"indexed": false,
+"state": "URL is unknown to Google",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/hospitality-travel-hajj-umrah-travel-agency": {
+"indexed": false,
+"state": "URL is unknown to Google",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/hospitality-travel-religious-tourism-company": {
+"indexed": false,
+"state": "URL is unknown to Google",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/hospitality-travel-medical-tourism-company": {
+"indexed": false,
+"state": "URL is unknown to Google",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/hospitality-travel-visa-consultancy": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/hospitality-travel-immigration-consultancy": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/hospitality-travel-destination-management-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/hospitality-travel-airport-transfer-company": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/hospitality-travel-travel-insurance-agency": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/hospitality-travel-yacht-charter-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
 "/industries/hospitality-travel-boat-charter-company": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-26T17:21+00:00"
+},
+"/industries/hospitality-travel-private-jet-charter-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/hospitality-travel-helicopter-charter-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/events-weddings-event-planning-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/events-weddings-wedding-planner": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/events-weddings-corporate-event-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/events-weddings-conference-organizer": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/events-weddings-exhibition-organizer": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/events-weddings-trade-show-organizer": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
+},
+"/industries/events-weddings-festival-organizer": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-28T08:34+00:00"
 },
 "/industries/retail-hardware-store": {
 "indexed": false,

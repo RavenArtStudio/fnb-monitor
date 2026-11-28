@@ -2,7 +2,7 @@
  "site": "turkelite",
  "name": "Turkelite",
  "host": "turkelitemedcare.com",
- "generated": "2026-11-28T00:18+00:00",
+ "generated": "2026-11-28T08:57+00:00",
  "score": {
   "value": 6.03,
   "delta": "+0.01",
@@ -48,8 +48,8 @@
   {
    "id": "sessions",
    "label": "Website sessions",
-   "total": 15,
-   "change": 650,
+   "total": 16,
+   "change": 700,
    "railText": null,
    "tone": null,
    "period": "Nov 21 to Nov 27"
@@ -57,8 +57,8 @@
   {
    "id": "impressions",
    "label": "Search impressions",
-   "total": 3701,
-   "change": -21,
+   "total": 3880,
+   "change": -17,
    "railText": null,
    "tone": null,
    "period": "Nov 21 to Nov 27"
