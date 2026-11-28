@@ -2059,15 +2059,170 @@
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-27T13:14+00:00"
 },
+"/industries/healthcare-medical-cardiology-clinic": {
+"indexed": false,
+"state": "Crawled - currently not indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/healthcare-medical-dermatology-clinic": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
 "/industries/healthcare-medical-neurology-clinic": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-26T17:21+00:00"
 },
+"/industries/healthcare-medical-gastroenterology-clinic": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/healthcare-medical-endocrinology-clinic": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/healthcare-medical-rheumatology-clinic": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/healthcare-medical-pulmonology-clinic": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/healthcare-medical-urology-clinic": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/healthcare-medical-nephrology-clinic": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/healthcare-medical-orthopedic-clinic": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/healthcare-medical-pain-management-clinic": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/healthcare-medical-sports-medicine-clinic": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/healthcare-medical-ent-clinic": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/healthcare-medical-eye-clinic": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/healthcare-medical-ophthalmology-clinic": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/healthcare-medical-optometry-clinic": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/healthcare-medical-audiology-clinic": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/healthcare-medical-hearing-aid-centre": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/healthcare-medical-sleep-clinic": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/healthcare-medical-allergy-clinic": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/healthcare-medical-weight-management-clinic": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/healthcare-medical-bariatric-clinic": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/healthcare-medical-diabetes-clinic": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/healthcare-medical-womens-health-clinic": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/healthcare-medical-mens-health-clinic": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/healthcare-medical-fertility-clinic": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/healthcare-medical-ivf-clinic": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/healthcare-medical-pregnancy-clinic": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/healthcare-medical-ultrasound-clinic": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/healthcare-medical-diagnostic-imaging-centre": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
 "/industries/healthcare-medical-mri-centre": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-26T17:21+00:00"
+},
+"/industries/healthcare-medical-ct-scan-centre": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/healthcare-medical-radiology-centre": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
 },
 "/industries/healthcare-medical-medical-laboratory": {
 "indexed": false,
@@ -2079,40 +2234,365 @@
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-26T17:21+00:00"
 },
+"/industries/healthcare-medical-pathology-lab": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/healthcare-medical-pharmacy": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/healthcare-medical-compounding-pharmacy": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/healthcare-medical-home-healthcare-agency": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/healthcare-medical-private-nursing-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/healthcare-medical-elderly-care-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/healthcare-medical-assisted-living-facility": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/healthcare-medical-nursing-home": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/healthcare-medical-rehabilitation-centre": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/healthcare-medical-physical-therapy-clinic": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/healthcare-medical-physiotherapy-clinic": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
 "/industries/healthcare-medical-chiropractic-clinic": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-26T17:21+00:00"
+},
+"/industries/healthcare-medical-osteopathy-clinic": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/healthcare-medical-occupational-therapy-clinic": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/healthcare-medical-speech-therapy-clinic": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/healthcare-medical-podiatry-clinic": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/healthcare-medical-foot-clinic": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/healthcare-medical-acupuncture-clinic": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/healthcare-medical-medical-equipment-supplier": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/healthcare-medical-medical-travel-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/healthcare-medical-medical-tourism-agency": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/healthcare-medical-patient-coordination-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/aesthetics-beauty-wellness-medical-spa": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/aesthetics-beauty-wellness-med-spa": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
 },
 "/industries/aesthetics-beauty-wellness-aesthetic-clinic": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-26T17:21+00:00"
 },
+"/industries/aesthetics-beauty-wellness-cosmetic-clinic": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/aesthetics-beauty-wellness-botox-clinic": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/aesthetics-beauty-wellness-dermal-filler-clinic": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/aesthetics-beauty-wellness-laser-hair-removal-clinic": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/aesthetics-beauty-wellness-skin-clinic": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/aesthetics-beauty-wellness-acne-clinic": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/aesthetics-beauty-wellness-anti-aging-clinic": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/aesthetics-beauty-wellness-hair-transplant-clinic": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/aesthetics-beauty-wellness-hair-restoration-clinic": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/aesthetics-beauty-wellness-scalp-micropigmentation-clinic": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
 "/industries/aesthetics-beauty-wellness-cosmetic-surgery-clinic": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-26T17:21+00:00"
+},
+"/industries/aesthetics-beauty-wellness-plastic-surgery-clinic": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/aesthetics-beauty-wellness-breast-surgery-clinic": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/aesthetics-beauty-wellness-rhinoplasty-clinic": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/aesthetics-beauty-wellness-body-contouring-clinic": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/aesthetics-beauty-wellness-liposuction-clinic": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/aesthetics-beauty-wellness-beauty-salon": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/aesthetics-beauty-wellness-hair-salon": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/aesthetics-beauty-wellness-barber-shop": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/aesthetics-beauty-wellness-nail-salon": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/aesthetics-beauty-wellness-lash-studio": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/aesthetics-beauty-wellness-brow-studio": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/aesthetics-beauty-wellness-makeup-studio": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/aesthetics-beauty-wellness-bridal-makeup-artist": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/aesthetics-beauty-wellness-tanning-salon": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/aesthetics-beauty-wellness-massage-centre": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
 },
 "/industries/aesthetics-beauty-wellness-day-spa": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-26T17:21+00:00"
 },
+"/industries/aesthetics-beauty-wellness-wellness-centre": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/aesthetics-beauty-wellness-sauna-centre": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/aesthetics-beauty-wellness-cryotherapy-centre": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/aesthetics-beauty-wellness-iv-therapy-clinic": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/aesthetics-beauty-wellness-red-light-therapy-centre": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/aesthetics-beauty-wellness-float-therapy-centre": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/fitness-sports-gym": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/fitness-sports-fitness-centre": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
 "/industries/fitness-sports-boutique-gym": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-26T17:21+00:00"
+},
+"/industries/fitness-sports-personal-training-studio": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
 },
 "/industries/fitness-sports-personal-trainer": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-26T17:21+00:00"
 },
+"/industries/fitness-sports-crossfit-gym": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
 "/industries/fitness-sports-yoga-studio": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-26T17:21+00:00"
+},
+"/industries/fitness-sports-pilates-studio": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/fitness-sports-boxing-gym": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/fitness-sports-mma-gym": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/fitness-sports-martial-arts-school": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/fitness-sports-karate-school": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/fitness-sports-taekwondo-school": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/fitness-sports-jiu-jitsu-academy": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
 },
 "/industries/fitness-sports-dance-studio": {
 "indexed": true,
@@ -2124,20 +2604,175 @@
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-26T17:21+00:00"
 },
+"/industries/fitness-sports-tennis-academy": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/fitness-sports-golf-academy": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/fitness-sports-football-academy": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/fitness-sports-cricket-academy": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/fitness-sports-basketball-academy": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/fitness-sports-sports-coaching-company": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/fitness-sports-sports-club": {
+"indexed": false,
+"state": "URL is unknown to Google",
+"checked": "2026-11-27T23:56+00:00"
+},
 "/industries/fitness-sports-country-club": {
 "indexed": false,
 "state": "Discovered - currently not indexed",
 "checked": "2026-11-26T17:21+00:00"
+},
+"/industries/fitness-sports-golf-club": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/fitness-sports-sports-facility": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/fitness-sports-indoor-sports-centre": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/fitness-sports-nutrition-coaching-business": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/fitness-sports-online-fitness-coaching-business": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/fitness-sports-weight-loss-coaching-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
 },
 "/industries/legal-services-law-firm": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-26T17:21+00:00"
 },
+"/industries/legal-services-solo-lawyer": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/legal-services-corporate-law-firm": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/legal-services-commercial-law-firm": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/legal-services-family-law-firm": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/legal-services-divorce-lawyer": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/legal-services-personal-injury-lawyer": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/legal-services-criminal-defence-lawyer": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/legal-services-immigration-lawyer": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/legal-services-employment-lawyer": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/legal-services-labour-lawyer": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/legal-services-real-estate-lawyer": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/legal-services-property-lawyer": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
 "/industries/legal-services-conveyancing-lawyer": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-26T17:21+00:00"
+},
+"/industries/legal-services-bankruptcy-lawyer": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/legal-services-tax-lawyer": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/legal-services-intellectual-property-lawyer": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/legal-services-patent-lawyer": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/legal-services-trademark-lawyer": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/legal-services-litigation-firm": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
 },
 "/industries/legal-services-medical-malpractice-lawyer": {
 "indexed": false,
@@ -2154,20 +2789,125 @@
 "state": "Discovered - currently not indexed",
 "checked": "2026-11-26T17:21+00:00"
 },
+"/industries/legal-services-wills-trusts-lawyer": {
+"indexed": false,
+"state": "Discovered - currently not indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
 "/industries/legal-services-business-lawyer": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-26T17:21+00:00"
+},
+"/industries/legal-services-contract-lawyer": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/legal-services-debt-recovery-lawyer": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/legal-services-legal-consultancy": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
 },
 "/industries/legal-services-notary-service": {
 "indexed": false,
 "state": "Duplicate, Google chose different canonical than user",
 "checked": "2026-11-26T17:21+00:00"
 },
+"/industries/legal-services-mediation-service": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/legal-services-arbitration-firm": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/legal-services-legal-document-preparation-service": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/accounting-tax-finance-accounting-firm": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/accounting-tax-finance-bookkeeping-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/accounting-tax-finance-outsourced-accounting-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/accounting-tax-finance-tax-preparation-company": {
+"indexed": false,
+"state": "Duplicate, Google chose different canonical than user",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/accounting-tax-finance-tax-advisory-firm": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/accounting-tax-finance-vat-consultancy": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/accounting-tax-finance-corporate-tax-consultancy": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/accounting-tax-finance-payroll-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/accounting-tax-finance-cfo-services-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
 "/industries/accounting-tax-finance-virtual-cfo-company": {
 "indexed": true,
 "state": "Submitted and indexed",
 "checked": "2026-11-26T03:50+00:00"
+},
+"/industries/accounting-tax-finance-financial-advisory-firm": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/accounting-tax-finance-financial-planning-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/accounting-tax-finance-wealth-management-firm": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/accounting-tax-finance-investment-advisory-firm": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
+},
+"/industries/accounting-tax-finance-asset-management-company": {
+"indexed": true,
+"state": "Submitted and indexed",
+"checked": "2026-11-27T23:56+00:00"
 },
 "/industries/education-training-ielts-training-centre": {
 "indexed": false,

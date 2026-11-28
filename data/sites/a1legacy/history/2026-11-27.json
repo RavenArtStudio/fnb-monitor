@@ -3,18 +3,18 @@
  "crawl": {
   "pages_ok": 1317,
   "broken_n": 0,
-  "issue_pages": 45,
-  "ms_median": 288,
-  "weight_total": 2130
+  "issue_pages": 35,
+  "ms_median": 435,
+  "weight_total": 2142
  },
  "cube": {
-  "overall": 5.85,
+  "overall": 5.86,
   "blocks": {
    "geo": 7.2,
    "product": 4.51,
-   "industry": 9.46,
+   "industry": 9.51,
    "proof": 1.44,
-   "tech": 9.37,
+   "tech": 9.39,
    "onpage": 7.35,
    "offsite": 0.8,
    "entity": 3.64,
